@@ -2,6 +2,8 @@
 
 A comprehensive Flutter mobile application designed to teach photography through structured daily lessons, interactive exercises, and progressive skill building.
 
+> **📚 Educational Project**: This application is developed for educational and learning purposes only. It serves as a demonstration of Flutter development best practices, mobile app architecture, and educational app design patterns.
+
 ## 🌟 Features
 
 ### 📚 **Structured Learning Path**
@@ -109,6 +111,27 @@ lib/
 │   └── helpers.dart       # Helper functions
 └── main.dart             # App entry point
 ```
+
+## 📚 Educational Purpose
+
+This project is developed as an **educational demonstration** and learning resource for:
+
+- **Flutter Development**: Showcasing best practices in Flutter app development
+- **Mobile Architecture**: Demonstrating proper project structure and code organization
+- **Educational App Design**: Implementing features like progress tracking, daily restrictions, and content management
+- **Learning Portfolio**: Serving as a portfolio piece for mobile development skills
+
+### **Learning Objectives**
+
+- Understanding Flutter app architecture and state management
+- Implementing local data persistence with SharedPreferences
+- Creating engaging user experiences with progress tracking
+- Building modular and maintainable code structures
+- Exploring educational app design patterns
+
+### **Not for Commercial Use**
+
+This application is intended for educational purposes only and is not designed for commercial distribution or monetization.
 
 ## 🎨 Key Architecture Features
 
@@ -245,14 +268,22 @@ flutter test integration_test/
 
 ## 🤝 Contributing
 
-We welcome contributions! Please follow these steps:
+We welcome educational contributions! This project is designed to be a learning resource, so contributions should focus on:
+
+- 📚 **Educational Value**: Improvements that help others learn Flutter development
+- 🧑‍💻 **Best Practices**: Code that demonstrates proper Flutter/Dart patterns
+- 📖 **Documentation**: Better explanations and learning guides
+- 🐛 **Learning Fixes**: Bug fixes that provide learning opportunities
+
+### **How to Contribute**
 
 1. **Fork the repository**
-2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
-3. **Make your changes** and write tests
-4. **Commit your changes**: `git commit -m 'Add amazing feature'`
-5. **Push to branch**: `git push origin feature/amazing-feature`
-6. **Open a Pull Request**
+2. **Create a feature branch**: `git checkout -b feature/educational-improvement`
+3. **Make your changes** with clear, educational comments
+4. **Write/update tests** to demonstrate testing practices
+5. **Commit your changes**: `git commit -m 'Add educational feature'`
+6. **Push to branch**: `git push origin feature/educational-improvement`
+7. **Open a Pull Request** with detailed learning explanations
 
 ### **Code Style Guidelines**
 
@@ -277,9 +308,32 @@ Examples:
 - `fix(progress): resolve streak calculation bug`
 - `docs(readme): update installation instructions`
 
-## 📄 License
+## 📄 License & Disclaimer
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### **Educational Use Only**
+
+This application is developed for **educational and learning purposes only**. It is intended to:
+
+- Demonstrate Flutter development techniques and best practices
+- Serve as a learning resource for mobile app development
+- Showcase portfolio-quality code and architecture
+
+### **Disclaimer**
+
+- This project is **not intended for commercial use or distribution**
+- The photography content and lessons are simplified examples for demonstration purposes
+- All code and content are provided "as is" for educational reference
+- Users are encouraged to use this project as a learning foundation for their own development
+
+### **Attribution**
+
+If you use this project for learning or as a reference, please consider:
+
+- ⭐ Starring the repository
+- 📝 Mentioning it in your own educational projects
+- 🤝 Contributing improvements back to the community
 
 ## 📞 Support
 
