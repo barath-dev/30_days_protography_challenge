@@ -19,6 +19,8 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   List<Lesson> _lessons = [];
   UserProgress? _userProgress;
   bool _isLoading = true;
+  LessonType? _filterType;
+  String? _filterCategory;
 
   // Simple color scheme
   static const Color _primary = Color(0xFFFF6B35);
@@ -48,9 +50,18 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
     setState(() => _isLoading = true);
 
     try {
-      // Load lessons and user progress
-      _lessons = LessonManager.allLessons;
+      // Load user progress first
       _userProgress = UserPreferences.currentProgress;
+
+      if (_userProgress != null) {
+        // Load lessons for the current user's difficulty level only
+        _lessons = LessonManager.getLessonsByDifficulty(
+          _userProgress!.selectedDifficulty,
+        );
+
+        // Apply any active filters
+        _applyFilters();
+      }
 
       setState(() => _isLoading = false);
       _controller.forward();
@@ -60,9 +71,60 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
     }
   }
 
+  void _applyFilters() {
+    if (_userProgress == null) return;
+
+    List<Lesson> filteredLessons = LessonManager.getLessonsByDifficulty(
+      _userProgress!.selectedDifficulty,
+    );
+
+    if (_filterType != null) {
+      filteredLessons =
+          filteredLessons
+              .where((lesson) => lesson.type == _filterType)
+              .toList();
+    }
+
+    if (_filterCategory != null) {
+      filteredLessons =
+          filteredLessons
+              .where((lesson) => lesson.categories.contains(_filterCategory))
+              .toList();
+    }
+
+    setState(() {
+      _lessons = filteredLessons;
+    });
+  }
+
   LessonStatus _getLessonStatus(Lesson lesson) {
-    if (_userProgress == null) return LessonStatus.locked;
-    return _userProgress!.getLessonStatus(lesson.id, lesson.day);
+    if (_userProgress == null) return LessonStatus.available; //TODO
+
+    // Convert actual lesson day to progress day for status checking
+    final progressDay = _getProgressDay(lesson.day, lesson.difficulty);
+    return _userProgress!.getLessonStatus(lesson.id, progressDay);
+  }
+
+  // Helper method to convert actual lesson day to progress day
+  int _getProgressDay(int actualDay, DifficultyLevel difficulty) {
+    const Map<DifficultyLevel, int> dayOffsets = {
+      DifficultyLevel.beginner: 0, // Days 1-30
+      DifficultyLevel.intermediate: 30, // Days 31-60
+      DifficultyLevel.advanced: 60, // Days 61-90
+    };
+    final offset = dayOffsets[difficulty] ?? 0;
+    return actualDay - offset;
+  }
+
+  String _getDifficultyDisplayName(DifficultyLevel difficulty) {
+    switch (difficulty) {
+      case DifficultyLevel.beginner:
+        return 'Beginner';
+      case DifficultyLevel.intermediate:
+        return 'Intermediate';
+      case DifficultyLevel.advanced:
+        return 'Advanced';
+    }
   }
 
   @override
@@ -75,6 +137,11 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   }
 
   PreferredSizeWidget _buildAppBar() {
+    final difficultyName =
+        _userProgress != null
+            ? _getDifficultyDisplayName(_userProgress!.selectedDifficulty)
+            : 'Unknown';
+
     return AppBar(
       backgroundColor: _background,
       elevation: 0,
@@ -82,9 +149,26 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
         onPressed: () => Navigator.pop(context),
         icon: const Icon(Icons.arrow_back, color: Colors.white),
       ),
-      title: const Text(
-        '30-Day Journey',
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            '30-Day Journey',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+          Text(
+            '$difficultyName Track',
+            style: TextStyle(
+              color: _primary,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
       ),
       actions: [
         IconButton(
@@ -93,7 +177,13 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
         ),
         IconButton(
           onPressed: _showFilterOptions,
-          icon: const Icon(Icons.filter_list, color: Colors.white),
+          icon: Icon(
+            Icons.filter_list,
+            color:
+                (_filterType != null || _filterCategory != null)
+                    ? _primary
+                    : Colors.white,
+          ),
         ),
       ],
     );
@@ -108,6 +198,22 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   }
 
   Widget _buildTimelineContent() {
+    if (_userProgress == null) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.error_outline, color: _text, size: 64),
+            const SizedBox(height: 16),
+            Text(
+              'No progress data found',
+              style: TextStyle(color: _text, fontSize: 16),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Column(
       children: [_buildProgress(), Expanded(child: _buildTimeline())],
     );
@@ -219,6 +325,35 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   }
 
   Widget _buildTimeline() {
+    if (_lessons.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.search_off, color: _text, size: 64),
+            const SizedBox(height: 16),
+            Text(
+              'No lessons found',
+              style: TextStyle(color: _text, fontSize: 16),
+            ),
+            if (_filterType != null || _filterCategory != null) ...[
+              const SizedBox(height: 8),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _filterType = null;
+                    _filterCategory = null;
+                  });
+                  _applyFilters();
+                },
+                child: Text('Clear Filters', style: TextStyle(color: _primary)),
+              ),
+            ],
+          ],
+        ),
+      );
+    }
+
     return RefreshIndicator(
       onRefresh: _loadData,
       color: _primary,
@@ -261,8 +396,9 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
 
   Widget _buildTimelineItem(Lesson lesson, LessonStatus status, bool isLast) {
     final progress = _userProgress?.getLessonProgress(lesson.id) ?? 0.0;
+    final progressDay = _getProgressDay(lesson.day, lesson.difficulty);
     final unlockTime =
-        _userProgress?.getTimeUntilUnlock(lesson.day) ?? 'Unknown';
+        _userProgress?.getTimeUntilUnlock(progressDay) ?? 'Unknown';
 
     return IntrinsicHeight(
       child: Row(
@@ -311,10 +447,8 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
       case LessonStatus.available:
         return _text;
       case LessonStatus.locked:
-        return _border;
       case LessonStatus.lockedToday:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        return _border;
     }
   }
 
@@ -351,12 +485,10 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
         );
         break;
       case LessonStatus.locked:
+      case LessonStatus.lockedToday:
         color = _border;
         child = Icon(Icons.lock, color: _text, size: 14);
         break;
-      case LessonStatus.lockedToday:
-        // TODO: Handle this case.
-        throw UnimplementedError();
     }
 
     return Container(
@@ -392,7 +524,8 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
     double progress,
     String unlockTime,
   ) {
-    final isLocked = status == LessonStatus.locked;
+    final isLocked =
+        status == LessonStatus.locked || status == LessonStatus.lockedToday;
     final isCompleted = status == LessonStatus.completed;
     final isInProgress = status == LessonStatus.inProgress;
     final canAccess = !isLocked;
@@ -579,12 +712,10 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
         color = _text;
         break;
       case LessonStatus.locked:
+      case LessonStatus.lockedToday:
         text = 'Locked';
         color = _border;
         break;
-      case LessonStatus.lockedToday:
-        // TODO: Handle this case.
-        throw UnimplementedError();
     }
 
     return Container(
@@ -640,25 +771,28 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   }
 
   void _onLessonTap(Lesson lesson, LessonStatus status) {
-    if (status == LessonStatus.locked) {
-      HapticFeedback.lightImpact();
-      _showLockedDialog();
-      return;
-    }
+    // if (status == LessonStatus.locked || status == LessonStatus.lockedToday) {
+    //   HapticFeedback.lightImpact();
+    //   _showLockedDialog();
+    //   return;
+    // } //TODO
 
     HapticFeedback.mediumImpact();
     Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => LessonDetailScreen(lesson: lesson)),
-    );
+    ).then((_) {
+      // Reload data when returning from lesson detail
+      _loadData();
+    });
   }
 
   void _showLockedDialog() {
     final userProgress = _userProgress;
     if (userProgress == null) return;
 
-    final nextDay = userProgress.getMaxAvailableDay() + 1;
-    final unlockTime = userProgress.getTimeUntilUnlock(nextDay);
+    final nextProgressDay = userProgress.getMaxAvailableDay() + 1;
+    final unlockTime = userProgress.getTimeUntilUnlock(nextProgressDay);
 
     showDialog(
       context: context,
@@ -741,13 +875,18 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Your Progress Statistics',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  '${_getDifficultyDisplayName(_userProgress!.selectedDifficulty)} Track',
+                  style: TextStyle(color: _primary, fontSize: 14),
                 ),
                 const SizedBox(height: 20),
                 _buildStatRow('Total Lessons', '${stats['totalLessons']}'),
@@ -805,35 +944,105 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Filter Lessons',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Filter Lessons',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    if (_filterType != null || _filterCategory != null)
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _filterType = null;
+                            _filterCategory = null;
+                          });
+                          _applyFilters();
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          'Clear All',
+                          style: TextStyle(color: _primary),
+                        ),
+                      ),
+                  ],
                 ),
                 const SizedBox(height: 16),
-                _buildFilterOption('All Lessons', Icons.list),
-                _buildFilterOption('Completed Only', Icons.check_circle),
-                _buildFilterOption('In Progress', Icons.play_circle),
-                _buildFilterOption('Theory Lessons', Icons.school),
-                _buildFilterOption('Practice Sessions', Icons.camera_alt),
+                const Text(
+                  'By Status',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                _buildFilterOption('All Lessons', Icons.list, () {
+                  setState(() {
+                    _filterType = null;
+                    _filterCategory = null;
+                  });
+                  _applyFilters();
+                  Navigator.pop(context);
+                }),
+                _buildFilterOption('Completed Only', Icons.check_circle, () {
+                  // Filter by completed status would need custom logic
+                  Navigator.pop(context);
+                }),
+                _buildFilterOption('Available Lessons', Icons.play_circle, () {
+                  // Filter by available status would need custom logic
+                  Navigator.pop(context);
+                }),
+                const SizedBox(height: 16),
+                const Text(
+                  'By Type',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                _buildFilterOption('Theory Lessons', Icons.school, () {
+                  setState(() {
+                    _filterType = LessonType.theory;
+                    _filterCategory = null;
+                  });
+                  _applyFilters();
+                  Navigator.pop(context);
+                }),
+                _buildFilterOption('Practice Sessions', Icons.camera_alt, () {
+                  setState(() {
+                    _filterType = LessonType.practice;
+                    _filterCategory = null;
+                  });
+                  _applyFilters();
+                  Navigator.pop(context);
+                }),
+                _buildFilterOption('Projects', Icons.assignment, () {
+                  setState(() {
+                    _filterType = LessonType.project;
+                    _filterCategory = null;
+                  });
+                  _applyFilters();
+                  Navigator.pop(context);
+                }),
               ],
             ),
           ),
     );
   }
 
-  Widget _buildFilterOption(String title, IconData icon) {
+  Widget _buildFilterOption(String title, IconData icon, VoidCallback onTap) {
     return ListTile(
       leading: Icon(icon, color: _text),
       title: Text(title, style: const TextStyle(color: Colors.white)),
-      onTap: () {
-        Navigator.pop(context);
-        // TODO: Implement filtering logic
-        debugPrint('Filter: $title');
-      },
+      onTap: onTap,
     );
   }
 }

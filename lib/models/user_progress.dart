@@ -1,6 +1,8 @@
 import 'package:photography_guide/models/lesson.dart';
 
 class UserProgress {
+  static bool debugUnlockAllLessons = true; // Set to true for testing
+
   final String userId;
   final DifficultyLevel selectedDifficulty;
   final int currentDay;
@@ -156,41 +158,44 @@ class UserProgress {
     return lessonProgress[lessonId]?.status == LessonStatus.current;
   }
 
-  bool isLessonLocked(String lessonId, int lessonDay) {
-    return !isDayUnlocked(lessonDay);
+  // Updated to work with progress days (1-30) instead of actual lesson days
+  bool isLessonLocked(String lessonId, int progressDay) {
+    return !isDayUnlocked(progressDay);
   }
 
-  // Daily unlock system methods
-  bool isDayUnlocked(int day) {
-    // Day 1 is always unlocked when the course starts
-    if (day == 1) return true;
+  // Daily unlock system methods (works with progress days 1-30)
+  bool isDayUnlocked(int progressDay) {
+    if (debugUnlockAllLessons) return true; //TODO
+    if (progressDay == 1) return true;
 
     // Check if this day has been explicitly unlocked
-    if (dailyUnlockDates.containsKey(day)) return true;
+    if (dailyUnlockDates.containsKey(progressDay)) return true;
 
     // Check if enough days have passed since course start
     final today = DateTime.now();
     final daysSinceCourseStart = today.difference(courseStartDate).inDays;
 
     // Unlock one day at a time, respecting the daily restriction
-    return day <= daysSinceCourseStart + 1;
+    return progressDay <= daysSinceCourseStart + 1;
   }
 
-  DateTime? getDayUnlockDate(int day) {
-    if (day == 1) return courseStartDate;
+  DateTime? getDayUnlockDate(int progressDay) {
+    if (progressDay == 1) return courseStartDate;
 
     // If already unlocked, return the unlock date
-    if (dailyUnlockDates.containsKey(day)) {
-      return dailyUnlockDates[day];
+    if (dailyUnlockDates.containsKey(progressDay)) {
+      return dailyUnlockDates[progressDay];
     }
 
     // Calculate when this day will be unlocked
-    final expectedUnlockDate = courseStartDate.add(Duration(days: day - 1));
+    final expectedUnlockDate = courseStartDate.add(
+      Duration(days: progressDay - 1),
+    );
     return expectedUnlockDate;
   }
 
-  String getTimeUntilUnlock(int day) {
-    final unlockDate = getDayUnlockDate(day);
+  String getTimeUntilUnlock(int progressDay) {
+    final unlockDate = getDayUnlockDate(progressDay);
     if (unlockDate == null) return 'Unknown';
 
     final now = DateTime.now();
@@ -233,15 +238,16 @@ class UserProgress {
     return (daysSinceCourseStart + 1).clamp(1, 30);
   }
 
-  LessonStatus getLessonStatus(String lessonId, int lessonDay) {
-    // Check daily unlock first
-    if (!isDayUnlocked(lessonDay)) return LessonStatus.locked;
+  // Updated to work with progress days instead of actual lesson days
+  LessonStatus getLessonStatus(String lessonId, int progressDay) {
+    // Check daily unlock first (using progress day)
+    if (!isDayUnlocked(progressDay)) return LessonStatus.locked;
 
     if (isLessonCompleted(lessonId)) return LessonStatus.completed;
 
     // Current day logic - only one lesson can be current at a time
     final maxAvailableDay = getMaxAvailableDay();
-    if (lessonDay == maxAvailableDay) {
+    if (progressDay == maxAvailableDay) {
       final progress = lessonProgress[lessonId];
       if (progress != null && progress.progressPercentage > 0) {
         return LessonStatus.inProgress;
@@ -249,7 +255,7 @@ class UserProgress {
       return LessonStatus.current;
     }
 
-    if (lessonDay < maxAvailableDay) return LessonStatus.available;
+    if (progressDay < maxAvailableDay) return LessonStatus.available;
 
     return LessonStatus.locked;
   }
@@ -262,7 +268,8 @@ class UserProgress {
     return savedItemIds.contains(itemId);
   }
 
-  UserProgress markLessonCompleted(String lessonId, int lessonDay) {
+  // Updated to work with progress days
+  UserProgress markLessonCompleted(String lessonId, int progressDay) {
     final updatedProgress = Map<String, LessonProgress>.from(lessonProgress);
     updatedProgress[lessonId] = LessonProgress(
       lessonId: lessonId,
@@ -283,12 +290,13 @@ class UserProgress {
 
     // Update daily unlock dates - unlock next day when current lesson is completed
     final updatedUnlockDates = Map<int, DateTime>.from(dailyUnlockDates);
-    final nextDay = lessonDay + 1;
-    if (nextDay <= 30 && !updatedUnlockDates.containsKey(nextDay)) {
+    final nextProgressDay = progressDay + 1;
+    if (nextProgressDay <= 30 &&
+        !updatedUnlockDates.containsKey(nextProgressDay)) {
       // Unlock the next day, but only if it's not in the future
       final today = DateTime.now();
       final nextDayUnlockDate = courseStartDate.add(
-        Duration(days: nextDay - 1),
+        Duration(days: nextProgressDay - 1),
       );
       final startOfToday = DateTime(today.year, today.month, today.day);
       final startOfNextDayUnlock = DateTime(
@@ -300,7 +308,7 @@ class UserProgress {
       // Only unlock if the scheduled unlock date has arrived
       if (startOfNextDayUnlock.isBefore(startOfToday) ||
           startOfNextDayUnlock.isAtSameMomentAs(startOfToday)) {
-        updatedUnlockDates[nextDay] = nextDayUnlockDate;
+        updatedUnlockDates[nextProgressDay] = nextDayUnlockDate;
       }
     }
 
@@ -308,7 +316,7 @@ class UserProgress {
       lessonProgress: updatedProgress,
       dailyUnlockDates: updatedUnlockDates,
       overallProgress: newOverallProgress,
-      currentDay: lessonDay == currentDay ? currentDay + 1 : currentDay,
+      currentDay: progressDay == currentDay ? currentDay + 1 : currentDay,
       lastActivityDate: DateTime.now(),
     );
   }

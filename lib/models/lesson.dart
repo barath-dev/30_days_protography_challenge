@@ -1,3 +1,49 @@
+// Enums
+enum LessonType { theory, practice, review, planning, project, celebration }
+
+enum DifficultyLevel { beginner, intermediate, advanced }
+
+// Models
+class PracticeExercise {
+  final String id;
+  final String title;
+  final String description;
+  final List<String> steps;
+  final Map<String, dynamic> requirements;
+  final int estimatedTime;
+
+  const PracticeExercise({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.steps,
+    required this.requirements,
+    required this.estimatedTime,
+  });
+
+  factory PracticeExercise.fromJson(Map<String, dynamic> json) {
+    return PracticeExercise(
+      id: json['id'] ?? '',
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      steps: List<String>.from(json['steps'] ?? []),
+      requirements: Map<String, dynamic>.from(json['requirements'] ?? {}),
+      estimatedTime: json['estimatedTime'] ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'steps': steps,
+      'requirements': requirements,
+      'estimatedTime': estimatedTime,
+    };
+  }
+}
+
 class Lesson {
   final String id;
   final int day;
@@ -131,47 +177,3 @@ class Lesson {
     );
   }
 }
-
-class PracticeExercise {
-  final String id;
-  final String title;
-  final String description;
-  final List<String> steps;
-  final Map<String, dynamic> requirements;
-  final int estimatedTime;
-
-  const PracticeExercise({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.steps,
-    required this.requirements,
-    required this.estimatedTime,
-  });
-
-  factory PracticeExercise.fromJson(Map<String, dynamic> json) {
-    return PracticeExercise(
-      id: json['id'] ?? '',
-      title: json['title'] ?? '',
-      description: json['description'] ?? '',
-      steps: List<String>.from(json['steps'] ?? []),
-      requirements: Map<String, dynamic>.from(json['requirements'] ?? {}),
-      estimatedTime: json['estimatedTime'] ?? 0,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'description': description,
-      'steps': steps,
-      'requirements': requirements,
-      'estimatedTime': estimatedTime,
-    };
-  }
-}
-
-enum LessonType { theory, practice, review, planning, project, celebration }
-
-enum DifficultyLevel { beginner, intermediate, advanced }

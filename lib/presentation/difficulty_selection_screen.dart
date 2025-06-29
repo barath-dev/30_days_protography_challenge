@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:photography_guide/models/lesson.dart';
-import '../models/user_progress.dart';
 import '../services/user_preferences.dart';
-import '../main.dart';
 import 'home_screen.dart';
 
 class DifficultySelectionScreen extends StatefulWidget {
@@ -228,7 +226,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                 const SizedBox(height: 12),
                 Text(
                   isEditing
-                      ? 'Change your difficulty level to better match your current skills.'
+                      ? 'Changing your difficulty level will reset your progress and start fresh with the new track.'
                       : 'Select the level that best matches your current photography experience. You can always change this later.',
                   style: TextStyle(color: _text, fontSize: 16, height: 1.5),
                 ),
@@ -476,15 +474,44 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
 
   Widget _buildBottomAction() {
     final isEditing = UserPreferences.currentProgress != null;
+    final currentDifficulty =
+        UserPreferences.currentProgress?.selectedDifficulty;
+    final isDifferentDifficulty =
+        isEditing && currentDifficulty != selectedDifficulty;
 
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
           if (selectedDifficulty != null) ...[
+            if (isDifferentDifficulty) ...[
+              Container(
+                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.only(bottom: 16),
+                decoration: BoxDecoration(
+                  color: Colors.orange.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.orange.withOpacity(0.3)),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.warning_amber, color: Colors.orange, size: 16),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Changing difficulty will reset your progress and start fresh.',
+                        style: TextStyle(color: Colors.orange, fontSize: 12),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
             Text(
               isEditing
-                  ? 'Ready to update your learning track?'
+                  ? isDifferentDifficulty
+                      ? 'Ready to reset and start with your new learning track?'
+                      : 'Your current learning track'
                   : 'Ready to start your photography journey?',
               style: TextStyle(color: _text, fontSize: 14),
               textAlign: TextAlign.center,
@@ -525,7 +552,9 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                       : Text(
                         selectedDifficulty != null
                             ? isEditing
-                                ? 'Update Learning Track'
+                                ? isDifferentDifficulty
+                                    ? 'Reset & Update Learning Track'
+                                    : 'Keep Current Track'
                                 : 'Start Learning'
                             : 'Select a Difficulty Level',
                         style: const TextStyle(
@@ -547,16 +576,25 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
 
     try {
       final currentProgress = UserPreferences.currentProgress;
+      final currentDifficulty = currentProgress?.selectedDifficulty;
+      final isDifferentDifficulty =
+          currentProgress != null && currentDifficulty != selectedDifficulty;
 
       if (currentProgress != null) {
-        // Update existing progress
-        final updatedProgress = currentProgress.copyWith(
-          selectedDifficulty: selectedDifficulty!,
-        );
-        await UserPreferences.saveUserProgress(updatedProgress);
+        if (isDifferentDifficulty) {
+          // Reset progress and create new progress with new difficulty
+          await UserPreferences.resetProgressForNewDifficulty(
+            selectedDifficulty!,
+          );
 
-        if (mounted) {
-          _showUpdateConfirmation();
+          if (mounted) {
+            _showResetConfirmation();
+          }
+        } else {
+          // Same difficulty, just return
+          if (mounted) {
+            Navigator.pop(context);
+          }
         }
       } else {
         // Create new progress
@@ -623,7 +661,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
     );
   }
 
-  void _showUpdateConfirmation() {
+  void _showResetConfirmation() {
     final difficulty = difficulties.firstWhere(
       (d) => d.level == selectedDifficulty!,
     );
@@ -637,11 +675,11 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
               borderRadius: BorderRadius.circular(16),
             ),
             title: Text(
-              'Level Updated!',
+              'Progress Reset!',
               style: TextStyle(color: Colors.white),
             ),
             content: Text(
-              'Your learning track has been updated to ${difficulty.title} level.',
+              'Your learning track has been updated to ${difficulty.title} level and your progress has been reset to start fresh.',
               style: TextStyle(color: _text),
             ),
             actions: [

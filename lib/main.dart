@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:photography_guide/presentation/difficulty_selection_screen.dart';
 import 'package:photography_guide/presentation/home_screen.dart';
 import 'services/user_preferences.dart';

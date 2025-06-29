@@ -22,13 +22,17 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
   bool _isLoading = true;
   SortOption _currentSort = SortOption.recentlySaved;
 
-  // Design constants
-  static const Color _primary = Color(0xFFFF6B35);
-  static const Color _background = Color(0xFF0D0D0D);
-  static const Color _card = Color(0xFF1A1A1A);
-  static const Color _text = Color(0xFF888888);
-  static const Color _border = Color(0xFF333333);
-  static const Color _success = Color(0xFF4CAF50);
+  // Enhanced design constants matching the lesson detail screen
+  static const Color _primaryColor = Color(0xFFFF6B35);
+  static const Color _secondaryColor = Color(0xFFFFB800);
+  static const Color _backgroundColor = Color(0xFF0B0B0B);
+  static const Color _surfaceColor = Color(0xFF1C1C1E);
+  static const Color _cardColor = Color(0xFF2C2C2E);
+  static const Color _textPrimary = Color(0xFFFFFFFF);
+  static const Color _textSecondary = Color(0xFFAAAAAA);
+  static const Color _textTertiary = Color(0xFF666666);
+  static const Color _borderColor = Color(0xFF3C3C3E);
+  static const Color _successColor = Color(0xFF30D158);
 
   final List<String> _tabs = [
     'All',
@@ -100,7 +104,6 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
 
     // Sort items
     _sortItems(items);
-
     return items;
   }
 
@@ -124,7 +127,7 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _background,
+      backgroundColor: _backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -142,44 +145,51 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: _card,
-                borderRadius: BorderRadius.circular(12),
+                color: _surfaceColor,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: _borderColor),
               ),
-              child: const Icon(Icons.arrow_back, color: Colors.white),
+              child: Icon(
+                Icons.arrow_back_rounded,
+                color: _textPrimary,
+                size: 20,
+              ),
             ),
           ),
-          Column(
-            children: [
-              const Text(
-                'Saved Items',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+          Expanded(
+            child: Column(
+              children: [
+                Text(
+                  'Saved Items',
+                  style: TextStyle(
+                    color: _textPrimary,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
-              ),
-              Text(
-                '${_savedItems.length} items saved',
-                style: const TextStyle(color: Color(0xFF888888), fontSize: 12),
-              ),
-            ],
+                Text(
+                  '${_savedItems.length} items saved',
+                  style: TextStyle(color: _textSecondary, fontSize: 14),
+                ),
+              ],
+            ),
           ),
           GestureDetector(
             onTap: _showSortOptions,
             child: Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: _card,
-                borderRadius: BorderRadius.circular(12),
+                color: _surfaceColor,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: _borderColor),
               ),
-              child: const Icon(Icons.sort, color: Colors.white),
+              child: Icon(Icons.sort_rounded, color: _textPrimary, size: 20),
             ),
           ),
         ],
@@ -193,13 +203,13 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
-          color: _card,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: _border),
+          color: _surfaceColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: _borderColor),
         ),
         child: Row(
           children: [
-            Icon(Icons.search, color: _text, size: 20),
+            Icon(Icons.search_rounded, color: _textSecondary, size: 20),
             const SizedBox(width: 12),
             Expanded(
               child: TextField(
@@ -208,10 +218,10 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
                     searchQuery = value;
                   });
                 },
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(color: _textPrimary, fontSize: 16),
                 decoration: InputDecoration(
                   hintText: 'Search saved items...',
-                  hintStyle: TextStyle(color: _text),
+                  hintStyle: TextStyle(color: _textSecondary),
                   border: InputBorder.none,
                   contentPadding: const EdgeInsets.symmetric(vertical: 16),
                 ),
@@ -224,7 +234,18 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
                     searchQuery = '';
                   });
                 },
-                child: Icon(Icons.close, color: _text, size: 20),
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: _textSecondary.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(
+                    Icons.close_rounded,
+                    color: _textSecondary,
+                    size: 16,
+                  ),
+                ),
               ),
           ],
         ),
@@ -234,7 +255,7 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
 
   Widget _buildTabBar() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
@@ -256,15 +277,31 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
                     duration: const Duration(milliseconds: 200),
                     margin: const EdgeInsets.only(right: 12),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
+                      horizontal: 18,
+                      vertical: 12,
                     ),
                     decoration: BoxDecoration(
-                      color: isSelected ? _primary : _card,
-                      borderRadius: BorderRadius.circular(20),
+                      gradient:
+                          isSelected
+                              ? LinearGradient(
+                                colors: [_primaryColor, _secondaryColor],
+                              )
+                              : null,
+                      color: isSelected ? null : _surfaceColor,
+                      borderRadius: BorderRadius.circular(25),
                       border: Border.all(
-                        color: isSelected ? _primary : _border,
+                        color: isSelected ? Colors.transparent : _borderColor,
                       ),
+                      boxShadow:
+                          isSelected
+                              ? [
+                                BoxShadow(
+                                  color: _primaryColor.withOpacity(0.3),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ]
+                              : null,
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -272,34 +309,33 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
                         Text(
                           tab,
                           style: TextStyle(
-                            color: isSelected ? Colors.white : _text,
+                            color: isSelected ? Colors.white : _textSecondary,
                             fontSize: 14,
                             fontWeight:
-                                isSelected
-                                    ? FontWeight.w600
-                                    : FontWeight.normal,
+                                isSelected ? FontWeight.w600 : FontWeight.w500,
                           ),
                         ),
                         if (count > 0) ...[
-                          const SizedBox(width: 6),
+                          const SizedBox(width: 8),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 6,
+                              horizontal: 8,
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
                               color:
                                   isSelected
                                       ? Colors.white.withOpacity(0.2)
-                                      : _border,
-                              borderRadius: BorderRadius.circular(8),
+                                      : _primaryColor.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
                               count.toString(),
                               style: TextStyle(
-                                color: isSelected ? Colors.white : _text,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
+                                color:
+                                    isSelected ? Colors.white : _primaryColor,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
                           ),
@@ -322,9 +358,27 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
 
   Widget _buildContent() {
     if (_isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(_primary),
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: _surfaceColor,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(_primaryColor),
+                strokeWidth: 3,
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'Loading saved items...',
+              style: TextStyle(color: _textSecondary, fontSize: 16),
+            ),
+          ],
         ),
       );
     }
@@ -337,8 +391,8 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
 
     return RefreshIndicator(
       onRefresh: _loadSavedItems,
-      color: _primary,
-      backgroundColor: _card,
+      color: _primaryColor,
+      backgroundColor: _surfaceColor,
       child: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         itemCount: items.length,
@@ -374,150 +428,208 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
   }
 
   Widget _buildSavedItemCard(SavedItem item) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: _card,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  color: _getTypeColor(item.type).withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: _getTypeColor(item.type).withOpacity(0.3),
+    return GestureDetector(
+      onTap: () => _openItem(item),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: _surfaceColor,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: _borderColor),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        _getTypeColor(item.type),
+                        _getTypeColor(item.type).withOpacity(0.7),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Icon(
+                    _getTypeIcon(item.type),
+                    color: Colors.white,
+                    size: 24,
                   ),
                 ),
-                child: Icon(
-                  _getTypeIcon(item.type),
-                  color: _getTypeColor(item.type),
-                  size: 24,
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: _getTypeColor(item.type).withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: _getTypeColor(item.type).withOpacity(0.3),
+                          ),
+                        ),
+                        child: Text(
+                          _getTypeName(item.type).toUpperCase(),
+                          style: TextStyle(
+                            color: _getTypeColor(item.type),
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        item.title,
+                        style: TextStyle(
+                          color: _textPrimary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
+                GestureDetector(
+                  onTap: () => _removeSavedItem(item),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: _primaryColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      Icons.bookmark_rounded,
+                      color: _primaryColor,
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              item.description,
+              style: TextStyle(
+                color: _textSecondary,
+                fontSize: 15,
+                height: 1.4,
               ),
-              const SizedBox(width: 16),
-              Expanded(
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 16),
+
+            // Progress bar for lessons
+            if (item.progress != null) ...[
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: _primaryColor.withOpacity(0.05),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: _primaryColor.withOpacity(0.1)),
+                ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: _getTypeColor(item.type).withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            _getTypeName(item.type),
-                            style: TextStyle(
-                              color: _getTypeColor(item.type),
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                            ),
+                        Icon(
+                          Icons.trending_up_rounded,
+                          color: _primaryColor,
+                          size: 16,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Progress',
+                          style: TextStyle(
+                            color: _primaryColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         const Spacer(),
-                        GestureDetector(
-                          onTap: () => _removeSavedItem(item),
-                          child: Icon(
-                            Icons.bookmark,
-                            color: _primary,
-                            size: 20,
+                        Text(
+                          '${(item.progress! * 100).round()}%',
+                          style: TextStyle(
+                            color: _primaryColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 8),
-                    GestureDetector(
-                      onTap: () => _openItem(item),
-                      child: Text(
-                        item.title,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      item.description,
-                      style: TextStyle(color: _text, fontSize: 14),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    LinearProgressIndicator(
+                      value: item.progress,
+                      backgroundColor: _borderColor,
+                      valueColor: AlwaysStoppedAnimation(_primaryColor),
+                      minHeight: 6,
+                      borderRadius: BorderRadius.circular(3),
                     ),
                   ],
                 ),
               ),
+              const SizedBox(height: 16),
             ],
-          ),
-          const SizedBox(height: 16),
 
-          // Progress bar for lessons
-          if (item.progress != null) ...[
+            // Footer info
             Row(
               children: [
-                Text('Progress', style: TextStyle(color: _text, fontSize: 12)),
+                Icon(Icons.folder_rounded, color: _textTertiary, size: 16),
+                const SizedBox(width: 6),
+                Text(
+                  item.category,
+                  style: TextStyle(
+                    color: _textTertiary,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                if (item.duration != null) ...[
+                  const SizedBox(width: 16),
+                  Icon(Icons.schedule_rounded, color: _textTertiary, size: 16),
+                  const SizedBox(width: 6),
+                  Text(
+                    '${item.duration} min',
+                    style: TextStyle(
+                      color: _textTertiary,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
                 const Spacer(),
                 Text(
-                  '${(item.progress! * 100).round()}%',
+                  _formatDate(item.savedDate),
                   style: TextStyle(
-                    color: _primary,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
+                    color: _textTertiary,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 8),
-            LinearProgressIndicator(
-              value: item.progress,
-              backgroundColor: _border,
-              valueColor: AlwaysStoppedAnimation(_primary),
-              minHeight: 4,
-              borderRadius: BorderRadius.circular(2),
-            ),
-            const SizedBox(height: 12),
           ],
-
-          // Footer info
-          Row(
-            children: [
-              Icon(Icons.folder_outlined, color: _text, size: 14),
-              const SizedBox(width: 4),
-              Text(item.category, style: TextStyle(color: _text, fontSize: 12)),
-              if (item.duration != null) ...[
-                const SizedBox(width: 16),
-                Icon(Icons.schedule, color: _text, size: 14),
-                const SizedBox(width: 4),
-                Text(
-                  '${item.duration} min',
-                  style: TextStyle(color: _text, fontSize: 12),
-                ),
-              ],
-              const Spacer(),
-              Text(
-                _formatDate(item.savedDate),
-                style: TextStyle(color: _text, fontSize: 12),
-              ),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -528,29 +640,42 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(color: _card, shape: BoxShape.circle),
-            child: Icon(Icons.bookmark_outline, color: _text, size: 40),
-          ),
-          const SizedBox(height: 24),
-          const Text(
-            'No Saved Items',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  _primaryColor.withOpacity(0.1),
+                  _secondaryColor.withOpacity(0.05),
+                ],
+              ),
+              shape: BoxShape.circle,
+              border: Border.all(color: _primaryColor.withOpacity(0.2)),
+            ),
+            child: Icon(
+              Icons.bookmark_outline_rounded,
+              color: _primaryColor,
+              size: 48,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 32),
+          Text(
+            searchQuery.isNotEmpty ? 'No Results Found' : 'No Saved Items',
+            style: TextStyle(
+              color: _textPrimary,
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 12),
           Text(
             searchQuery.isNotEmpty
-                ? 'No items match your search'
+                ? 'Try adjusting your search or filters'
                 : 'Start bookmarking lessons and tips\nto see them here',
-            style: TextStyle(color: _text, fontSize: 14),
+            style: TextStyle(color: _textSecondary, fontSize: 16, height: 1.5),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 32),
           if (searchQuery.isNotEmpty)
             ElevatedButton(
               onPressed: () {
@@ -559,10 +684,27 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
                 });
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: _primary,
+                backgroundColor: _primaryColor,
                 foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
               ),
-              child: const Text('Clear Search'),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.clear_rounded, size: 20),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Clear Search',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
             ),
         ],
       ),
@@ -572,26 +714,26 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
   Color _getTypeColor(SavedItemType type) {
     switch (type) {
       case SavedItemType.lesson:
-        return _primary;
+        return _primaryColor;
       case SavedItemType.tip:
-        return _success;
+        return _successColor;
       case SavedItemType.article:
-        return const Color(0xFF2196F3);
+        return const Color(0xFF007AFF);
       case SavedItemType.reference:
-        return const Color(0xFF9C27B0);
+        return const Color(0xFFAF52DE);
     }
   }
 
   IconData _getTypeIcon(SavedItemType type) {
     switch (type) {
       case SavedItemType.lesson:
-        return Icons.play_circle_outline;
+        return Icons.play_circle_filled_rounded;
       case SavedItemType.tip:
-        return Icons.lightbulb_outline;
+        return Icons.lightbulb_rounded;
       case SavedItemType.article:
-        return Icons.article_outlined;
+        return Icons.article_rounded;
       case SavedItemType.reference:
-        return Icons.description_outlined;
+        return Icons.description_rounded;
     }
   }
 
@@ -612,7 +754,9 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
     final now = DateTime.now();
     final difference = now.difference(date);
 
-    if (difference.inDays > 0) {
+    if (difference.inDays > 7) {
+      return '${date.day}/${date.month}/${date.year}';
+    } else if (difference.inDays > 0) {
       return '${difference.inDays}d ago';
     } else if (difference.inHours > 0) {
       return '${difference.inHours}h ago';
@@ -623,7 +767,6 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
 
   Future<void> _openItem(SavedItem item) async {
     if (item.type == SavedItemType.lesson) {
-      // Get the lesson and navigate to lesson detail
       final lesson = LessonManager.getLessonById(item.id);
       if (lesson != null && mounted) {
         Navigator.push(
@@ -632,7 +775,6 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
         );
       }
     } else {
-      // For other types, show a simple detail view or open content
       _showItemDetail(item);
     }
   }
@@ -640,10 +782,10 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
   void _showItemDetail(SavedItem item) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: _card,
+      backgroundColor: _surfaceColor,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder:
           (context) => DraggableScrollableSheet(
@@ -652,7 +794,7 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
             minChildSize: 0.5,
             builder:
                 (context, scrollController) => Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -661,23 +803,28 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
                           width: 40,
                           height: 4,
                           decoration: BoxDecoration(
-                            color: _border,
+                            color: _borderColor,
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 24),
                       Row(
                         children: [
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: _getTypeColor(item.type).withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(12),
+                              gradient: LinearGradient(
+                                colors: [
+                                  _getTypeColor(item.type),
+                                  _getTypeColor(item.type).withOpacity(0.7),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.circular(16),
                             ),
                             child: Icon(
                               _getTypeIcon(item.type),
-                              color: _getTypeColor(item.type),
+                              color: Colors.white,
                               size: 24,
                             ),
                           ),
@@ -688,29 +835,32 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
                               children: [
                                 Text(
                                   item.title,
-                                  style: const TextStyle(
-                                    color: Colors.white,
+                                  style: TextStyle(
+                                    color: _textPrimary,
                                     fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
                                 Text(
                                   item.category,
-                                  style: TextStyle(color: _text, fontSize: 14),
+                                  style: TextStyle(
+                                    color: _textSecondary,
+                                    fontSize: 14,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 24),
                       Expanded(
                         child: SingleChildScrollView(
                           controller: scrollController,
                           child: Text(
                             item.description,
                             style: TextStyle(
-                              color: _text,
+                              color: _textSecondary,
                               fontSize: 16,
                               height: 1.6,
                             ),
@@ -729,28 +879,34 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
       context: context,
       builder:
           (context) => AlertDialog(
-            backgroundColor: _card,
+            backgroundColor: _surfaceColor,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(20),
             ),
-            title: const Text(
+            title: Text(
               'Remove Bookmark',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                color: _textPrimary,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             content: Text(
-              'Are you sure you want to remove "${item.title}" from your saved items?',
-              style: TextStyle(color: _text),
+              'Remove "${item.title}" from your saved items?',
+              style: TextStyle(color: _textSecondary),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
-                child: Text('Cancel', style: TextStyle(color: _text)),
+                child: Text('Cancel', style: TextStyle(color: _textSecondary)),
               ),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context, true),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: _primary,
+                  backgroundColor: _primaryColor,
                   foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 child: const Text('Remove'),
               ),
@@ -769,8 +925,11 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('${item.title} removed from saved items'),
-            backgroundColor: _card,
+            backgroundColor: _surfaceColor,
             behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
         );
       }
@@ -780,27 +939,28 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
   void _showSortOptions() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: _card,
+      backgroundColor: _surfaceColor,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder:
           (context) => Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Sort by',
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    color: _textPrimary,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
                 ...SortOption.values.map((option) => _buildSortOption(option)),
+                const SizedBox(height: 10),
               ],
             ),
           ),
@@ -810,36 +970,63 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
   Widget _buildSortOption(SortOption option) {
     final isSelected = _currentSort == option;
 
-    return ListTile(
-      leading: Icon(_getSortIcon(option), color: isSelected ? _primary : _text),
-      title: Text(
-        _getSortName(option),
-        style: TextStyle(
-          color: isSelected ? _primary : Colors.white,
-          fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-        ),
-      ),
-      trailing:
-          isSelected ? Icon(Icons.check, color: _primary, size: 20) : null,
+    return GestureDetector(
       onTap: () {
         setState(() {
           _currentSort = option;
         });
         Navigator.pop(context);
+        HapticFeedback.lightImpact();
       },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color:
+              isSelected ? _primaryColor.withOpacity(0.1) : Colors.transparent,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color:
+                isSelected
+                    ? _primaryColor.withOpacity(0.3)
+                    : Colors.transparent,
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              _getSortIcon(option),
+              color: isSelected ? _primaryColor : _textSecondary,
+              size: 22,
+            ),
+            const SizedBox(width: 16),
+            Text(
+              _getSortName(option),
+              style: TextStyle(
+                color: isSelected ? _primaryColor : _textPrimary,
+                fontSize: 16,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+              ),
+            ),
+            const Spacer(),
+            if (isSelected)
+              Icon(Icons.check_rounded, color: _primaryColor, size: 20),
+          ],
+        ),
+      ),
     );
   }
 
   IconData _getSortIcon(SortOption option) {
     switch (option) {
       case SortOption.recentlySaved:
-        return Icons.access_time;
+        return Icons.access_time_rounded;
       case SortOption.alphabetical:
-        return Icons.sort_by_alpha;
+        return Icons.sort_by_alpha_rounded;
       case SortOption.type:
-        return Icons.category;
+        return Icons.category_rounded;
       case SortOption.category:
-        return Icons.folder_outlined;
+        return Icons.folder_rounded;
     }
   }
 

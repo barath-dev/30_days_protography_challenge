@@ -65,6 +65,25 @@ class UserPreferences {
     await setFirstLaunchCompleted();
   }
 
+  // New method to reset progress when difficulty changes
+  static Future<void> resetProgressForNewDifficulty(
+    DifficultyLevel newDifficulty,
+  ) async {
+    try {
+      // Create fresh progress with the new difficulty
+      final freshProgress = UserProgress.initial(newDifficulty);
+      await saveUserProgress(freshProgress);
+
+      // Clear saved items as they might be specific to the old difficulty
+      await _prefs?.remove(_keySavedItems);
+
+      print('Progress reset for new difficulty: ${newDifficulty.toString()}');
+    } catch (e) {
+      print('Error resetting progress for new difficulty: $e');
+      rethrow;
+    }
+  }
+
   static Future<void> updateLessonProgress(
     String lessonId,
     LessonProgress lessonProgress,
@@ -86,12 +105,12 @@ class UserPreferences {
 
   static Future<void> markLessonCompleted(
     String lessonId,
-    int lessonDay,
+    int progressDay, // Changed from lessonDay to progressDay
   ) async {
     if (_currentProgress != null) {
       final updatedProgress = _currentProgress!.markLessonCompleted(
         lessonId,
-        lessonDay,
+        progressDay, // Now uses progress day (1-30) instead of actual lesson day
       );
       await saveUserProgress(updatedProgress);
     }
@@ -235,6 +254,16 @@ class UserPreferences {
     _currentProgress = null;
   }
 
+  // Get current user's difficulty level
+  static DifficultyLevel? getCurrentDifficulty() {
+    return _currentProgress?.selectedDifficulty;
+  }
+
+  // Check if difficulty has been set
+  static bool hasDifficultySet() {
+    return _currentProgress?.selectedDifficulty != null;
+  }
+
   // Statistics
   static Future<Map<String, dynamic>> getStatistics() async {
     if (_currentProgress == null) return {};
@@ -260,6 +289,7 @@ class UserPreferences {
       'startDate': _currentProgress!.startDate.toIso8601String(),
       'daysSinceStart':
           DateTime.now().difference(_currentProgress!.startDate).inDays,
+      'selectedDifficulty': _currentProgress!.selectedDifficulty.toString(),
     };
   }
 }

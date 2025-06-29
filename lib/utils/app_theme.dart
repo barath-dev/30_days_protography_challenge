@@ -16,12 +16,10 @@ class AppTheme {
         primary: AppConstants.primaryColor,
         secondary: AppConstants.primaryColor,
         surface: AppConstants.cardColor,
-        background: AppConstants.backgroundColor,
         error: AppConstants.errorColor,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: Colors.white,
-        onBackground: Colors.white,
         onError: Colors.white,
         tertiary: AppConstants.successColor,
         outline: AppConstants.borderColor,
@@ -216,14 +214,14 @@ class AppTheme {
 
       // Switch Theme
       switchTheme: SwitchThemeData(
-        thumbColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return Colors.white;
           }
           return AppConstants.textSecondary;
         }),
-        trackColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        trackColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return AppConstants.primaryColor;
           }
           return AppConstants.borderColor;
@@ -232,21 +230,21 @@ class AppTheme {
 
       // Checkbox Theme
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return AppConstants.primaryColor;
           }
           return Colors.transparent;
         }),
-        checkColor: MaterialStateProperty.all(Colors.white),
+        checkColor: WidgetStateProperty.all(Colors.white),
         side: const BorderSide(color: AppConstants.borderColor, width: 2),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
 
       // Radio Theme
       radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return AppConstants.primaryColor;
           }
           return AppConstants.borderColor;
@@ -296,15 +294,15 @@ class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppConstants.cardColor,
         indicatorColor: AppConstants.primaryColor.withOpacity(0.2),
-        labelTextStyle: MaterialStateProperty.all(
+        labelTextStyle: WidgetStateProperty.all(
           const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w500,
             fontFamily: 'SF Pro Display',
           ),
         ),
-        iconTheme: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return const IconThemeData(color: AppConstants.primaryColor);
           }
           return const IconThemeData(color: AppConstants.textSecondary);
@@ -438,12 +436,10 @@ class AppTheme {
         primary: AppConstants.primaryColor,
         secondary: AppConstants.primaryColor,
         surface: Colors.grey[50]!,
-        background: Colors.white,
         error: AppConstants.errorColor,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: Colors.black87,
-        onBackground: Colors.black87,
         onError: Colors.white,
         tertiary: AppConstants.successColor,
         outline: Colors.grey[300]!,
