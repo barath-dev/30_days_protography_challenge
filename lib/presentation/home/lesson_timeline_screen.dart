@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../models/lesson.dart';
-import '../models/user_progress.dart';
-import '../services/user_preferences.dart';
-import '../services/lesson_manager.dart';
+import '../../models/lesson.dart';
+import '../../models/user_progress.dart';
+import '../../services/user_preferences.dart';
+import '../../services/lesson_manager.dart';
 import 'lesson_detail_screen.dart';
 
 class LessonTimelineScreen extends StatefulWidget {

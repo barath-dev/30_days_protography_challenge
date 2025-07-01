@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:photography_guide/presentation/difficulty_selection_screen.dart';
-import 'package:photography_guide/presentation/home_screen.dart';
-import 'package:photography_guide/presentation/lesson_detail_screen.dart';
-import 'package:photography_guide/presentation/lesson_timeline_screen.dart';
-import 'package:photography_guide/presentation/saved_items_screen.dart';
+import 'package:photography_guide/presentation/onboarding/difficulty_selection_screen.dart';
+import 'package:photography_guide/presentation/home/home_screen.dart';
+import 'package:photography_guide/presentation/home/lesson_detail_screen.dart';
+import 'package:photography_guide/presentation/home/lesson_timeline_screen.dart';
+import 'package:photography_guide/presentation/home/saved_items_screen.dart';
 import '../models/lesson.dart';
 
 class NavigationService {

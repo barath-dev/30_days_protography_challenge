@@ -7,11 +7,13 @@ import '../models/saved_item.dart';
 
 class UserPreferences {
   static SharedPreferences? _prefs;
-  static UserProgress? _currentProgress;
+  static Map<DifficultyLevel, UserProgress> _allProgress = {};
+  static DifficultyLevel? _activeDifficulty;
 
   // Keys for SharedPreferences
   static const String _keyFirstLaunch = 'first_launch';
-  static const String _keyUserProgress = 'user_progress';
+  static const String _keyAllProgress = 'all_user_progress';
+  static const String _keyActiveDifficulty = 'active_difficulty';
   static const String _keySavedItems = 'saved_items';
   static const String _keySettings = 'app_settings';
   static const String _keyOnboardingCompleted = 'onboarding_completed';
@@ -20,7 +22,14 @@ class UserPreferences {
   // Initialize SharedPreferences
   static Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
-    await _loadUserProgress();
+    await _loadAllProgress();
+    await _loadActiveDifficulty();
+  }
+
+  // Force reload - useful when data changes
+  static Future<void> forceReload() async {
+    await _loadAllProgress();
+    await _loadActiveDifficulty();
   }
 
   // First launch management
@@ -32,55 +41,116 @@ class UserPreferences {
     await _prefs?.setBool(_keyFirstLaunch, false);
   }
 
-  // User Progress Management
-  static UserProgress? get currentProgress => _currentProgress;
+  // Active Difficulty Management
+  static DifficultyLevel? get activeDifficulty => _activeDifficulty;
 
-  static Future<void> _loadUserProgress() async {
-    final progressJson = _prefs?.getString(_keyUserProgress);
-    if (progressJson != null) {
+  static Future<void> _loadActiveDifficulty() async {
+    final difficultyString = _prefs?.getString(_keyActiveDifficulty);
+    if (difficultyString != null) {
       try {
-        final progressMap = jsonDecode(progressJson) as Map<String, dynamic>;
-        _currentProgress = UserProgress.fromJson(progressMap);
+        _activeDifficulty = DifficultyLevel.values.firstWhere(
+          (e) => e.toString().split('.').last == difficultyString,
+        );
       } catch (e) {
-        print('Error loading user progress: $e');
-        _currentProgress = null;
+        _activeDifficulty = null;
       }
     }
   }
 
-  static Future<void> saveUserProgress(UserProgress progress) async {
-    try {
-      _currentProgress = progress;
-      final progressJson = jsonEncode(progress.toJson());
-      await _prefs?.setString(_keyUserProgress, progressJson);
-      await _updateLastSyncTime();
-    } catch (e) {
-      print('Error saving user progress: $e');
+  static Future<void> setActiveDifficulty(DifficultyLevel difficulty) async {
+    _activeDifficulty = difficulty;
+    await _prefs?.setString(
+      _keyActiveDifficulty,
+      difficulty.toString().split('.').last,
+    );
+    await _updateLastSyncTime();
+  }
+
+  // Multi-Progress Management
+  static Map<DifficultyLevel, UserProgress> get allProgress =>
+      Map.unmodifiable(_allProgress);
+
+  static UserProgress? get currentProgress =>
+      _activeDifficulty != null ? _allProgress[_activeDifficulty] : null;
+
+  static Future<void> _loadAllProgress() async {
+    final progressJson = _prefs?.getString(_keyAllProgress);
+    if (progressJson != null) {
+      try {
+        final progressData = jsonDecode(progressJson) as Map<String, dynamic>;
+        _allProgress.clear();
+
+        for (final entry in progressData.entries) {
+          final difficulty = DifficultyLevel.values.firstWhere(
+            (e) => e.toString().split('.').last == entry.key,
+          );
+          final progress = UserProgress.fromJson(
+            entry.value as Map<String, dynamic>,
+          );
+          _allProgress[difficulty] = progress;
+        }
+
+        print(
+          'All progress loaded: ${_allProgress.keys.map((d) => d.toString().split('.').last).join(', ')}',
+        );
+      } catch (e) {
+        print('Error loading all progress: $e');
+        _allProgress.clear();
+      }
     }
   }
 
-  static Future<void> initializeUserProgress(DifficultyLevel difficulty) async {
-    final progress = UserProgress.initial(difficulty);
-    await saveUserProgress(progress);
+  static Future<void> _saveAllProgress() async {
+    try {
+      final progressData = <String, dynamic>{};
+      for (final entry in _allProgress.entries) {
+        progressData[entry.key.toString().split('.').last] =
+            entry.value.toJson();
+      }
+
+      final progressJson = jsonEncode(progressData);
+      await _prefs?.setString(_keyAllProgress, progressJson);
+      await _updateLastSyncTime();
+      print(
+        'All progress saved for difficulties: ${_allProgress.keys.map((d) => d.toString().split('.').last).join(', ')}',
+      );
+    } catch (e) {
+      print('Error saving all progress: $e');
+    }
+  }
+
+  static Future<void> saveProgressForDifficulty(
+    DifficultyLevel difficulty,
+    UserProgress progress,
+  ) async {
+    _allProgress[difficulty] = progress;
+    await _saveAllProgress();
+    print('Progress saved for difficulty: $difficulty');
+  }
+
+  static UserProgress? getProgressForDifficulty(DifficultyLevel difficulty) {
+    return _allProgress[difficulty];
+  }
+
+  static Future<void> initializeProgressForDifficulty(
+    DifficultyLevel difficulty,
+  ) async {
+    if (!_allProgress.containsKey(difficulty)) {
+      final progress = UserProgress.initial(difficulty);
+      _allProgress[difficulty] = progress;
+      await _saveAllProgress();
+      print('Progress initialized for difficulty: $difficulty');
+    }
+
+    // Set as active difficulty
+    await setActiveDifficulty(difficulty);
     await setFirstLaunchCompleted();
   }
 
-  // New method to reset progress when difficulty changes
-  static Future<void> resetProgressForNewDifficulty(
-    DifficultyLevel newDifficulty,
-  ) async {
-    try {
-      // Create fresh progress with the new difficulty
-      final freshProgress = UserProgress.initial(newDifficulty);
-      await saveUserProgress(freshProgress);
-
-      // Clear saved items as they might be specific to the old difficulty
-      await _prefs?.remove(_keySavedItems);
-
-      print('Progress reset for new difficulty: ${newDifficulty.toString()}');
-    } catch (e) {
-      print('Error resetting progress for new difficulty: $e');
-      rethrow;
+  // Current Progress Helper Methods (work with active difficulty)
+  static Future<void> updateCurrentProgress(UserProgress progress) async {
+    if (_activeDifficulty != null) {
+      await saveProgressForDifficulty(_activeDifficulty!, progress);
     }
   }
 
@@ -88,52 +158,64 @@ class UserPreferences {
     String lessonId,
     LessonProgress lessonProgress,
   ) async {
-    if (_currentProgress != null) {
+    final current = currentProgress;
+    if (current != null && _activeDifficulty != null) {
       final updatedProgress = Map<String, LessonProgress>.from(
-        _currentProgress!.lessonProgress,
+        current.lessonProgress,
       );
       updatedProgress[lessonId] = lessonProgress;
 
-      final newUserProgress = _currentProgress!.copyWith(
+      final newUserProgress = current.copyWith(
         lessonProgress: updatedProgress,
         lastActivityDate: DateTime.now(),
       );
 
-      await saveUserProgress(newUserProgress);
+      await saveProgressForDifficulty(_activeDifficulty!, newUserProgress);
     }
   }
 
   static Future<void> markLessonCompleted(
     String lessonId,
-    int progressDay, // Changed from lessonDay to progressDay
+    int progressDay,
   ) async {
-    if (_currentProgress != null) {
-      final updatedProgress = _currentProgress!.markLessonCompleted(
+    final current = currentProgress;
+    if (current != null && _activeDifficulty != null) {
+      final updatedProgress = current.markLessonCompleted(
         lessonId,
-        progressDay, // Now uses progress day (1-30) instead of actual lesson day
+        progressDay,
       );
-      await saveUserProgress(updatedProgress);
+      await saveProgressForDifficulty(_activeDifficulty!, updatedProgress);
     }
   }
 
   static Future<void> updateStreak() async {
-    if (_currentProgress != null) {
-      final updatedProgress = _currentProgress!.updateStreak();
-      await saveUserProgress(updatedProgress);
+    final current = currentProgress;
+    if (current != null && _activeDifficulty != null) {
+      final updatedProgress = current.updateStreak();
+      await saveProgressForDifficulty(_activeDifficulty!, updatedProgress);
     }
   }
 
   static Future<void> updateCurrentDay(int newDay) async {
-    if (_currentProgress != null) {
-      final updatedProgress = _currentProgress!.copyWith(
+    final current = currentProgress;
+    if (current != null && _activeDifficulty != null) {
+      final updatedProgress = current.copyWith(
         currentDay: newDay,
         lastActivityDate: DateTime.now(),
       );
-      await saveUserProgress(updatedProgress);
+      await saveProgressForDifficulty(_activeDifficulty!, updatedProgress);
     }
   }
 
-  // Saved Items Management
+  static Future<void> unlockTodaysLessonForCurrent() async {
+    final current = currentProgress;
+    if (current != null && _activeDifficulty != null) {
+      final updatedProgress = current.unlockTodaysLesson();
+      await saveProgressForDifficulty(_activeDifficulty!, updatedProgress);
+    }
+  }
+
+  // Saved Items Management (shared across all difficulties)
   static Future<List<SavedItem>> getSavedItems() async {
     final savedItemsJson = _prefs?.getString(_keySavedItems);
     if (savedItemsJson != null) {
@@ -171,10 +253,11 @@ class UserPreferences {
     currentItems.add(item);
     await saveSavedItems(currentItems);
 
-    // Update user progress if needed
-    if (_currentProgress != null) {
-      final updatedProgress = _currentProgress!.toggleSavedItem(item.id);
-      await saveUserProgress(updatedProgress);
+    // Update current progress if available
+    final current = currentProgress;
+    if (current != null && _activeDifficulty != null) {
+      final updatedProgress = current.toggleSavedItem(item.id);
+      await saveProgressForDifficulty(_activeDifficulty!, updatedProgress);
     }
   }
 
@@ -183,10 +266,11 @@ class UserPreferences {
     currentItems.removeWhere((item) => item.id == itemId);
     await saveSavedItems(currentItems);
 
-    // Update user progress if needed
-    if (_currentProgress != null) {
-      final updatedProgress = _currentProgress!.toggleSavedItem(itemId);
-      await saveUserProgress(updatedProgress);
+    // Update current progress if available
+    final current = currentProgress;
+    if (current != null && _activeDifficulty != null) {
+      final updatedProgress = current.toggleSavedItem(itemId);
+      await saveProgressForDifficulty(_activeDifficulty!, updatedProgress);
     }
   }
 
@@ -244,57 +328,145 @@ class UserPreferences {
   // Utility Methods
   static Future<void> clearAllData() async {
     await _prefs?.clear();
-    _currentProgress = null;
+    _allProgress.clear();
+    _activeDifficulty = null;
   }
 
-  static Future<void> resetProgress() async {
-    await _prefs?.remove(_keyUserProgress);
-    await _prefs?.remove(_keySavedItems);
-    await _prefs?.setBool(_keyFirstLaunch, true);
-    _currentProgress = null;
+  static Future<void> resetProgressForDifficulty(
+    DifficultyLevel difficulty,
+  ) async {
+    _allProgress.remove(difficulty);
+    await _saveAllProgress();
+
+    // Initialize fresh progress for this difficulty
+    await initializeProgressForDifficulty(difficulty);
   }
 
-  // Get current user's difficulty level
+  // Legacy compatibility
   static DifficultyLevel? getCurrentDifficulty() {
-    return _currentProgress?.selectedDifficulty;
+    return _activeDifficulty;
   }
 
-  // Check if difficulty has been set
   static bool hasDifficultySet() {
-    return _currentProgress?.selectedDifficulty != null;
+    return _activeDifficulty != null;
   }
 
-  // Statistics
+  static bool hasValidProgress() {
+    return currentProgress != null &&
+        currentProgress!.selectedDifficulty != null &&
+        currentProgress!.userId.isNotEmpty;
+  }
+
+  static bool hasProgressForDifficulty(DifficultyLevel difficulty) {
+    return _allProgress.containsKey(difficulty);
+  }
+
+  static List<DifficultyLevel> getAvailableDifficulties() {
+    return _allProgress.keys.toList();
+  }
+
+  // Statistics for current difficulty
   static Future<Map<String, dynamic>> getStatistics() async {
-    if (_currentProgress == null) return {};
+    final current = currentProgress;
+    if (current == null) return {};
 
     final savedItems = await getSavedItems();
     final completedLessons =
-        _currentProgress!.lessonProgress.values
+        current.lessonProgress.values
             .where((p) => p.status == LessonStatus.completed)
             .length;
 
-    final totalTimeSpent = _currentProgress!.lessonProgress.values.fold<int>(
+    final totalTimeSpent = current.lessonProgress.values.fold<int>(
       0,
       (sum, progress) => sum + progress.timeSpent,
     );
 
     return {
       'completedLessons': completedLessons,
-      'currentDay': _currentProgress!.currentDay,
-      'dailyStreak': _currentProgress!.dailyStreak,
-      'overallProgress': _currentProgress!.overallProgress,
+      'currentDay': current.currentDay,
+      'dailyStreak': current.dailyStreak,
+      'overallProgress': current.overallProgress,
       'savedItemsCount': savedItems.length,
       'totalTimeSpent': totalTimeSpent,
-      'startDate': _currentProgress!.startDate.toIso8601String(),
-      'daysSinceStart':
-          DateTime.now().difference(_currentProgress!.startDate).inDays,
-      'selectedDifficulty': _currentProgress!.selectedDifficulty.toString(),
+      'startDate': current.startDate.toIso8601String(),
+      'daysSinceStart': DateTime.now().difference(current.startDate).inDays,
+      'selectedDifficulty': current.selectedDifficulty.toString(),
     };
+  }
+
+  // Statistics for all difficulties
+  static Future<Map<String, dynamic>> getAllStatistics() async {
+    final allStats = <String, dynamic>{};
+
+    for (final entry in _allProgress.entries) {
+      final difficulty = entry.key;
+      final progress = entry.value;
+
+      final completedLessons =
+          progress.lessonProgress.values
+              .where((p) => p.status == LessonStatus.completed)
+              .length;
+
+      final totalTimeSpent = progress.lessonProgress.values.fold<int>(
+        0,
+        (sum, p) => sum + p.timeSpent,
+      );
+
+      allStats[difficulty.toString().split('.').last] = {
+        'completedLessons': completedLessons,
+        'currentDay': progress.currentDay,
+        'dailyStreak': progress.dailyStreak,
+        'overallProgress': progress.overallProgress,
+        'totalTimeSpent': totalTimeSpent,
+        'startDate': progress.startDate.toIso8601String(),
+        'daysSinceStart': DateTime.now().difference(progress.startDate).inDays,
+      };
+    }
+
+    final savedItems = await getSavedItems();
+    allStats['global'] = {
+      'totalDifficulties': _allProgress.length,
+      'savedItemsCount': savedItems.length,
+      'activeDifficulty': _activeDifficulty?.toString().split('.').last,
+    };
+
+    return allStats;
+  }
+
+  // Debug helper methods
+  static Future<void> debugPrintProgress() async {
+    print('=== DEBUG: Multi-Difficulty Progress ===');
+    print('Active Difficulty: $_activeDifficulty');
+    print(
+      'Available Difficulties: ${_allProgress.keys.map((d) => d.toString().split('.').last).join(', ')}',
+    );
+
+    for (final entry in _allProgress.entries) {
+      final difficulty = entry.key;
+      final progress = entry.value;
+      print('--- ${difficulty.toString().split('.').last} ---');
+      print('  User ID: ${progress.userId}');
+      print('  Current Day: ${progress.currentDay}');
+      print('  Streak: ${progress.dailyStreak}');
+      print('  Overall Progress: ${progress.overallProgress}');
+      print('  Start Date: ${progress.startDate}');
+      print('  Last Activity: ${progress.lastActivityDate}');
+    }
+    print('=====================================');
+  }
+
+  static void debugPrintSharedPrefs() {
+    print('=== DEBUG: SharedPreferences ===');
+    print('First Launch: ${_prefs?.getBool(_keyFirstLaunch)}');
+    print('Has All Progress: ${_prefs?.containsKey(_keyAllProgress)}');
+    print('Active Difficulty: ${_prefs?.getString(_keyActiveDifficulty)}');
+    print('Has Saved Items: ${_prefs?.containsKey(_keySavedItems)}');
+    print('Onboarding Completed: ${_prefs?.getBool(_keyOnboardingCompleted)}');
+    print('===============================');
   }
 }
 
-// App Settings Model
+// App Settings Model (unchanged)
 class AppSettings {
   final bool notificationsEnabled;
   final bool dailyReminders;

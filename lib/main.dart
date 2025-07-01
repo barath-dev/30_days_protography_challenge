@@ -1,54 +1,84 @@
 import 'package:flutter/material.dart';
-import 'package:photography_guide/presentation/difficulty_selection_screen.dart';
-import 'package:photography_guide/presentation/home_screen.dart';
-import 'services/user_preferences.dart';
-import 'services/lesson_manager.dart';
-import 'services/navigation_service.dart';
-import 'utils/app_theme.dart';
-import 'utils/error_handler.dart';
-import 'widgets/common_widgets.dart';
+import 'package:flutter/services.dart';
+import 'package:photography_guide/services/user_preferences.dart';
+import 'package:photography_guide/services/lesson_manager.dart';
+import 'package:photography_guide/services/navigation_service.dart';
+import 'package:photography_guide/presentation/home/home_screen.dart';
+import 'package:photography_guide/presentation/onboarding/difficulty_selection_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Setup global error handling
-  setupGlobalErrorHandling();
-
-  // Set system UI overlay style
-  AppTheme.setSystemUIOverlayStyle();
-  AppTheme.setPreferredOrientations();
-
   // Initialize services
-  await _initializeServices();
+  await _initializeApp();
 
-  runApp(const PhotographyLearningApp());
+  runApp(const PhotographyGuideApp());
 }
 
-Future<void> _initializeServices() async {
+Future<void> _initializeApp() async {
   try {
+    // Set system UI overlay style
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: Color(0xFF0D0D0D),
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
+    );
+
+    // Set preferred orientations
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+    // Initialize core services
+    print('🔧 Initializing UserPreferences...');
     await UserPreferences.init();
+
+    print('🔧 Initializing LessonManager...');
     await LessonManager.init();
-  } catch (e, stackTrace) {
-    ErrorHandler.handleError(e, stackTrace: stackTrace, showSnackbar: false);
+
+    // Debug print current state
+    await UserPreferences.debugPrintProgress();
+
+    print('✅ App initialization completed successfully');
+  } catch (e) {
+    print('❌ Error during app initialization: $e');
+    // Continue with app launch even if initialization fails
   }
 }
 
-class PhotographyLearningApp extends StatelessWidget {
-  const PhotographyLearningApp({super.key});
+class PhotographyGuideApp extends StatelessWidget {
+  const PhotographyGuideApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Photography Learning',
-      theme: AppTheme.darkTheme,
-      navigatorKey: NavigationService.navigatorKey,
-      onGenerateRoute: NavigationService.generateRoute,
-      navigatorObservers: [AppNavigationObserver()],
-      home: const AppInitializer(),
+      title: 'Photography Guide',
       debugShowCheckedModeBanner: false,
-      builder: (context, child) {
-        return ErrorBoundary(child: child ?? const SizedBox.shrink());
-      },
+      navigatorKey: NavigationService.navigatorKey,
+      navigatorObservers: [AppNavigationObserver()],
+      onGenerateRoute: NavigationService.generateRoute,
+      theme: ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        primaryColor: const Color(0xFFFF6B35),
+        scaffoldBackgroundColor: const Color(0xFF0D0D0D),
+        colorScheme: const ColorScheme.dark(
+          primary: Color(0xFFFF6B35),
+          surface: Color(0xFF1A1A1A),
+          background: Color(0xFF0D0D0D),
+        ),
+        fontFamily: 'Inter',
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(color: Colors.white),
+          bodyMedium: TextStyle(color: Colors.white),
+          bodySmall: TextStyle(color: Color(0xFF888888)),
+        ),
+      ),
+      home: const AppInitializer(),
     );
   }
 }
@@ -61,110 +91,120 @@ class AppInitializer extends StatefulWidget {
 }
 
 class _AppInitializerState extends State<AppInitializer> {
-  bool _isFirstLaunch = true;
   bool _isLoading = true;
+  bool _hasError = false;
   String? _errorMessage;
 
   @override
   void initState() {
     super.initState();
-    _initializeApp();
+    _determineInitialRoute();
   }
 
-  Future<void> _initializeApp() async {
+  Future<void> _determineInitialRoute() async {
     try {
-      setState(() {
-        _isLoading = true;
-        _errorMessage = null;
-      });
+      // Ensure all services are initialized
+      await UserPreferences.forceReload();
 
-      // Check if this is the first launch
-      final isFirstLaunch = UserPreferences.isFirstLaunch();
+      // Small delay to show loading state
+      await Future.delayed(const Duration(milliseconds: 1500));
 
+      if (!mounted) return;
+
+      // Determine which screen to show
+      Widget initialScreen;
+
+      if (UserPreferences.isFirstLaunch()) {
+        // First time user - go to difficulty selection
+        initialScreen = const DifficultySelectionScreen();
+      } else if (!UserPreferences.hasDifficultySet()) {
+        // User has launched before but no difficulty set - go to difficulty selection
+        initialScreen = const DifficultySelectionScreen();
+      } else {
+        // Existing user with difficulty set - go to home
+        initialScreen = const HomeScreen();
+      }
+
+      // Navigate to determined screen
+      Navigator.of(
+        context,
+      ).pushReplacement(MaterialPageRoute(builder: (_) => initialScreen));
+    } catch (e) {
+      print('Error determining initial route: $e');
       setState(() {
-        _isFirstLaunch = isFirstLaunch;
+        _hasError = true;
+        _errorMessage = e.toString();
         _isLoading = false;
-      });
-    } catch (e, stackTrace) {
-      ErrorHandler.handleError(e, stackTrace: stackTrace, showSnackbar: false);
-
-      setState(() {
-        _isLoading = false;
-        _errorMessage = 'Failed to initialize app. Please try again.';
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading) {
-      return const AppLoadingScreen();
+    if (_hasError) {
+      return _buildErrorScreen();
     }
 
-    if (_errorMessage != null) {
-      return AppErrorScreen(message: _errorMessage!, onRetry: _initializeApp);
-    }
-
-    if (_isFirstLaunch) {
-      return const DifficultySelectionScreen();
-    }
-
-    return BackButtonHandler(child: const HomeScreen());
+    return _buildLoadingScreen();
   }
-}
 
-class AppLoadingScreen extends StatelessWidget {
-  const AppLoadingScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildLoadingScreen() {
     return Scaffold(
       backgroundColor: const Color(0xFF0D0D0D),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // App Logo or Icon
+            // App logo/icon
             Container(
-              width: 120,
-              height: 120,
+              padding: const EdgeInsets.all(32),
               decoration: BoxDecoration(
+                color: const Color(0xFFFF6B35).withOpacity(0.1),
                 shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xFFFF6B35), width: 2),
-                gradient: RadialGradient(
-                  colors: [
-                    const Color(0xFFFF6B35).withOpacity(0.2),
-                    Colors.transparent,
-                  ],
+                border: Border.all(
+                  color: const Color(0xFFFF6B35).withOpacity(0.3),
+                  width: 2,
                 ),
               ),
               child: const Icon(
                 Icons.camera_alt,
-                size: 48,
                 color: Color(0xFFFF6B35),
+                size: 64,
               ),
             ),
+
             const SizedBox(height: 32),
+
+            // App title
             const Text(
-              'Photography Learning',
+              'Photography Guide',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8),
+
+            const SizedBox(height: 16),
+
+            // Subtitle
             const Text(
               'Master photography in 30 days',
               style: TextStyle(color: Color(0xFF888888), fontSize: 16),
             ),
+
             const SizedBox(height: 48),
+
+            // Loading indicator
             const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFFF6B35)),
+              valueColor: AlwaysStoppedAnimation(Color(0xFFFF6B35)),
             ),
-            const SizedBox(height: 16),
+
+            const SizedBox(height: 24),
+
+            // Loading text
             const Text(
-              'Loading...',
+              'Preparing your learning journey...',
               style: TextStyle(color: Color(0xFF888888), fontSize: 14),
             ),
           ],
@@ -172,34 +212,20 @@ class AppLoadingScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class AppErrorScreen extends StatelessWidget {
-  final String message;
-  final VoidCallback onRetry;
-
-  const AppErrorScreen({
-    super.key,
-    required this.message,
-    required this.onRetry,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildErrorScreen() {
     return Scaffold(
       backgroundColor: const Color(0xFF0D0D0D),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(32),
+          padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.error_outline,
-                size: 64,
-                color: Color(0xFFF44336),
-              ),
+              const Icon(Icons.error_outline, color: Colors.red, size: 64),
+
               const SizedBox(height: 24),
+
               const Text(
                 'Something went wrong',
                 style: TextStyle(
@@ -207,24 +233,194 @@ class AppErrorScreen extends StatelessWidget {
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
-                textAlign: TextAlign.center,
               ),
+
               const SizedBox(height: 16),
+
               Text(
-                message,
+                'We encountered an error while starting the app. Please try again.',
                 style: const TextStyle(color: Color(0xFF888888), fontSize: 16),
                 textAlign: TextAlign.center,
               ),
+
+              if (_errorMessage != null) ...[
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1A1A1A),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: const Color(0xFF333333)),
+                  ),
+                  child: Text(
+                    _errorMessage!,
+                    style: const TextStyle(
+                      color: Color(0xFF888888),
+                      fontSize: 12,
+                      fontFamily: 'monospace',
+                    ),
+                  ),
+                ),
+              ],
+
               const SizedBox(height: 32),
-              CustomButton(
-                text: 'Try Again',
-                onPressed: onRetry,
-                icon: Icons.refresh,
+
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _hasError = false;
+                    _isLoading = true;
+                  });
+                  _determineInitialRoute();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFFF6B35),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 16,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text(
+                  'Try Again',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+// Helper class for app lifecycle management
+class AppLifecycleManager extends WidgetsBindingObserver {
+  static final AppLifecycleManager _instance = AppLifecycleManager._internal();
+  factory AppLifecycleManager() => _instance;
+  AppLifecycleManager._internal();
+
+  void initialize() {
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    switch (state) {
+      case AppLifecycleState.resumed:
+        _onAppResumed();
+        break;
+      case AppLifecycleState.paused:
+        _onAppPaused();
+        break;
+      case AppLifecycleState.detached:
+        _onAppDetached();
+        break;
+      case AppLifecycleState.inactive:
+        // App is inactive, no action needed
+        break;
+      case AppLifecycleState.hidden:
+        // App is hidden, no action needed
+        break;
+    }
+  }
+
+  void _onAppResumed() {
+    print('📱 App resumed');
+    // Unlock today's lesson for active difficulty when app resumes
+    _unlockTodaysLessonIfNeeded();
+  }
+
+  void _onAppPaused() {
+    print('📱 App paused');
+    // Save any pending changes
+    // This is handled automatically by SharedPreferences
+  }
+
+  void _onAppDetached() {
+    print('📱 App detached');
+  }
+
+  Future<void> _unlockTodaysLessonIfNeeded() async {
+    try {
+      final activeDifficulty = UserPreferences.activeDifficulty;
+      if (activeDifficulty != null) {
+        // Update streak and unlock today's lesson
+        await UserPreferences.updateStreak();
+        await LessonManager.unlockTodaysLesson(activeDifficulty);
+      }
+    } catch (e) {
+      print('Error unlocking today\'s lesson: $e');
+    }
+  }
+}
+
+// App configuration and constants
+class AppConfig {
+  static const String appName = 'Photography Guide';
+  static const String appVersion = '1.0.0';
+  static const int totalCourseDays = 30;
+
+  // Color scheme
+  static const Color primaryColor = Color(0xFFFF6B35);
+  static const Color backgroundColor = Color(0xFF0D0D0D);
+  static const Color cardColor = Color(0xFF1A1A1A);
+  static const Color textColor = Color(0xFF888888);
+  static const Color borderColor = Color(0xFF333333);
+  static const Color successColor = Color(0xFF4CAF50);
+
+  // Feature flags
+  static const bool enableDebugMode = true;
+  static const bool enableAnalytics = false;
+  static const bool enableNotifications = true;
+
+  // App settings
+  static const Duration dailyLessonUnlockTime = Duration(hours: 0); // Midnight
+  static const int maxSavedItems = 100;
+  static const int maxRecentActivity = 10;
+}
+
+// Global error handler
+void setupGlobalErrorHandler() {
+  FlutterError.onError = (FlutterErrorDetails details) {
+    if (AppConfig.enableDebugMode) {
+      FlutterError.presentError(details);
+    }
+
+    // Log error for analytics/crash reporting
+    print('Flutter Error: ${details.exception}');
+    print('Stack trace: ${details.stack}');
+  };
+}
+
+// Performance monitoring
+class PerformanceMonitor {
+  static final Map<String, Stopwatch> _timers = {};
+
+  static void startTimer(String name) {
+    _timers[name] = Stopwatch()..start();
+  }
+
+  static void stopTimer(String name) {
+    final timer = _timers[name];
+    if (timer != null) {
+      timer.stop();
+      print('⏱️ $name took ${timer.elapsedMilliseconds}ms');
+      _timers.remove(name);
+    }
+  }
+
+  static void logMemoryUsage() {
+    // In a real app, you'd use proper memory monitoring tools
+    print('📊 Memory monitoring would be implemented here');
   }
 }

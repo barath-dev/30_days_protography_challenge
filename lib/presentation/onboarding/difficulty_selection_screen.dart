@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:photography_guide/models/lesson.dart';
-import '../services/user_preferences.dart';
-import 'home_screen.dart';
+import 'package:photography_guide/models/user_progress.dart';
+import '../../services/user_preferences.dart';
+import '../home/home_screen.dart';
 
 class DifficultySelectionScreen extends StatefulWidget {
   const DifficultySelectionScreen({super.key});
@@ -20,6 +21,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
 
   DifficultyLevel? selectedDifficulty;
   bool _isLoading = false;
+  Map<DifficultyLevel, bool> _hasProgress = {};
 
   // Design constants
   static const Color _primary = Color(0xFFFF6B35);
@@ -27,6 +29,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
   static const Color _card = Color(0xFF1A1A1A);
   static const Color _text = Color(0xFF888888);
   static const Color _border = Color(0xFF333333);
+  static const Color _success = Color(0xFF4CAF50);
 
   final List<DifficultyInfo> difficulties = [
     DifficultyInfo(
@@ -88,6 +91,18 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
   @override
   void initState() {
     super.initState();
+    _initAnimations();
+    _loadCurrentDifficulty();
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _initAnimations() {
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 1200),
       vsync: this,
@@ -109,23 +124,20 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
         curve: const Interval(0.2, 0.8, curve: Curves.easeOut),
       ),
     );
-
-    _loadCurrentDifficulty();
-    _animationController.forward();
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
   }
 
   Future<void> _loadCurrentDifficulty() async {
-    final currentProgress = UserPreferences.currentProgress;
-    if (currentProgress != null) {
-      setState(() {
-        selectedDifficulty = currentProgress.selectedDifficulty;
-      });
+    selectedDifficulty = UserPreferences.activeDifficulty;
+
+    // Check which difficulties have existing progress
+    for (final difficulty in DifficultyLevel.values) {
+      _hasProgress[difficulty] = UserPreferences.hasProgressForDifficulty(
+        difficulty,
+      );
+    }
+
+    if (mounted) {
+      setState(() {});
     }
   }
 
@@ -154,7 +166,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
   }
 
   Widget _buildHeader() {
-    final isEditing = UserPreferences.currentProgress != null;
+    final isEditing = UserPreferences.activeDifficulty != null;
 
     return Padding(
       padding: const EdgeInsets.all(20),
@@ -187,7 +199,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                     border: Border.all(color: _primary, width: 1),
                   ),
                   child: Text(
-                    'Editing',
+                    'Switch Track',
                     style: TextStyle(
                       color: _primary,
                       fontSize: 12,
@@ -214,7 +226,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
               children: [
                 Text(
                   isEditing
-                      ? 'Update Your\nSkill Level'
+                      ? 'Switch Learning\nTrack'
                       : 'Choose Your\nSkill Level',
                   style: TextStyle(
                     color: Colors.white,
@@ -226,8 +238,8 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                 const SizedBox(height: 12),
                 Text(
                   isEditing
-                      ? 'Changing your difficulty level will reset your progress and start fresh with the new track.'
-                      : 'Select the level that best matches your current photography experience. You can always change this later.',
+                      ? 'Switch between different learning tracks. Your progress is saved for each difficulty level.'
+                      : 'Select the level that best matches your current photography experience. You can always switch between tracks later.',
                   style: TextStyle(color: _text, fontSize: 16, height: 1.5),
                 ),
               ],
@@ -245,6 +257,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
       itemBuilder: (context, index) {
         final difficulty = difficulties[index];
         final isSelected = selectedDifficulty == difficulty.level;
+        final hasProgress = _hasProgress[difficulty.level] ?? false;
         final delay = index * 0.2;
 
         return AnimatedBuilder(
@@ -264,7 +277,11 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                   begin: const Offset(0, 0.3),
                   end: Offset.zero,
                 ).animate(animation),
-                child: _buildDifficultyCard(difficulty, isSelected),
+                child: _buildDifficultyCard(
+                  difficulty,
+                  isSelected,
+                  hasProgress,
+                ),
               ),
             );
           },
@@ -273,7 +290,11 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
     );
   }
 
-  Widget _buildDifficultyCard(DifficultyInfo difficulty, bool isSelected) {
+  Widget _buildDifficultyCard(
+    DifficultyInfo difficulty,
+    bool isSelected,
+    bool hasProgress,
+  ) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -306,7 +327,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildCardHeader(difficulty, isSelected),
+            _buildCardHeader(difficulty, isSelected, hasProgress),
             const SizedBox(height: 16),
             Text(
               difficulty.description,
@@ -316,6 +337,10 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
             _buildFeaturesList(difficulty),
             const SizedBox(height: 16),
             _buildCardFooter(difficulty),
+            if (hasProgress) ...[
+              const SizedBox(height: 16),
+              _buildProgressIndicator(difficulty),
+            ],
             if (isSelected) ...[
               const SizedBox(height: 16),
               _buildSelectedIndicator(),
@@ -326,7 +351,11 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
     );
   }
 
-  Widget _buildCardHeader(DifficultyInfo difficulty, bool isSelected) {
+  Widget _buildCardHeader(
+    DifficultyInfo difficulty,
+    bool isSelected,
+    bool hasProgress,
+  ) {
     return Row(
       children: [
         AnimatedContainer(
@@ -347,13 +376,39 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                difficulty.title,
-                style: TextStyle(
-                  color: isSelected ? difficulty.color : Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  Text(
+                    difficulty.title,
+                    style: TextStyle(
+                      color: isSelected ? difficulty.color : Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  if (hasProgress) ...[
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: _success.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: _success.withOpacity(0.3)),
+                      ),
+                      child: Text(
+                        'In Progress',
+                        style: TextStyle(
+                          color: _success,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
               ),
               Text(
                 difficulty.subtitle,
@@ -373,6 +428,74 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
             child: const Icon(Icons.check, color: Colors.white, size: 16),
           ),
       ],
+    );
+  }
+
+  Widget _buildProgressIndicator(DifficultyInfo difficulty) {
+    final progress = UserPreferences.getProgressForDifficulty(difficulty.level);
+    if (progress == null) return const SizedBox.shrink();
+
+    final completedLessons =
+        progress.lessonProgress.values
+            .where((p) => p.status == LessonStatus.completed)
+            .length;
+    final progressPercentage = completedLessons / 30.0;
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: _background.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: _border.withOpacity(0.5)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Progress',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Text(
+                '$completedLessons/30 lessons',
+                style: TextStyle(
+                  color: difficulty.color,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          LinearProgressIndicator(
+            value: progressPercentage,
+            backgroundColor: _border.withOpacity(0.3),
+            valueColor: AlwaysStoppedAnimation(difficulty.color),
+            minHeight: 4,
+            borderRadius: BorderRadius.circular(2),
+          ),
+          const SizedBox(height: 6),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Day ${progress.currentDay}',
+                style: TextStyle(color: _text, fontSize: 11),
+              ),
+              Text(
+                '${progress.dailyStreak} day streak',
+                style: TextStyle(color: _text, fontSize: 11),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -473,45 +596,29 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
   }
 
   Widget _buildBottomAction() {
-    final isEditing = UserPreferences.currentProgress != null;
-    final currentDifficulty =
-        UserPreferences.currentProgress?.selectedDifficulty;
+    final isEditing = UserPreferences.activeDifficulty != null;
+    final currentDifficulty = UserPreferences.activeDifficulty;
     final isDifferentDifficulty =
         isEditing && currentDifficulty != selectedDifficulty;
+    final hasProgress =
+        selectedDifficulty != null
+            ? (_hasProgress[selectedDifficulty!] ?? false)
+            : false;
 
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
           if (selectedDifficulty != null) ...[
-            if (isDifferentDifficulty) ...[
-              Container(
-                padding: const EdgeInsets.all(12),
-                margin: const EdgeInsets.only(bottom: 16),
-                decoration: BoxDecoration(
-                  color: Colors.orange.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.orange.withOpacity(0.3)),
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.warning_amber, color: Colors.orange, size: 16),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        'Changing difficulty will reset your progress and start fresh.',
-                        style: TextStyle(color: Colors.orange, fontSize: 12),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
             Text(
               isEditing
                   ? isDifferentDifficulty
-                      ? 'Ready to reset and start with your new learning track?'
-                      : 'Your current learning track'
+                      ? hasProgress
+                          ? 'Continue your progress in ${difficulties.firstWhere((d) => d.level == selectedDifficulty).title} track'
+                          : 'Start fresh with ${difficulties.firstWhere((d) => d.level == selectedDifficulty).title} track'
+                      : 'Continue with your current learning track'
+                  : hasProgress
+                  ? 'Continue your existing progress'
                   : 'Ready to start your photography journey?',
               style: TextStyle(color: _text, fontSize: 14),
               textAlign: TextAlign.center,
@@ -553,8 +660,12 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                         selectedDifficulty != null
                             ? isEditing
                                 ? isDifferentDifficulty
-                                    ? 'Reset & Update Learning Track'
-                                    : 'Keep Current Track'
+                                    ? hasProgress
+                                        ? 'Switch to ${difficulties.firstWhere((d) => d.level == selectedDifficulty).title}'
+                                        : 'Start ${difficulties.firstWhere((d) => d.level == selectedDifficulty).title} Track'
+                                    : 'Continue Current Track'
+                                : hasProgress
+                                ? 'Continue Learning'
                                 : 'Start Learning'
                             : 'Select a Difficulty Level',
                         style: const TextStyle(
@@ -575,33 +686,23 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
     setState(() => _isLoading = true);
 
     try {
-      final currentProgress = UserPreferences.currentProgress;
-      final currentDifficulty = currentProgress?.selectedDifficulty;
-      final isDifferentDifficulty =
-          currentProgress != null && currentDifficulty != selectedDifficulty;
+      final currentDifficulty = UserPreferences.activeDifficulty;
+      final isDifferentDifficulty = currentDifficulty != selectedDifficulty;
+      final hasProgress = _hasProgress[selectedDifficulty!] ?? false;
 
-      if (currentProgress != null) {
-        if (isDifferentDifficulty) {
-          // Reset progress and create new progress with new difficulty
-          await UserPreferences.resetProgressForNewDifficulty(
-            selectedDifficulty!,
-          );
-
-          if (mounted) {
-            _showResetConfirmation();
-          }
-        } else {
-          // Same difficulty, just return
-          if (mounted) {
-            Navigator.pop(context);
-          }
+      if (hasProgress) {
+        // Switch to existing progress
+        await UserPreferences.setActiveDifficulty(selectedDifficulty!);
+        if (mounted) {
+          await _showSwitchConfirmation();
         }
       } else {
-        // Create new progress
-        await UserPreferences.initializeUserProgress(selectedDifficulty!);
-
+        // Initialize new progress for this difficulty
+        await UserPreferences.initializeProgressForDifficulty(
+          selectedDifficulty!,
+        );
         if (mounted) {
-          _showStartConfirmation();
+          await _showStartConfirmation();
         }
       }
     } catch (e) {
@@ -616,12 +717,12 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
     }
   }
 
-  void _showStartConfirmation() {
+  Future<void> _showStartConfirmation() async {
     final difficulty = difficulties.firstWhere(
       (d) => d.level == selectedDifficulty!,
     );
 
-    showDialog(
+    await showDialog(
       context: context,
       barrierDismissible: false,
       builder:
@@ -644,10 +745,12 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
             actions: [
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushReplacement(
+                  Navigator.pop(context); // Close dialog
+                  // Navigate to HomeScreen and replace the entire stack
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (_) => const HomeScreen()),
+                    (route) => false,
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -661,13 +764,14 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
     );
   }
 
-  void _showResetConfirmation() {
+  Future<void> _showSwitchConfirmation() async {
     final difficulty = difficulties.firstWhere(
       (d) => d.level == selectedDifficulty!,
     );
 
-    showDialog(
+    await showDialog(
       context: context,
+      barrierDismissible: false,
       builder:
           (context) => AlertDialog(
             backgroundColor: _card,
@@ -675,20 +779,27 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
               borderRadius: BorderRadius.circular(16),
             ),
             title: Text(
-              'Progress Reset!',
+              'Track Switched!',
               style: TextStyle(color: Colors.white),
             ),
             content: Text(
-              'Your learning track has been updated to ${difficulty.title} level and your progress has been reset to start fresh.',
+              'You\'ve switched to the ${difficulty.title} track. Your progress has been preserved and you can continue where you left off.',
               style: TextStyle(color: _text),
             ),
             actions: [
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pop(context);
+                  Navigator.pop(context); // Close dialog
+                  Navigator.pop(
+                    context,
+                    true,
+                  ); // Return to home with refresh flag
                 },
-                child: Text('Done', style: TextStyle(color: _primary)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: _primary,
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text('Continue'),
               ),
             ],
           ),
@@ -720,7 +831,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
   }
 }
 
-// Data model for difficulty information
+// Data model for difficulty information (unchanged)
 class DifficultyInfo {
   final DifficultyLevel level;
   final String title;

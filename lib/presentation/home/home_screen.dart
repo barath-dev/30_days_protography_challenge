@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../models/lesson.dart';
-import '../models/user_progress.dart';
-import '../services/user_preferences.dart';
-import '../services/lesson_manager.dart';
+import '../../models/lesson.dart';
+import '../../models/user_progress.dart';
+import '../../services/user_preferences.dart';
+import '../../services/lesson_manager.dart';
 import 'saved_items_screen.dart';
 import 'lesson_timeline_screen.dart';
 import 'lesson_detail_screen.dart';
-import 'difficulty_selection_screen.dart';
+import '../onboarding/difficulty_selection_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   UserProgress? _userProgress;
+  DifficultyLevel? _activeDifficulty;
   Lesson? _currentLesson;
   bool _isLoading = true;
   late AnimationController _animationController;
@@ -34,6 +35,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    _initAnimations();
+    _loadUserData();
+  }
+
+  void _initAnimations() {
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
@@ -41,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
     );
-    _loadUserData();
   }
 
   @override
@@ -51,25 +56,44 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Future<void> _loadUserData() async {
+    if (!mounted) return;
+
     setState(() => _isLoading = true);
 
     try {
-      await UserPreferences.updateStreak();
-      await LessonManager.unlockTodaysLesson();
+      // Force reload user preferences to get fresh data
+      await UserPreferences.init();
 
+      _activeDifficulty = UserPreferences.activeDifficulty;
       _userProgress = UserPreferences.currentProgress;
 
-      if (_userProgress != null) {
-        _currentLesson = LessonManager.getCurrentLesson(
-          _userProgress!.selectedDifficulty,
-        );
+      if (_userProgress != null && _activeDifficulty != null) {
+        await UserPreferences.updateStreak();
+        await LessonManager.unlockTodaysLesson(_activeDifficulty);
+
+        // Reload progress after potential updates
+        _userProgress = UserPreferences.currentProgress;
+
+        _currentLesson = LessonManager.getCurrentLesson(_activeDifficulty);
       }
 
-      _animationController.forward();
+      if (mounted) {
+        _animationController.forward();
+      }
     } catch (e) {
       print('Error loading user data: $e');
     } finally {
-      setState(() => _isLoading = false);
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  // Force refresh method that can be called when data changes
+  Future<void> _forceRefresh() async {
+    if (mounted) {
+      _animationController.reset();
+      await _loadUserData();
     }
   }
 
@@ -115,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       );
     }
 
-    if (_userProgress == null) {
+    if (_userProgress == null || _activeDifficulty == null) {
       return _buildWelcomeScreen();
     }
 
@@ -197,13 +221,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 width: double.infinity,
                 margin: const EdgeInsets.symmetric(horizontal: 40),
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
+                  onPressed: () async {
+                    final result = await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (_) => const DifficultySelectionScreen(),
                       ),
                     );
+
+                    // If difficulty was selected, refresh the home screen
+                    if (result == true) {
+                      await _forceRefresh();
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: _primary,
@@ -228,8 +257,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildSidebar() {
-    final difficulty = _userProgress?.selectedDifficulty;
-    final stats = LessonManager.getLessonStatistics();
+    final difficulty = _activeDifficulty;
+    final stats = LessonManager.getLessonStatistics(_activeDifficulty);
+    final availableDifficulties = UserPreferences.getAvailableDifficulties();
 
     return Drawer(
       backgroundColor: _card,
@@ -271,6 +301,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         fontSize: 14,
                       ),
                     ),
+                  if (availableDifficulties.length > 1) ...[
+                    const SizedBox(height: 8),
+                    Text(
+                      '${availableDifficulties.length} tracks started',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.6),
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),
@@ -313,7 +353,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '${((stats['completionRate'] ?? 0.0) * 100).round()}% Course Complete',
+                    '${((stats['completionRate'] ?? 0.0) * 100).round()}% Current Track Complete',
                     style: TextStyle(color: _text, fontSize: 12),
                   ),
                 ],
@@ -343,19 +383,37 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     );
                   }),
-                  _buildDrawerItem(Icons.tune, 'Change Difficulty', () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const DifficultySelectionScreen(),
-                      ),
-                    );
-                  }),
+                  _buildDrawerItem(
+                    Icons.tune,
+                    'Switch Learning Track',
+                    () async {
+                      Navigator.pop(context);
+                      final result = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const DifficultySelectionScreen(),
+                        ),
+                      );
+
+                      // If difficulty was changed, refresh the home screen
+                      if (result == true) {
+                        await _forceRefresh();
+                      }
+                    },
+                  ),
                   _buildDrawerItem(Icons.insights, 'Progress Stats', () {
                     Navigator.pop(context);
                     _showDetailedStats();
                   }),
+                  if (availableDifficulties.length > 1)
+                    _buildDrawerItem(
+                      Icons.compare_arrows,
+                      'All Tracks Progress',
+                      () {
+                        Navigator.pop(context);
+                        _showAllTracksProgress();
+                      },
+                    ),
                   const Divider(color: Color(0xFF333333), height: 32),
                   _buildDrawerItem(Icons.settings, 'Settings', () {
                     Navigator.pop(context);
@@ -456,7 +514,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               Icon(Icons.school, color: _primary, size: 16),
               const SizedBox(width: 8),
               Text(
-                _getDifficultyDisplayName(_userProgress!.selectedDifficulty),
+                _getDifficultyDisplayName(_activeDifficulty!),
                 style: TextStyle(
                   color: _primary,
                   fontSize: 14,
@@ -756,7 +814,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     LessonDetailScreen(lesson: _currentLesson),
                           ),
                         );
-                        _loadUserData();
+                        await _loadUserData();
                       }
                       : () {
                         HapticFeedback.lightImpact();
@@ -822,7 +880,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Available ${LessonManager.getTimeUntilNextLesson()}',
+                          'Available ${LessonManager.getTimeUntilNextLesson(_activeDifficulty)}',
                           style: TextStyle(
                             color: _text,
                             fontSize: 14,
@@ -879,9 +937,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: Icon(Icons.emoji_events, color: _success, size: 48),
           ),
           const SizedBox(height: 24),
-          const Text(
-            'Journey Complete!',
-            style: TextStyle(
+          Text(
+            '${_getDifficultyDisplayName(_activeDifficulty!)} Track Complete!',
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -889,27 +947,60 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           const SizedBox(height: 12),
           Text(
-            'You\'ve mastered all 30 lessons in your photography journey. Time to capture the world with your new skills!',
+            'You\'ve mastered all 30 lessons in your ${_getDifficultyDisplayName(_activeDifficulty!).toLowerCase()} photography journey. Time to capture the world with your new skills!',
             style: TextStyle(color: _text, fontSize: 16, height: 1.5),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const LessonTimelineScreen()),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: _success,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const LessonTimelineScreen(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: _success,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text('Review Journey'),
+                ),
               ),
-            ),
-            child: const Text('Review Your Journey'),
+              const SizedBox(width: 12),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const DifficultySelectionScreen(),
+                      ),
+                    );
+                    if (result == true) {
+                      await _forceRefresh();
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: _primary,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text('Try New Track'),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -1097,9 +1188,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                '30-Day Challenge',
-                style: TextStyle(
+              Text(
+                '${_getDifficultyDisplayName(_activeDifficulty!)} Track',
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -1244,7 +1335,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       builder: (_) => const LessonTimelineScreen(),
                     ),
                   );
-                  _loadUserData();
+                  await _loadUserData();
                 },
               ),
             ),
@@ -1380,7 +1471,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ],
             ),
           );
-        }).toList(),
+        }),
       ],
     );
   }
@@ -1398,7 +1489,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void _showDetailedStats() {
-    final stats = LessonManager.getLessonStatistics();
+    final stats = LessonManager.getLessonStatistics(_activeDifficulty);
 
     showModalBottomSheet(
       context: context,
@@ -1413,9 +1504,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Detailed Statistics',
-                  style: TextStyle(
+                Text(
+                  '${_getDifficultyDisplayName(_activeDifficulty!)} Track Statistics',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -1438,11 +1529,161 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
                 _buildStatRow(
                   'Difficulty Level',
-                  _getDifficultyDisplayName(_userProgress!.selectedDifficulty),
+                  _getDifficultyDisplayName(_activeDifficulty!),
                 ),
               ],
             ),
           ),
+    );
+  }
+
+  void _showAllTracksProgress() {
+    final allStats = LessonManager.getAllStatistics();
+    final availableDifficulties = UserPreferences.getAvailableDifficulties();
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: _card,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder:
+          (context) => Container(
+            padding: const EdgeInsets.all(24),
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'All Learning Tracks',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: availableDifficulties.length,
+                    itemBuilder: (context, index) {
+                      final difficulty = availableDifficulties[index];
+                      final difficultyName = _getDifficultyDisplayName(
+                        difficulty,
+                      );
+                      final stats =
+                          allStats[difficulty.toString().split('.').last] ?? {};
+                      final isActive = difficulty == _activeDifficulty;
+
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 16),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color:
+                              isActive
+                                  ? _primary.withOpacity(0.1)
+                                  : _background,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color:
+                                isActive ? _primary.withOpacity(0.3) : _border,
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  difficultyName,
+                                  style: TextStyle(
+                                    color: isActive ? _primary : Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                if (isActive)
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: _primary.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Text(
+                                      'Active',
+                                      style: TextStyle(
+                                        color: _primary,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _buildMiniStatItem(
+                                    'Completed',
+                                    '${stats['completedLessons'] ?? 0}/30',
+                                  ),
+                                ),
+                                Expanded(
+                                  child: _buildMiniStatItem(
+                                    'Progress',
+                                    '${((stats['completionRate'] ?? 0.0) * 100).round()}%',
+                                  ),
+                                ),
+                                Expanded(
+                                  child: _buildMiniStatItem(
+                                    'Streak',
+                                    '${stats['currentStreak'] ?? 0}',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            LinearProgressIndicator(
+                              value:
+                                  (stats['completionRate'] ?? 0.0).toDouble(),
+                              backgroundColor: _border.withOpacity(0.3),
+                              valueColor: AlwaysStoppedAnimation(
+                                isActive ? _primary : _success,
+                              ),
+                              minHeight: 4,
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+    );
+  }
+
+  Widget _buildMiniStatItem(String label, String value) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(label, style: TextStyle(color: _text, fontSize: 12)),
+      ],
     );
   }
 
@@ -1480,7 +1721,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               style: TextStyle(color: Colors.white),
             ),
             content: Text(
-              'Photography Guide is your companion for mastering photography in 30 days. With personalized lessons, practice exercises, and progress tracking, you\'ll develop your skills systematically.',
+              'Photography Guide is your companion for mastering photography in 30 days. With personalized lessons, practice exercises, and progress tracking, you\'ll develop your skills systematically across multiple difficulty levels.',
               style: TextStyle(color: _text, height: 1.5),
             ),
             actions: [

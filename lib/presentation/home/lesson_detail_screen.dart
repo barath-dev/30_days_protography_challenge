@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../models/lesson.dart';
-import '../models/user_progress.dart';
-import '../models/saved_item.dart';
-import '../services/user_preferences.dart';
-import '../services/lesson_manager.dart';
+import '../../models/lesson.dart';
+import '../../models/user_progress.dart';
+import '../../models/saved_item.dart';
+import '../../services/user_preferences.dart';
+import '../../services/lesson_manager.dart';
 
 class LessonDetailScreen extends StatefulWidget {
   final Lesson? lesson;
@@ -289,8 +289,9 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
     final progressDay = _getProgressDay(_lesson!.day, _lesson!.difficulty);
     final userProgress = UserPreferences.currentProgress;
-    if (userProgress == null || !userProgress.isDayUnlocked(progressDay))
+    if (userProgress == null || !userProgress.isDayUnlocked(progressDay)) {
       return;
+    }
 
     final sessionDuration =
         DateTime.now().difference(_sessionStartTime!).inMinutes;

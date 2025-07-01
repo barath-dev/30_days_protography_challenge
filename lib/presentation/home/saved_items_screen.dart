@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../models/saved_item.dart';
-import '../services/user_preferences.dart';
-import '../services/lesson_manager.dart';
+import '../../models/saved_item.dart';
+import '../../services/user_preferences.dart';
+import '../../services/lesson_manager.dart';
 import 'lesson_detail_screen.dart';
 
 class SavedItemsScreen extends StatefulWidget {

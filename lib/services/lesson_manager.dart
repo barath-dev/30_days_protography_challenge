@@ -1,4 +1,3 @@
-import 'package:photography_guide/data/advancedLessons.dart';
 import 'package:photography_guide/data/beginnerlessons.dart';
 import 'package:photography_guide/data/intermediateLessons.dart';
 
@@ -98,38 +97,44 @@ class LessonManager {
     return getLessonByActualDay(actualDay, difficulty);
   }
 
-  // Get lesson by day (uses current user's difficulty and maps to actual day)
+  // Get lesson by day (uses current user's active difficulty and maps to actual day)
   static Lesson? getLessonByDay(int progressDay) {
-    final currentDifficulty = UserPreferences.getCurrentDifficulty();
+    final currentDifficulty = UserPreferences.activeDifficulty;
     if (currentDifficulty == null) return null;
 
     return getLessonByProgressDay(progressDay, currentDifficulty);
   }
 
-  // Fixed getCurrentLesson method to properly use progress day mapping
+  // Updated getCurrentLesson method to use active difficulty
   static Lesson? getCurrentLesson([DifficultyLevel? difficulty]) {
-    final progress = UserPreferences.currentProgress;
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
+    if (targetDifficulty == null) return null;
 
+    final progress = UserPreferences.getProgressForDifficulty(targetDifficulty);
     if (progress != null) {
-      final targetDifficulty = difficulty ?? progress.selectedDifficulty;
       final maxAvailableProgressDay = progress.getMaxAvailableDay();
-
-      // Convert progress day to actual lesson day for the difficulty
       return getLessonByProgressDay(maxAvailableProgressDay, targetDifficulty);
     }
     return null;
   }
 
   // Check if a lesson can be accessed today (using progress day)
-  static bool canAccessLesson(int progressDay) {
-    final progress = UserPreferences.currentProgress;
+  static bool canAccessLesson(int progressDay, [DifficultyLevel? difficulty]) {
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
+    if (targetDifficulty == null) return false;
+
+    final progress = UserPreferences.getProgressForDifficulty(targetDifficulty);
     if (progress == null) return false;
+
     return progress.isDayUnlocked(progressDay);
   }
 
-  // Check if user has already accessed today's lesson
-  static bool hasAccessedTodaysLesson() {
-    final progress = UserPreferences.currentProgress;
+  // Check if user has already accessed today's lesson for active difficulty
+  static bool hasAccessedTodaysLesson([DifficultyLevel? difficulty]) {
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
+    if (targetDifficulty == null) return false;
+
+    final progress = UserPreferences.getProgressForDifficulty(targetDifficulty);
     if (progress == null) return false;
 
     final today = DateTime.now();
@@ -144,17 +149,19 @@ class LessonManager {
   }
 
   // Get the next available lesson (respecting daily restrictions)
-  static Lesson? getNextAvailableLesson() {
-    final progress = UserPreferences.currentProgress;
+  static Lesson? getNextAvailableLesson([DifficultyLevel? difficulty]) {
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
+    if (targetDifficulty == null) return null;
+
+    final progress = UserPreferences.getProgressForDifficulty(targetDifficulty);
     if (progress == null) return null;
 
     final maxAvailableProgressDay = progress.getMaxAvailableDay();
-    final difficulty = progress.selectedDifficulty;
 
     // Check if today's lesson is completed
     final todaysLesson = getLessonByProgressDay(
       maxAvailableProgressDay,
-      difficulty,
+      targetDifficulty,
     );
     if (todaysLesson != null && !progress.isLessonCompleted(todaysLesson.id)) {
       return todaysLesson;
@@ -164,15 +171,18 @@ class LessonManager {
     final nextProgressDay = maxAvailableProgressDay + 1;
     if (nextProgressDay <= AppConstants.totalCourseDays &&
         progress.isDayUnlocked(nextProgressDay)) {
-      return getLessonByProgressDay(nextProgressDay, difficulty);
+      return getLessonByProgressDay(nextProgressDay, targetDifficulty);
     }
 
     return null;
   }
 
   // Get time until next lesson unlocks
-  static String getTimeUntilNextLesson() {
-    final progress = UserPreferences.currentProgress;
+  static String getTimeUntilNextLesson([DifficultyLevel? difficulty]) {
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
+    if (targetDifficulty == null) return 'Unknown';
+
+    final progress = UserPreferences.getProgressForDifficulty(targetDifficulty);
     if (progress == null) return 'Unknown';
 
     final maxAvailableProgressDay = progress.getMaxAvailableDay();
@@ -185,45 +195,49 @@ class LessonManager {
     return progress.getTimeUntilUnlock(nextProgressDay);
   }
 
-  // Get next lesson
-  static Lesson? getNextLesson(int currentProgressDay) {
-    final difficulty = UserPreferences.getCurrentDifficulty();
-    if (difficulty == null) return null;
+  // Get next lesson for specific difficulty
+  static Lesson? getNextLesson(
+    int currentProgressDay, [
+    DifficultyLevel? difficulty,
+  ]) {
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
+    if (targetDifficulty == null) return null;
 
-    return getLessonByProgressDay(currentProgressDay + 1, difficulty);
+    return getLessonByProgressDay(currentProgressDay + 1, targetDifficulty);
   }
 
-  // Get previous lesson
-  static Lesson? getPreviousLesson(int currentProgressDay) {
-    final difficulty = UserPreferences.getCurrentDifficulty();
-    if (difficulty == null) return null;
+  // Get previous lesson for specific difficulty
+  static Lesson? getPreviousLesson(
+    int currentProgressDay, [
+    DifficultyLevel? difficulty,
+  ]) {
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
+    if (targetDifficulty == null) return null;
 
     if (currentProgressDay > 1) {
-      return getLessonByProgressDay(currentProgressDay - 1, difficulty);
+      return getLessonByProgressDay(currentProgressDay - 1, targetDifficulty);
     }
     return null;
   }
 
-  // Get lessons by type (filtered by current difficulty)
+  // Get lessons by type (filtered by specified or active difficulty)
   static List<Lesson> getLessonsByType(
     LessonType type, [
     DifficultyLevel? difficulty,
   ]) {
-    final targetDifficulty =
-        difficulty ?? UserPreferences.getCurrentDifficulty();
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
     if (targetDifficulty == null) return [];
 
     final lessons = getLessonsByDifficulty(targetDifficulty);
     return lessons.where((lesson) => lesson.type == type).toList();
   }
 
-  // Get lessons by category (filtered by current difficulty)
+  // Get lessons by category (filtered by specified or active difficulty)
   static List<Lesson> getLessonsByCategory(
     String category, [
     DifficultyLevel? difficulty,
   ]) {
-    final targetDifficulty =
-        difficulty ?? UserPreferences.getCurrentDifficulty();
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
     if (targetDifficulty == null) return [];
 
     final lessons = getLessonsByDifficulty(targetDifficulty);
@@ -232,9 +246,9 @@ class LessonManager {
         .toList();
   }
 
-  // Get lessons for current user's difficulty
+  // Get lessons for current user's active difficulty
   static List<Lesson> getCurrentUserLessons() {
-    final difficulty = UserPreferences.getCurrentDifficulty();
+    final difficulty = UserPreferences.activeDifficulty;
     if (difficulty == null) return [];
 
     return getLessonsByDifficulty(difficulty);
@@ -252,11 +266,17 @@ class LessonManager {
   }
 
   // Progress management with daily restrictions
-  static Future<bool> markLessonCompleted(String lessonId) async {
+  static Future<bool> markLessonCompleted(
+    String lessonId, [
+    DifficultyLevel? difficulty,
+  ]) async {
     final lesson = getLessonById(lessonId);
     if (lesson == null) return false;
 
-    final progress = UserPreferences.currentProgress;
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
+    if (targetDifficulty == null) return false;
+
+    final progress = UserPreferences.getProgressForDifficulty(targetDifficulty);
     if (progress == null) return false;
 
     // Convert actual lesson day to progress day for validation
@@ -267,8 +287,8 @@ class LessonManager {
       return false;
     }
 
-    // Verify lesson belongs to current user's difficulty
-    if (lesson.difficulty != progress.selectedDifficulty) {
+    // Verify lesson belongs to target difficulty
+    if (lesson.difficulty != targetDifficulty) {
       return false;
     }
 
@@ -278,13 +298,19 @@ class LessonManager {
 
   static Future<bool> updateLessonProgress(
     String lessonId,
-    double progress,
-    int timeSpent,
-  ) async {
+    double progressPercentage,
+    int timeSpent, [
+    DifficultyLevel? difficulty,
+  ]) async {
     final lesson = getLessonById(lessonId);
     if (lesson == null) return false;
 
-    final currentProgress = UserPreferences.currentProgress;
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
+    if (targetDifficulty == null) return false;
+
+    final currentProgress = UserPreferences.getProgressForDifficulty(
+      targetDifficulty,
+    );
     if (currentProgress == null) return false;
 
     // Convert actual lesson day to progress day for validation
@@ -295,8 +321,8 @@ class LessonManager {
       return false;
     }
 
-    // Verify lesson belongs to current user's difficulty
-    if (lesson.difficulty != currentProgress.selectedDifficulty) {
+    // Verify lesson belongs to target difficulty
+    if (lesson.difficulty != targetDifficulty) {
       return false;
     }
 
@@ -304,34 +330,44 @@ class LessonManager {
     final updatedLessonProgress = LessonProgress(
       lessonId: lessonId,
       status:
-          progress >= 1.0 ? LessonStatus.completed : LessonStatus.inProgress,
-      progressPercentage: progress,
+          progressPercentage >= 1.0
+              ? LessonStatus.completed
+              : LessonStatus.inProgress,
+      progressPercentage: progressPercentage,
       timeSpent: (existingProgress?.timeSpent ?? 0) + timeSpent,
       lastAccessed: DateTime.now(),
       startedAt: existingProgress?.startedAt ?? DateTime.now(),
-      completedAt: progress >= 1.0 ? DateTime.now() : null,
+      completedAt: progressPercentage >= 1.0 ? DateTime.now() : null,
     );
 
     await UserPreferences.updateLessonProgress(lessonId, updatedLessonProgress);
 
     // If lesson is completed, handle daily unlock logic
-    if (progress >= 1.0) {
-      await markLessonCompleted(lessonId);
+    if (progressPercentage >= 1.0) {
+      await markLessonCompleted(lessonId, targetDifficulty);
     }
 
     return true;
   }
 
-  // Unlock today's lesson (called when user opens the app)
-  static Future<void> unlockTodaysLesson() async {
-    final progress = UserPreferences.currentProgress;
-    if (progress != null) {
-      final updatedProgress = progress.unlockTodaysLesson();
-      await UserPreferences.saveUserProgress(updatedProgress);
+  // Unlock today's lesson for active difficulty
+  static Future<void> unlockTodaysLesson([DifficultyLevel? difficulty]) async {
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
+    if (targetDifficulty != null) {
+      final progress = UserPreferences.getProgressForDifficulty(
+        targetDifficulty,
+      );
+      if (progress != null) {
+        final updatedProgress = progress.unlockTodaysLesson();
+        await UserPreferences.saveProgressForDifficulty(
+          targetDifficulty,
+          updatedProgress,
+        );
+      }
     }
   }
 
-  // Search functionality (respects current difficulty)
+  // Search functionality (respects specified or active difficulty)
   static List<dynamic> searchContent(
     String query, [
     DifficultyLevel? difficulty,
@@ -339,10 +375,9 @@ class LessonManager {
     final lowercaseQuery = query.toLowerCase();
     final results = <dynamic>[];
 
-    final targetDifficulty =
-        difficulty ?? UserPreferences.getCurrentDifficulty();
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
     if (targetDifficulty != null) {
-      // Search lessons for current difficulty
+      // Search lessons for target difficulty
       final lessons = getLessonsByDifficulty(targetDifficulty);
       results.addAll(
         lessons.where(
@@ -389,9 +424,12 @@ class LessonManager {
     return results;
   }
 
-  // Get recommended content based on progress
-  static List<dynamic> getRecommendedContent() {
-    final progress = UserPreferences.currentProgress;
+  // Get recommended content based on progress for specified or active difficulty
+  static List<dynamic> getRecommendedContent([DifficultyLevel? difficulty]) {
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
+    if (targetDifficulty == null) return [];
+
+    final progress = UserPreferences.getProgressForDifficulty(targetDifficulty);
     if (progress == null) return [];
 
     final recommendations = <dynamic>[];
@@ -402,7 +440,7 @@ class LessonManager {
             .length;
 
     // Add current lesson
-    final currentLesson = getCurrentLesson();
+    final currentLesson = getCurrentLesson(targetDifficulty);
     if (currentLesson != null) {
       recommendations.add(currentLesson);
     }
@@ -457,13 +495,18 @@ class LessonManager {
     return recommendations;
   }
 
-  // Statistics (filtered by current difficulty)
-  static Map<String, dynamic> getLessonStatistics() {
-    final progress = UserPreferences.currentProgress;
+  // Statistics (for specified or active difficulty)
+  static Map<String, dynamic> getLessonStatistics([
+    DifficultyLevel? difficulty,
+  ]) {
+    final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
+    if (targetDifficulty == null) return {};
+
+    final progress = UserPreferences.getProgressForDifficulty(targetDifficulty);
     if (progress == null) return {};
 
-    final currentUserLessons = getCurrentUserLessons();
-    final totalLessons = currentUserLessons.length;
+    final lessons = getLessonsByDifficulty(targetDifficulty);
+    final totalLessons = lessons.length;
     final completedLessons =
         progress.lessonProgress.values
             .where((p) => p.status == LessonStatus.completed)
@@ -494,7 +537,35 @@ class LessonManager {
     };
   }
 
-  // Private methods for loading data
+  // Get statistics for all difficulties
+  static Map<String, dynamic> getAllStatistics() {
+    final allStats = <String, dynamic>{};
+
+    for (final difficulty in DifficultyLevel.values) {
+      final stats = getLessonStatistics(difficulty);
+      if (stats.isNotEmpty) {
+        allStats[difficulty.toString().split('.').last] = stats;
+      }
+    }
+
+    // Add global statistics
+    final activeDifficulty = UserPreferences.activeDifficulty;
+    final totalDifficultiesStarted =
+        UserPreferences.getAvailableDifficulties().length;
+
+    allStats['global'] = {
+      'totalDifficultiesStarted': totalDifficultiesStarted,
+      'activeDifficulty': activeDifficulty?.toString().split('.').last,
+      'availableDifficulties':
+          UserPreferences.getAvailableDifficulties()
+              .map((d) => d.toString().split('.').last)
+              .toList(),
+    };
+
+    return allStats;
+  }
+
+  // Private methods for loading data (unchanged)
   static Future<void> _loadLessons() async {
     _beginnerLessons = _createBeginnerLessons();
     _intermediateLessons = _createIntermediateLessons();
@@ -667,6 +738,7 @@ class LessonManager {
     }
   }
 
+  // Supplementary content creation methods (unchanged)
   static List<SavedItem> _createPhotographyTips() {
     final tips = <SavedItem>[];
     final now = DateTime.now();
