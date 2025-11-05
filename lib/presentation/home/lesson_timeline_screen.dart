@@ -98,7 +98,10 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   }
 
   LessonStatus _getLessonStatus(Lesson lesson) {
-    if (_userProgress == null) return LessonStatus.available; //TODO
+    if (_userProgress == null) {
+      // If no progress exists, only Day 1 lessons are available
+      return lesson.day == 1 ? LessonStatus.available : LessonStatus.locked;
+    }
 
     // Convert actual lesson day to progress day for status checking
     final progressDay = _getProgressDay(lesson.day, lesson.difficulty);
@@ -771,11 +774,11 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   }
 
   void _onLessonTap(Lesson lesson, LessonStatus status) {
-    // if (status == LessonStatus.locked || status == LessonStatus.lockedToday) {
-    //   HapticFeedback.lightImpact();
-    //   _showLockedDialog();
-    //   return;
-    // } //TODO
+    if (status == LessonStatus.locked || status == LessonStatus.lockedToday) {
+      HapticFeedback.lightImpact();
+      _showLockedDialog();
+      return;
+    }
 
     HapticFeedback.mediumImpact();
     Navigator.push(

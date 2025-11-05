@@ -8,6 +8,9 @@ import 'saved_items_screen.dart';
 import 'lesson_timeline_screen.dart';
 import 'lesson_detail_screen.dart';
 import '../onboarding/difficulty_selection_screen.dart';
+import '../settings/settings_screen.dart';
+import '../help/help_support_screen.dart';
+import '../notifications/notifications_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -417,11 +420,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   const Divider(color: Color(0xFF333333), height: 32),
                   _buildDrawerItem(Icons.settings, 'Settings', () {
                     Navigator.pop(context);
-                    // TODO: Navigate to settings
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SettingsScreen(),
+                      ),
+                    );
                   }),
                   _buildDrawerItem(Icons.help_outline, 'Help & Support', () {
                     Navigator.pop(context);
-                    // TODO: Navigate to help
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const HelpSupportScreen(),
+                      ),
+                    );
                   }),
                   _buildDrawerItem(Icons.info_outline, 'About', () {
                     Navigator.pop(context);
@@ -526,7 +539,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ),
         GestureDetector(
           onTap: () {
-            // TODO: Open notifications
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const NotificationsScreen(),
+              ),
+            );
           },
           child: Container(
             padding: const EdgeInsets.all(12),
