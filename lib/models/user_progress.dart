@@ -1,7 +1,7 @@
 import 'package:photography_guide/models/lesson.dart';
 
 class UserProgress {
-  static bool debugUnlockAllLessons = true; // Set to true for testing
+  static bool debugUnlockAllLessons = false; // Set to true for testing
 
   final String userId;
   final DifficultyLevel selectedDifficulty;
@@ -165,7 +165,7 @@ class UserProgress {
 
   // Daily unlock system methods (works with progress days 1-30)
   bool isDayUnlocked(int progressDay) {
-    if (debugUnlockAllLessons) return true; //TODO
+    if (debugUnlockAllLessons) return true;
     if (progressDay == 1) return true;
 
     // Check if this day has been explicitly unlocked
