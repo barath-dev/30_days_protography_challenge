@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -30,21 +33,11 @@ android {
     }
 
     signingConfigs {
-        // To create a release keystore, run:
-        // keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA \
-        //   -keysize 2048 -validity 10000 -alias upload
-        //
-        // Then create android/key.properties with:
-        // storePassword=<password>
-        // keyPassword=<password>
-        // keyAlias=upload
-        // storeFile=<path-to-keystore>
-        //
         create("release") {
-            val keystorePropertiesFile = rootProject.file("key.properties")
+            val keystorePropertiesFile = rootProject.file("app/key.properties")
             if (keystorePropertiesFile.exists()) {
-                val keystoreProperties = java.util.Properties()
-                keystoreProperties.load(java.io.FileInputStream(keystorePropertiesFile))
+                val keystoreProperties = Properties()
+                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
                 storeFile = file(keystoreProperties.getProperty("storeFile"))
                 storePassword = keystoreProperties.getProperty("storePassword")
@@ -65,8 +58,9 @@ android {
                 signingConfigs.getByName("debug")
             }
 
-            // Enable code shrinking and obfuscation for smaller APK size
+            // Disable code shrinking and resource shrinking for now
             isMinifyEnabled = false
+            isShrinkResources = false  // Add this line
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

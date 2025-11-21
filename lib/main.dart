@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:photography_guide/services/user_preferences.dart';
 import 'package:photography_guide/services/lesson_manager.dart';
 import 'package:photography_guide/services/navigation_service.dart';
+import 'package:photography_guide/utils/app_theme.dart';
 import 'package:photography_guide/presentation/home/home_screen.dart';
 import 'package:photography_guide/presentation/onboarding/difficulty_selection_screen.dart';
 
@@ -55,30 +56,30 @@ class PhotographyGuideApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Photography Guide',
-      debugShowCheckedModeBanner: false,
-      navigatorKey: NavigationService.navigatorKey,
-      navigatorObservers: [AppNavigationObserver()],
-      onGenerateRoute: NavigationService.generateRoute,
-      theme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.dark,
-        primaryColor: const Color(0xFFFF6B35),
-        scaffoldBackgroundColor: const Color(0xFF0D0D0D),
-        colorScheme: const ColorScheme.dark(
-          primary: Color(0xFFFF6B35),
-          surface: Color(0xFF1A1A1A),
-          background: Color(0xFF0D0D0D),
-        ),
-        fontFamily: 'Inter',
-        textTheme: const TextTheme(
-          bodyLarge: TextStyle(color: Colors.white),
-          bodyMedium: TextStyle(color: Colors.white),
-          bodySmall: TextStyle(color: Color(0xFF888888)),
-        ),
-      ),
-      home: const AppInitializer(),
+    return ValueListenableBuilder<AppSettings>(
+      valueListenable: UserPreferences.settingsNotifier,
+      builder: (context, settings, child) {
+        return MaterialApp(
+          title: 'Photography Guide',
+          debugShowCheckedModeBanner: false,
+          navigatorKey: NavigationService.navigatorKey,
+          navigatorObservers: [AppNavigationObserver()],
+          onGenerateRoute: NavigationService.generateRoute,
+          themeMode:
+              settings.darkModeEnabled ? ThemeMode.dark : ThemeMode.light,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          builder: (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(
+                context,
+              ).copyWith(textScaler: TextScaler.linear(settings.textScale)),
+              child: child!,
+            );
+          },
+          home: const AppInitializer(),
+        );
+      },
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import '../../models/lesson.dart';
 import '../../models/user_progress.dart';
 import '../../models/saved_item.dart';
@@ -31,19 +32,6 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
   LessonProgress? _lessonProgress;
   bool _isLoading = true;
   DateTime? _sessionStartTime;
-
-  // Enhanced design constants
-  static const Color _primaryColor = Color(0xFFFF6B35);
-  static const Color _secondaryColor = Color(0xFFFFB800);
-  static const Color _backgroundColor = Color(0xFF0B0B0B);
-  static const Color _surfaceColor = Color(0xFF1C1C1E);
-  static const Color _cardColor = Color(0xFF2C2C2E);
-  static const Color _textPrimary = Color(0xFFFFFFFF);
-  static const Color _textSecondary = Color(0xFFAAAAAA);
-  static const Color _textTertiary = Color(0xFF666666);
-  static const Color _borderColor = Color(0xFF3C3C3E);
-  static const Color _successColor = Color(0xFF30D158);
-  static const Color _warningColor = Color(0xFFFF9F0A);
 
   @override
   void initState() {
@@ -144,13 +132,15 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         _lesson != null
             ? _getProgressDay(_lesson!.day, _lesson!.difficulty)
             : 0;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     showDialog(
       context: context,
       barrierDismissible: false,
       builder:
           (context) => AlertDialog(
-            backgroundColor: _surfaceColor,
+            backgroundColor: theme.cardColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
@@ -159,20 +149,19 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: _warningColor.withOpacity(0.1),
+                    color: Colors.orange.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.lock_rounded,
-                    color: _warningColor,
+                    color: Colors.orange,
                     size: 24,
                   ),
                 ),
                 const SizedBox(width: 12),
-                const Text(
+                Text(
                   'Lesson Locked',
-                  style: TextStyle(
-                    color: _textPrimary,
+                  style: theme.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -184,16 +173,18 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
               children: [
                 Text(
                   'This lesson is not available yet.',
-                  style: TextStyle(color: _textSecondary, fontSize: 16),
+                  style: theme.textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 16),
                 if (_lesson != null) ...[
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: _primaryColor.withOpacity(0.1),
+                      color: colorScheme.primary.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: _primaryColor.withOpacity(0.3)),
+                      border: Border.all(
+                        color: colorScheme.primary.withOpacity(0.3),
+                      ),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,7 +192,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                         Text(
                           'Day $progressDay unlocks: ${_getUnlockTimeText()}',
                           style: TextStyle(
-                            color: _primaryColor,
+                            color: colorScheme.primary,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                           ),
@@ -209,7 +200,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                         const SizedBox(height: 8),
                         Text(
                           'Complete one lesson per day to maintain your learning momentum.',
-                          style: TextStyle(color: _textSecondary, fontSize: 13),
+                          style: theme.textTheme.bodySmall,
                         ),
                       ],
                     ),
@@ -232,7 +223,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                 child: Text(
                   'Back to Timeline',
                   style: TextStyle(
-                    color: _primaryColor,
+                    color: colorScheme.primary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -320,10 +311,11 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
     if (success && mounted) {
       _showCompletionDialog();
     } else if (mounted) {
+      final theme = Theme.of(context);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Unable to complete lesson at this time'),
-          backgroundColor: _surfaceColor,
+          backgroundColor: theme.cardColor,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -340,12 +332,14 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
     );
     final nextLesson = LessonManager.getNextLesson(currentProgressDay);
     final timeUntilNext = LessonManager.getTimeUntilNextLesson();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     showDialog(
       context: context,
       builder:
           (context) => AlertDialog(
-            backgroundColor: _surfaceColor,
+            backgroundColor: theme.cardColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
@@ -354,20 +348,19 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: _successColor.withOpacity(0.1),
+                    color: colorScheme.tertiary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
                     Icons.celebration_rounded,
-                    color: _successColor,
+                    color: colorScheme.tertiary,
                     size: 28,
                   ),
                 ),
                 const SizedBox(width: 12),
-                const Text(
+                Text(
                   'Lesson Complete!',
-                  style: TextStyle(
-                    color: _textPrimary,
+                  style: theme.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -379,7 +372,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
               children: [
                 Text(
                   'Excellent work! You\'ve mastered "${_lesson!.title}".',
-                  style: TextStyle(color: _textSecondary, fontSize: 16),
+                  style: theme.textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 20),
                 if (nextLesson != null) ...[
@@ -388,12 +381,14 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          _primaryColor.withOpacity(0.1),
-                          _secondaryColor.withOpacity(0.05),
+                          colorScheme.primary.withOpacity(0.1),
+                          colorScheme.secondary.withOpacity(0.05),
                         ],
                       ),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: _primaryColor.withOpacity(0.3)),
+                      border: Border.all(
+                        color: colorScheme.primary.withOpacity(0.3),
+                      ),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -402,14 +397,14 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                           children: [
                             Icon(
                               Icons.arrow_forward_rounded,
-                              color: _primaryColor,
+                              color: colorScheme.primary,
                               size: 20,
                             ),
                             const SizedBox(width: 8),
                             Text(
                               'Up Next',
                               style: TextStyle(
-                                color: _primaryColor,
+                                color: colorScheme.primary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -419,16 +414,17 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                         const SizedBox(height: 8),
                         Text(
                           nextLesson.title,
-                          style: const TextStyle(
-                            color: _textPrimary,
+                          style: theme.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
-                            fontSize: 15,
                           ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           'Available: $timeUntilNext',
-                          style: TextStyle(color: _primaryColor, fontSize: 13),
+                          style: TextStyle(
+                            color: colorScheme.primary,
+                            fontSize: 13,
+                          ),
                         ),
                       ],
                     ),
@@ -441,7 +437,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                 onPressed: () => Navigator.pop(context),
                 child: Text(
                   'Review Later',
-                  style: TextStyle(color: _textTertiary),
+                  style: TextStyle(color: theme.textTheme.bodySmall?.color),
                 ),
               ),
               ElevatedButton(
@@ -454,7 +450,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: _primaryColor,
+                  backgroundColor: colorScheme.primary,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -515,10 +511,14 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     if (_isLoading) {
       return Scaffold(
-        backgroundColor: _backgroundColor,
+        backgroundColor: theme.scaffoldBackgroundColor,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -526,19 +526,18 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: _surfaceColor,
+                  color: theme.cardColor,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(_primaryColor),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    colorScheme.primary,
+                  ),
                   strokeWidth: 3,
                 ),
               ),
               const SizedBox(height: 24),
-              Text(
-                'Loading lesson...',
-                style: TextStyle(color: _textSecondary, fontSize: 16),
-              ),
+              Text('Loading lesson...', style: theme.textTheme.bodyMedium),
             ],
           ),
         ),
@@ -547,33 +546,38 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
     if (_lesson == null) {
       return Scaffold(
-        backgroundColor: _backgroundColor,
+        backgroundColor: theme.scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: _backgroundColor,
+          backgroundColor: theme.scaffoldBackgroundColor,
           elevation: 0,
           leading: IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back_rounded, color: _textPrimary),
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: theme.textTheme.bodyLarge?.color,
+            ),
           ),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.search_off_rounded, color: _textTertiary, size: 64),
+              Icon(
+                Icons.search_off_rounded,
+                color: theme.textTheme.bodySmall?.color,
+                size: 64,
+              ),
               const SizedBox(height: 16),
               Text(
                 'Lesson not found',
-                style: TextStyle(
-                  color: _textPrimary,
-                  fontSize: 20,
+                style: theme.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 8),
               Text(
                 'The requested lesson could not be loaded',
-                style: TextStyle(color: _textSecondary, fontSize: 16),
+                style: theme.textTheme.bodyMedium,
               ),
             ],
           ),
@@ -582,7 +586,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
     }
 
     return Scaffold(
-      backgroundColor: _backgroundColor,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: Stack(
         children: [
           CustomScrollView(
@@ -635,11 +639,14 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
   }
 
   Widget _buildSliverAppBar() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return SliverAppBar(
       expandedHeight: 280,
       floating: false,
       pinned: true,
-      backgroundColor: _backgroundColor,
+      backgroundColor: theme.scaffoldBackgroundColor,
       leading: _buildAppBarButton(
         icon: Icons.arrow_back_rounded,
         onTap: () => Navigator.pop(context),
@@ -660,7 +667,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [_surfaceColor, _backgroundColor],
+              colors: [theme.cardColor, theme.scaffoldBackgroundColor],
             ),
           ),
           child: Stack(
@@ -672,7 +679,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                     return CustomPaint(
                       painter: _PatternPainter(
                         progress: _progressAnimation.value,
-                        primaryColor: _primaryColor,
+                        primaryColor: colorScheme.primary,
                       ),
                     );
                   },
@@ -690,20 +697,20 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                         shape: BoxShape.circle,
                         gradient: RadialGradient(
                           colors: [
-                            _primaryColor.withOpacity(0.3),
-                            _primaryColor.withOpacity(0.1),
+                            colorScheme.primary.withOpacity(0.3),
+                            colorScheme.primary.withOpacity(0.1),
                             Colors.transparent,
                           ],
                         ),
                         border: Border.all(
-                          color: _primaryColor.withOpacity(0.5),
+                          color: colorScheme.primary.withOpacity(0.5),
                           width: 2,
                         ),
                       ),
                       child: Icon(
                         _getTypeIcon(_lesson!.type),
                         size: 36,
-                        color: _primaryColor,
+                        color: colorScheme.primary,
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -713,16 +720,16 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                         vertical: 8,
                       ),
                       decoration: BoxDecoration(
-                        color: _primaryColor.withOpacity(0.15),
+                        color: colorScheme.primary.withOpacity(0.15),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: _primaryColor.withOpacity(0.3),
+                          color: colorScheme.primary.withOpacity(0.3),
                         ),
                       ),
                       child: Text(
                         _getTypeName(_lesson!.type),
                         style: TextStyle(
-                          color: _primaryColor,
+                          color: colorScheme.primary,
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           letterSpacing: 0.5,
@@ -744,16 +751,22 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
     required VoidCallback onTap,
     bool isActive = false,
   }) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: _surfaceColor.withOpacity(0.9),
+          color: theme.cardColor.withOpacity(0.9),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: isActive ? _primaryColor.withOpacity(0.5) : _borderColor,
+            color:
+                isActive
+                    ? colorScheme.primary.withOpacity(0.5)
+                    : theme.dividerColor,
             width: 1,
           ),
           boxShadow: [
@@ -766,7 +779,8 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         ),
         child: Icon(
           icon,
-          color: isActive ? _primaryColor : _textPrimary,
+          color:
+              isActive ? colorScheme.primary : theme.textTheme.bodyLarge?.color,
           size: 20,
         ),
       ),
@@ -774,203 +788,71 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
   }
 
   Widget _buildContentSection() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return _buildSection(
       title: 'Lesson Content',
       icon: Icons.auto_stories_rounded,
       child: Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: _surfaceColor,
+          color: theme.cardColor,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: _borderColor),
+          border: Border.all(color: theme.dividerColor),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [_buildFormattedContent(_lesson!.content)],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFormattedContent(String content) {
-    final lines = content.split('\n');
-    final widgets = <Widget>[];
-
-    for (int i = 0; i < lines.length; i++) {
-      final line = lines[i].trim();
-      if (line.isEmpty) {
-        widgets.add(const SizedBox(height: 12));
-        continue;
-      }
-
-      // Handle main headings (bold with **)
-      if (line.startsWith('**') && line.endsWith('**') && line.length > 4) {
-        widgets.add(const SizedBox(height: 20));
-        widgets.add(
-          Text(
-            line.substring(2, line.length - 2),
-            style: const TextStyle(
-              color: _textPrimary,
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
+        child: MarkdownBody(
+          data: _lesson!.content,
+          styleSheet: MarkdownStyleSheet(
+            h1: theme.textTheme.headlineMedium?.copyWith(
+              color: colorScheme.primary,
+              fontWeight: FontWeight.bold,
               height: 1.3,
             ),
-          ),
-        );
-        widgets.add(const SizedBox(height: 16));
-      }
-      // Handle bullet points with emojis or markdown
-      else if (line.startsWith('• ') ||
-          line.startsWith('- ') ||
-          line.startsWith('✅ ') ||
-          line.startsWith('❌ ') ||
-          line.startsWith('💡 ') ||
-          line.startsWith('🎯 ') ||
-          line.startsWith('📌 ') ||
-          line.startsWith('📷 ') ||
-          line.startsWith('📸 ') ||
-          line.startsWith('🇮🇳 ') ||
-          line.startsWith('👁️ ') ||
-          line.startsWith('🧩 ')) {
-        widgets.add(
-          Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            decoration: BoxDecoration(
-              color: _cardColor,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: _borderColor.withOpacity(0.5)),
+            h2: theme.textTheme.titleLarge?.copyWith(
+              color: theme.textTheme.titleLarge?.color,
+              fontWeight: FontWeight.bold,
+              height: 1.3,
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (line.contains('✅') ||
-                    line.contains('❌') ||
-                    line.contains('💡') ||
-                    line.contains('🎯') ||
-                    line.contains('📌') ||
-                    line.contains('📷') ||
-                    line.contains('📸') ||
-                    line.contains('🇮🇳') ||
-                    line.contains('👁️') ||
-                    line.contains('🧩')) ...[
-                  Text(
-                    line.substring(0, 2),
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: _buildFormattedText(line.substring(2).trim()),
-                  ),
-                ] else ...[
-                  Container(
-                    width: 6,
-                    height: 6,
-                    margin: const EdgeInsets.only(top: 8, right: 12),
-                    decoration: BoxDecoration(
-                      color: _primaryColor,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  Expanded(
-                    child: _buildFormattedText(line.substring(2).trim()),
-                  ),
-                ],
-              ],
+            h3: theme.textTheme.titleMedium?.copyWith(
+              color: theme.textTheme.titleMedium?.color,
+              fontWeight: FontWeight.w600,
+              height: 1.3,
             ),
-          ),
-        );
-      }
-      // Handle numbered lists
-      else if (RegExp(r'^\d+\.').hasMatch(line)) {
-        widgets.add(
-          Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            decoration: BoxDecoration(
-              color: _cardColor,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: _borderColor.withOpacity(0.5)),
+            p: theme.textTheme.bodyLarge?.copyWith(height: 1.6),
+            strong: theme.textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: colorScheme.primary,
             ),
-            child: _buildFormattedText(line),
+            listBullet: theme.textTheme.bodyLarge?.copyWith(
+              color: colorScheme.primary,
+            ),
+            blockquote: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.textTheme.bodySmall?.color,
+              fontStyle: FontStyle.italic,
+            ),
+            blockquoteDecoration: BoxDecoration(
+              color: colorScheme.primary.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+              border: Border(
+                left: BorderSide(color: colorScheme.primary, width: 4),
+              ),
+            ),
+            code: theme.textTheme.bodyMedium?.copyWith(
+              backgroundColor: theme.scaffoldBackgroundColor,
+              fontFamily: 'monospace',
+            ),
+            codeblockDecoration: BoxDecoration(
+              color: theme.scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: theme.dividerColor),
+            ),
+            blockSpacing: 16,
           ),
-        );
-      }
-      // Regular paragraphs
-      else {
-        widgets.add(
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: _buildFormattedText(line),
-          ),
-        );
-      }
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: widgets,
-    );
-  }
-
-  Widget _buildFormattedText(String text) {
-    final spans = <TextSpan>[];
-    final regex = RegExp(r'\*([^*]+)\*');
-    int lastMatchEnd = 0;
-
-    for (final match in regex.allMatches(text)) {
-      // Add text before the match
-      if (match.start > lastMatchEnd) {
-        spans.add(
-          TextSpan(
-            text: text.substring(lastMatchEnd, match.start),
-            style: TextStyle(color: _textSecondary, fontSize: 15, height: 1.6),
-          ),
-        );
-      }
-
-      // Add the italic text
-      spans.add(
-        TextSpan(
-          text: match.group(1),
-          style: TextStyle(
-            color: _primaryColor,
-            fontSize: 15,
-            fontStyle: FontStyle.italic,
-            fontWeight: FontWeight.w600,
-            height: 1.6,
-          ),
+          onTapLink: (text, href, title) {
+            // Handle links if necessary
+          },
         ),
-      );
-
-      lastMatchEnd = match.end;
-    }
-
-    // Add remaining text
-    if (lastMatchEnd < text.length) {
-      spans.add(
-        TextSpan(
-          text: text.substring(lastMatchEnd),
-          style: TextStyle(color: _textSecondary, fontSize: 15, height: 1.6),
-        ),
-      );
-    }
-
-    return RichText(
-      text: TextSpan(
-        children:
-            spans.isEmpty
-                ? [
-                  TextSpan(
-                    text: text,
-                    style: TextStyle(
-                      color: _textSecondary,
-                      fontSize: 15,
-                      height: 1.6,
-                    ),
-                  ),
-                ]
-                : spans,
       ),
     );
   }
@@ -1010,6 +892,9 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
   }
 
   Widget _buildProgressIndicator() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Positioned(
       top: 0,
       left: 0,
@@ -1017,12 +902,14 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
       child: Container(
         height: 3,
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [_backgroundColor, _surfaceColor]),
+          gradient: LinearGradient(
+            colors: [theme.scaffoldBackgroundColor, theme.cardColor],
+          ),
         ),
         child: LinearProgressIndicator(
           value: _readingProgress,
           backgroundColor: Colors.transparent,
-          valueColor: AlwaysStoppedAnimation<Color>(_primaryColor),
+          valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
         ),
       ),
     );
@@ -1030,6 +917,8 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
   Widget _buildLessonHeader() {
     final progressDay = _getProgressDay(_lesson!.day, _lesson!.difficulty);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1040,12 +929,12 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [_primaryColor, _secondaryColor],
+                  colors: [colorScheme.primary, colorScheme.secondary],
                 ),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: _primaryColor.withOpacity(0.3),
+                    color: colorScheme.primary.withOpacity(0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -1065,19 +954,22 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: _surfaceColor,
+                color: theme.cardColor,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: _borderColor),
+                border: Border.all(color: theme.dividerColor),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.schedule_rounded, color: _textSecondary, size: 16),
+                  Icon(
+                    Icons.schedule_rounded,
+                    color: theme.textTheme.bodyMedium?.color,
+                    size: 16,
+                  ),
                   const SizedBox(width: 6),
                   Text(
                     '${_lesson!.estimatedDuration} min',
-                    style: TextStyle(
-                      color: _textSecondary,
+                    style: theme.textTheme.bodyMedium?.copyWith(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                     ),
@@ -1090,8 +982,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         const SizedBox(height: 20),
         Text(
           _lesson!.title,
-          style: const TextStyle(
-            color: _textPrimary,
+          style: theme.textTheme.displaySmall?.copyWith(
             fontSize: 32,
             fontWeight: FontWeight.w800,
             height: 1.1,
@@ -1103,7 +994,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
           Text(
             _lesson!.subtitle,
             style: TextStyle(
-              color: _primaryColor,
+              color: colorScheme.primary,
               fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
@@ -1112,11 +1003,11 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         ],
         Text(
           _lesson!.description,
-          style: TextStyle(
-            color: _textSecondary,
+          style: theme.textTheme.bodyLarge?.copyWith(
             fontSize: 17,
             height: 1.5,
             fontWeight: FontWeight.w400,
+            color: theme.textTheme.bodyMedium?.color,
           ),
         ),
       ],
@@ -1126,6 +1017,8 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
   Widget _buildStatsRow() {
     final isCompleted = _lessonProgress?.status == LessonStatus.completed;
     final progressPercentage = (_readingProgress * 100).round();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Row(
       children: [
@@ -1134,7 +1027,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             icon: Icons.trending_up_rounded,
             label: 'Progress',
             value: '$progressPercentage%',
-            color: _primaryColor,
+            color: colorScheme.primary,
           ),
         ),
         const SizedBox(width: 16),
@@ -1146,7 +1039,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                     : Icons.radio_button_unchecked_rounded,
             label: 'Status',
             value: isCompleted ? 'Completed' : 'In Progress',
-            color: isCompleted ? _successColor : _secondaryColor,
+            color: isCompleted ? colorScheme.tertiary : colorScheme.secondary,
           ),
         ),
         const SizedBox(width: 16),
@@ -1155,7 +1048,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             icon: Icons.menu_book_rounded,
             label: 'Type',
             value: _getTypeName(_lesson!.type).split(' ')[0],
-            color: _textSecondary,
+            color: theme.textTheme.bodyMedium?.color ?? Colors.grey,
           ),
         ),
       ],
@@ -1168,12 +1061,13 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
     required String value,
     required Color color,
   }) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: _surfaceColor,
+        color: theme.cardColor,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _borderColor),
+        border: Border.all(color: theme.dividerColor),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -1188,8 +1082,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
           const SizedBox(height: 8),
           Text(
             value,
-            style: TextStyle(
-              color: _textPrimary,
+            style: theme.textTheme.bodyLarge?.copyWith(
               fontSize: 16,
               fontWeight: FontWeight.w700,
             ),
@@ -1197,8 +1090,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
           const SizedBox(height: 4),
           Text(
             label,
-            style: TextStyle(
-              color: _textTertiary,
+            style: theme.textTheme.bodySmall?.copyWith(
               fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
@@ -1221,6 +1113,8 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
   Widget _buildObjectivesSection() {
     if (_lesson!.objectives.isEmpty) return const SizedBox.shrink();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return _buildSection(
       title: 'Learning Objectives',
@@ -1238,9 +1132,11 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                     ),
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: _primaryColor.withOpacity(0.05),
+                      color: colorScheme.primary.withOpacity(0.05),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: _primaryColor.withOpacity(0.1)),
+                      border: Border.all(
+                        color: colorScheme.primary.withOpacity(0.1),
+                      ),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1249,7 +1145,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                           width: 24,
                           height: 24,
                           decoration: BoxDecoration(
-                            color: _primaryColor,
+                            color: colorScheme.primary,
                             shape: BoxShape.circle,
                           ),
                           child: Center(
@@ -1267,8 +1163,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                         Expanded(
                           child: Text(
                             entry.value,
-                            style: TextStyle(
-                              color: _textPrimary,
+                            style: theme.textTheme.bodyMedium?.copyWith(
                               fontSize: 15,
                               height: 1.4,
                               fontWeight: FontWeight.w400,
@@ -1285,6 +1180,9 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
   }
 
   Widget _buildExercisesSection() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return _buildSection(
       title: 'Practice Exercises',
       icon: Icons.fitness_center_rounded,
@@ -1300,12 +1198,14 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          _primaryColor.withOpacity(0.1),
-                          _secondaryColor.withOpacity(0.05),
+                          colorScheme.primary.withOpacity(0.1),
+                          colorScheme.secondary.withOpacity(0.05),
                         ],
                       ),
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: _primaryColor.withOpacity(0.2)),
+                      border: Border.all(
+                        color: colorScheme.primary.withOpacity(0.2),
+                      ),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1315,10 +1215,10 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: _primaryColor,
+                                color: colorScheme.primary,
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Icon(
+                              child: const Icon(
                                 Icons.assignment_rounded,
                                 color: Colors.white,
                                 size: 20,
@@ -1328,8 +1228,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                             Expanded(
                               child: Text(
                                 exercise.title,
-                                style: TextStyle(
-                                  color: _textPrimary,
+                                style: theme.textTheme.titleMedium?.copyWith(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -1340,8 +1239,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                         const SizedBox(height: 16),
                         Text(
                           exercise.description,
-                          style: TextStyle(
-                            color: _textSecondary,
+                          style: theme.textTheme.bodyMedium?.copyWith(
                             fontSize: 15,
                             height: 1.5,
                           ),
@@ -1357,7 +1255,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                             ),
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: _surfaceColor.withOpacity(0.5),
+                              color: theme.cardColor.withOpacity(0.5),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Row(
@@ -1368,7 +1266,10 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                                   height: 28,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
-                                      colors: [_primaryColor, _secondaryColor],
+                                      colors: [
+                                        colorScheme.primary,
+                                        colorScheme.secondary,
+                                      ],
                                     ),
                                     shape: BoxShape.circle,
                                   ),
@@ -1387,8 +1288,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                                 Expanded(
                                   child: Text(
                                     entry.value,
-                                    style: TextStyle(
-                                      color: _textPrimary,
+                                    style: theme.textTheme.bodyMedium?.copyWith(
                                       fontSize: 14,
                                       height: 1.4,
                                     ),
@@ -1409,6 +1309,8 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
   Widget _buildTechnicalDetails() {
     if (_lesson!.technicalDetails.isEmpty) return const SizedBox.shrink();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return _buildSection(
       title: 'Technical Details',
@@ -1416,9 +1318,9 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: _surfaceColor,
+          color: theme.cardColor,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: _borderColor),
+          border: Border.all(color: theme.dividerColor),
         ),
         child: Column(
           children:
@@ -1434,7 +1336,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                             child: Text(
                               entry.key.replaceAll('_', ' ').toUpperCase(),
                               style: TextStyle(
-                                color: _primaryColor,
+                                color: colorScheme.primary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 letterSpacing: 0.5,
@@ -1444,8 +1346,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                           Expanded(
                             child: Text(
                               entry.value.toString(),
-                              style: TextStyle(
-                                color: _textPrimary,
+                              style: theme.textTheme.bodyMedium?.copyWith(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -1466,6 +1367,9 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
     required IconData icon,
     required Widget child,
   }) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1474,16 +1378,15 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: _primaryColor.withOpacity(0.1),
+                color: colorScheme.primary.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Icon(icon, color: _primaryColor, size: 20),
+              child: Icon(icon, color: colorScheme.primary, size: 20),
             ),
             const SizedBox(width: 12),
             Text(
               title,
-              style: const TextStyle(
-                color: _textPrimary,
+              style: theme.textTheme.titleLarge?.copyWith(
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
               ),
@@ -1496,9 +1399,36 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
     );
   }
 
+  void _navigateToPreviousLesson() {
+    final currentProgressDay = _getProgressDay(
+      _lesson!.day,
+      _lesson!.difficulty,
+    );
+    final previousLesson = LessonManager.getPreviousLesson(currentProgressDay);
+    if (previousLesson != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => LessonDetailScreen(lesson: previousLesson),
+        ),
+      );
+    }
+  }
+
+  void _scrollToNextSection() {
+    _scrollController.animateTo(
+      _scrollController.offset + 300,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
   Widget _buildActionButtons() {
     final isCompleted = _lessonProgress?.status == LessonStatus.completed;
-    final canMarkComplete = _readingProgress >= 0.8;
+    final canMarkComplete = _readingProgress >= 0.9;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     final currentProgressDay = _getProgressDay(
       _lesson!.day,
       _lesson!.difficulty,
@@ -1516,18 +1446,22 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             gradient:
                 (isCompleted || !canMarkComplete)
                     ? null
-                    : LinearGradient(colors: [_primaryColor, _secondaryColor]),
+                    : LinearGradient(
+                      colors: [colorScheme.primary, colorScheme.secondary],
+                    ),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color:
                   (isCompleted || !canMarkComplete)
-                      ? _borderColor
+                      ? theme.dividerColor
                       : Colors.transparent,
             ),
           ),
           child: ElevatedButton(
             onPressed:
-                (isCompleted || !canMarkComplete) ? null : _markAsCompleted,
+                canMarkComplete && !isCompleted
+                    ? _markAsCompleted
+                    : (!isCompleted ? _scrollToNextSection : null),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
@@ -1541,25 +1475,25 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                 if (isCompleted) ...[
                   Icon(
                     Icons.check_circle_rounded,
-                    color: _successColor,
+                    color: colorScheme.tertiary,
                     size: 24,
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: 12),
                   Text(
                     'Completed',
                     style: TextStyle(
-                      color: _successColor,
+                      color: colorScheme.tertiary,
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ] else if (canMarkComplete) ...[
                   const Icon(
-                    Icons.check_rounded,
+                    Icons.check_circle_outline_rounded,
                     color: Colors.white,
                     size: 24,
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: 12),
                   const Text(
                     'Mark as Complete',
                     style: TextStyle(
@@ -1569,12 +1503,15 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                     ),
                   ),
                 ] else ...[
-                  Icon(Icons.menu_book_rounded, color: _textTertiary, size: 24),
-                  const SizedBox(width: 8),
+                  Icon(
+                    Icons.menu_book_rounded,
+                    color: theme.textTheme.bodySmall?.color,
+                    size: 24,
+                  ),
+                  const SizedBox(width: 12),
                   Text(
                     'Continue Reading (${(_readingProgress * 100).round()}%)',
-                    style: TextStyle(
-                      color: _textTertiary,
+                    style: theme.textTheme.bodyMedium?.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
@@ -1584,7 +1521,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 20),
         Row(
           children: [
             if (hasPrevious) ...[
@@ -1592,44 +1529,19 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                 child: _buildNavButton(
                   label: 'Previous',
                   icon: Icons.arrow_back_rounded,
-                  onPressed: () {
-                    final previousLesson = LessonManager.getPreviousLesson(
-                      currentProgressDay,
-                    );
-                    if (previousLesson != null) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (_) => LessonDetailScreen(lesson: previousLesson),
-                        ),
-                      );
-                    }
-                  },
+                  onPressed: _navigateToPreviousLesson,
+                  isPrimary: false,
                 ),
               ),
-              if (hasNext) const SizedBox(width: 12),
+              if (hasNext) const SizedBox(width: 16),
             ],
             if (hasNext) ...[
               Expanded(
                 child: _buildNavButton(
                   label: 'Next',
                   icon: Icons.arrow_forward_rounded,
-                  onPressed: () {
-                    final nextLesson = LessonManager.getNextLesson(
-                      currentProgressDay,
-                    );
-                    if (nextLesson != null) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (_) => LessonDetailScreen(lesson: nextLesson),
-                        ),
-                      );
-                    }
-                  },
-                  isPrimary: !hasPrevious,
+                  onPressed: _navigateToNextLesson,
+                  isPrimary: true,
                 ),
               ),
             ],
@@ -1645,6 +1557,9 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
     required VoidCallback onPressed,
     bool isPrimary = false,
   }) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Container(
       height: 48,
       decoration: BoxDecoration(
@@ -1652,14 +1567,17 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             isPrimary
                 ? LinearGradient(
                   colors: [
-                    _primaryColor.withOpacity(0.2),
-                    _secondaryColor.withOpacity(0.1),
+                    colorScheme.primary.withOpacity(0.2),
+                    colorScheme.secondary.withOpacity(0.1),
                   ],
                 )
                 : null,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: isPrimary ? _primaryColor.withOpacity(0.3) : _borderColor,
+          color:
+              isPrimary
+                  ? colorScheme.primary.withOpacity(0.3)
+                  : theme.dividerColor,
         ),
       ),
       child: ElevatedButton(
@@ -1677,7 +1595,10 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             if (label == 'Previous') ...[
               Icon(
                 icon,
-                color: isPrimary ? _primaryColor : _textSecondary,
+                color:
+                    isPrimary
+                        ? colorScheme.primary
+                        : theme.textTheme.bodyMedium?.color,
                 size: 18,
               ),
               const SizedBox(width: 8),
@@ -1685,7 +1606,10 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             Text(
               label,
               style: TextStyle(
-                color: isPrimary ? _primaryColor : _textSecondary,
+                color:
+                    isPrimary
+                        ? colorScheme.primary
+                        : theme.textTheme.bodyMedium?.color,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
@@ -1694,7 +1618,10 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
               const SizedBox(width: 8),
               Icon(
                 icon,
-                color: isPrimary ? _primaryColor : _textSecondary,
+                color:
+                    isPrimary
+                        ? colorScheme.primary
+                        : theme.textTheme.bodyMedium?.color,
                 size: 18,
               ),
             ],

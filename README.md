@@ -89,18 +89,24 @@ flutter build ios --release
 
 ```
 lib/
-├── models/                 # Data models
+├── data/                  # Data sources and static content
+│   ├── beginnerlessons.dart
+│   ├── intermediateLessons.dart
+│   └── advancedLessons.dart
+├── models/                # Data models
 │   ├── lesson.dart        # Lesson and exercise models
 │   ├── user_progress.dart # Progress tracking models
 │   └── saved_item.dart    # Saved content models
 ├── services/              # Business logic and data management
 │   ├── lesson_manager.dart     # Lesson content management
 │   └── user_preferences.dart   # User data persistence
-├── screens/               # UI screens
+├── presentation/          # UI screens and logic
 │   ├── home/              # Home and dashboard screens
-│   ├── lessons/           # Lesson viewing and interaction
-│   ├── progress/          # Progress tracking and stats
-│   └── settings/          # App settings and preferences
+│   ├── help/              # Help and support
+│   ├── mcq/               # Quiz screens
+│   ├── notifications/     # Notification settings
+│   ├── onboarding/        # Onboarding flow
+│   └── settings/          # App settings
 ├── widgets/               # Reusable UI components
 │   ├── common/            # Generic widgets
 │   ├── lesson/            # Lesson-specific widgets

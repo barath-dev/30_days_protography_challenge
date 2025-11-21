@@ -5,7 +5,9 @@ import 'package:photography_guide/presentation/home/home_screen.dart';
 import 'package:photography_guide/presentation/home/lesson_detail_screen.dart';
 import 'package:photography_guide/presentation/home/lesson_timeline_screen.dart';
 import 'package:photography_guide/presentation/home/saved_items_screen.dart';
+import 'package:photography_guide/presentation/quiz/quiz_screen.dart';
 import '../models/lesson.dart';
+import '../models/quiz_result.dart';
 
 class NavigationService {
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -25,6 +27,7 @@ class NavigationService {
   static const String profile = '/profile';
   static const String achievements = '/achievements';
   static const String statistics = '/statistics';
+  static const String quiz = '/quiz';
 
   // Navigation methods
   static Future<T?> push<T extends Object?>(
@@ -117,6 +120,24 @@ class NavigationService {
     return push(statistics);
   }
 
+  // Quiz navigation
+  static Future<QuizResult?> toQuiz({
+    required String quizTitle,
+    required String lessonId,
+    required DifficultyLevel quizLevel,
+    bool isUnlockQuiz = false,
+  }) async {
+    return push<QuizResult>(
+      quiz,
+      arguments: {
+        'quizTitle': quizTitle,
+        'lessonId': lessonId,
+        'quizLevel': quizLevel,
+        'isUnlockQuiz': isUnlockQuiz,
+      },
+    );
+  }
+
   // Modal navigation methods
   static Future<T?> showBottomSheet<T>({
     required Widget child,
@@ -172,6 +193,18 @@ class NavigationService {
           LessonDetailScreen(
             lesson: args?['lesson'],
             lessonId: args?['lessonId'],
+          ),
+          settings,
+        );
+
+      case quiz:
+        final args = settings.arguments as Map<String, dynamic>?;
+        return _buildRoute(
+          QuizScreen(
+            quizTitle: args?['quizTitle'] ?? 'Quiz',
+            lessonId: args?['lessonId'] ?? '',
+            quizLevel: args?['quizLevel'] ?? DifficultyLevel.beginner,
+            isUnlockQuiz: args?['isUnlockQuiz'] ?? false,
           ),
           settings,
         );

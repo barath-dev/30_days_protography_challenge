@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "66778843382",
+    "project_id": "photography-guide-76359",
+    "storage_bucket": "photography-guide-76359.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66778843382:android:a6b6f51ece32689f8784d7",
+        "android_client_info": {
+          "package_name": "com.example.photography_guide"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6cnyAXb57e46BK5m70Cae7WbJMPZqNYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 import 'package:photography_guide/data/beginnerlessons.dart';
 import 'package:photography_guide/data/intermediateLessons.dart';
+import 'package:photography_guide/data/advancedLessons.dart';
 
 import '../models/lesson.dart';
 import '../models/user_progress.dart';

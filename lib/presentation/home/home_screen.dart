@@ -27,14 +27,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
 
-  // Design constants
-  static const Color _primary = Color(0xFFFF6B35);
-  static const Color _background = Color(0xFF0D0D0D);
-  static const Color _card = Color(0xFF1A1A1A);
-  static const Color _text = Color(0xFF888888);
-  static const Color _border = Color(0xFF333333);
-  static const Color _success = Color(0xFF4CAF50);
-
   @override
   void initState() {
     super.initState();
@@ -124,18 +116,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     if (_isLoading) {
       return Scaffold(
-        backgroundColor: _background,
+        backgroundColor: theme.scaffoldBackgroundColor,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation(_primary),
+                valueColor: AlwaysStoppedAnimation(colorScheme.primary),
               ),
               const SizedBox(height: 16),
-              Text('Loading your journey...', style: TextStyle(color: _text)),
+              Text(
+                'Loading your journey...',
+                style: TextStyle(color: theme.textTheme.bodyMedium?.color),
+              ),
             ],
           ),
         ),
@@ -147,13 +145,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
 
     return Scaffold(
-      backgroundColor: _background,
+      backgroundColor: theme.scaffoldBackgroundColor,
       drawer: _buildSidebar(),
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: _loadUserData,
-          color: _primary,
-          backgroundColor: _card,
+          color: colorScheme.primary,
+          backgroundColor: theme.cardColor,
           child: FadeTransition(
             opacity: _fadeAnimation,
             child: SingleChildScrollView(
@@ -182,8 +180,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildWelcomeScreen() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     return Scaffold(
-      backgroundColor: _background,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: Center(
         child: FadeTransition(
           opacity: _fadeAnimation,
@@ -193,22 +195,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: _primary.withOpacity(0.1),
+                  color: colorScheme.primary.withOpacity(0.1),
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: _primary.withOpacity(0.3),
+                    color: colorScheme.primary.withOpacity(0.3),
                     width: 2,
                   ),
                 ),
-                child: Icon(Icons.camera_alt, color: _primary, size: 48),
+                child: Icon(
+                  Icons.camera_alt,
+                  color: colorScheme.primary,
+                  size: 48,
+                ),
               ),
               const SizedBox(height: 32),
-              const Text(
+              Text(
                 'Welcome to\nPhotography Guide',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 32,
+                style: textTheme.displaySmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   height: 1.2,
                 ),
@@ -217,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               Text(
                 'Master photography in 30 days with personalized\nlessons tailored to your skill level',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: _text, fontSize: 16, height: 1.5),
+                style: textTheme.bodyLarge?.copyWith(height: 1.5),
               ),
               const SizedBox(height: 48),
               Container(
@@ -238,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _primary,
+                    backgroundColor: colorScheme.primary,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
@@ -263,9 +267,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final difficulty = _activeDifficulty;
     final stats = LessonManager.getLessonStatistics(_activeDifficulty);
     final availableDifficulties = UserPreferences.getAvailableDifficulties();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Drawer(
-      backgroundColor: _card,
+      backgroundColor: theme.cardColor,
       child: SafeArea(
         child: Column(
           children: [
@@ -277,7 +283,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [_primary, _primary.withOpacity(0.8)],
+                  colors: [
+                    colorScheme.primary,
+                    colorScheme.primary.withOpacity(0.8),
+                  ],
                 ),
               ),
               child: Column(
@@ -285,7 +294,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   CircleAvatar(
                     radius: 32,
                     backgroundColor: Colors.white.withOpacity(0.2),
-                    child: Icon(Icons.person, color: Colors.white, size: 32),
+                    child: const Icon(
+                      Icons.person,
+                      color: Colors.white,
+                      size: 32,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   const Text(
@@ -323,9 +336,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               margin: const EdgeInsets.all(16),
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: _background,
+                color: theme.scaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: _border),
+                border: Border.all(color: theme.dividerColor),
               ),
               child: Column(
                 children: [
@@ -336,28 +349,28 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         'Completed',
                         '${stats['completedLessons'] ?? 0}',
                         Icons.check_circle,
-                        _success,
+                        colorScheme.tertiary,
                       ),
                       _buildStatItem(
                         'Streak',
                         '${stats['currentStreak'] ?? 0}',
                         Icons.local_fire_department,
-                        _primary,
+                        colorScheme.primary,
                       ),
                     ],
                   ),
                   const SizedBox(height: 12),
                   LinearProgressIndicator(
                     value: (stats['completionRate'] ?? 0.0).toDouble(),
-                    backgroundColor: _border,
-                    valueColor: AlwaysStoppedAnimation(_primary),
+                    backgroundColor: theme.dividerColor,
+                    valueColor: AlwaysStoppedAnimation(colorScheme.primary),
                     minHeight: 6,
                     borderRadius: BorderRadius.circular(3),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     '${((stats['completionRate'] ?? 0.0) * 100).round()}% Current Track Complete',
-                    style: TextStyle(color: _text, fontSize: 12),
+                    style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
                   ),
                 ],
               ),
@@ -417,15 +430,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         _showAllTracksProgress();
                       },
                     ),
-                  const Divider(color: Color(0xFF333333), height: 32),
-                  _buildDrawerItem(Icons.settings, 'Settings', () {
+                  const Divider(height: 32),
+                  _buildDrawerItem(Icons.settings, 'Settings', () async {
                     Navigator.pop(context);
-                    Navigator.push(
+                    await Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => const SettingsScreen(),
-                      ),
+                      MaterialPageRoute(builder: (_) => const SettingsScreen()),
                     );
+                    // Refresh data when returning from settings (e.g. reset progress)
+                    _loadUserData();
                   }),
                   _buildDrawerItem(Icons.help_outline, 'Help & Support', () {
                     Navigator.pop(context);
@@ -449,7 +462,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               padding: const EdgeInsets.all(16),
               child: Text(
                 'Photography Guide v1.0',
-                style: TextStyle(color: _text, fontSize: 12),
+                style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -471,23 +484,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         const SizedBox(height: 4),
         Text(
           value,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
-        Text(label, style: TextStyle(color: _text, fontSize: 12)),
+        Text(
+          label,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12),
+        ),
       ],
     );
   }
 
   Widget _buildDrawerItem(IconData icon, String title, VoidCallback onTap) {
+    final theme = Theme.of(context);
     return ListTile(
-      leading: Icon(icon, color: _text, size: 22),
+      leading: Icon(icon, color: theme.textTheme.bodyMedium?.color, size: 22),
       title: Text(
         title,
-        style: const TextStyle(color: Colors.white, fontSize: 16),
+        style: theme.textTheme.bodyLarge?.copyWith(fontSize: 16),
       ),
       onTap: onTap,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -496,6 +511,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildHeader() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -506,30 +524,34 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: _card,
+                    color: theme.cardColor,
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: _border),
+                    border: Border.all(color: theme.dividerColor),
                   ),
-                  child: Icon(Icons.menu, color: Colors.white, size: 24),
+                  child: Icon(
+                    Icons.menu,
+                    color: colorScheme.onSurface,
+                    size: 24,
+                  ),
                 ),
               ),
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-            color: _primary.withOpacity(0.1),
+            color: colorScheme.primary.withOpacity(0.1),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: _primary.withOpacity(0.3)),
+            border: Border.all(color: colorScheme.primary.withOpacity(0.3)),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.school, color: _primary, size: 16),
+              Icon(Icons.school, color: colorScheme.primary, size: 16),
               const SizedBox(width: 8),
               Text(
                 _getDifficultyDisplayName(_activeDifficulty!),
                 style: TextStyle(
-                  color: _primary,
+                  color: colorScheme.primary,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -541,23 +563,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (_) => const NotificationsScreen(),
-              ),
+              MaterialPageRoute(builder: (_) => const NotificationsScreen()),
             );
           },
           child: Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: _card,
+              color: theme.cardColor,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: _border),
+              border: Border.all(color: theme.dividerColor),
             ),
             child: Stack(
               children: [
                 Icon(
                   Icons.notifications_outlined,
-                  color: Colors.white,
+                  color: colorScheme.onSurface,
                   size: 24,
                 ),
                 // Notification dot
@@ -568,7 +588,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     width: 8,
                     height: 8,
                     decoration: BoxDecoration(
-                      color: _primary,
+                      color: colorScheme.primary,
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -584,24 +604,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget _buildWelcomeSection() {
     final greeting = _getGreeting();
     final userName = 'Photographer'; // Could be dynamic from user preferences
+    final theme = Theme.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           '$greeting $userName',
-          style: TextStyle(
-            color: _text,
-            fontSize: 16,
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: theme.textTheme.bodyMedium?.color,
             fontWeight: FontWeight.w400,
           ),
         ),
         const SizedBox(height: 8),
-        const Text(
+        Text(
           'Ready to continue\nyour journey?',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 28,
+          style: theme.textTheme.displaySmall?.copyWith(
             fontWeight: FontWeight.bold,
             height: 1.2,
           ),
@@ -632,19 +650,28 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final isCompleted = status == LessonStatus.completed;
     final isInProgress = progress > 0 && progress < 1.0;
 
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [_primary.withOpacity(0.1), _primary.withOpacity(0.05)],
+          colors: [
+            colorScheme.primary.withOpacity(0.1),
+            colorScheme.primary.withOpacity(0.05),
+          ],
         ),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: _primary.withOpacity(0.3), width: 1.5),
+        border: Border.all(
+          color: colorScheme.primary.withOpacity(0.3),
+          width: 1.5,
+        ),
         boxShadow: [
           BoxShadow(
-            color: _primary.withOpacity(0.1),
+            color: colorScheme.primary.withOpacity(0.1),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -683,7 +710,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                     Text(
                       'Day ${_getProgressDay(_currentLesson!.day, _currentLesson!.difficulty)} of 30',
-                      style: TextStyle(color: _text, fontSize: 12),
+                      style: theme.textTheme.bodySmall,
                     ),
                   ],
                 ),
@@ -695,19 +722,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: _success.withOpacity(0.1),
+                    color: colorScheme.tertiary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: _success.withOpacity(0.3)),
+                    border: Border.all(
+                      color: colorScheme.tertiary.withOpacity(0.3),
+                    ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.check, color: _success, size: 14),
+                      Icon(Icons.check, color: colorScheme.tertiary, size: 14),
                       const SizedBox(width: 4),
                       Text(
                         'Completed',
                         style: TextStyle(
-                          color: _success,
+                          color: colorScheme.tertiary,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
@@ -723,9 +752,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           // Lesson Title and Description
           Text(
             _currentLesson!.title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 22,
+            style: theme.textTheme.headlineLarge?.copyWith(
               fontWeight: FontWeight.bold,
               height: 1.2,
             ),
@@ -733,7 +760,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           const SizedBox(height: 8),
           Text(
             _currentLesson!.description,
-            style: TextStyle(color: _text, fontSize: 15, height: 1.5),
+            style: theme.textTheme.bodyLarge?.copyWith(
+              color: theme.textTheme.bodyMedium?.color,
+              height: 1.5,
+            ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -747,16 +777,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               children: [
                 Text(
                   'Progress',
-                  style: TextStyle(
-                    color: _text,
-                    fontSize: 14,
+                  style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 Text(
                   '${(progress * 100).round()}% complete',
                   style: TextStyle(
-                    color: _primary,
+                    color: colorScheme.primary,
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
@@ -767,7 +795,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             Container(
               height: 6,
               decoration: BoxDecoration(
-                color: _border,
+                color: theme.dividerColor,
                 borderRadius: BorderRadius.circular(3),
               ),
               child: FractionallySizedBox(
@@ -776,12 +804,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [_primary, _primary.withOpacity(0.8)],
+                      colors: [
+                        colorScheme.primary,
+                        colorScheme.primary.withOpacity(0.8),
+                      ],
                     ),
                     borderRadius: BorderRadius.circular(3),
                     boxShadow: [
                       BoxShadow(
-                        color: _primary.withOpacity(0.3),
+                        color: colorScheme.primary.withOpacity(0.3),
                         blurRadius: 4,
                         offset: const Offset(0, 1),
                       ),
@@ -839,7 +870,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         _showLessonLockedDialog();
                       },
               style: ElevatedButton.styleFrom(
-                backgroundColor: canAccess ? _primary : _border,
+                backgroundColor:
+                    canAccess ? colorScheme.primary : theme.disabledColor,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
@@ -885,13 +917,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: _border.withOpacity(0.3),
+                color: theme.dividerColor.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: _border),
+                border: Border.all(color: theme.dividerColor),
               ),
               child: Row(
                 children: [
-                  Icon(Icons.schedule, color: _text, size: 18),
+                  Icon(
+                    Icons.schedule,
+                    color: theme.textTheme.bodyMedium?.color,
+                    size: 18,
+                  ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
@@ -899,18 +935,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       children: [
                         Text(
                           'Available ${LessonManager.getTimeUntilNextLesson(_activeDifficulty)}',
-                          style: TextStyle(
-                            color: _text,
-                            fontSize: 14,
+                          style: theme.textTheme.bodyMedium?.copyWith(
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         Text(
                           'Complete lessons daily to maintain your learning streak',
-                          style: TextStyle(
-                            color: _text.withOpacity(0.7),
-                            fontSize: 12,
-                          ),
+                          style: theme.textTheme.bodySmall,
                         ),
                       ],
                     ),
@@ -925,19 +956,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildCourseCompletedBanner() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final successColor = colorScheme.tertiary;
+
     return Container(
       padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [_success.withOpacity(0.15), _success.withOpacity(0.05)],
+          colors: [
+            successColor.withOpacity(0.15),
+            successColor.withOpacity(0.05),
+          ],
         ),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: _success.withOpacity(0.3), width: 1.5),
+        border: Border.all(color: successColor.withOpacity(0.3), width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: _success.withOpacity(0.1),
+            color: successColor.withOpacity(0.1),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -948,25 +986,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: _success.withOpacity(0.1),
+              color: successColor.withOpacity(0.1),
               shape: BoxShape.circle,
-              border: Border.all(color: _success.withOpacity(0.3), width: 2),
+              border: Border.all(
+                color: successColor.withOpacity(0.3),
+                width: 2,
+              ),
             ),
-            child: Icon(Icons.emoji_events, color: _success, size: 48),
+            child: Icon(Icons.emoji_events, color: successColor, size: 48),
           ),
           const SizedBox(height: 24),
           Text(
             '${_getDifficultyDisplayName(_activeDifficulty!)} Track Complete!',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 24,
+            style: theme.textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.bold,
+              color: Colors.white, // Keep white for contrast
             ),
           ),
           const SizedBox(height: 12),
           Text(
             'You\'ve mastered all 30 lessons in your ${_getDifficultyDisplayName(_activeDifficulty!).toLowerCase()} photography journey. Time to capture the world with your new skills!',
-            style: TextStyle(color: _text, fontSize: 16, height: 1.5),
+            style: theme.textTheme.bodyMedium?.copyWith(height: 1.5),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
@@ -983,7 +1023,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _success,
+                    backgroundColor: successColor,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(
@@ -1008,7 +1048,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _primary,
+                    backgroundColor: colorScheme.primary,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(
@@ -1026,23 +1066,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildMetaChip(IconData icon, String text) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: _card.withOpacity(0.6),
+        color: theme.cardColor.withOpacity(0.6),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: _border.withOpacity(0.5)),
+        border: Border.all(color: theme.dividerColor.withOpacity(0.5)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: _text, size: 14),
+          Icon(icon, color: theme.textTheme.bodyMedium?.color, size: 14),
           const SizedBox(width: 4),
           Text(
             text,
-            style: TextStyle(
-              color: _text,
-              fontSize: 12,
+            style: theme.textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -1052,20 +1091,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Color _getStatusColor(LessonStatus? status) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+
     switch (status) {
       case LessonStatus.completed:
-        return _success;
+        return colorScheme.tertiary;
       case LessonStatus.inProgress:
-        return _primary;
+        return colorScheme.primary;
       case LessonStatus.current:
-        return _primary;
+        return colorScheme.primary;
       case LessonStatus.available:
         return Colors.blue;
       case LessonStatus.locked:
       case LessonStatus.lockedToday:
-        return _text;
+        return theme.disabledColor;
       default:
-        return _text;
+        return theme.disabledColor;
     }
   }
 
@@ -1126,56 +1168,56 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final nextProgressDay = _userProgress?.getMaxAvailableDay() ?? 1;
     final unlockTime =
         _userProgress?.getTimeUntilUnlock(nextProgressDay + 1) ?? 'Unknown';
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     showDialog(
       context: context,
       builder:
           (context) => AlertDialog(
-            backgroundColor: _card,
+            backgroundColor: theme.cardColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
             title: Row(
               children: [
-                Icon(Icons.schedule, color: _primary, size: 24),
+                Icon(Icons.schedule, color: colorScheme.primary, size: 24),
                 const SizedBox(width: 12),
-                const Text(
-                  'Lesson Locked',
-                  style: TextStyle(color: Colors.white),
-                ),
+                Text('Lesson Locked', style: theme.textTheme.titleLarge),
               ],
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'This lesson follows our daily learning schedule to help you build consistent learning habits.',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: theme.textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 16),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: _primary.withOpacity(0.1),
+                    color: colorScheme.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: _primary.withOpacity(0.3)),
+                    border: Border.all(
+                      color: colorScheme.primary.withOpacity(0.3),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Next lesson available: $unlockTime',
-                        style: TextStyle(
-                          color: _primary,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          color: colorScheme.primary,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         'Daily lessons help you maintain focus and avoid burnout while building strong learning habits.',
-                        style: TextStyle(color: _text, fontSize: 13),
+                        style: theme.textTheme.bodySmall,
                       ),
                     ],
                   ),
@@ -1185,7 +1227,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('Understood', style: TextStyle(color: _primary)),
+                child: Text(
+                  'Understood',
+                  style: TextStyle(color: colorScheme.primary),
+                ),
               ),
             ],
           ),
@@ -1196,6 +1241,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final currentDay = _userProgress?.currentDay ?? 1;
     final progress = _userProgress?.overallProgress ?? 0.0;
     final streak = _userProgress?.dailyStreak ?? 0;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -1208,10 +1255,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             children: [
               Text(
                 '${_getDifficultyDisplayName(_activeDifficulty!)} Track',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
+                style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
+                  color: Colors.white, // Keep white for contrast on dark card
                 ),
               ),
               Container(
@@ -1220,14 +1266,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  color: _success.withOpacity(0.1),
+                  color: colorScheme.tertiary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: _success.withOpacity(0.3)),
+                  border: Border.all(
+                    color: colorScheme.tertiary.withOpacity(0.3),
+                  ),
                 ),
                 child: Text(
                   'Day $currentDay',
                   style: TextStyle(
-                    color: _success,
+                    color: colorScheme.tertiary,
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                   ),
@@ -1245,7 +1293,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     Text(
                       '${(progress * 100).round()}%',
                       style: TextStyle(
-                        color: _primary,
+                        color: colorScheme.primary,
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
                       ),
@@ -1266,14 +1314,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       children: [
                         Icon(
                           Icons.local_fire_department,
-                          color: _primary,
+                          color: colorScheme.primary,
                           size: 20,
                         ),
                         const SizedBox(width: 4),
                         Text(
                           '$streak',
                           style: TextStyle(
-                            color: _primary,
+                            color: colorScheme.primary,
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
@@ -1292,8 +1340,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           const SizedBox(height: 20),
           LinearProgressIndicator(
             value: progress,
-            backgroundColor: _border,
-            valueColor: AlwaysStoppedAnimation(_primary),
+            backgroundColor: theme.dividerColor.withOpacity(0.2),
+            valueColor: AlwaysStoppedAnimation(colorScheme.primary),
             minHeight: 8,
             borderRadius: BorderRadius.circular(4),
           ),
@@ -1327,14 +1375,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildQuickActions() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Quick Actions',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
+          style: theme.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -1343,31 +1392,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           children: [
             Expanded(
               child: _buildActionCard(
-                icon: Icons.timeline,
-                title: 'View Timeline',
-                subtitle: 'All 30 lessons',
-                onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const LessonTimelineScreen(),
-                    ),
-                  );
-                  await _loadUserData();
+                'Daily Challenge',
+                Icons.camera,
+                colorScheme.primary,
+                () {
+                  // Navigate to daily challenge
                 },
               ),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: _buildActionCard(
-                icon: Icons.bookmark,
-                title: 'Saved Content',
-                subtitle: 'Your bookmarks',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const SavedItemsScreen()),
-                  );
+                'Community',
+                Icons.people_outline,
+                colorScheme.tertiary,
+                () {
+                  // Navigate to community
                 },
               ),
             ),
@@ -1377,43 +1417,43 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildActionCard({
-    required IconData icon,
-    required String title,
-    required String subtitle,
-    required VoidCallback onTap,
-  }) {
+  Widget _buildActionCard(
+    String title,
+    IconData icon,
+    Color color,
+    VoidCallback onTap,
+  ) {
+    final theme = Theme.of(context);
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: _card,
+          color: theme.cardColor,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: _border),
+          border: Border.all(color: theme.dividerColor),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: _primary.withOpacity(0.1),
+                color: color.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(icon, color: _primary, size: 24),
+              child: Icon(icon, color: color, size: 24),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
             Text(
               title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
+              style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 4),
-            Text(subtitle, style: TextStyle(color: _text, fontSize: 14)),
+            Text('Tap to open', style: theme.textTheme.bodySmall),
           ],
         ),
       ),
@@ -1421,147 +1461,216 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildRecentActivity() {
-    final completedLessons =
-        _userProgress?.lessonProgress.values
-            .where((p) => p.status == LessonStatus.completed)
-            .take(3)
-            .toList() ??
-        [];
-
-    if (completedLessons.isEmpty) {
-      return const SizedBox.shrink();
-    }
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Recent Activity',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Recent Activity',
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const LessonTimelineScreen(),
+                  ),
+                );
+              },
+              child: Text(
+                'View All',
+                style: TextStyle(color: colorScheme.primary),
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 16),
-        ...completedLessons.map((progress) {
-          final lesson = LessonManager.getLessonById(progress.lessonId);
-          if (lesson == null) return const SizedBox.shrink();
-
-          return Container(
-            margin: const EdgeInsets.only(bottom: 12),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: _card,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: _border),
-            ),
-            child: Row(
+        // Placeholder for recent activity list
+        Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: theme.cardColor,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: theme.dividerColor),
+          ),
+          child: Center(
+            child: Column(
               children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: _success.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(Icons.check, color: _success, size: 16),
+                Icon(
+                  Icons.history,
+                  color: theme.textTheme.bodyMedium?.color,
+                  size: 48,
                 ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Day ${_getProgressDay(lesson.day, lesson.difficulty)}: ${lesson.title}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        'Completed ${progress.timeSpent} min ago',
-                        style: TextStyle(color: _text, fontSize: 12),
-                      ),
-                    ],
-                  ),
+                const SizedBox(height: 16),
+                Text('No recent activity', style: theme.textTheme.bodyLarge),
+                const SizedBox(height: 8),
+                Text(
+                  'Start a lesson to see your activity here',
+                  style: theme.textTheme.bodyMedium,
+                  textAlign: TextAlign.center,
                 ),
               ],
             ),
-          );
-        }),
+          ),
+        ),
       ],
     );
   }
 
   BoxDecoration _cardDecoration() {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return BoxDecoration(
-      gradient: const LinearGradient(
+      gradient: LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
-        colors: [Color(0xFF2D2D2D), Color(0xFF1A1A1A)],
+        colors:
+            isDark
+                ? [const Color(0xFF2D2D2D), const Color(0xFF1A1A1A)]
+                : [
+                  theme.cardColor,
+                  theme.cardColor,
+                ], // Use solid color for light mode or adjust as needed
       ),
       borderRadius: BorderRadius.circular(16),
-      border: Border.all(color: _border),
+      border: Border.all(color: theme.dividerColor),
+      boxShadow:
+          isDark
+              ? null
+              : [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
     );
   }
 
   void _showDetailedStats() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     final stats = LessonManager.getLessonStatistics(_activeDifficulty);
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: _card,
+      backgroundColor: theme.scaffoldBackgroundColor,
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder:
-          (context) => Container(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${_getDifficultyDisplayName(_activeDifficulty!)} Track Statistics',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+          (context) => DraggableScrollableSheet(
+            initialChildSize: 0.7,
+            minChildSize: 0.5,
+            maxChildSize: 0.9,
+            expand: false,
+            builder:
+                (context, scrollController) => ListView(
+                  controller: scrollController,
+                  padding: const EdgeInsets.all(24),
+                  children: [
+                    Text(
+                      'Your Progress Stats',
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 32),
+                    _buildStatCard(
+                      'Total Lessons',
+                      '${stats['totalLessons']}',
+                      Icons.library_books,
+                      colorScheme.primary,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildStatCard(
+                      'Completed',
+                      '${stats['completedLessons']}',
+                      Icons.check_circle,
+                      colorScheme.tertiary,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildStatCard(
+                      'Remaining',
+                      '${stats['remainingLessons']}',
+                      Icons.timelapse,
+                      Colors.orange,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildStatCard(
+                      'Completion Rate',
+                      '${((stats['completionRate'] ?? 0.0) * 100).round()}%',
+                      Icons.pie_chart,
+                      Colors.blue,
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 24),
-                _buildStatRow('Total Lessons', '${stats['totalLessons']}'),
-                _buildStatRow('Completed', '${stats['completedLessons']}'),
-                _buildStatRow(
-                  'Completion Rate',
-                  '${(stats['completionRate'] * 100).round()}%',
-                ),
-                _buildStatRow(
-                  'Time Spent',
-                  '${stats['totalTimeSpent']} minutes',
-                ),
-                _buildStatRow(
-                  'Current Streak',
-                  '${stats['currentStreak']} days',
-                ),
-                _buildStatRow(
-                  'Difficulty Level',
-                  _getDifficultyDisplayName(_activeDifficulty!),
-                ),
-              ],
-            ),
           ),
+    );
+  }
+
+  Widget _buildStatCard(
+    String title,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
+    final theme = Theme.of(context);
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: theme.cardColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: theme.dividerColor),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: color, size: 24),
+          ),
+          const SizedBox(width: 16),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title, style: theme.textTheme.bodyMedium),
+              Text(
+                value,
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
   void _showAllTracksProgress() {
     final allStats = LessonManager.getAllStatistics();
     final availableDifficulties = UserPreferences.getAvailableDifficulties();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: _card,
+      backgroundColor: theme.scaffoldBackgroundColor,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -1573,11 +1682,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'All Learning Tracks',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                  style: theme.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -1600,12 +1707,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           color:
                               isActive
-                                  ? _primary.withOpacity(0.1)
-                                  : _background,
+                                  ? colorScheme.primary.withOpacity(0.1)
+                                  : theme.cardColor,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
                             color:
-                                isActive ? _primary.withOpacity(0.3) : _border,
+                                isActive
+                                    ? colorScheme.primary.withOpacity(0.3)
+                                    : theme.dividerColor,
                           ),
                         ),
                         child: Column(
@@ -1616,9 +1725,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               children: [
                                 Text(
                                   difficultyName,
-                                  style: TextStyle(
-                                    color: isActive ? _primary : Colors.white,
-                                    fontSize: 18,
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    color:
+                                        isActive ? colorScheme.primary : null,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -1629,13 +1738,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       vertical: 4,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: _primary.withOpacity(0.2),
+                                      color: colorScheme.primary.withOpacity(
+                                        0.2,
+                                      ),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Text(
                                       'Active',
                                       style: TextStyle(
-                                        color: _primary,
+                                        color: colorScheme.primary,
                                         fontSize: 10,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -1670,9 +1781,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             LinearProgressIndicator(
                               value:
                                   (stats['completionRate'] ?? 0.0).toDouble(),
-                              backgroundColor: _border.withOpacity(0.3),
+                              backgroundColor: theme.dividerColor.withOpacity(
+                                0.3,
+                              ),
                               valueColor: AlwaysStoppedAnimation(
-                                isActive ? _primary : _success,
+                                isActive
+                                    ? colorScheme.primary
+                                    : colorScheme.tertiary,
                               ),
                               minHeight: 4,
                               borderRadius: BorderRadius.circular(2),
@@ -1690,62 +1805,49 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildMiniStatItem(String label, String value) {
+    final theme = Theme.of(context);
     return Column(
       children: [
         Text(
           value,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
+          style: theme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
-        Text(label, style: TextStyle(color: _text, fontSize: 12)),
+        Text(label, style: theme.textTheme.bodySmall),
       ],
     );
   }
 
-  Widget _buildStatRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label, style: TextStyle(color: _text, fontSize: 16)),
-          Text(
-            value,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   void _showAboutDialog() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     showDialog(
       context: context,
       builder:
           (context) => AlertDialog(
-            backgroundColor: _card,
+            backgroundColor: theme.cardColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            title: const Text(
+            title: Text(
               'About Photography Guide',
-              style: TextStyle(color: Colors.white),
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             content: Text(
               'Photography Guide is your companion for mastering photography in 30 days. With personalized lessons, practice exercises, and progress tracking, you\'ll develop your skills systematically across multiple difficulty levels.',
-              style: TextStyle(color: _text, height: 1.5),
+              style: theme.textTheme.bodyMedium?.copyWith(height: 1.5),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('Got it', style: TextStyle(color: _primary)),
+                child: Text(
+                  'Got it',
+                  style: TextStyle(color: colorScheme.primary),
+                ),
               ),
             ],
           ),

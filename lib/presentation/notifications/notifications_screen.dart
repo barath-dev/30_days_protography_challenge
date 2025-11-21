@@ -9,13 +9,6 @@ class NotificationsScreen extends StatefulWidget {
 }
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
-  // Design constants
-  static const Color _primary = Color(0xFFFF6B35);
-  static const Color _background = Color(0xFF0D0D0D);
-  static const Color _card = Color(0xFF1A1A1A);
-  static const Color _text = Color(0xFF888888);
-  static const Color _border = Color(0xFF333333);
-
   final List<NotificationItem> _notifications = [
     NotificationItem(
       id: '1',
@@ -45,21 +38,22 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     final unreadCount = _notifications.where((n) => !n.isRead).length;
 
     return Scaffold(
-      backgroundColor: _background,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: _background,
+        backgroundColor: theme.scaffoldBackgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
+        title: Text(
           'Notifications',
-          style: TextStyle(
-            color: Colors.white,
+          style: theme.textTheme.titleLarge?.copyWith(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -73,25 +67,29 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               },
               child: Text(
                 'Mark all read',
-                style: TextStyle(color: _primary, fontSize: 14),
+                style: TextStyle(color: colorScheme.primary, fontSize: 14),
               ),
             ),
         ],
       ),
-      body: _notifications.isEmpty
-          ? _buildEmptyState()
-          : ListView.builder(
-              padding: const EdgeInsets.all(20),
-              itemCount: _notifications.length,
-              itemBuilder: (context, index) {
-                final notification = _notifications[index];
-                return _buildNotificationCard(notification);
-              },
-            ),
+      body:
+          _notifications.isEmpty
+              ? _buildEmptyState()
+              : ListView.builder(
+                padding: const EdgeInsets.all(20),
+                itemCount: _notifications.length,
+                itemBuilder: (context, index) {
+                  final notification = _notifications[index];
+                  return _buildNotificationCard(notification);
+                },
+              ),
     );
   }
 
   Widget _buildEmptyState() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -99,36 +97,34 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: _card,
+              color: theme.cardColor,
               shape: BoxShape.circle,
-              border: Border.all(color: _border),
+              border: Border.all(color: theme.dividerColor),
             ),
             child: Icon(
               Icons.notifications_none,
-              color: _text,
+              color: theme.textTheme.bodyMedium?.color,
               size: 48,
             ),
           ),
           const SizedBox(height: 24),
           Text(
             'No Notifications',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
+            style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 8),
-          Text(
-            'You\'re all caught up!',
-            style: TextStyle(color: _text, fontSize: 14),
-          ),
+          Text('You\'re all caught up!', style: theme.textTheme.bodyMedium),
         ],
       ),
     );
   }
 
   Widget _buildNotificationCard(NotificationItem notification) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Dismissible(
       key: Key(notification.id),
       direction: DismissDirection.endToStart,
@@ -139,7 +135,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('Notification removed'),
-            backgroundColor: _primary,
+            backgroundColor: colorScheme.primary,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
@@ -152,7 +148,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         padding: const EdgeInsets.only(right: 20),
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
-          color: Colors.red,
+          color: colorScheme.error,
           borderRadius: BorderRadius.circular(16),
         ),
         child: const Icon(Icons.delete, color: Colors.white),
@@ -168,12 +164,16 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           margin: const EdgeInsets.only(bottom: 12),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: notification.isRead ? _card : _card.withOpacity(0.8),
+            color:
+                notification.isRead
+                    ? theme.cardColor
+                    : theme.cardColor.withOpacity(0.8),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: notification.isRead
-                  ? _border
-                  : _primary.withOpacity(0.3),
+              color:
+                  notification.isRead
+                      ? theme.dividerColor
+                      : colorScheme.primary.withOpacity(0.3),
               width: notification.isRead ? 1 : 2,
             ),
           ),
@@ -183,8 +183,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: _getNotificationColor(notification.type)
-                      .withOpacity(0.1),
+                  color: _getNotificationColor(
+                    notification.type,
+                  ).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(
@@ -203,12 +204,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         Expanded(
                           child: Text(
                             notification.title,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: notification.isRead
-                                  ? FontWeight.w600
-                                  : FontWeight.bold,
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              fontWeight:
+                                  notification.isRead
+                                      ? FontWeight.w600
+                                      : FontWeight.bold,
                             ),
                           ),
                         ),
@@ -217,7 +217,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                             width: 8,
                             height: 8,
                             decoration: BoxDecoration(
-                              color: _primary,
+                              color: colorScheme.primary,
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -226,17 +226,15 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     const SizedBox(height: 4),
                     Text(
                       notification.message,
-                      style: TextStyle(
-                        color: _text,
-                        fontSize: 13,
-                        height: 1.4,
-                      ),
+                      style: theme.textTheme.bodyMedium?.copyWith(height: 1.4),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       _formatTimestamp(notification.timestamp),
-                      style: TextStyle(
-                        color: _text.withOpacity(0.7),
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.textTheme.bodySmall?.color?.withOpacity(
+                          0.7,
+                        ),
                         fontSize: 11,
                       ),
                     ),
@@ -266,11 +264,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   }
 
   Color _getNotificationColor(NotificationType type) {
+    final colorScheme = Theme.of(context).colorScheme;
     switch (type) {
       case NotificationType.achievement:
         return const Color(0xFFFFD700);
       case NotificationType.reminder:
-        return _primary;
+        return colorScheme.primary;
       case NotificationType.milestone:
         return const Color(0xFF9C27B0);
       case NotificationType.info:
@@ -312,13 +311,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   }
 }
 
-enum NotificationType {
-  achievement,
-  reminder,
-  milestone,
-  info,
-  tip,
-}
+enum NotificationType { achievement, reminder, milestone, info, tip }
 
 class NotificationItem {
   final String id;

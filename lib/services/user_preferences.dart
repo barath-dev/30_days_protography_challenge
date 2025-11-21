@@ -9,6 +9,7 @@ class UserPreferences {
   static SharedPreferences? _prefs;
   static Map<DifficultyLevel, UserProgress> _allProgress = {};
   static DifficultyLevel? _activeDifficulty;
+  static final ValueNotifier<AppSettings> settingsNotifier = ValueNotifier(AppSettings.defaultSettings());
 
   // Keys for SharedPreferences
   static const String _keyFirstLaunch = 'first_launch';
@@ -18,12 +19,16 @@ class UserPreferences {
   static const String _keySettings = 'app_settings';
   static const String _keyOnboardingCompleted = 'onboarding_completed';
   static const String _keyLastSyncTime = 'last_sync_time';
+  static const String _keyQuizResults = 'quiz_results';
+  static const String _keyUnlockedLevels = 'unlocked_levels';
 
   // Initialize SharedPreferences
   static Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
     await _loadAllProgress();
     await _loadActiveDifficulty();
+    // Initialize settings notifier
+    settingsNotifier.value = await getAppSettings();
   }
 
   // Force reload - useful when data changes
@@ -298,6 +303,7 @@ class UserPreferences {
     try {
       final settingsJson = jsonEncode(settings.toJson());
       await _prefs?.setString(_keySettings, settingsJson);
+      settingsNotifier.value = settings;
     } catch (e) {
       print('Error saving app settings: $e');
     }
@@ -431,6 +437,118 @@ class UserPreferences {
     };
 
     return allStats;
+  }
+
+  // Quiz and Level Unlock Management
+  static Future<List<Map<String, dynamic>>> getQuizResults() async {
+    final resultsJson = _prefs?.getString(_keyQuizResults);
+    if (resultsJson != null) {
+      try {
+        final resultsList = jsonDecode(resultsJson) as List;
+        return resultsList.cast<Map<String, dynamic>>();
+      } catch (e) {
+        print('Error loading quiz results: $e');
+        return [];
+      }
+    }
+    return [];
+  }
+
+  static Future<void> saveQuizResult(dynamic result) async {
+    try {
+      // Import QuizResult dynamically to avoid circular dependency
+      final quizLevel = result.quizLevel as DifficultyLevel;
+      final passed = result.passed as bool;
+      final isUnlockQuiz = result.isUnlockQuiz as bool;
+
+      // Save the quiz result
+      final results = await getQuizResults();
+      final resultMap = result.toMap() as Map<String, dynamic>;
+      results.add(resultMap);
+
+      final resultsJson = jsonEncode(results);
+      await _prefs?.setString(_keyQuizResults, resultsJson);
+
+      print('📝 Quiz result saved: Level ${quizLevel.name}, Passed: $passed');
+
+      // If this is an unlock quiz and the user passed, unlock the next level
+      if (isUnlockQuiz && passed) {
+        final targetLevel = _getNextLevel(quizLevel);
+        if (targetLevel != null) {
+          await unlockLevel(targetLevel);
+          print('🔓 Unlocked ${targetLevel.name} level!');
+        }
+      }
+
+      await _updateLastSyncTime();
+    } catch (e) {
+      print('Error saving quiz result: $e');
+    }
+  }
+
+  static bool hasAttemptedQuiz(DifficultyLevel level) {
+    // Check if there's any quiz result for this level
+    try {
+      final resultsJson = _prefs?.getString(_keyQuizResults);
+      if (resultsJson != null) {
+        final resultsList = jsonDecode(resultsJson) as List;
+        return resultsList.any((result) {
+          final quizLevel = result['quizLevel'] as String?;
+          return quizLevel == level.name;
+        });
+      }
+    } catch (e) {
+      print('Error checking quiz attempts: $e');
+    }
+    return false;
+  }
+
+  static DifficultyLevel? _getNextLevel(DifficultyLevel currentLevel) {
+    switch (currentLevel) {
+      case DifficultyLevel.beginner:
+        return DifficultyLevel.intermediate;
+      case DifficultyLevel.intermediate:
+        return DifficultyLevel.advanced;
+      case DifficultyLevel.advanced:
+        return null; // No next level
+    }
+  }
+
+  static Future<void> unlockLevel(DifficultyLevel level) async {
+    try {
+      final unlockedLevels = await getUnlockedLevels();
+      if (!unlockedLevels.contains(level.name)) {
+        unlockedLevels.add(level.name);
+        await _prefs?.setString(_keyUnlockedLevels, jsonEncode(unlockedLevels));
+        await _updateLastSyncTime();
+      }
+    } catch (e) {
+      print('Error unlocking level: $e');
+    }
+  }
+
+  static Future<List<String>> getUnlockedLevels() async {
+    final levelsJson = _prefs?.getString(_keyUnlockedLevels);
+    if (levelsJson != null) {
+      try {
+        final levelsList = jsonDecode(levelsJson) as List;
+        return levelsList.cast<String>();
+      } catch (e) {
+        print('Error loading unlocked levels: $e');
+        // Default: beginner is always unlocked
+        return ['beginner'];
+      }
+    }
+    // Default: beginner is always unlocked
+    return ['beginner'];
+  }
+
+  static Future<bool> isLevelUnlocked(DifficultyLevel level) async {
+    // Beginner is always unlocked
+    if (level == DifficultyLevel.beginner) return true;
+
+    final unlockedLevels = await getUnlockedLevels();
+    return unlockedLevels.contains(level.name);
   }
 
   // Debug helper methods
