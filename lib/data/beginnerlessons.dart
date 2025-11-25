@@ -1,3665 +1,2664 @@
-// Updated LessonManager with Photography Course Integration
-// Data provider classes for the first 8 days
 
 class BeginnerLessonsData {
   static List<Map<String, dynamic>> get lessons {
     return [
-      // Day 1: What is Photography?
+
       {
         'id': 'lesson_001',
         'day': 1,
         'title': 'What is Photography?',
-        'subtitle': 'Understanding the basics of capturing light',
-        'description':
-            'Learn what photography means, its history, and the fundamental components of every photograph.',
-        'content':
-            '''**Photography means clicking a photo using a camera or mobile phone.**
+        'subtitle': '(Complete Lesson in Very Simple Language)',
+        'description': 'Learn about What is Photography?',
+        'content': '''Day 1: What is Photography?
+(Complete Lesson in Very Simple Language)
 
+🌟 What You Will Learn Today:
+	•	What photography means
+	•	A short and easy history of photography (world + India)
+	•	Why photography is important
+	•	How a camera works
+	•	Different types of cameras
+	•	4 basic things in every photo
+	•	A simple photography activity
+	•	Beginner tips
+	•	One beautiful quote
+	•	Important words
+	•	A short summary
+
+🌟 What is Photography? (Very Simple Words)
+Photography means clicking a photo using a camera or mobile phone.
 A photo can be of:
-• A person (like your mom or friend)
-• A place (your room, garden, or road)  
-• A thing (like a cup, flower, or chair)
-• A moment (like someone laughing or the sunset)
-
-📷 The word *Photography* is made from:
-• Photo = Light
-• Graphy = Drawing or writing
-
+	•	A person (like your mom or friend)
+	•	A place (your room, garden, or road)
+	•	A thing (like a cup, flower, or chair)
+	•	A moment (like someone laughing or the sunset)
+📷 The word Photography is made from:
+	•	Photo = Light
+	•	Graphy = Drawing or writing
 So, Photography means drawing or writing with light.
 
-**🖐️ A Little History of Photography**
-
-Long ago, people didn't have cameras. They used to paint or draw pictures. Then came a smart idea: the Camera Obscura -- a dark box with a tiny hole. Light passed through the hole and made an image inside the box.
+🖐️ A Little History of Photography
+📖 Long ago:
+People didn’t have cameras. They used to paint or draw pictures.
+Then came a smart idea: the Camera Obscura – a dark box with a tiny hole. Light passed through the hole and made an image inside the box (but the image was upside down and couldn't be saved).
 
 📸 The First Real Photo:
-• In 1826, a man named Joseph Niépce took the world's first photograph
-• It took him 8 hours to take one photo!
+	•	In 1826, a man named Joseph Niépce took the world’s first photograph.
+	•	It took him 8 hours to take one photo!
+Then other people helped improve the process.
+👴 Famous Names:
+	•	Louis Daguerre (1839) – Made photos easier and faster.
+	•	George Eastman (1888) – Made the first Kodak camera for everyone.
+Then came digital cameras and now we all use phones to click photos in seconds!
 
-**🇮🇳 Photography in India**
-• The first known photo in India was taken in the 1840s
-• Lala Deen Dayal (1844–1905) was India's first great photographer
-• He took photos of palaces, royals, and daily life
+🗓️ Simple Timeline:
+Year
+What Happened
+1826
+First photo by Niépce
+1839
+Daguerre made photo-taking easier
+1888
+Kodak camera made for everyone
+1990s
+Digital cameras started
+2000s
+Mobile phone cameras became common
+Now
+Everyone takes pictures with a phone 📱
 
-**💡 Why is Photography Important?**
+🇮🇳 A Little History of Photography in India (Very Simple)
+📸 First Photograph in India
+	•	The first known photo in India was taken in the 1840s.
+	•	It showed Indian people, palaces, and temples.
+	•	Early photos were mostly taken by British officers and Indian royals.
 
-Photography helps us:
-✅ Save beautiful memories
-✅ Express our thoughts without words
-✅ Show emotions (like love, joy, sadness)
-✅ Notice small details in life
-✅ Make a career or earn money
-✅ Make people smile 😊
+🧘‍♂️ Early Photographers in India
+	•	Lala Deen Dayal (1844–1905)
+	•	India’s first great photographer.
+	•	Took photos of palaces, royals, and daily life.
+	•	Worked for Nizam of Hyderabad and British Viceroys.
+	•	Samuel Bourne (British)
+	•	Took amazing photos of Himalayas, rivers, and Indian cities in the 1860s.
 
-**👁️ How Does a Camera Work?**
+🏫 First Photo Studios in India
+	•	Studios opened in Kolkata, Mumbai, and Chennai in the 1850s–60s.
+	•	Photos were first popular among royalty and rich families.
 
-Think of your camera like your eyes:
-1. Light enters the lens (just like your eye gets light)
-2. Inside the camera, there is a sensor (like your retina)
-3. The camera captures the image and saves it
+🎥 Modern India
+	•	In the 1980s–90s, people started using color film.
+	•	Now in 2000s+, mobile photography is everywhere.
+	•	India now has wedding photographers, Instagram creators, and mobile artists.
 
-**🧩 4 Things Every Photo Has**
+💡 Why is Photography Important?
+Photography helps us: ✅ Save beautiful memories ✅ Express our thoughts without words ✅ Show emotions (like love, joy, sadness) ✅ Notice small details in life ✅ Make a career or earn money ✅ Make people smile 😊
+You don’t need to be rich or perfect. You just need to start.
 
-1. **Light** - No light = no photo
-2. **Subject** - The main thing in the photo
-3. **Framing/Composition** - How you place the subject
-4. **Timing** - When you click the photo''',
-        'estimatedDuration': 25,
+👁️ How Does a Camera Work?
+Think of your camera like your eyes.
+	•	Light enters the lens (just like your eye gets light).
+	•	Inside the camera, there is a sensor (like your retina).
+	•	The camera captures the image and saves it.
+Even your phone works the same way.
+
+📷 Types of Cameras (Very Easy)
+1. 📱 Mobile Camera
+	•	Everyone has it.
+	•	Perfect for beginners.
+2. 📸 DSLR Camera
+	•	Big camera with buttons and manual settings.
+	•	Used by professional photographers.
+3. 📷 Mirrorless Camera
+	•	Like DSLR but smaller.
+	•	Very good quality.
+4. 🎥 Film Camera
+	•	Old type.
+	•	Uses film rolls instead of memory card.
+5. 📸 Instant Camera
+	•	Gives a printed photo instantly (like Polaroid).
+📌 Your mobile camera is more than enough to start!
+
+🧩 4 Things Every Photo Has
+1. Light
+No light = no photo. Light can come from:
+	•	Sun
+	•	Bulb
+	•	Window
+	•	Candle
+
+2. Subject
+The main thing in the photo. Examples:
+	•	A flower
+	•	A person
+	•	A pet
+	•	A cup
+
+3. Framing / Composition
+How you place the subject in the photo. Is it:
+	•	In the center?
+	•	Left side or right?
+	•	Close or far?
+
+4. Timing
+When you click the photo. Right timing makes the photo great:
+	•	Someone smiling
+	•	Bird flying
+	•	Candle blowing out
+
+🏠 Today’s Simple Activity
+Click 5 photos with any camera (phone is fine):
+	•	A cup or glass
+	•	A flower or plant
+	•	A window or light coming through it
+	•	A person (ask before clicking!)
+	•	A shadow on the wall
+Then look at your photos and ask:
+	•	What did I click?
+	•	Is it bright or dark?
+	•	Can I see the subject clearly?
+	•	What did I like in this photo?
+📌 This will help you see the world like a photographer.
+
+📌 5 Beginner Tips (Very Easy)
+	•	Clean your camera lens
+	•	Use natural light (sunlight) if possible
+	•	Don’t zoom too much — go closer
+	•	Keep your hands steady — don’t shake
+	•	Take your time. There is no rush!
+
+💬 Quote of the Day:
+“You don’t need a big camera. You just need to see beauty in simple things.”
+Look at the world with kind and curious eyes. That’s a good photographer.
+
+🧠 New Words You Learned Today
+Word
+Meaning (Easy)
+Photography
+Taking pictures using light
+Light
+Brightness from sun, bulb, etc.
+Subject
+The main thing in a photo
+Framing
+How you place things in a photo
+Timing
+The moment you click the photo
+Camera
+Device to take photos
+
+✅ Summary of Day 1
+	•	Photography means drawing with light.
+	•	It started nearly 200 years ago!
+	•	In India, it began in the 1840s with royal and studio portraits.
+	•	Anyone can learn — start with a mobile camera.
+	•	Every photo needs: light, subject, framing, and timing.
+	•	Do the small photo activity today.
+	•	Practice daily and don’t worry about mistakes.
+    📸''',
+        'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Basics', 'History', 'Theory'],
-        'objectives': [
-          'Understand what photography means',
-          'Learn the basic history of photography',
-          'Identify the 4 essential elements of every photo',
-          'Understand how a camera works like an eye',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_001_01',
-            'title': 'First Photo Practice',
-            'description':
-                'Take your first intentional photographs to understand the basics',
-            'steps': [
-              'Take a photo of a cup or glass',
-              'Take a photo of a flower or plant',
-              'Take a photo of a window or light coming through it',
-              'Take a photo of a person (ask permission first!)',
-              'Take a photo of a shadow on the wall',
-            ],
-            'requirements': {
-              'camera': 'Any camera or mobile phone',
-              'time': '15 minutes',
-              'location': 'Indoor and outdoor',
-            },
-            'estimatedTime': 15,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand What is Photography?'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Photography': 'Taking pictures using light',
-            'Light': 'Brightness from sun, bulb, etc.',
-            'Subject': 'The main thing in a photo',
-            'Framing': 'How you place things in a photo',
-            'Timing': 'The moment you click the photo',
-            'Camera': 'Device to take photos',
-          },
-          'quote':
-              'You don\'t need a big camera. You just need to see beauty in simple things.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 2: Types of Cameras
       {
         'id': 'lesson_002',
         'day': 2,
-        'title': 'Types of Cameras',
-        'subtitle': 'DSLR, Mirrorless, Mobile & More',
-        'description':
-            'Explore different camera types and understand their strengths and weaknesses.',
-        'content': '''**✋ What is a Camera?**
+        'title': 'Types of Cameras (Very Simple and Clear)',
+        'subtitle': '(DSLR, Mirrorless, Mobile & More)',
+        'description': 'Learn about Types of Cameras (Very Simple and Clear)',
+        'content': '''Day 2: Types of Cameras (Very Simple and Clear)
+(DSLR, Mirrorless, Mobile & More)
 
+🌟 What You Will Learn Today:
+	•	The most common camera types: DSLR, Mirrorless, Mobile
+	•	Other camera types: Film, Instant, Action, Drone, Compact
+	•	Differences between them
+	•	Their strengths and weaknesses
+	•	Which camera is best for beginners
+	•	Simple mixed history of cameras (India + World)
+	•	Activity and tips
+	•	Vocabulary and summary
+
+✋ What is a Camera?
 A camera is a tool used to capture photos using light.
-
 Today, we will learn about different types of cameras:
-1. Mobile Camera 📱
-2. DSLR Camera 📸
-3. Mirrorless Camera 📷
-4. Film Camera 🎞️
-5. Instant Camera 🖼️
-6. Action Camera 🎥
-7. Drone Camera 🚁
-8. Compact/Point-and-Shoot Camera 📷
+	•	Mobile Camera 📱
+	•	DSLR Camera 📸
+	•	Mirrorless Camera 📷
+	•	Film Camera 🎞️
+	•	Instant Camera 🖼️
+	•	Action Camera 🎥
+	•	Drone Camera 🚁
+	•	Compact/Point-and-Shoot Camera 📷
 
-**📱 1. Mobile Camera**
-• Found in smartphones
-• Easy to carry and always with you
-• Most people start photography with this
+🌍📜 A Short History of Cameras (World + India Together)
+	•	1800s: In France, Joseph Niépce took the first photo using a metal plate (8-hour exposure!).
+	•	1839: Louis Daguerre invented the Daguerreotype — the first easy method to make photos.
+	•	1840s in India: British officers and Indian royals began using this camera method. Early photos showed temples, forts, and palaces.
+	•	1850s-60s: Photo studios opened in Kolkata, Mumbai, and Chennai. Indian photographers like Lala Deen Dayal became famous for capturing royals and architecture.
+	•	1888: Kodak introduced the first portable box camera in the West. Photography became easier and popular.
+	•	1900s: Cameras became smaller and used film rolls. This spread both in Western countries and India.
+	•	1990s: Digital cameras were invented — no film, just memory cards.
+	•	2000s: Mobile cameras started appearing.
+	•	2010s in India: DSLRs became affordable, and mobile photography exploded.
+	•	Now: Indians and people across the world use all kinds of cameras — from phones to drones — for weddings, travel, business, and fun!
 
-✅ Pros: Simple to use, always in your pocket, great for quick shots
-❌ Cons: Small sensor, not great in low light, limited manual control
-📊 Best For: Beginners, casual photography, social media
+📱 1. Mobile Camera
+	•	Found in smartphones.
+	•	Easy to carry and always with you.
+	•	Most people start photography with this.
+✅ Pros:
+	•	Simple to use
+	•	Always in your pocket
+	•	Great for quick shots and daily use
+❌ Cons:
+	•	Small sensor, not great in low light
+	•	Limited manual control
+📊 Best For:
+	•	Beginners, casual photography, social media
 
-**📸 2. DSLR Camera (Digital Single Lens Reflex)**
-• Big camera with a mirror inside
-• Used by professional photographers
+📸 2. DSLR Camera (Digital Single Lens Reflex)
+	•	Big camera with a mirror inside
+	•	Used by professional photographers
+✅ Pros:
+	•	Excellent photo quality
+	•	Manual control
+	•	Works well in low light
+	•	Changeable lenses
+❌ Cons:
+	•	Heavy and big
+	•	Expensive
+📊 Best For:
+	•	Portraits, weddings, studio work
 
-✅ Pros: Excellent photo quality, manual control, works well in low light, changeable lenses
-❌ Cons: Heavy and big, expensive
-📊 Best For: Portraits, weddings, studio work
+📷 3. Mirrorless Camera
+	•	Newer technology, no mirror inside
+	•	Lightweight with high quality
+✅ Pros:
+	•	Compact
+	•	Fast focus
+	•	Excellent image and video
+	•	Changeable lenses
+❌ Cons:
+	•	Battery life shorter
+	•	Slightly costly
+📊 Best For:
+	•	Travel, content creation, video/photo hybrid
 
-**📷 3. Mirrorless Camera**
-• Newer technology, no mirror inside
-• Lightweight with high quality
+🎞️ 4. Film Camera
+	•	Uses film rolls to capture images
+	•	Photos are developed later on paper
+✅ Pros:
+	•	Vintage style
+	•	High-quality detail and texture
+❌ Cons:
+	•	Film is costly and needs development
+	•	No preview
+📊 Best For:
+	•	Art, retro-style photography
 
-✅ Pros: Compact, fast focus, excellent image and video, changeable lenses
-❌ Cons: Battery life shorter, slightly costly
-📊 Best For: Travel, content creation, video/photo hybrid
+🖼️ 5. Instant Camera
+	•	Prints photos immediately (like Polaroid)
+✅ Pros:
+	•	Fun to use
+	•	Instant results
+❌ Cons:
+	•	Film is expensive
+	•	No editing
+📊 Best For:
+	•	Parties, memories, fun
 
-**🎞️ 4. Film Camera**
-• Uses film rolls to capture images
-• Photos are developed later on paper
+🎥 6. Action Camera (Like GoPro)
+	•	Small, tough, waterproof
+✅ Pros:
+	•	Durable
+	•	Great for action, sports, adventure
+❌ Cons:
+	•	Small screen
+	•	Not for portraits or pro work
+📊 Best For:
+	•	Travel, biking, underwater shots
 
-✅ Pros: Vintage style, high-quality detail and texture
-❌ Cons: Film is costly and needs development, no preview
-📊 Best For: Art, retro-style photography
+🚁 7. Drone Camera
+	•	Flies in air, captures aerial photos/videos
+✅ Pros:
+	•	Bird's eye view
+	•	Unique perspective
+❌ Cons:
+	•	Needs space
+	•	Battery limited
+📊 Best For:
+	•	Events, landscape, real estate, filmmaking
 
-**📌 Your mobile camera is more than enough to start!**''',
-        'estimatedDuration': 20,
+📷 8. Compact / Point-and-Shoot Camera
+	•	Small digital camera with fixed lens
+✅ Pros:
+	•	Easy to use
+	•	Pocket-friendly
+❌ Cons:
+	•	Less manual control
+	•	Lower quality than DSLR/Mirrorless
+📊 Best For:
+	•	Everyday snapshots, travel
+
+📊 Comparison Table (Simple Words)
+Camera Type
+Size
+Lens Type
+Quality
+Best For
+Mobile
+Very Small
+Fixed
+Good
+Daily use, social media
+DSLR
+Big
+Changeable
+Excellent
+Portraits, pro photography
+Mirrorless
+Medium
+Changeable
+Excellent
+Travel, video/photo hybrid
+Film
+Medium
+Changeable
+Vintage look
+Art, retro photography
+Instant
+Medium
+Fixed
+Basic
+Fun, prints on the spot
+Action
+Very Small
+Fixed
+Good
+Sports, action, travel
+Drone
+Small/Flying
+Fixed
+Great
+Aerial photos/videos
+Compact
+Small
+Fixed
+Basic-Good
+Travel, family photography
+
+🏠 Today’s Activity
+Take 3 mobile photos:
+	•	A person (portrait)
+	•	An object (cup, book)
+	•	Outdoor (tree, street)
+If you have other cameras, try the same shots and compare:
+	•	Quality
+	•	Focus
+	•	Brightness
+	•	Look and feel
+
+👍 Tips of the Day
+	•	Don’t worry about expensive gear
+	•	Learn what your camera can do
+	•	Use natural light
+	•	Keep your hand steady
+
+💬 Quote of the Day
+"The best camera is the one you have with you."
+Practice is more important than the gear.
+
+🧠 Words You Learned Today
+Word
+Meaning (Simple)
+DSLR
+Big camera with mirror and viewfinder
+Mirrorless
+Modern camera without mirror
+Film
+Old-style roll used for taking pictures
+Drone
+Flying camera for aerial shots
+Compact
+Small camera, easy to carry
+
+✅ Summary of Day 2
+	•	Cameras have a long history from the 1800s in France to modern India.
+	•	Photography developed in parallel across the world — from the West (France, UK, USA) to India where it gained early royal and cultural value.
+	•	Indian photographers like Lala Deen Dayal helped popularize photography.
+	•	Mobile, DSLR, and Mirrorless are most common today.
+	•	Others include: Film, Instant, Action, Drone, Compact.
+	•	Choose what suits your needs, not just trends.
+	•	Practice every day with whatever camera you have!
+	•	Cameras have a long history from the 1800s in France to modern India.
+	•	Indian photographers like Lala Deen Dayal helped popularize photography.
+	•	Mobile, DSLR, and Mirrorless are most common today.
+	•	Others include: Film, Instant, Action, Drone, Compact.
+	•	Choose what suits your needs, not just trends.
+	•	Practice every day with whatever camera you have!
+
+
+
+🌞''',
+        'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Equipment', 'Camera Types'],
-        'objectives': [
-          'Identify different types of cameras',
-          'Understand pros and cons of each camera type',
-          'Choose the right camera for your needs',
-          'Learn about camera evolution from film to digital',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_002_01',
-            'title': 'Camera Comparison Practice',
-            'description':
-                'Compare photo quality and features across different camera types',
-            'steps': [
-              'Take a photo of a person (portrait)',
-              'Take a photo of an object (cup, book)',
-              'Take a photo outdoors (tree, street)',
-              'If you have access to other cameras, try the same shots',
-              'Compare quality, focus, brightness, and look',
-            ],
-            'requirements': {
-              'camera': 'Mobile phone minimum, other cameras optional',
-              'subjects': 'Various subjects for comparison',
-              'time': '20 minutes',
-            },
-            'estimatedTime': 20,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Types of Cameras (Very Simple and Clear)'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'DSLR': 'Big camera with mirror and viewfinder',
-            'Mirrorless': 'Modern camera without mirror',
-            'Film': 'Old-style roll used for taking pictures',
-            'Drone': 'Flying camera for aerial shots',
-            'Compact': 'Small camera, easy to carry',
-          },
-          'quote': 'The best camera is the one you have with you.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 3: Understanding ISO
       {
         'id': 'lesson_003',
         'day': 3,
-        'title': 'Understanding ISO',
-        'subtitle': 'Your Camera\'s Sensitivity to Light',
-        'description':
-            'Learn how ISO controls light sensitivity and affects photo quality.',
-        'content': '''**📷 What is ISO?**
+        'title': 'Understanding ISO – Your Camera’s Sensitivity to Light',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Understanding ISO – Your Camera’s Sensitivity to Light',
+        'content': '''Day 3: Understanding ISO – Your Camera’s Sensitivity to Light
 
-ISO is your camera's **sensitivity to light**.
+🌟 What You Will Learn Today:
+	•	What is ISO in photography?
+	•	Why is ISO important?
+	•	How ISO affects light and photo quality
+	•	ISO in mobile vs DSLR vs Mirrorless
+	•	How ISO works with Shutter Speed and Aperture
+	•	ISO in video shooting
+	•	Simple examples with visual imagination
+	•	Indian + World use cases
+	•	Activity and daily tips
+	•	Summary and vocabulary
 
-• A **low ISO** (like 100) means **less sensitive** to light
-• A **high ISO** (like 3200) means **more sensitive** to light
-
+📷 What is ISO?
+ISO is your camera's sensitivity to light.
+	•	A low ISO (like 100) means less sensitive to light.
+	•	A high ISO (like 3200) means more sensitive to light.
 👉 Think of ISO like your eyes:
-• In bright sunlight ☀️, you don't need to squint (ISO 100)
-• At night 🌙, your eyes try hard to see (ISO 1600+)
+	•	In bright sunlight ☀️, you don’t need to squint (ISO 100).
+	•	At night 🌙, your eyes try hard to see (ISO 1600+).
 
-**🔍 Why is ISO Important?**
+🔍 Why is ISO Important?
+ISO helps control how bright or dark your photo looks — especially when light is low.
+	•	You increase ISO when it's too dark.
+	•	You keep ISO low when it’s bright or sunny.
+But there’s a catch: 📸 Higher ISO = More Brightness but More Grain (Noise)
 
-ISO helps control **how bright or dark your photo looks** --- especially when light is low.
+🔁 ISO + Shutter Speed + Aperture
+These three settings are called the Exposure Triangle:
+	•	ISO: Light sensitivity
+	•	Shutter Speed: How fast the photo is taken
+	•	Aperture: How wide the lens opens
+Changing one affects the others. For example:
+	•	If it’s dark, you can increase ISO OR use slower shutter speed OR open aperture wider.
+	•	Best results come when you balance all three.
 
-• You increase ISO when it's **too dark**
-• You keep ISO low when it's **bright or sunny**
+🌄 ISO Values (Simple Chart)
+ISO Value
+Light Situation
+Result
+100-200
+Sunny daylight
+Sharp and clean photo
+400-800
+Cloudy, indoors
+Bright enough, little noise
+1600-3200
+Evening, low light
+Bright photo, visible noise
+6400+
+Very dark/nighttime
+Very grainy, low quality image
 
-But there's a catch:
-📸 **Higher ISO = More Brightness but More Grain (Noise)**
+📱 ISO on Mobile vs DSLR vs Mirrorless
+	•	📱 Mobile: ISO is automatic, but some phones allow manual ISO (Pro mode).
+	•	📸 DSLR & Mirrorless: Full control. You can manually set ISO from 100 to 12800 or more.
+Mobile phones today use AI to reduce noise at high ISO. Still, DSLRs give cleaner results.
 
-**🌄 ISO Values (Simple Chart)**
+🎬 ISO in Video
+	•	In video shooting, ISO affects the brightness of your video.
+	•	Most videographers keep ISO as low as possible and use lighting to control exposure.
+	•	Too much ISO in video = grainy, soft look
+In India, many wedding cinematographers use ISO 800–3200 during receptions or nighttime.
 
-| ISO Value | Light Situation | Result |
-|-----------|----------------|---------|
-| 100-200 | Sunny daylight | Sharp and clean photo |
-| 400-800 | Cloudy, indoors | Bright enough, little noise |
-| 1600-3200 | Evening, low light | Bright photo, visible noise |
-| 6400+ | Very dark/nighttime | Very grainy, low quality image |
+🇮🇳📸 Indian & Global Use
+	•	In Indian weddings, photographers raise ISO for low-light temples or halls.
+	•	In night festivals (like Diwali), ISO helps capture bright lights in dark areas.
+	•	Wildlife photographers often shoot early morning or late evening — high ISO is common.
+	•	In the West, ISO is used widely in concerts, street photography, and sports events at night.
 
-**📱 ISO on Mobile vs DSLR vs Mirrorless**
+🏠 Today’s Activity
+Take 3 photos using your mobile camera or DSLR (manual mode):
+	•	In sunlight – set ISO low (like 100)
+	•	Indoors – increase ISO (around 800)
+	•	In dim light/night – try higher ISO (1600+ if possible)
+🔍 Compare:
+	•	Which one is clean?
+	•	Which one is grainy?
+	•	What happens to brightness?
+Try the same scene with different ISO values and notice the changes.
 
-• 📱 **Mobile**: ISO is automatic, but some phones allow manual ISO (Pro mode)
-• 📸 **DSLR & Mirrorless**: Full control. You can manually set ISO from 100 to 12800 or more
+👍 Tips of the Day
+	•	Keep ISO as low as possible for clean photos
+	•	Only increase when there’s not enough light
+	•	Learn how ISO, Shutter Speed, and Aperture work together
+	•	Use a tripod in low light to avoid raising ISO too high
 
-Mobile phones today use **AI to reduce noise** at high ISO. Still, DSLRs give **cleaner results**.
+💬 Quote of the Day
+"A noisy photo is better than a blurry one."
+Sometimes, using high ISO is okay to save the moment.
 
-**🇮🇳📸 Indian & Global Use**
+🧠 Words You Learned Today
+Word
+Meaning (Simple)
+ISO
+Camera's sensitivity to light
+Noise
+Grain or dots in photo when ISO is high
+Manual Mode
+You control all camera settings yourself
+Exposure
+How bright or dark the photo is
+Sensor
+Part of the camera that catches the image
+Triangle
+ISO + Shutter Speed + Aperture
 
-• In **Indian weddings**, photographers raise ISO for low-light temples or halls
-• In **night festivals (like Diwali)**, ISO helps capture bright lights in dark areas
-• **Wildlife photographers** often shoot early morning or late evening --- high ISO is common''',
-        'estimatedDuration': 25,
+✅ Summary of Day 3
+	•	ISO controls how sensitive your camera is to light
+	•	Lower ISO = clean, but needs more light
+	•	Higher ISO = brighter, but more grainy
+	•	ISO is part of the Exposure Triangle
+	•	Learn to balance ISO with other settings
+	•	ISO works in photos and videos
+	•	Practice in different light situations today!
+
+
+🌼''',
+        'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Technical Settings', 'Exposure', 'Light'],
-        'objectives': [
-          'Understand what ISO means and how it works',
-          'Learn when to use high vs low ISO',
-          'Recognize the trade-off between brightness and noise',
-          'Practice ISO settings in different lighting conditions',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_003_01',
-            'title': 'ISO Experiment',
-            'description':
-                'Practice using different ISO settings in various lighting conditions',
-            'steps': [
-              'Take a photo in sunlight with ISO 100',
-              'Take a photo indoors with ISO 800',
-              'Take a photo in dim light with ISO 1600+',
-              'Compare the brightness and grain in each photo',
-              'Try the same scene with different ISO values',
-            ],
-            'requirements': {
-              'camera': 'Mobile with manual mode or DSLR',
-              'lighting': 'Various lighting conditions',
-              'time': '30 minutes',
-            },
-            'estimatedTime': 30,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Understanding ISO – Your Camera’s Sensitivity to Light'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'ISO': 'Camera\'s sensitivity to light',
-            'Noise': 'Grain or dots in photo when ISO is high',
-            'Manual Mode': 'You control all camera settings yourself',
-            'Exposure': 'How bright or dark the photo is',
-            'Sensor': 'Part of the camera that catches the image',
-          },
-          'quote': 'A noisy photo is better than a blurry one.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 4: Aperture
       {
         'id': 'lesson_004',
         'day': 4,
-        'title': 'Aperture',
-        'subtitle': 'The Eye of Your Camera',
-        'description':
-            'Learn how aperture controls light and depth of field in your photos.',
-        'content': '''**👁️ What is Aperture?**
+        'title': 'Aperture – The Eye of Your Camera',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Aperture – The Eye of Your Camera',
+        'content': '''Day 4: Aperture – The Eye of Your Camera
 
-**Aperture** is the opening inside your lens that lets light into the camera.
+🌟 What You Will Learn Today:
+	•	What is aperture in photography?
+	•	How aperture affects light and depth
+	•	What is f-number or f-stop?
+	•	How aperture affects background blur
+	•	Simple comparison examples
+	•	Use in Indian and global photography
+	•	Daily activity, tips, vocabulary, summary
 
-👉 Think of it like your eye's pupil:
-• In bright light ☀️ your pupil gets small (small aperture)
-• In darkness 🌙 your pupil opens wide (big aperture)
+👁️ What is Aperture?
+Aperture is the opening inside your lens that lets light into the camera.
+👉 Think of it like your eye’s pupil:
+	•	In bright light ☀️ your pupil gets small (small aperture)
+	•	In darkness 🌙 your pupil opens wide (big aperture)
+Aperture is measured in f-numbers like:
+	•	f/1.8 – big opening, lets in more light
+	•	f/16 – small opening, lets in less light
 
-Aperture is measured in **f-numbers** like:
-• **f/1.8** -- big opening, lets in more light
-• **f/16** -- small opening, lets in less light
-
-**🔢 Understanding f-Number (f-Stop)**
-
+🔢 Understanding f-Number (f-Stop)
 This can feel confusing at first:
-• **Smaller f-number = Bigger opening = More light**
-• **Larger f-number = Smaller opening = Less light**
+	•	Smaller f-number = Bigger opening = More light
+	•	Larger f-number = Smaller opening = Less light
+f-number
+Opening Size
+Light
+Blur (Background)
+f/1.4
+Very big
+High
+Very blurry
+f/2.8
+Big
+Medium
+Blurry
+f/8
+Medium-small
+Low
+Little blur
+f/16
+Very small
+Very Low
+Sharp background
 
-| f-number | Opening Size | Light | Blur (Background) |
-|----------|--------------|-------|-------------------|
-| f/1.4 | Very big | High | Very blurry |
-| f/2.8 | Big | Medium | Blurry |
-| f/8 | Medium-small | Low | Little blur |
-| f/16 | Very small | Very Low | Sharp background |
+🎨 How Aperture Affects Photos
+1. Brightness
+	•	Bigger aperture (f/1.8) = brighter photo
+	•	Smaller aperture (f/16) = darker photo
+2. Depth of Field (DOF)
+	•	Shallow DOF (f/1.8): Subject is clear, background is blurry
+	•	Deep DOF (f/16): Everything from front to back is clear
 
-**🎨 How Aperture Affects Photos**
+📸 Real Life Examples
+	•	📱 Mobile Portrait Mode simulates wide aperture (f/2.0) for blur
+	•	📷 DSLR with f/1.8 lens: Great for portraits with creamy background
+	•	🌄 Landscape photography: Uses f/11 or f/16 for sharp details
 
-**1. Brightness**
-• Bigger aperture (f/1.8) = brighter photo
-• Smaller aperture (f/16) = darker photo
+🇮🇳 Use in India + World
+	•	Indian Weddings: Photographers often use wide aperture (f/2.8) to blur background during couple portraits
+	•	Street Photography: Uses f/4 to f/8 to keep more in focus
+	•	Global Portraits: f/1.4 to f/2.8 is popular for face shots
+	•	Architecture/Temples: f/8 to f/11 keeps structures sharp
 
-**2. Depth of Field (DOF)**
-• **Shallow DOF** (f/1.8): Subject is clear, background is blurry
-• **Deep DOF** (f/16): Everything from front to back is clear
+🏠 Today’s Activity
+Use Pro Mode (manual) on your camera or app:
+	•	Take a photo with lowest f-number your camera allows (e.g., f/2.0)
+	•	Take the same photo with a high f-number (e.g., f/11)
+📊 Compare:
+	•	Brightness
+	•	Background
+	•	Sharpness
+If you use a mobile, try Portrait vs Normal photo modes and observe the background.
 
-**📸 Real Life Examples**
+👍 Tips of the Day
+	•	Wide aperture = brighter photo + more blur
+	•	Small aperture = less light but sharper background
+	•	Aperture affects both light and depth
+	•	Always use a tripod for high f-number in low light
 
-• 📱 **Mobile Portrait Mode** simulates wide aperture (f/2.0) for blur
-• 📷 **DSLR with f/1.8 lens**: Great for portraits with creamy background
-• 🌄 **Landscape photography**: Uses f/11 or f/16 for sharp details
+💬 Quote of the Day
+"Blur in the background brings focus to the story in the front."
 
-**🇮🇳 Use in India + World**
+🧠 Words You Learned Today
+Word
+Meaning (Simple)
+Aperture
+Opening inside the lens
+f-number
+Size of the lens opening
+Depth of Field
+How much of the photo is in focus
+Background Blur
+Soft look behind the subject
+Portrait Mode
+Phone setting that gives blurred background
 
-• **Indian Weddings**: Photographers often use wide aperture (f/2.8) to blur background during couple portraits
-• **Street Photography**: Uses f/4 to f/8 to keep more in focus
-• **Architecture/Temples**: f/8 to f/11 keeps structures sharp''',
+✅ Summary of Day 4
+	•	Aperture controls how much light enters your camera
+	•	Measured in f-numbers like f/1.8, f/5.6, f/16
+	•	Affects brightness and background blur
+	•	Used creatively in portraits, landscapes, weddings
+	•	Practice today with wide and narrow apertures!
+  🏃‍♂️''',
         'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Technical Settings', 'Exposure', 'Depth of Field'],
-        'objectives': [
-          'Understand what aperture is and how it works',
-          'Learn the relationship between f-numbers and opening size',
-          'Master depth of field control',
-          'Practice creative background blur techniques',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_004_01',
-            'title': 'Aperture Practice',
-            'description':
-                'Experiment with different aperture settings to understand depth of field',
-            'steps': [
-              'Take a photo with the lowest f-number your camera allows (e.g., f/2.0)',
-              'Take the same photo with a high f-number (e.g., f/11)',
-              'Compare brightness and background blur',
-              'If using mobile, try Portrait vs Normal photo modes',
-              'Observe how the background changes in each shot',
-            ],
-            'requirements': {
-              'camera':
-                  'Camera with manual aperture control or mobile with portrait mode',
-              'subject': 'Person or object with background',
-              'time': '25 minutes',
-            },
-            'estimatedTime': 25,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Aperture – The Eye of Your Camera'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Aperture': 'Opening inside the lens',
-            'f-number': 'Size of the lens opening',
-            'Depth of Field': 'How much of the photo is in focus',
-            'Background Blur': 'Soft look behind the subject',
-            'Portrait Mode': 'Phone setting that gives blurred background',
-          },
-          'quote':
-              'Blur in the background brings focus to the story in the front.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 5: Shutter Speed
       {
         'id': 'lesson_005',
         'day': 5,
-        'title': 'Shutter Speed',
-        'subtitle': 'Freezing and Showing Motion',
-        'description':
-            'Learn how shutter speed controls motion and creates dynamic effects in photography.',
-        'content': '''**📸 What is Shutter Speed?**
+        'title': 'Shutter Speed – Freezing and Showing Motion',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Shutter Speed – Freezing and Showing Motion',
+        'content': '''Day 5: Shutter Speed – Freezing and Showing Motion
 
-**Shutter speed** means **how fast or slow** your camera takes a photo.
+🌟 What You Will Learn Today:
+	•	What is shutter speed?
+	•	Fast vs slow shutter speed
+	•	How it affects motion and brightness
+	•	What is motion blur and when to use it
+	•	How shutter speed connects with ISO and aperture
+	•	Shutter speed in mobile vs DSLR
+	•	Indian + global real use cases
+	•	Tips, activity, vocabulary, and summary
 
-👉 Imagine your camera's shutter like an **eyelid**:
-• Blink quickly = freezes moment (fast shutter)
-• Blink slowly = captures movement (slow shutter)
-
-It's measured in seconds or fractions:
-• **1/1000 sec** = very fast
-• **1/30 sec** = slower  
-• **1 sec or more** = very slow
-
+📸 What is Shutter Speed?
+Shutter speed means how fast or slow your camera takes a photo.
+👉 Imagine your camera’s shutter like an eyelid:
+	•	Blink quickly = freezes moment (fast shutter)
+	•	Blink slowly = captures movement (slow shutter)
+It’s measured in seconds or fractions:
+	•	1/1000 sec = very fast
+	•	1/30 sec = slower
+	•	1 sec or more = very slow
 ⏱️ Common Shutter Speeds:
-• 1/4000 (very fast)
-• 1/500
-• 1/125
-• 1/30
-• 1 sec
-• 5 sec
-• 30 sec (long exposure)
+	•	1/4000 (very fast)
+	•	1/500
+	•	1/125
+	•	1/30
+	•	1 sec
+	•	5 sec
+	•	30 sec (long exposure)
 
-**⚡ Fast Shutter Speed**
-
-• Example: 1/1000 or 1/500 second
-• Freezes fast actions: sports, birds, dancing
-
+⚡ Fast Shutter Speed
+	•	Example: 1/1000 or 1/500 second
+	•	Freezes fast actions: sports, birds, dancing
 📸 Used in:
-• Indian weddings: dancing shots
-• Wildlife and street photos
-• Kids playing, splashing water
-• Sports like cricket, football
-
+	•	Indian weddings: dancing shots
+	•	Wildlife and street photos
+	•	Kids playing, splashing water
+	•	Sports like cricket, football
 ✅ Best in good light or daylight
 
-**🐢 Slow Shutter Speed**
-
-• Example: 1/10 sec, 1 sec, 5 sec
-• Shows motion blur: car lights, waterfalls, people moving
-
+🐢 Slow Shutter Speed
+	•	Example: 1/10 sec, 1 sec, 5 sec
+	•	Shows motion blur: car lights, waterfalls, people moving
 📸 Used in:
-• Light trails during Diwali, Christmas, or New Year
-• Waterfalls in hills (like Himachal, Kerala)
-• Holi celebrations with color flying
-• Fire dance in village fairs
+	•	Light trails during Diwali, Christmas, or New Year
+	•	Waterfalls in hills (like Himachal, Kerala)
+	•	Holi celebrations with color flying
+	•	Fire dance in village fairs
+📌 Use a tripod or stable surface to avoid blurry photos with slow shutter.
 
-📌 Use a **tripod or stable surface** to avoid blurry photos with slow shutter.
+💡 Shutter Speed and Light
+	•	Fast shutter = less light enters = darker image
+	•	Slow shutter = more light enters = brighter image
+You must adjust ISO and Aperture to keep the photo well-lit.
+📷 Example:
+	•	f/2.8 + ISO 800 + 1/1000 = bright and sharp action shot
+	•	f/8 + ISO 100 + 1 sec = dark unless scene has lights
 
-**💡 Shutter Speed and Light**
+🔁 Shutter + ISO + Aperture = Exposure Triangle
+These three control how your photo looks:
+	•	ISO = sensitivity to light
+	•	Aperture = how wide the lens opens
+	•	Shutter Speed = how long the light hits the sensor
+👉 Change one, you must balance the others.
 
-• **Fast shutter** = less light enters = darker image
-• **Slow shutter** = more light enters = brighter image
+📱 Mobile vs DSLR vs Mirrorless
+	•	📱 Mobile: Some phones allow Pro Mode. Use apps like Lightroom, Open Camera.
+	•	📸 DSLR/Mirrorless: Full manual control, easier to use for motion and long exposures.
+⚠️ Mobile slow shutter often simulates effects with software — not always true blur.
 
-You must adjust **ISO and Aperture** to keep the photo well-lit.
+🗺️ Indian & Global Examples
+	•	🇮🇳 India:
+	•	Wedding photographers use both fast and slow speeds
+	•	Monsoon: capturing water splashes (fast) or rain trails (slow)
+	•	Devotional events like Aarti or festivals with fire/dance
+	•	🌍 Global:
+	•	Light trails in cities like Tokyo, New York
+	•	Northern lights in long exposures (5+ sec)
+	•	Sports and action shots in Olympics, football matches
 
-**🗺️ Indian & Global Examples**
+🏠 Today’s Activity
+Use your camera or mobile (Pro Mode):
+	•	Take a photo of something moving fast (bike, fan, person walking)
+	•	Use fast shutter (1/1000) and again slow shutter (1/10 or 1 sec)
+🔍 Compare:
+	•	Which one is sharp?
+	•	Which one has blur?
+	•	Which one tells a better story?
+Bonus: Try night shot with light trails — cars, candles, sparklers.
 
-• 🇮🇳 **India**:
-  - Wedding photographers use both fast and slow speeds
-  - Monsoon: capturing water splashes (fast) or rain trails (slow)
-  - Devotional events like Aarti or festivals with fire/dance
+👍 Tips of the Day
+	•	Use fast shutter in bright light or to freeze action
+	•	Use slow shutter with tripod for night or motion shots
+	•	Learn to adjust ISO and Aperture to balance light
+	•	Don’t shake the camera at slow shutter speeds
+	•	Try creative blur to show energy or motion
 
-• 🌍 **Global**:
-  - Light trails in cities like Tokyo, New York
-  - Northern lights in long exposures (5+ sec)
-  - Sports and action shots in Olympics, football matches''',
+💬 Quote of the Day
+“Sometimes blur tells a better story than clarity.”
+Blur shows movement, emotion, and atmosphere.
+
+🧠 Words You Learned Today
+Word
+Meaning (Simple)
+Shutter Speed
+How fast your camera takes the photo
+Motion Blur
+Soft lines or movement in photo
+Fast Shutter
+Freezes motion
+Slow Shutter
+Shows movement
+Tripod
+Stand to keep the camera steady
+Long Exposure
+Very slow shutter photo (1 sec or more)
+Light Trails
+Streaks of moving lights (cars, candles)
+
+✅ Summary of Day 5
+	•	Shutter speed controls motion and light in a photo
+	•	Fast shutter freezes action (sports, dancing, splashes)
+	•	Slow shutter shows motion (light trails, festivals, waterfalls)
+	•	Works with ISO and Aperture in the Exposure Triangle
+	•	Try both styles today and compare the results!
+
+
+📐''',
         'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Technical Settings', 'Motion', 'Creative Effects'],
-        'objectives': [
-          'Understand how shutter speed affects motion',
-          'Learn to freeze action with fast shutter speeds',
-          'Create motion blur effects with slow shutter speeds',
-          'Master the relationship between shutter speed and light',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_005_01',
-            'title': 'Motion Control Practice',
-            'description':
-                'Experiment with different shutter speeds to control motion in your photos',
-            'steps': [
-              'Find something moving (person walking, fan, bike)',
-              'Take a photo with fast shutter (1/1000) to freeze motion',
-              'Take the same subject with slow shutter (1/10 or 1 sec)',
-              'Compare which one is sharp vs which has motion blur',
-              'Try night shots with light trails from cars or candles',
-            ],
-            'requirements': {
-              'camera': 'Camera with manual shutter control',
-              'subjects': 'Moving objects or people',
-              'support': 'Tripod or stable surface for slow shutter',
-              'time': '35 minutes',
-            },
-            'estimatedTime': 35,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Shutter Speed – Freezing and Showing Motion'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Shutter Speed': 'How fast your camera takes the photo',
-            'Motion Blur': 'Soft lines or movement in photo',
-            'Fast Shutter': 'Freezes motion',
-            'Slow Shutter': 'Shows movement',
-            'Tripod': 'Stand to keep the camera steady',
-            'Long Exposure': 'Very slow shutter photo (1 sec or more)',
-            'Light Trails': 'Streaks of moving lights (cars, candles)',
-          },
-          'quote': 'Sometimes blur tells a better story than clarity.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 6: The Exposure Triangle
       {
         'id': 'lesson_006',
         'day': 6,
-        'title': 'The Exposure Triangle',
-        'subtitle': 'Balancing Light in Photography',
-        'description':
-            'Master the relationship between ISO, Aperture, and Shutter Speed for perfect exposure.',
-        'content': '''**🔺 What is the Exposure Triangle?**
+        'title': 'The Exposure Triangle – Balancing Light in Photography',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about The Exposure Triangle – Balancing Light in Photography',
+        'content': '''Day 6: The Exposure Triangle – Balancing Light in Photography
 
-The **Exposure Triangle** is made of three main settings that control how your photo looks:
+🌟 What You Will Learn Today:
+	•	What is the Exposure Triangle?
+	•	Role of ISO, Aperture, and Shutter Speed
+	•	How to balance light using all three
+	•	Common exposure problems and fixes
+	•	Real examples from Indian & global photography
+	•	Beginner-friendly combinations
+	•	Exposure in video shooting
+	•	Practical activity, tips, vocabulary, summary
 
-1. **ISO** -- Light sensitivity
-2. **Aperture** -- Size of lens opening (f-number)  
-3. **Shutter Speed** -- How long light hits the camera sensor
+🔺 What is the Exposure Triangle?
+The Exposure Triangle is made of three main settings that control how your photo looks:
+	•	ISO – Light sensitivity
+	•	Aperture – Size of lens opening (f-number)
+	•	Shutter Speed – How long light hits the camera sensor
+Each one affects exposure (how bright/dark your photo is).
+📸 Perfect photo = Proper balance of all three
 
-Each one affects **exposure** (how bright/dark your photo is).
+🧠 How Each Part Works
+Setting
+What it Does
+Affects
+ISO
+Sensitivity to light
+Brightness & noise
+Aperture (f/)
+Size of lens opening
+Brightness & blur
+Shutter Speed
+Time light is captured
+Brightness & motion
 
-📸 **Perfect photo = Proper balance of all three**
+⚖️ Balance Examples:
+	•	Bright day photo:
+	•	ISO 100
+	•	f/11
+	•	Shutter 1/1000 sec
+	•	Indoor low light:
+	•	ISO 800
+	•	f/2.8
+	•	Shutter 1/60 sec
+	•	Creative motion photo (light trails):
+	•	ISO 100
+	•	f/8
+	•	Shutter 5 sec
+	•	Portrait with background blur:
+	•	ISO 200
+	•	f/1.8
+	•	Shutter 1/500 sec
 
-**🧠 How Each Part Works**
+🚦 What Happens if You Don’t Balance?
+	•	Too much light = Overexposed (photo is too bright, no detail)
+	•	Too little light = Underexposed (photo is too dark, no clarity)
+	•	Wrong combo = blur, grainy images, or harsh shadows
+✅ Always check your exposure meter in camera. It helps guide you to neutral (0).
+📷 Tip: Slight underexposure is better than overexposure—you can fix it later.
 
-| Setting | What it Does | Affects |
-|---------|-------------|---------|
-| ISO | Sensitivity to light | Brightness & noise |
-| Aperture (f/) | Size of lens opening | Brightness & blur |
-| Shutter Speed | Time light is captured | Brightness & motion |
-
-**⚖️ Balance Examples:**
-
-1. **Bright day photo**:
-   • ISO 100
-   • f/11  
-   • Shutter 1/1000 sec
-
-2. **Indoor low light**:
-   • ISO 800
-   • f/2.8
-   • Shutter 1/60 sec
-
-3. **Creative motion photo (light trails)**:
-   • ISO 100
-   • f/8
-   • Shutter 5 sec
-
-4. **Portrait with background blur**:
-   • ISO 200
-   • f/1.8
-   • Shutter 1/500 sec
-
-**🚦 What Happens if You Don't Balance?**
-
-• Too much light = **Overexposed** (photo is too bright, no detail)
-• Too little light = **Underexposed** (photo is too dark, no clarity)
-• Wrong combo = blur, grainy images, or harsh shadows
-
-✅ Always check your **exposure meter** in camera. It helps guide you to neutral (0).
-
-**🎥 Exposure Triangle in Video**
-
+🎥 Exposure Triangle in Video
 Just like photos, exposure triangle applies to video:
-• ISO = brightness
-• Aperture = depth + brightness  
-• Shutter speed = motion smoothness
+	•	ISO = brightness
+	•	Aperture = depth + brightness
+	•	Shutter speed = motion smoothness
+🎬 Common video rule: Shutter Speed = 2x Frame Rate
+	•	If filming at 30fps → shutter = 1/60 sec
+Video shooters use ND filters in daylight to keep aperture low.
 
-🎬 Common video rule: **Shutter Speed = 2x Frame Rate**
-• If filming at 30fps → shutter = 1/60 sec
+🇮🇳 Indian + Global Use Examples
+	•	Indian temples (dim light): ISO 1600, f/2.8, 1/60 sec
+	•	Outdoor dance (bright sun): ISO 100, f/4, 1/2000 sec
+	•	Global city lights: Long exposure with tripod – ISO 100, f/11, 10 sec
+	•	Wedding portraits: Soft blur with wide aperture and low ISO
+	•	Festivals (India): Capture bright scenes with balanced settings
 
-**🇮🇳 Indian + Global Use Examples**
+🏠 Today’s Activity
+Take 3 photos of the same subject using different exposure combinations:
+	•	High ISO, low shutter speed (ISO 1600 / f/5.6 / 1/20)
+	•	Wide aperture, medium ISO (ISO 400 / f/1.8 / 1/200)
+	•	Fully balanced setup (your best guess)
+📊 Compare:
+	•	Which is too bright?
+	•	Which is too dark?
+	•	Which has better blur/background?
+If possible, try a video in both indoor and outdoor light.
 
-• **Indian temples** (dim light): ISO 1600, f/2.8, 1/60 sec
-• **Outdoor dance** (bright sun): ISO 100, f/4, 1/2000 sec
-• **Global city lights**: Long exposure with tripod -- ISO 100, f/11, 10 sec
-• **Wedding portraits**: Soft blur with wide aperture and low ISO''',
-        'estimatedDuration': 35,
+👍 Tips of the Day
+	•	Start with Aperture Priority Mode to learn easier
+	•	Keep ISO low if there's enough light
+	•	Use wide aperture to let in more light in dim scenes
+	•	Use tripod for long shutter speeds
+	•	Practice different lighting setups daily
+	•	Don’t fear mistakes—they teach exposure faster than theory!
+
+💬 Quote of the Day
+"A good photo is not just light – it's balanced light."
+
+🧠 Words You Learned Today
+Word
+Meaning (Simple)
+Exposure
+How bright or dark a photo is
+Overexposed
+Too bright photo
+Underexposed
+Too dark photo
+Exposure Meter
+Shows if photo is correctly exposed
+Balance
+Keeping ISO, aperture, shutter in harmony
+ND Filter
+Reduces light entering lens (for video)
+
+✅ Summary of Day 6
+	•	Exposure Triangle = ISO + Aperture + Shutter Speed
+	•	All three affect light in your photo
+	•	Balance them to control brightness, motion, and blur
+	•	Same rules apply to photos and video
+	•	Practice is the best way to master exposure''',
+        'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Technical Settings', 'Exposure', 'Balance'],
-        'objectives': [
-          'Understand the relationship between ISO, Aperture, and Shutter Speed',
-          'Learn to balance exposure settings for different scenarios',
-          'Recognize overexposed and underexposed photos',
-          'Apply exposure triangle principles to both photo and video',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_006_01',
-            'title': 'Exposure Triangle Practice',
-            'description':
-                'Practice balancing the three exposure settings in different lighting conditions',
-            'steps': [
-              'Take a photo with high ISO, low shutter speed (ISO 1600 / f/5.6 / 1/20)',
-              'Take the same subject with wide aperture, medium ISO (ISO 400 / f/1.8 / 1/200)',
-              'Create a fully balanced setup for the same scene',
-              'Compare which is too bright, too dark, or has better blur',
-              'Try filming a short video using the 2x frame rate rule',
-            ],
-            'requirements': {
-              'camera': 'Manual camera controls',
-              'subjects': 'Various lighting scenarios',
-              'time': '40 minutes',
-            },
-            'estimatedTime': 40,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand The Exposure Triangle – Balancing Light in Photography'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Exposure': 'How bright or dark a photo is',
-            'Overexposed': 'Too bright photo',
-            'Underexposed': 'Too dark photo',
-            'Exposure Meter': 'Shows if photo is correctly exposed',
-            'Balance': 'Keeping ISO, aperture, shutter in harmony',
-            'ND Filter': 'Reduces light entering lens (for video)',
-          },
-          'quote': 'A good photo is not just light -- it\'s balanced light.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 7: White Balance
       {
         'id': 'lesson_007',
         'day': 7,
-        'title': 'White Balance',
-        'subtitle': 'Getting Natural Colors in Your Photos',
-        'description':
-            'Learn how to correct colors and use white balance creatively in different lighting conditions.',
-        'content': '''**🌈 What is White Balance?**
+        'title': 'Practice Day – Manual Mode Practice (Even Mobile)',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Practice Day – Manual Mode Practice (Even Mobile)',
+        'content': '''Day 7: Practice Day – Manual Mode Practice (Even Mobile)
 
-White Balance (WB) helps make **colors look natural** in a photo.
+🌟 What You Will Learn Today:
+	•	What is white balance in photography?
+	•	Why color temperature matters
+	•	Types of white balance settings
+	•	How to use white balance in camera and mobile
+	•	Using WB creatively
+	•	Indian & global use cases
+	•	Tips, activity, vocabulary, and summary
 
-Different light sources have different **color temperatures**:
-• A candle gives a warm orange light 🔥
-• Tube lights give cool blue light ❄️
-
+🌈 What is White Balance?
+White Balance (WB) helps make colors look natural in a photo.
+Different light sources have different color temperatures:
+	•	A candle gives a warm orange light 🔥
+	•	Tube lights give cool blue light ❄️
 Without white balance, your photo might look too yellow or too blue.
-
 📷 WB adjusts the camera to match the color of light.
 
-**🌡️ Color Temperature Basics**
+🌡️ Color Temperature Basics
+Color is measured in Kelvin (K):
+Light Source
+Color Temp (Kelvin)
+Color Tone
+Candle Light
+1000-2000K
+Very Warm
+Tungsten Bulb
+2500-3200K
+Warm
+Sunrise/Sunset
+3000-4000K
+Golden
+Daylight
+5000-5500K
+Neutral
+Cloudy Sky
+6000-7000K
+Cool
+Shade/Overcast
+7000-9000K
+Very Cool
+🎨 Cooler color = more blue 🔥 Warmer color = more orange
 
-Color is measured in **Kelvin (K)**:
-
-| Light Source | Color Temp (Kelvin) | Color Tone |
-|--------------|-------------------|------------|
-| Candle Light | 1000-2000K | Very Warm |
-| Tungsten Bulb | 2500-3200K | Warm |
-| Sunrise/Sunset | 3000-4000K | Golden |
-| Daylight | 5000-5500K | Neutral |
-| Cloudy Sky | 6000-7000K | Cool |
-| Shade/Overcast | 7000-9000K | Very Cool |
-
-🎨 Cooler color = more blue
-🔥 Warmer color = more orange
-
-**⚙️ Common White Balance Modes**
-
+⚙️ Common White Balance Modes
 Most cameras and phones offer these WB presets:
-• **Auto WB (AWB)**: Let camera decide
-• **Daylight** ☀️: Use in sunlight
-• **Cloudy** ☁️: Adds warmth  
-• **Tungsten/Incandescent** 💡: Reduces yellow indoor light
-• **Fluorescent**: Fixes blue-green tones
-• **Shade**: Warms up cool shadow light
-• **Custom / Kelvin**: You set exact color temperature
-
+	•	Auto WB (AWB): Let camera decide
+	•	Daylight ☀️: Use in sunlight
+	•	Cloudy ☁️: Adds warmth
+	•	Tungsten/Incandescent 💡: Reduces yellow indoor light
+	•	Fluorescent: Fixes blue-green tones
+	•	Shade: Warms up cool shadow light
+	•	Custom / Kelvin: You set exact color temperature
 📌 Tip: Try each setting to understand the change it makes.
 
-**📱 White Balance in Mobile and DSLR**
-
-• 📱 On phones: Use apps like Lightroom or Pro Mode for WB
-• 📷 DSLRs: You can set WB manually or even choose Kelvin value (advanced)
-• 🎥 Video: Set white balance manually to keep color consistent in clips
-
+📱 White Balance in Mobile and DSLR
+	•	📱 On phones: Use apps like Lightroom or Pro Mode for WB
+	•	📷 DSLRs: You can set WB manually or even choose Kelvin value (advanced)
+	•	🎥 Video: Set white balance manually to keep color consistent in clips
 📸 RAW format allows you to fix white balance easily in editing
 
-**🧠 Creative Use of White Balance**
-
-White balance isn't just correction -- it's also **creativity**:
-
+🧠 Creative Use of White Balance
+White balance isn’t just correction – it’s also creativity:
 🎨 You can use incorrect WB for creative effects:
-• **Cool tone** for a night or sad mood
-• **Warm tone** for happy or vintage scenes
+	•	Cool tone for a night or sad mood
+	•	Warm tone for happy or vintage scenes
+📸 Many fashion photographers use warmer WB for golden glow.
 
-📸 Many fashion photographers use **warmer WB** for golden glow.
+🇮🇳 Indian + Global Photography Use
+	•	Indian weddings: Often use warm lights → set to Tungsten or Kelvin ~3200K
+	•	Outdoor shoots in golden hour: Daylight WB gives best colors
+	•	Fashion shoots with mixed lighting: Use Custom WB or shoot RAW
+	•	Global travel photos: Adjust WB depending on country lighting (snow = cool, deserts = warm)
+	•	Night photography: Manual WB avoids strange color shifts from street lamps
 
-**🇮🇳 Indian + Global Photography Use**
+🏠 Today’s Activity
+Try taking the same photo in 5 different White Balance modes:
+	•	Auto WB
+	•	Daylight
+	•	Tungsten
+	•	Cloudy
+	•	Custom or Kelvin (if supported)
+📊 Compare:
+	•	Which one looks too blue or too yellow?
+	•	Which feels closest to natural?
+	•	Try indoor, outdoor, and at sunset
+Bonus: Create a mood photo using incorrect WB for artistic look.
 
-• **Indian weddings**: Often use warm lights → set to Tungsten or Kelvin ~3200K
-• **Outdoor shoots in golden hour**: Daylight WB gives best colors
-• **Fashion shoots with mixed lighting**: Use Custom WB or shoot RAW
-• **Night photography**: Manual WB avoids strange color shifts from street lamps''',
-        'estimatedDuration': 25,
+👍 Tips of the Day
+	•	Auto WB is fine for beginners, but test manual in tricky light
+	•	Shoot in RAW to fix WB later with no quality loss
+	•	Use warmer tones for storytelling and cooler tones for drama
+	•	Know your environment’s light: sun, tube, LED, halogen
+	•	Use manual WB in professional video shoots for consistency
+
+💬 Quote of the Day
+"Light has color – and white balance helps you show it truthfully."
+
+🧠 Words You Learned Today
+Word
+Meaning (Simple)
+White Balance
+Makes colors look natural in different light
+Kelvin (K)
+Unit to measure color temperature
+Auto WB
+Camera automatically sets white balance
+Color Cast
+Unwanted color tone (too blue, too yellow)
+Custom WB
+Manually adjusted white balance
+Warm Tone
+Yellow-orange coloring
+Cool Tone
+Blue coloring
+
+✅ Summary of Day 7
+	•	White balance helps get natural-looking colors
+	•	Color temperature changes based on light source
+	•	Use WB presets or set Kelvin value
+	•	Try creative effects using warm or cool tones
+	•	Practice with different lights, indoors and outdoors
+
+
+🌤️''',
+        'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Technical Settings', 'Color', 'Light Quality'],
-        'objectives': [
-          'Understand what white balance is and why it matters',
-          'Learn different white balance modes and when to use them',
-          'Master color temperature and Kelvin scale basics',
-          'Use white balance creatively for mood and atmosphere',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_007_01',
-            'title': 'White Balance Comparison',
-            'description':
-                'Test different white balance settings to see their effects on color',
-            'steps': [
-              'Take the same photo in 5 different White Balance modes: Auto, Daylight, Tungsten, Cloudy, Custom',
-              'Compare which looks too blue or too yellow',
-              'Identify which feels closest to natural colors',
-              'Try indoor, outdoor, and sunset lighting',
-              'Create a mood photo using incorrect WB for artistic effect',
-            ],
-            'requirements': {
-              'camera': 'Camera with white balance controls',
-              'lighting': 'Various light sources (indoor, outdoor, mixed)',
-              'time': '30 minutes',
-            },
-            'estimatedTime': 30,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Practice Day – Manual Mode Practice (Even Mobile)'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'White Balance': 'Makes colors look natural in different light',
-            'Kelvin (K)': 'Unit to measure color temperature',
-            'Auto WB': 'Camera automatically sets white balance',
-            'Color Cast': 'Unwanted color tone (too blue, too yellow)',
-            'Custom WB': 'Manually adjusted white balance',
-            'Warm Tone': 'Yellow-orange coloring',
-            'Cool Tone': 'Blue coloring',
-          },
-          'quote':
-              'Light has color -- and white balance helps you show it truthfully.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 8: Understanding Natural Light
       {
         'id': 'lesson_008',
         'day': 8,
-        'title': 'Understanding Natural Light',
-        'subtitle': 'Morning vs Noon vs Evening',
-        'description':
-            'Learn how natural light changes throughout the day and when to shoot for the best results.',
-        'content': '''**🌞 What is Natural Light?**
+        'title': 'Understanding Natural Light (Morning vs Noon vs Evening)',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Understanding Natural Light (Morning vs Noon vs Evening)',
+        'content': '''Day 8: Understanding Natural Light (Morning vs Noon vs Evening)
 
-Natural light is the light that comes from the **sun**. Unlike artificial lights (like bulbs or LEDs), it changes all day long.
+🌟 What You Will Learn Today:
+	•	What is natural light?
+	•	How sunlight changes during the day
+	•	Which light is best for photography?
+	•	Golden hour and blue hour
+	•	Indian + global examples
+	•	Tips, practice, daily words, and summary
 
-As a beginner, learning how sunlight works will help you decide **when** to shoot and how your photos will look.
+🌞 What is Natural Light?
+Natural light is the light that comes from the sun. Unlike artificial lights (like bulbs or LEDs), it changes all day long.
+As a beginner, learning how sunlight works will help you decide when to shoot and how your photos will look.
 
-**🕗 How Light Changes Through the Day**
+🕗 How Light Changes Through the Day
+Time of Day
+Light Type
+Characteristics
+Best For
+Morning (6–9am)
+Soft, Golden Light
+Warm tones, long shadows
+Portraits, landscapes
+Noon (11am–2pm)
+Harsh, Bright
+Strong light, hard shadows, white tone
+Product shots (with diffuser)
+Evening (4–6pm)
+Soft, Warm Light
+Similar to morning, golden tone
+Portraits, outdoor shoots
+Golden Hour
+Softest Golden
+1 hour after sunrise / before sunset
+Dreamy portraits, nature
+Blue Hour
+Cool, Soft Blue
+After sunset / before sunrise
+Cityscapes, creative low light
 
-| Time of Day | Light Type | Characteristics | Best For |
-|-------------|------------|----------------|----------|
-| Morning (6-9am) | Soft, Golden Light | Warm tones, long shadows | Portraits, landscapes |
-| Noon (11am-2pm) | Harsh, Bright | Strong light, hard shadows, white tone | Product shots (with diffuser) |
-| Evening (4-6pm) | Soft, Warm Light | Similar to morning, golden tone | Portraits, outdoor shoots |
-| Golden Hour | Softest Golden | 1 hour after sunrise / before sunset | Dreamy portraits, nature |
-| Blue Hour | Cool, Soft Blue | After sunset / before sunrise | Cityscapes, creative low light |
-
-**☀️ Why Time Matters**
-
-The **quality of sunlight** affects your image:
-• **Soft Light** (morning/evening): smooth shadows, gentle skin tones
-• **Harsh Light** (midday): deep shadows, high contrast, not ideal for portraits
-
+☀️ Why Time Matters
+The quality of sunlight affects your image:
+	•	Soft Light (morning/evening): smooth shadows, gentle skin tones
+	•	Harsh Light (midday): deep shadows, high contrast, not ideal for portraits
 📸 Beginners tip: Start shooting early morning or late afternoon for easier, beautiful light.
 
-**🌏 Indian + Global Examples**
+🌏 Indian + Global Examples
+	•	India (Varanasi Ghats, sunrise) – Soft fog + golden tones
+	•	South India temples at noon – Use shaded areas or reflectors
+	•	Desert sunset in Rajasthan – Rich, warm tones perfect for silhouettes
+	•	Global – Eiffel Tower at golden hour, NYC at blue hour
 
-• **India (Varanasi Ghats, sunrise)** -- Soft fog + golden tones
-• **South India temples at noon** -- Use shaded areas or reflectors  
-• **Desert sunset in Rajasthan** -- Rich, warm tones perfect for silhouettes
-• **Global** -- Eiffel Tower at golden hour, NYC at blue hour
+🎥 Light & Video
+	•	Morning/evening light gives a soft, cinematic look
+	•	Use a reflector to bounce light in shadow areas
+	•	Avoid midday unless using diffusers or shaded areas
 
-**🎥 Light & Video**
+🏠 Practice Activity
+📷 Take 3 photos of the same subject at:
+	•	Morning light (before 9am)
+	•	Midday (around 1pm)
+	•	Evening (after 4pm)
+📊 Compare:
+	•	Which has softer shadows?
+	•	Which one looks too bright?
+	•	Which photo tells a better story?
+Bonus: Capture a photo during golden hour. Notice the mood and warm colors.
 
-• Morning/evening light gives a soft, cinematic look
-• Use a **reflector** to bounce light in shadow areas
-• Avoid midday unless using diffusers or shaded areas
+👍 Tips of the Day
+	•	Avoid harsh noon light for faces – it creates strong shadows under eyes
+	•	Use trees, buildings, or shade to diffuse light
+	•	Golden hour = best time for natural light beginners
+	•	Early morning light also has less pollution haze
 
-**🌤️ Weather and Natural Light**
+💬 Quote of the Day
+"Light is the soul of photography. Natural light gives it life."
 
-• **Cloudy days**: Act like a giant softbox, perfect for portraits
-• **Rainy days**: Dramatic mood, great for moody shots
-• **Clear sunny days**: Best for landscapes but harsh for people
-• **Overcast**: Even, soft light for any subject''',
-        'estimatedDuration': 20,
+🧠 Words You Learned Today
+Word
+Meaning (Simple)
+Natural Light
+Light from the sun
+Golden Hour
+Soft warm light just after sunrise or before sunset
+Harsh Light
+Strong bright light that creates hard shadows
+Soft Light
+Gentle light with smooth shadows
+Blue Hour
+Cool soft light just after sunset
+
+✅ Summary of Day 8
+	•	Natural light changes all day – learn to use it
+	•	Golden & blue hours are great for beginners
+	•	Midday light is harsh – use shade or reflectors
+	•	Indian and global examples show light variety
+	•	Practice daily at different times to train your eye
+
+
+💡''',
+        'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Natural Light', 'Time of Day', 'Light Quality'],
-        'objectives': [
-          'Understand how natural light changes throughout the day',
-          'Learn the best times to shoot for different subjects',
-          'Recognize golden hour and blue hour opportunities',
-          'Master working with different weather conditions',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_008_01',
-            'title': 'Natural Light Timeline',
-            'description':
-                'Document how natural light changes by photographing the same subject at different times',
-            'steps': [
-              'Choose one subject (person, object, or scene)',
-              'Photograph it in morning light (before 9am)',
-              'Photograph it at midday (around 1pm)',
-              'Photograph it in evening light (after 4pm)',
-              'Compare soft shadows vs harsh shadows',
-              'Try to capture during golden hour if possible',
-            ],
-            'requirements': {
-              'subject': 'Same subject for all shots',
-              'timing': 'Different times of day',
-              'location': 'Outdoor or window light',
-              'time': 'Throughout the day',
-            },
-            'estimatedTime': 60,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Understanding Natural Light (Morning vs Noon vs Evening)'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Natural Light': 'Light from the sun',
-            'Golden Hour':
-                'Soft warm light just after sunrise or before sunset',
-            'Harsh Light': 'Strong bright light that creates hard shadows',
-            'Soft Light': 'Gentle light with smooth shadows',
-            'Blue Hour': 'Cool soft light just after sunset',
-          },
-          'quote':
-              'Light is the soul of photography. Natural light gives it life.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 9: Artificial Light Basics
       {
         'id': 'lesson_009',
         'day': 9,
-        'title': 'Artificial Light Basics',
-        'subtitle': 'Lamps, Phone Lights, LED',
-        'description':
-            'Learn to work with artificial light sources and create professional-looking photos at home.',
-        'content': '''**💡 What is Artificial Light?**
+        'title': 'Artificial Light Basics (Lamps, Phone Lights, LED)',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Artificial Light Basics (Lamps, Phone Lights, LED)',
+        'content': '''Day 9: Artificial Light Basics (Lamps, Phone Lights, LED)
 
-Artificial light is any **non-natural** light source -- created by humans, like:
-• LED panels
-• Tube lights
-• Lamps
-• Mobile flashlight
-• Ring lights
+🌟 What You Will Learn Today:
+	•	What is artificial light?
+	•	Types of artificial light sources
+	•	Hard vs soft light
+	•	Mixing artificial and natural light
+	•	Indian + global examples
+	•	Beginner-friendly lighting setups
+	•	Tips, activity, daily words, and summary
 
-This light can be used **anytime**, even at night or indoors.
+💡 What is Artificial Light?
+Artificial light is any non-natural light source – created by humans, like:
+	•	LED panels
+	•	Tube lights
+	•	Lamps
+	•	Mobile flashlight
+	•	Ring lights
+This light can be used anytime, even at night or indoors.
 
-**🔦 Types of Artificial Light Sources**
+🔦 Types of Artificial Light Sources
+Light Type
+Example Use
+Characteristics
+LED Lights
+Portraits, Product shoots
+Energy-efficient, bright, adjustable color temp
+Ring Light
+Selfies, Beauty shots
+Soft, even light, great for faces
+Mobile Flashlight
+Quick lighting, on the go
+Hard, direct light
+Lamps
+Home portraits, indoor mood
+Warm tone, soft if diffused
+Tube Light
+Room lighting
+Flat, bright, can be harsh
+📸 Tip: Use white paper or cloth to soften harsh lights.
 
-| Light Type | Example Use | Characteristics |
-|------------|-------------|----------------|
-| LED Lights | Portraits, Product shoots | Energy-efficient, bright, adjustable color temp |
-| Ring Light | Selfies, Beauty shots | Soft, even light, great for faces |
-| Mobile Flashlight | Quick lighting, on the go | Hard, direct light |
-| Lamps | Home portraits, indoor mood | Warm tone, soft if diffused |
-| Tube Light | Room lighting | Flat, bright, can be harsh |
+🔄 Hard Light vs Soft Light
+Type
+How It Looks
+When to Use
+Hard Light
+Sharp shadows, contrast
+Dramatic portraits, fashion
+Soft Light
+Smooth, low shadows
+Portraits, beauty, storytelling
+🎨 Soft light is better for beginners. Use diffusers or bounce light off walls.
 
-📸 Tip: Use white paper or cloth to **soften harsh lights**.
-
-**🔄 Hard Light vs Soft Light**
-
-| Type | How It Looks | When to Use |
-|------|-------------|-------------|
-| Hard Light | Sharp shadows, contrast | Dramatic portraits, fashion |
-| Soft Light | Smooth, low shadows | Portraits, beauty, storytelling |
-
-🎨 Soft light is better for beginners. Use **diffusers** or bounce light off walls.
-
-**🔁 Mixing Natural + Artificial Light**
-
+🔁 Mixing Natural + Artificial Light
 Many photographers use both.
-• Shoot near a **window** with a **lamp** or **LED fill light**
-• Balance the **color temperature** (cool light + warm light = balance)
-• Use white balance setting to match the mix
+	•	Shoot near a window with a lamp or LED fill light
+	•	Balance the color temperature (cool light + warm light = balance)
+	•	Use white balance setting to match the mix
 
-**🇮🇳 Indian + Global Examples**
+🇮🇳 Indian + Global Examples
+	•	Mobile phone flash at Indian festivals or street portraits
+	•	Ring light for makeup/fashion reels on Instagram
+	•	LED panels in wedding events or indoor mandaps
+	•	Global – studio setups for YouTube creators and fashion bloggers
 
-• **Mobile phone flash** at Indian festivals or street portraits
-• **Ring light** for makeup/fashion reels on Instagram
-• **LED panels** in wedding events or indoor mandaps
-• **Global** -- studio setups for YouTube creators and fashion bloggers
+🎥 Artificial Light in Video
+	•	LED lights are great for continuous lighting
+	•	Add softboxes or umbrellas to make video light natural
+	•	Use practical lights (lamps, fairy lights) for background interest
 
-**🎥 Artificial Light in Video**
+🏠 Practice Activity
+Try 3 setups using common lights at home:
+	•	Mobile torch + tissue paper (makeshift soft light)
+	•	Ring light or table lamp + white wall
+	•	Mix natural window light + one artificial light
+📊 Compare:
+	•	Which looks softest?
+	•	Which gives more dramatic effect?
+	•	Which is best for faces?
+Bonus: Shoot a short reel or photo series using only artificial lights.
 
-• LED lights are great for continuous lighting
-• Add softboxes or umbrellas to make video light natural
-• Use **practical lights** (lamps, fairy lights) for background interest
+👍 Tips of the Day
+	•	Don’t point light directly – bounce or diffuse it
+	•	Try to control shadows for better results
+	•	Ring lights = easiest soft light tool for beginners
+	•	Always check white balance with artificial lights
 
-**💡 DIY Lighting Setup at Home**
+💬 Quote of the Day
+"You don’t need expensive gear to light a scene – just creativity."
 
-• **Soft key light**: Table lamp + white sheet/tissue paper
-• **Fill light**: Phone flashlight + bounce off white wall
-• **Background light**: LED strip or fairy lights
-• **Reflector**: White cardboard or bedsheet''',
-        'estimatedDuration': 25,
+🧠 Words You Learned Today
+Word
+Meaning (Simple)
+Artificial Light
+Light from human-made sources like bulbs or LEDs
+Diffuser
+Material that softens harsh light
+Hard Light
+Strong light with deep shadows
+Soft Light
+Gentle light with smooth shadows
+Fill Light
+Extra light to brighten dark parts
+
+✅ Summary of Day 9
+	•	Artificial light helps shoot anytime, anywhere
+	•	Learn types like LED, lamp, phone flash, and ring light
+	•	Use soft light for faces and portraits
+	•	Mix with natural light for best results
+	•	Practice setups at home using common tools
+
+
+📐''',
+        'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Artificial Light', 'DIY Setup', 'Light Control'],
-        'objectives': [
-          'Understand different types of artificial light sources',
-          'Learn to create soft light from hard sources',
-          'Master mixing artificial and natural light',
-          'Set up basic lighting at home with common items',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_009_01',
-            'title': 'DIY Lighting Experiment',
-            'description':
-                'Create professional-looking photos using common household lights',
-            'steps': [
-              'Try mobile torch + tissue paper for makeshift soft light',
-              'Use ring light or table lamp + white wall bounce',
-              'Mix natural window light + one artificial light',
-              'Compare which looks softest on faces',
-              'Create a short photo series using only artificial lights',
-            ],
-            'requirements': {
-              'lights': 'Mobile flashlight, lamps, or LED lights',
-              'diffusers': 'Tissue paper, white cloth, or wall',
-              'subject': 'Person or object to light',
-              'time': '30 minutes',
-            },
-            'estimatedTime': 30,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Artificial Light Basics (Lamps, Phone Lights, LED)'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Artificial Light':
-                'Light from human-made sources like bulbs or LEDs',
-            'Diffuser': 'Material that softens harsh light',
-            'Hard Light': 'Strong light with deep shadows',
-            'Soft Light': 'Gentle light with smooth shadows',
-            'Fill Light': 'Extra light to brighten dark parts',
-          },
-          'quote':
-              'You don\'t need expensive gear to light a scene -- just creativity.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 10: Rule of Thirds
       {
         'id': 'lesson_010',
         'day': 10,
-        'title': 'Rule of Thirds',
-        'subtitle': 'Easy Composition Hack',
-        'description':
-            'Master the most fundamental composition technique to make your photos more engaging.',
-        'content': '''**📏 What is the Rule of Thirds?**
+        'title': 'Rule of Thirds – Easy Composition Hack',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Rule of Thirds – Easy Composition Hack',
+        'content': '''Day 10: Rule of Thirds – Easy Composition Hack
 
-The Rule of Thirds is a simple way to **compose a photo**.
+🌟 What You Will Learn Today:
+	•	What is the Rule of Thirds?
+	•	How to use it for better framing
+	•	Why it makes photos look good
+	•	Indian + global examples
+	•	Tips, activity, daily words, and summary
 
+📏 What is the Rule of Thirds?
+The Rule of Thirds is a simple way to compose a photo.
 Imagine breaking your image into 9 equal parts using 2 vertical and 2 horizontal lines:
-
-```
 |---|---|---|
 |---|---|---|
 |---|---|---|
-```
-
-The 4 points where these lines cross are called **focus points**. Placing your subject on these points makes your photo more balanced and interesting.
-
+The 4 points where these lines cross are called focus points. Placing your subject on these points makes your photo more balanced and interesting.
 📸 Most cameras and phones allow you to turn on this grid in settings.
 
-**🎯 Why Use the Rule of Thirds?**
+🎯 Why Use the Rule of Thirds?
+	•	Draws attention naturally
+	•	Creates space and balance
+	•	Looks more professional
+	•	Avoids placing the subject directly in the center (which can look boring)
+✅ Tip: For landscapes, place the horizon on top or bottom third – not the middle.
 
-• Draws attention naturally
-• Creates space and balance
-• Looks more professional
-• Avoids placing the subject directly in the center (which can look boring)
+📌 How to Use It
+	•	Place eyes of a person on the top third
+	•	Place a tree or building on the left or right third
+	•	Use the empty space to tell more story
+Use the grid to plan your shot before pressing the shutter.
 
-✅ Tip: For landscapes, place the **horizon** on top or bottom third -- not the middle.
+🇮🇳 Indian + Global Examples
+	•	Taj Mahal framed on right third, sky on left
+	•	Indian bride off-center, background blurred
+	•	Sunset in Goa with sun placed on lower third
+	•	Eiffel Tower or New York skyline following this rule for depth
 
-**📌 How to Use It**
+🎥 Rule of Thirds in Video
+	•	Keep speaker’s eyes at top third
+	•	Use thirds to lead viewer’s eye across the frame
+	•	Helps keep interviews balanced and natural
 
-• Place **eyes** of a person on the top third
-• Place **a tree or building** on the left or right third  
-• Use the **empty space** to tell more story
+🏠 Practice Activity
+	•	Take 3 photos using the Rule of Thirds:
+	•	A portrait (focus on eyes)
+	•	A landscape (focus on horizon)
+	•	A product or object (off to one side)
+	•	Then take the same 3 shots with the subject in the center.
+📊 Compare:
+	•	Which ones look more dynamic?
+	•	Which tell a better story?
+Bonus: Edit old photos by cropping to follow the rule.
 
-Use the grid to plan your shot **before pressing the shutter**.
+👍 Tips of the Day
+	•	Use gridlines on your phone or camera
+	•	Don’t always center your subject
+	•	Use space around your subject creatively
+	•	Rules can be broken—but learn them first!
 
-**🇮🇳 Indian + Global Examples**
+💬 Quote of the Day
+“Learn the rules like a pro, so you can break them like an artist.” – Pablo Picasso
 
-• **Taj Mahal framed on right third**, sky on left
-• **Indian bride** off-center, background blurred
-• **Sunset in Goa** with sun placed on lower third
-• **Eiffel Tower** or **New York skyline** following this rule for depth
+🧠 Words You Learned Today
+Word
+Meaning (Simple)
+Rule of Thirds
+Guideline that divides image into 9 parts
+Focus Points
+Cross points of the 9-part grid
+Composition
+How elements are arranged in a photo
+Gridlines
+Lines on screen that help frame your shot
+Framing
+Positioning your subject inside the photo
 
-**🎥 Rule of Thirds in Video**
+✅ Summary of Day 10
+	•	Rule of Thirds makes your photo look balanced
+	•	Place important things on lines or focus points
+	•	Useful in portraits, landscapes, and videos
+	•	Practice by using the grid and comparing results
 
-• Keep speaker's eyes at top third
-• Use thirds to lead viewer's eye across the frame
-• Helps keep interviews balanced and natural
 
-**🔄 When to Break the Rule**
-
-Rules are made to be broken! Sometimes center composition works better:
-• Symmetrical subjects (like reflections)
-• Patterns or textures
-• When you want to create tension or focus
-• Portrait photography with strong eye contact
-
-But learn the rule first before breaking it creatively.''',
-        'estimatedDuration': 20,
+🔳''',
+        'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Composition', 'Framing', 'Visual Design'],
-        'objectives': [
-          'Understand the Rule of Thirds concept',
-          'Learn to use gridlines for better composition',
-          'Practice placing subjects on focus points',
-          'Know when to follow and when to break the rule',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_010_01',
-            'title': 'Rule of Thirds Practice',
-            'description':
-                'Apply the Rule of Thirds to different types of photography',
-            'steps': [
-              'Turn on gridlines in your camera/phone settings',
-              'Take a portrait with eyes on the top third line',
-              'Take a landscape with horizon on top or bottom third',
-              'Take a photo of an object placed on left or right third',
-              'Take the same 3 shots with subjects in the center',
-              'Compare which compositions look more dynamic',
-            ],
-            'requirements': {
-              'camera': 'Any camera with grid option',
-              'subjects': 'Person, landscape, and object',
-              'time': '25 minutes',
-            },
-            'estimatedTime': 25,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Rule of Thirds – Easy Composition Hack'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Rule of Thirds': 'Guideline that divides image into 9 parts',
-            'Focus Points': 'Cross points of the 9-part grid',
-            'Composition': 'How elements are arranged in a photo',
-            'Gridlines': 'Lines on screen that help frame your shot',
-            'Framing': 'Positioning your subject inside the photo',
-          },
-          'quote':
-              'Learn the rules like a pro, so you can break them like an artist. -- Pablo Picasso',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 11: Leading Lines, Framing & Balance
       {
         'id': 'lesson_011',
         'day': 11,
         'title': 'Leading Lines, Framing & Balance',
-        'subtitle': 'Advanced Composition Techniques',
-        'description':
-            'Learn to use leading lines, natural framing, and visual balance to create compelling photographs.',
-        'content': '''**➿ What are Leading Lines?**
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Leading Lines, Framing & Balance',
+        'content': '''Day 11: Leading Lines, Framing & Balance
 
-Leading lines are lines that guide the viewer's eyes through the photo. They **lead attention** to the main subject.
+🌟 What You Will Learn Today:
+	•	What are leading lines?
+	•	How to frame your subject better
+	•	What is balance in photography?
+	•	Indian + global examples
+	•	Tips, activity, daily words, and summary
 
+➿ What are Leading Lines?
+Leading lines are lines that guide the viewer’s eyes through the photo. They lead attention to the main subject.
 They can be:
-• Roads  • Rivers  • Walls  • Handrails  • Bridges  • Light or shadow patterns
-
+	•	Roads
+	•	Rivers
+	•	Walls
+	•	Handrails
+	•	Bridges
+	•	Light or shadow patterns
 📸 Use these lines to point toward your subject, making the photo more interesting and focused.
 
-**🖼️ What is Framing in Photography?**
-
-Framing means using **objects around your subject** to draw attention to it.
-Like: • A window frame  • Tree branches  • Doorways  • Arches
-
+🖼️ What is Framing in Photography?
+Framing means using objects around your subject to draw attention to it. Like:
+	•	A window frame
+	•	Tree branches
+	•	Doorways
+	•	Arches
 It gives depth and helps separate the subject from the background.
-
 📷 Tip: Shoot through something to add framing.
 
-**⚖️ What is Balance in a Photo?**
+⚖️ What is Balance in a Photo?
+Balance means that your photo feels stable. It’s not too heavy on one side. You can balance your photo by:
+	•	Putting a subject on one side + empty space on the other
+	•	Using color or brightness to balance objects
+	•	Making sure the visual weight is even
+Balance is not always symmetry. It’s about feeling right.
 
-Balance means that your photo **feels stable**. It's not too heavy on one side.
-You can balance your photo by:
-• Putting a subject on one side + empty space on the other
-• Using color or brightness to balance objects
-• Making sure the visual weight is even
+🇮🇳 Indian + Global Examples
+	•	Indian railway tracks leading to a far temple = leading lines
+	•	Bride under arch doorway = framing
+	•	Colorful street art + empty wall = visual balance
+	•	European alleyways as leading lines to subjects
+	•	Desert roads in Rajasthan for travel photos
 
-Balance is not always symmetry. It's about feeling right.
+🎥 Video Composition
+	•	Use leading lines in streets to guide the eye
+	•	Frame interviews using doorways or background items
+	•	Keep background and subject balanced in frame
 
-**🇮🇳 Indian + Global Examples**
+🏠 Practice Activity
+	•	Take 3 photos using each technique:
+	•	Leading Lines: roads, railings, walls
+	•	Framing: shoot through something
+	•	Balance: play with subject on one side, something on the other
+📊 Review:
+	•	Which image directs attention clearly?
+	•	Which frame adds depth?
+	•	Which one feels stable?
+Bonus: Use mirrors or windows for creative framing.
 
-• **Indian railway tracks** leading to a far temple = leading lines
-• **Bride under arch doorway** = framing
-• **Colorful street art** + empty wall = visual balance
-• **European alleyways** as leading lines to subjects
-• **Desert roads** in Rajasthan for travel photos
+👍 Tips of the Day
+	•	Look for natural lines around you
+	•	Move left/right to find a better frame
+	•	Don’t overcrowd one side of the photo
+	•	Use shadows and colors to create balance
 
-**🎥 Video Composition**
+💬 Quote of the Day
+“Great photos don’t just show things—they lead your eyes and tell a story.”
 
-• Use leading lines in streets to guide the eye
-• Frame interviews using doorways or background items
-• Keep background and subject balanced in frame''',
-        'estimatedDuration': 25,
+🧠 Words You Learned Today
+Word
+Meaning (Simple)
+Leading Lines
+Lines that guide eyes to the main subject
+Framing
+Using surroundings to draw focus on your subject
+Balance
+Equal visual weight in photo
+Depth
+Sense of distance in a photo
+Composition
+How photo elements are arranged
+
+✅ Summary of Day 11
+	•	Leading lines help guide attention
+	•	Framing adds depth and focus
+	•	Balance makes photos feel stable
+	•	These tools make your composition stronger
+	•	Practice by trying all 3 in real-life scenes
+
+🎨''',
+        'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Composition', 'Visual Design', 'Advanced Techniques'],
-        'objectives': [
-          'Use leading lines to guide viewer attention',
-          'Create natural frames within your compositions',
-          'Achieve visual balance in your photographs',
-          'Combine multiple composition techniques effectively',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_011_01',
-            'title': 'Composition Techniques Practice',
-            'description':
-                'Apply leading lines, framing, and balance in your photography',
-            'steps': [
-              'Find and photograph leading lines (roads, railings, walls)',
-              'Create a frame within your photo (shoot through something)',
-              'Practice visual balance with subjects and empty space',
-              'Combine multiple techniques in one photo',
-              'Use mirrors or windows for creative framing',
-            ],
-            'requirements': {
-              'subjects': 'Various scenes with natural lines and frames',
-              'locations': 'Indoor and outdoor environments',
-              'time': '35 minutes',
-            },
-            'estimatedTime': 35,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Leading Lines, Framing & Balance'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Leading Lines': 'Lines that guide eyes to the main subject',
-            'Framing': 'Using surroundings to draw focus on your subject',
-            'Balance': 'Equal visual weight in photo',
-            'Depth': 'Sense of distance in a photo',
-            'Composition': 'How photo elements are arranged',
-          },
-          'quote':
-              'Great photos don\'t just show things---they lead your eyes and tell a story.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 12: Backgrounds & Color
       {
         'id': 'lesson_012',
         'day': 12,
         'title': 'Backgrounds & Color in Photography',
-        'subtitle': 'Making Your Subject Stand Out',
-        'description':
-            'Master the use of backgrounds and color to create impactful and emotionally resonant photographs.',
-        'content': '''**🧱 Why Backgrounds Matter**
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Backgrounds & Color in Photography',
+        'content': '''Day 12: Backgrounds & Color in Photography
 
-A background can make or break a photo. A **clean and simple background** makes your subject stand out.
+🌟 What You Will Learn Today:
+	•	Why background matters
+	•	How to use color to tell a story
+	•	Making your subject stand out
+	•	Indian + global examples
+	•	Tips, activity, daily words, and summary
 
-Avoid: • Messy rooms • Crowds • Distracting elements (like poles or trash)
-Instead, choose: • Plain walls • Nature (trees, sky) • Colorful but not busy backgrounds
+🧱 Why Backgrounds Matter
+A background can make or break a photo. A clean and simple background makes your subject stand out.
+Avoid:
+	•	Messy rooms
+	•	Crowds
+	•	Distracting elements (like poles or trash)
+Instead, choose:
+	•	Plain walls
+	•	Nature (trees, sky)
+	•	Colorful but not busy backgrounds
 
-**🎨 Using Color in Photos**
-
+🎨 Using Color in Photos
 Color affects the mood and feel of your photo.
-
-| Color | Feel / Mood | Use In |
-|-------|------------|--------|
-| Red | Bold, Passionate | Fashion, Action, Festivals |
-| Blue | Calm, Sad, Peaceful | Nature, Portraits |
-| Yellow | Happy, Bright | Outdoor, Kids |
-| Black/White | Dramatic, Classic | Fashion, Street, Artistic |
-| Green | Nature, Fresh | Landscapes, Outdoors |
-
+Color
+Feel / Mood
+Use In
+Red
+Bold, Passionate
+Fashion, Action, Festivals
+Blue
+Calm, Sad, Peaceful
+Nature, Portraits
+Yellow
+Happy, Bright
+Outdoor, Kids
+Black/White
+Dramatic, Classic
+Fashion, Street, Artistic
+Green
+Nature, Fresh
+Landscapes, Outdoors
 🎯 Use color to match the story you want to tell.
 
-**🪄 Subject vs Background**
-
-Make sure your subject doesn't **blend in** with the background.
-
+🪄 Subject vs Background
+Make sure your subject doesn’t blend in with the background.
 📌 Tips:
-• Use opposite colors (red outfit + green background)
-• Use blur (shallow depth of field)
-• Keep background clean
+	•	Use opposite colors (red outfit + green background)
+	•	Use blur (shallow depth of field)
+	•	Keep background clean
 
-**🇮🇳 Indian + Global Examples**
+🇮🇳 Indian + Global Examples
+	•	Indian bride in red against neutral temple walls = contrast
+	•	Holi colors with plain sky background = focus on action
+	•	French street art with model in black = strong contrast
 
-• Indian bride in red against neutral temple walls = contrast
-• Holi colors with plain sky background = focus on action
-• French street art with model in black = strong contrast''',
-        'estimatedDuration': 20,
+🏠 Practice Activity
+	•	Take 3 photos:
+	•	With messy background
+	•	With clean background
+	•	With color contrast (opposite color)
+📊 Compare:
+	•	Where does the subject pop more?
+	•	Which photo tells a better story?
+Bonus: Try black & white filter to study shape and background.
+
+👍 Tips of the Day
+	•	Always check your background before clicking
+	•	Use color to add mood
+	•	Contrast = attention
+	•	Don’t let background fight with your subject
+
+💬 Quote of the Day
+“A good background supports the subject like a stage supports a performer.”
+
+🧠 Words You Learned Today
+Word
+Meaning (Simple)
+Background
+What’s behind your subject
+Contrast
+Strong difference in color or light
+Color Theory
+How colors work together
+Visual Mood
+Feeling created by color and tone
+Clean Shot
+A photo without distractions
+
+✅ Summary of Day 12
+	•	Keep backgrounds clean and simple
+	•	Use colors to show mood and emotion
+	•	Use contrast to make subject pop
+	•	Avoid clutter or distraction
+	•	Practice by changing background and color combinations''',
+        'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Color Theory', 'Backgrounds', 'Visual Impact'],
-        'objectives': [
-          'Choose appropriate backgrounds for your subjects',
-          'Use color psychology to enhance your photos',
-          'Create contrast between subject and background',
-          'Apply color theory to storytelling',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_012_01',
-            'title': 'Background and Color Practice',
-            'description':
-                'Experiment with different backgrounds and color combinations',
-            'steps': [
-              'Take a photo with a messy background',
-              'Take the same subject with a clean background',
-              'Create strong color contrast between subject and background',
-              'Try a black & white version to study composition',
-              'Experiment with different colored backgrounds',
-            ],
-            'requirements': {
-              'subjects': 'Various subjects with different backgrounds',
-              'colors': 'Different colored backgrounds or clothing',
-              'time': '25 minutes',
-            },
-            'estimatedTime': 25,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Backgrounds & Color in Photography'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Background': 'What\'s behind your subject',
-            'Contrast': 'Strong difference in color or light',
-            'Color Theory': 'How colors work together',
-            'Visual Mood': 'Feeling created by color and tone',
-            'Clean Shot': 'A photo without distractions',
-          },
-          'quote':
-              'A good background supports the subject like a stage supports a performer.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 13: Practice Day
       {
         'id': 'lesson_013',
         'day': 13,
-        'title': 'Practice Day',
-        'subtitle': 'Shoot a Story in 5 Photos',
-        'description':
-            'Apply everything you\'ve learned to create a cohesive photo story that demonstrates your growing skills.',
-        'content': '''**📖 What is a Photo Story?**
+        'title': 'Practice Day – Shoot a Story in 5 Photos',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Practice Day – Shoot a Story in 5 Photos',
+        'content': '''📷 Day 13: Practice Day – Shoot a Story in 5 Photos
 
-A photo story is a **series of photos** that together tell a complete idea or feeling. You don't need fancy gear---just good planning and observation.
+🌟 What You Will Practice Today:
+	•	Using light and composition
+	•	Telling a story in 5 frames
+	•	Shooting with intention
 
-**🧭 How to Plan Your Story**
+📖 What is a Photo Story?
+A photo story is a series of photos that together tell a complete idea or feeling. You don’t need fancy gear—just good planning and observation.
 
+🧭 How to Plan Your Story
 Choose a topic like:
-• A day in your life  • A local market  • Preparing a dish  • A small festival event
-
+	•	A day in your life
+	•	A local market
+	•	Preparing a dish
+	•	A small festival event
 Plan:
-1. Wide Shot (shows the scene)
-2. Medium Shot (shows subject in environment)  
-3. Close-up (details)
-4. Action Shot (movement or emotion)
-5. Final/Ending Shot (wraps the story)
+	•	Wide Shot (shows the scene)
+	•	Medium Shot (shows subject in environment)
+	•	Close-up (details)
+	•	Action Shot (movement or emotion)
+	•	Final/Ending Shot (wraps the story)
 
-**📷 Story Structure**
+🏠 Practice Activity
+Create a 5-photo story using any camera. Edit if needed. Share with a friend or group and ask:
+	•	Does it feel complete?
+	•	What emotion or idea do they get?
+Bonus: Try to shoot without any words or captions.
 
-• **Beginning**: Set the scene, establish context
-• **Middle**: Show the main action or subject
-• **Details**: Capture important small elements
-• **Emotion**: Include human connection or feeling
-• **End**: Provide closure or conclusion
+👍 Tips of the Day
+	•	Keep your story simple
+	•	Think of beginning, middle, and end
+	•	Use light and color to support your story
+	•	One strong emotion = one great story
 
-**🎬 Tips for Storytelling**
+💬 Quote of the Day
+“A camera tells more truth in five frames than a paragraph of words.”
 
-• Keep your story simple and focused
-• Think of beginning, middle, and end
-• Use light and color to support your narrative
-• One strong emotion = one great story
-• Don't try to tell everything - focus on one main idea''',
-        'estimatedDuration': 60,
-        'type': 'project',
+✅ Summary of Day 13
+	•	Photo stories help you practice everything
+	•	Think like a storyteller
+	•	Plan your shots before clicking
+	•	Use variety (angles, emotions, shots)
+📸''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Storytelling', 'Project Work', 'Creative Practice'],
-        'objectives': [
-          'Plan and execute a complete photo story',
-          'Apply composition and technical skills together',
-          'Create emotional connection through photography',
-          'Develop narrative thinking in visual work',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_013_01',
-            'title': '5-Photo Story Project',
-            'description':
-                'Create a complete story using exactly 5 photographs',
-            'steps': [
-              'Choose a simple story topic from your daily life',
-              'Plan your 5 shots: wide, medium, close-up, action, ending',
-              'Shoot your story using natural light only',
-              'Review and select your best 5 images',
-              'Arrange them in storytelling order',
-              'Share with someone and ask what story they see',
-            ],
-            'requirements': {
-              'story_topic': 'Simple, personal narrative',
-              'shots': 'Exactly 5 photos',
-              'editing': 'Minimal editing only',
-              'time': '60 minutes',
-            },
-            'estimatedTime': 60,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Practice Day – Shoot a Story in 5 Photos'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Photo Story': 'Series of images that tell a complete narrative',
-            'Narrative': 'The story or sequence of events',
-            'Visual Flow': 'How images work together in sequence',
-            'Story Arc': 'Beginning, middle, and end structure',
-            'Context': 'Background information that helps understanding',
-          },
-          'quote':
-              'A camera tells more truth in five frames than a paragraph of words.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 14: Feedback & Self-Review
       {
         'id': 'lesson_014',
         'day': 14,
-        'title': 'Feedback & Self-Review',
-        'subtitle': 'Improve Your Shots',
-        'description':
-            'Learn to critically evaluate your own work and seek constructive feedback for continuous improvement.',
-        'content': '''**🧐 Why Review Matters**
+        'title': 'Feedback & Self-Review – Improve Your Shots',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Feedback & Self-Review – Improve Your Shots',
+        'content': '''Day 14: Feedback & Self-Review – Improve Your Shots
 
+🌟 What You Will Learn Today:
+	•	How to review your own photos
+	•	Asking for feedback the right way
+	•	How to improve based on reviews
+
+🧐 Why Review Matters
 Looking at your own photos after the shoot helps you learn. Every photo teaches you:
-• What worked  • What didn't  • What to do next time
+	•	What worked
+	•	What didn’t
+	•	What to do next time
 
-**📋 Checklist for Reviewing a Photo**
+📋 Checklist for Reviewing a Photo
+✅ Is the subject clear? ✅ Is the lighting good? ✅ Is the photo balanced? ✅ Any distractions in the background? ✅ Does it tell a story or emotion?
 
-✅ Is the subject clear?
-✅ Is the lighting good?
-✅ Is the photo balanced?
-✅ Any distractions in the background?
-✅ Does it tell a story or emotion?
-
-**🙋 How to Ask for Feedback**
-
+🙋 How to Ask for Feedback
 Ask friends or other photographers:
-• What do you feel when you see this photo?
-• Is the subject clear?
-• What would you improve?
+	•	What do you feel when you see this photo?
+	•	Is the subject clear?
+	•	What would you improve?
+📌 Don’t ask “Is it good?” — ask specific questions.
 
-📌 Don't ask "Is it good?" --- ask specific questions.
+🛠️ How to Improve
+	•	Practice based on feedback
+	•	Re-shoot your weak photos
+	•	Try editing for better result
+	•	Keep old photos to compare your growth
 
-**🛠️ How to Improve**
+🏠 Practice Activity
+	•	Select 5 photos from Day 13
+	•	Review them using the checklist
+	•	Ask for feedback from someone
+	•	Re-shoot 1 of them based on feedback
 
-• Practice based on feedback
-• Re-shoot your weak photos
-• Try editing for better result
-• Keep old photos to compare your growth
+💬 Quote of the Day
+“Every photo you take is a step forward. Look back only to see how far you’ve come.”
 
-**📈 Self-Assessment Questions**
-
-• What was I trying to achieve with this photo?
-• Did I succeed in my goal?
-• What technical aspects worked well?
-• What would I do differently next time?
-• How does this compare to my earlier work?''',
+✅ Summary of Day 14
+	•	Review and feedback make you grow faster
+	•	Ask specific questions
+	•	Re-shoot to improve your skills
+	•	Keep learning from every photo''',
         'estimatedDuration': 30,
-        'type': 'review',
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Self-Assessment', 'Feedback', 'Improvement'],
-        'objectives': [
-          'Develop critical evaluation skills for your own work',
-          'Learn to ask for and receive constructive feedback',
-          'Create improvement plans based on analysis',
-          'Track your progress over time',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_014_01',
-            'title': 'Photo Review and Feedback Session',
-            'description':
-                'Critically analyze your recent work and gather feedback',
-            'steps': [
-              'Select 5 photos from Day 13 project',
-              'Review them using the checklist criteria',
-              'Ask a friend or family member for their feedback',
-              'Identify one photo to re-shoot based on feedback',
-              'Re-shoot that photo with improvements',
-              'Compare original vs improved version',
-            ],
-            'requirements': {
-              'photos': '5 recent photos for review',
-              'feedback_source': 'Friend, family member, or online community',
-              'time': '45 minutes',
-            },
-            'estimatedTime': 45,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Feedback & Self-Review – Improve Your Shots'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Feedback': 'Helpful opinion to improve',
-            'Review': 'Look again with focus',
-            'Critique': 'Friendly analysis',
-            'Self-Assessment': 'Evaluating your own work',
-            'Improvement': 'Making something better',
-          },
-          'quote': 'Your best photo is the one you understand the most.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 15: Portrait Photography at Home
       {
         'id': 'lesson_015',
         'day': 15,
-        'title': 'Portrait Photography at Home',
-        'subtitle': 'Using Window Light',
-        'description':
-            'Master the art of portrait photography using natural window light and simple home setups.',
-        'content': '''**🌞 Why Window Light Is Powerful**
+        'title': 'Portrait Photography at Home (Using Window Light)',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Portrait Photography at Home (Using Window Light)',
+        'content': '''📷 Day 15: Portrait Photography at Home (Using Window Light)
 
+🌟 What You Will Learn Today:
+	•	How to use natural window light for portraits
+	•	Simple posing and emotional connection
+	•	Indian-friendly home setups
+	•	How to create mood with light
+
+🌞 Why Window Light Is Powerful
 Window light is soft, free, and creates a natural look. It wraps gently around the face, giving depth and beauty.
-
-🕒 Best Time: Morning or late evening
-📍 Setup: Near a window, curtains for softening light
-
+🕒 Best Time: Morning or late evening 📍 Setup: Near a window, curtains for softening light
 🪟 Window light helps you learn:
-• Direction of light  • Shadow vs highlight  • Mood and emotion through angles
+	•	Direction of light
+	•	Shadow vs highlight
+	•	Mood and emotion through angles
 
-**🧍 Posing + Emotion**
-
+🧍 Posing + Emotion
 Try these beginner-friendly poses:
-• Seated by the window, looking outside
-• Looking toward light for drama
-• Using a prop (cup, book, dupatta)
-
+	•	Seated by the window, looking outside
+	•	Looking toward light for drama
+	•	Using a prop (cup, book, dupatta)
 Let your subject relax. Talk to them. Get natural expressions.
 
-**💡 Window Light Techniques**
+🇮🇳 Indian Context
+	•	Grandmother in saree near jharokha
+	•	Child by balcony light
+	•	Portrait using morning pooja light
 
-• **Front lighting**: Subject faces the window (even, soft light)
-• **Side lighting**: Subject at 45° to window (dramatic shadows)
-• **Back lighting**: Subject between you and window (rim light, silhouettes)
-• **Diffused lighting**: Use sheer curtains to soften harsh sunlight
+🏠 Practice Task
+Take 6 photos:
+	•	Facing the window
+	•	Side lit
+	•	Backlit (silhouette)
+	•	Profile with soft curtain light
+	•	Smiling candid
+	•	Using a cultural prop
 
-**🇮🇳 Indian Context**
+✍️ Vocabulary
+Word
+Simple Meaning
+Portrait
+A photo of a person
+Natural Light
+Light from the sun
+Silhouette
+Dark shape against light
 
-• Grandmother in saree near jharokha
-• Child by balcony light
-• Portrait using morning pooja light
-• Traditional clothing with cultural window frames
+💬 Quote
+"The best portraits feel like they know you—even if you’re a stranger."
 
-**📸 Camera Settings for Window Portraits**
-
-• Use wide aperture (f/1.8-f/2.8) for background blur
-• Focus on the eyes closest to camera
-• Expose for the face, not the bright window
-• Use reflector (white paper/cloth) to fill shadows''',
-        'estimatedDuration': 35,
-        'type': 'practice',
+✅ Summary
+	•	Use your home’s window light
+	•	Keep poses and setup simple
+	•	Create mood and emotion with light''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Portrait Photography', 'Natural Light', 'Home Studio'],
-        'objectives': [
-          'Master window light for portrait photography',
-          'Learn basic posing and direction techniques',
-          'Create professional-looking portraits at home',
-          'Understand light direction and its effects',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_015_01',
-            'title': 'Window Light Portrait Session',
-            'description':
-                'Create a variety of portrait styles using only window light',
-            'steps': [
-              'Take a portrait with subject facing the window',
-              'Take a side-lit portrait (subject at 45° to window)',
-              'Create a backlit silhouette',
-              'Use soft curtain light for a gentle look',
-              'Capture a smiling candid moment',
-              'Try using a cultural prop or traditional clothing',
-            ],
-            'requirements': {
-              'location': 'Near a window with good natural light',
-              'subject': 'Willing person to pose',
-              'props': 'Optional cultural items or simple props',
-              'time': '40 minutes',
-            },
-            'estimatedTime': 40,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Portrait Photography at Home (Using Window Light)'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Portrait': 'A photo of a person',
-            'Natural Light': 'Light from the sun',
-            'Silhouette': 'Dark shape against light',
-            'Rim Light': 'Light that outlines the subject',
-            'Fill Light': 'Additional light to brighten shadows',
-          },
-          'quote':
-              'The best portraits feel like they know you---even if you\'re a stranger.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 16: Object/Product Photography
       {
         'id': 'lesson_016',
         'day': 16,
-        'title': 'Object/Product Photography',
-        'subtitle': 'Use Household Items',
-        'description':
-            'Learn to photograph objects and products with professional results using simple home setups.',
-        'content': '''**🧴 What to Photograph**
-• Jewelry • Perfume bottles • Books or spectacles • Handcrafted items (rangoli plate, diya)
+        'title': 'Object/Product Photography (Use Household Items)',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Object/Product Photography (Use Household Items)',
+        'content': '''📷 Day 16: Object/Product Photography (Use Household Items)
 
-**🛏️ DIY Setup Tips**
-• Use white chart paper or dupatta for background
-• Torch + tissue paper = soft light
-• Books = tripod • CDs, foil = reflectors
+🌟 What You Will Learn Today:
+	•	Take sharp, beautiful product shots at home
+	•	Set up clean backgrounds
+	•	Use DIY props and light
+
+🧴 What to Photograph
+	•	Jewelry
+	•	Perfume bottles
+	•	Books or spectacles
+	•	Handcrafted items (rangoli plate, diya)
+
+🛏️ DIY Setup Tips
+	•	Use white chart paper or dupatta for background
+	•	Torch + tissue paper = soft light
+	•	Books = tripod
+	•	CDs, foil = reflectors
 🎯 Trick: Shoot by a window in daytime
 
-**🖼️ Frame the Object**
-• Keep background plain • Shoot top-down or from eye level • Leave breathing space around object
+🖼️ Frame the Object
+	•	Keep background plain
+	•	Shoot top-down or from eye level
+	•	Leave breathing space around object
 
-**📸 Product Photography Techniques**
+🏠 Practice Task
+Shoot:
+	•	Kitchen item (e.g., spice jar)
+	•	Beauty product (e.g., cream)
+	•	Handmade object
+Try 3 angles for each:
+	•	Flat lay
+	•	Eye level
+	•	Creative close-up
 
-• **Flat lay**: Top-down view for multiple objects
-• **Eye level**: Shows object naturally as you see it
-• **Low angle**: Makes object look important
-• **Close-up details**: Shows texture and quality
+💬 Quote
+“Even a teaspoon can shine with the right light and angle.”
 
-**💡 Lighting Setup for Products**
-
-• Window light is best for natural look
-• Use white paper to bounce light and fill shadows
-• Avoid direct flash - it creates harsh reflections
-• Multiple angles: try rotating the object for best light
-
-**🇮🇳 Indian Items to Practice With**
-
-• Traditional jewelry or accessories
-• Spices in small bowls
-• Handmade crafts or pottery
-• Cultural items like diyas or decorative plates
-• Books or artistic objects
-
-**📱 Mobile Settings for Products**
-
-• Use macro mode if available
-• Focus carefully on the main feature
-• Keep steady or use a makeshift tripod
-• Take multiple shots from different angles''',
-        'estimatedDuration': 25,
-        'type': 'practice',
+✅ Summary
+	•	Background and light are key
+	•	Use Indian items for fun practice
+	•	Focus on cleanliness, angles, and mood''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Product Photography', 'DIY Setup', 'Objects'],
-        'objectives': [
-          'Master product photography basics',
-          'Create clean backgrounds',
-          'Use natural light effectively',
-          'Learn different shooting angles for objects',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_016_01',
-            'title': 'Product Photography Practice',
-            'description':
-                'Photograph various household items with professional presentation',
-            'steps': [
-              'Photograph a kitchen item (spice jar)',
-              'Photograph a beauty product (cream)',
-              'Photograph a handmade object',
-              'Try 3 angles: flat lay, eye level, creative close-up',
-              'Practice with different backgrounds (white, colored, textured)',
-            ],
-            'requirements': {
-              'items': 'Various household products',
-              'setup': 'Clean background and good light',
-              'backgrounds': 'White paper, cloth, or other clean surfaces',
-              'time': '30 minutes',
-            },
-            'estimatedTime': 30,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Object/Product Photography (Use Household Items)'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Product Photography': 'Professional photos of objects',
-            'Flat Lay': 'Top-down view of objects',
-            'Macro': 'Very close-up photography',
-            'Reflector': 'Surface that bounces light',
-            'Background': 'Surface behind the object',
-          },
-          'quote': 'Even a teaspoon can shine with the right light and angle.',
-        },
+        'technicalDetails': {},
       },
-
       {
         'id': 'lesson_017',
         'day': 17,
-        'title': 'Everyday Storytelling',
-        'subtitle': 'Document Your Day',
-        'description':
-            'Learn to tell compelling photo stories using your daily life and create meaningful visual narratives.',
-        'content': '''**📖 What is Visual Storytelling?**
+        'title': 'Everyday Storytelling – Document Your Day',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Everyday Storytelling – Document Your Day',
+        'content': '''📷 Day 17: Everyday Storytelling – Document Your Day
 
-Visual storytelling is showing a day, moment, or emotion with 3-5 photos that work together to tell a complete story.
+🌟 What You Will Learn Today:
+	•	Tell a photo story using daily life
+	•	Combine wide, medium, and close-up shots
 
+📖 What is Visual Storytelling?
+It’s showing a day, moment, or emotion with 3–5 photos.
 Great stories have:
-• **Beginning, middle, end**
-• **Real emotion**
-• **Authentic moments**
-• **A clear focus or theme**
+	•	Beginning, middle, end
+	•	Emotion
+	•	Real moments
 
-**🎒 What to Capture in Daily Life**
+🎒 What to Capture
+	•	Making chai in morning light
+	•	Your street from balcony
+	•	Cutting vegetables
+	•	Small interaction with someone
 
-Your ordinary moments can become extraordinary stories:
-• Making chai in morning light
-• Your street view from the balcony
-• Cutting vegetables for dinner
-• Small interactions with family
-• Evening activities or routines
+📷 Practice Flow:
+	•	Wide shot – Set the scene
+	•	Medium – Show activity
+	•	Close-up – Detail (hands, tools, tea)
+	•	Emotion – Face or reaction
+	•	Ending – Something quiet or final
 
-**📷 Story Structure for Daily Documentation**
+🏠 Practice Task
+Create a 5-photo story:
+	•	No editing
+	•	Only natural light
+	•	Add emotion (silence, joy, reflection)
 
-1. **Wide shot** -- Set the scene (your room, kitchen, street)
-2. **Medium shot** -- Show the activity (person cooking, reading)
-3. **Close-up** -- Detail (hands, tools, expressions)
-4. **Emotion** -- Capture feelings (concentration, joy, reflection)
-5. **Ending** -- Something quiet or final (finished meal, sunset)
+💬 Quote
+“Don’t shoot what it looks like. Shoot what it feels like.”
 
-**🇮🇳 Indian Daily Life Story Ideas**
-
-• Morning pooja ritual in 5 frames
-• Street vendor preparing food
-• Grandmother's evening knitting routine
-• Children playing in the courtyard
-• Festival preparation at home
-• Monsoon day through your window
-
-**🎬 Tips for Authentic Storytelling**
-
-• **Don't stage** -- capture real moments
-• **Be patient** -- wait for natural emotions
-• **Get close** -- don't be afraid to move closer
-• **Use natural light** -- avoid flash for authentic feel
-• **Focus on one main idea** -- keep it simple
-
-**📱 Technical Tips for Story Shooting**
-
-• Shoot in good light (near windows, outdoors)
-• Keep camera steady for each shot
-• Vary your angles (high, low, eye level)
-• Don't over-edit -- maintain natural feel''',
-        'estimatedDuration': 40,
-        'type': 'practice',
+✅ Summary
+	•	Tell stories through daily life
+	•	Use a mix of shots
+	•	Add real emotion and detail''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Storytelling', 'Documentary', 'Daily Life'],
-        'objectives': [
-          'Create compelling stories from everyday moments',
-          'Master the 5-shot story structure',
-          'Develop an eye for meaningful details',
-          'Practice authentic documentary photography',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_017_01',
-            'title': 'Daily Life Story Project',
-            'description':
-                'Create a complete visual story from your daily routine',
-            'steps': [
-              'Choose one daily activity (cooking, studying, evening walk)',
-              'Plan your 5 shots: wide, medium, close-up, emotion, ending',
-              'Shoot the story using only natural light',
-              'Focus on real moments, not posed shots',
-              'Arrange photos in storytelling sequence',
-              'Share with someone without captions - can they understand the story?',
-            ],
-            'requirements': {
-              'activity': 'Any daily routine or activity',
-              'shots': 'Exactly 5 photos telling complete story',
-              'lighting': 'Natural light only',
-              'time': '45 minutes',
-            },
-            'estimatedTime': 45,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Everyday Storytelling – Document Your Day'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Visual Storytelling': 'Telling stories through images',
-            'Documentary': 'Recording real life as it happens',
-            'Authentic': 'Real and unposed moments',
-            'Narrative': 'A story with beginning, middle, end',
-            'Wide Shot': 'Shows entire scene or location',
-          },
-          'quote': 'Don\'t shoot what it looks like. Shoot what it feels like.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 18: Black & White Photography
       {
         'id': 'lesson_018',
         'day': 18,
-        'title': 'Black & White Photography',
-        'subtitle': 'When and Why',
-        'description':
-            'Understand when to remove color and how black & white photography can enhance emotion and focus.',
-        'content': '''**🖤 Why Black & White Photography?**
+        'title': 'Black & White Photography – When and Why',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Black & White Photography – When and Why',
+        'content': '''📷 Day 18: Black & White Photography – When and Why
 
-Black & white photography removes the distraction of color and helps viewers focus on:
-• **Emotion and mood**
-• **Shapes and patterns**
-• **Light and shadows**
-• **Textures and details**
-• **The essence of the subject**
+🌟 What You Will Learn Today:
+	•	Why and when to remove color
+	•	Create emotion with contrast
 
-**🎨 When to Choose Black & White**
+🖤 Why Black & White?
+	•	Color can distract from emotion
+	•	B&W helps focus on shapes, light, shadows
+	•	Best for old streets, faces, rain
 
-**Best subjects for B&W:**
-• Portraits with strong emotions
-• Old buildings and monuments
-• Street photography and daily life
-• Dramatic weather (rain, storms, fog)
-• High contrast scenes
-• Busy markets (removes color clutter)
-• Textures (fabric, wood, skin, walls)
+Best Moments to Try
+	•	Monuments or streets
+	•	Family moments
+	•	Rainy window light
+	•	Busy markets (removes color clutter)
 
-**When to keep color:**
-• Flowers and nature (color is the story)
-• Food photography
-• Festivals and celebrations
-• Fashion with important color elements
+📱 Practice with Any Phone
+	•	Convert a regular photo to B&W in editing
+	•	Increase contrast slightly
+	•	Don’t over-sharpen
 
-**📷 What Makes a Good B&W Photo**
+🏠 Practice Task
+Take 4 B&W pictures:
+	•	Face (portrait)
+	•	Texture (like fabric or hands)
+	•	Architecture
+	•	A quiet moment
 
-• **Strong contrast** between light and dark areas
-• **Interesting textures** and patterns
-• **Clear subject** that stands out
-• **Good composition** (rule of thirds, leading lines)
-• **Emotional connection** or story
+💬 Quote
+“Color records. Black & white reveals.”
 
-**🇮🇳 Indian Subjects Perfect for B&W**
+✅ Summary
+	•	Black & white simplifies and strengthens
+	•	Use for emotion, old charm, mood
+	•	Learn to ‘see’ without color
 
-• Old heritage buildings and forts
-• Portraits of elderly people with character lines
-• Monsoon scenes with dramatic clouds
-• Street vendors and market scenes
-• Religious ceremonies and rituals
-• Rural life and farming activities
-• Traditional crafts and artisans at work
 
-**📱 Converting to Black & White**
-
-**In camera:** Most phones have B&W mode in camera settings
-**In editing:** Convert color photos using:
-• Phone gallery editor
-• Snapseed: Tools > Black & White
-• Instagram filters
-• Lightroom Mobile
-
-**✨ B&W Editing Tips**
-
-• Increase contrast slightly for drama
-• Adjust highlights and shadows
-• Don't over-sharpen
-• Keep some detail in both bright and dark areas
-• Experiment with different B&W styles (high contrast, soft, vintage)''',
-        'estimatedDuration': 25,
+📱''',
+        'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'beginner',
-        'categories': [
-          'Black & White',
-          'Artistic Expression',
-          'Post-Processing',
-        ],
-        'objectives': [
-          'Understand when and why to use black & white',
-          'Learn to see scenes without color',
-          'Master contrast and texture in B&W photography',
-          'Convert and edit black & white photos effectively',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_018_01',
-            'title': 'Black & White Photography Practice',
-            'description':
-                'Create powerful black & white images focusing on emotion and composition',
-            'steps': [
-              'Take a portrait focusing on emotion and character',
-              'Photograph textures (fabric, wall, hands, wood)',
-              'Capture architecture or old buildings',
-              'Shoot a busy scene (market, street) and see how B&W simplifies it',
-              'Convert all to black & white and compare with color versions',
-              'Adjust contrast and shadows for better drama',
-            ],
-            'requirements': {
-              'subjects': 'Portrait, texture, architecture, busy scene',
-              'editing': 'Convert to B&W and adjust contrast',
-              'comparison': 'Compare B&W vs color versions',
-              'time': '35 minutes',
-            },
-            'estimatedTime': 35,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Black & White Photography – When and Why'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Contrast': 'Difference between light and dark areas',
-            'Texture': 'Surface quality you can see or feel',
-            'Highlights': 'Brightest parts of the photo',
-            'Shadows': 'Darkest parts of the photo',
-            'Monochrome': 'Another term for black & white',
-          },
-          'quote': 'Color records. Black & white reveals.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 19: Mobile Photography Like DSLR
       {
         'id': 'lesson_019',
         'day': 19,
         'title': 'How to Shoot with Mobile Like a DSLR',
-        'subtitle': 'Manual Controls and Pro Techniques',
-        'description':
-            'Learn to use your mobile phone\'s manual controls to achieve professional-looking results.',
-        'content': '''**📱 Unlocking Your Phone's Potential**
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about How to Shoot with Mobile Like a DSLR',
+        'content': '''Day 19: How to Shoot with Mobile Like a DSLR
 
-Modern smartphones have powerful cameras that can create DSLR-quality photos when used correctly. The key is learning to use **manual controls** instead of just point-and-shoot auto mode.
+🌟 What You Will Learn Today:
+	•	Use mobile manual/pro mode
+	•	Adjust ISO, shutter, focus
 
-**🔧 Finding Manual/Pro Mode**
+📷 Start with Settings
+Use your phone’s Pro/Manual mode (many Androids, some iPhones):
+	•	ISO: Brightness
+	•	Shutter: Motion freeze or blur
+	•	WB: Color tone
+	•	Focus: Sharp or soft
+📱 Apps to Try:
+	•	Lightroom Mobile
+	•	ProCam (iOS)
+	•	Footej (Android)
 
-**Android phones:** Look for "Pro", "Manual", or "Expert" mode in camera app
-**iPhones:** Use third-party apps like Lightroom Mobile, ProCam, or VSCO
-**Camera apps to try:**
-• Lightroom Mobile (free, powerful)
-• Open Camera (Android, free)
-• ProCam (iOS, paid but professional)
-• Footej Camera (Android)
+🎯 Practice Mode:
+	•	Daylight: ISO 100, fast shutter
+	•	Night: High ISO, steady hand or support
+	•	Portrait: Manual focus + touch exposure lock
 
-**⚙️ Manual Settings Explained**
+🏠 Practice Task
+Shoot:
+	•	Bright object with ISO 100
+	•	Low-light photo using ISO + steady hold
+	•	Portrait using manual focus
 
-**ISO:** Controls brightness and grain
-• Sunny day: ISO 100-200
-• Indoors: ISO 400-800
-• Low light: ISO 1600+ (expect some grain)
+💬 Quote
+“It’s not the gear, it’s the control in your hands.”
 
-**Shutter Speed:** Controls motion and light
-• Fast action: 1/500s or faster
-• Portraits: 1/125s to 1/250s
-• Night/low light: 1/30s or slower (use tripod)
+✅ Summary
+	•	Manual mode makes your mobile powerful
+	•	Practice exposure + focus
+	•	Use apps to learn more
 
-**Focus:** Tap to focus manually
-• Portrait: Focus on closest eye
-• Landscape: Focus 1/3 into the scene
-• Macro: Use manual focus for precision
 
-**White Balance:** Control color temperature
-• Daylight: 5500K
-• Cloudy: 6500K
-• Indoor tungsten: 3200K
-• Shade: 7500K
-
-**📸 DSLR-Style Techniques with Mobile**
-
-**Shallow Depth of Field (Background Blur):**
-• Get close to subject
-• Use Portrait mode if available
-• Use widest aperture setting (lowest f-number)
-• Create distance between subject and background
-
-**Sharp Landscapes:**
-• Use smaller aperture (higher f-number)
-• Focus 1/3 into the scene
-• Use tripod for sharp results
-• Shoot in good light
-
-**Action Photography:**
-• Use Sport mode or fast shutter speed
-• Continuous autofocus if available
-• Burst mode for best shot selection
-• Keep phone steady and track the action
-
-**🇮🇳 Indian Photography Scenarios**
-
-• **Wedding portraits:** Use Portrait mode + manual exposure
-• **Street photography:** Manual focus + faster shutter
-• **Monuments:** Small aperture + tripod for sharpness
-• **Festivals:** High ISO + fast shutter for action
-• **Food photography:** Macro focus + soft light''',
+🌙''',
         'estimatedDuration': 30,
-        'type': 'practice',
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': [
-          'Mobile Photography',
-          'Manual Controls',
-          'Technical Skills',
-        ],
-        'objectives': [
-          'Master manual controls on mobile phones',
-          'Achieve DSLR-like results with smartphones',
-          'Understand when to use different shooting modes',
-          'Create professional-looking photos with mobile',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_019_01',
-            'title': 'Mobile Manual Mode Practice',
-            'description':
-                'Practice using manual controls to create professional-looking mobile photos',
-            'steps': [
-              'Download a manual camera app (Lightroom Mobile recommended)',
-              'Take a bright outdoor photo using ISO 100, fast shutter',
-              'Shoot an indoor portrait using higher ISO and manual focus',
-              'Create background blur by getting close to subject',
-              'Take a night photo using tripod and slow shutter',
-              'Compare your manual shots with auto mode versions',
-            ],
-            'requirements': {
-              'app': 'Manual camera app (Lightroom Mobile, Open Camera, etc.)',
-              'scenarios': 'Outdoor, indoor, portrait, night photography',
-              'comparison': 'Manual vs auto mode shots',
-              'time': '40 minutes',
-            },
-            'estimatedTime': 40,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand How to Shoot with Mobile Like a DSLR'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Manual Mode': 'You control camera settings yourself',
-            'Pro Mode': 'Advanced camera controls on phone',
-            'Burst Mode': 'Taking multiple photos quickly',
-            'Continuous Focus': 'Camera keeps refocusing on moving subjects',
-            'Macro Focus': 'Very close-up photography',
-          },
-          'quote': 'It\'s not the gear, it\'s the control in your hands.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 20: Low Light Photography
       {
         'id': 'lesson_020',
         'day': 20,
-        'title': 'How to Shoot in Low Light',
-        'subtitle': 'Without Flash',
-        'description':
-            'Master techniques for capturing beautiful photos in dark environments using available light sources.',
-        'content': '''**🌙 Why Avoid Flash?**
+        'title': 'How to Shoot in Low Light (Without Flash)',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about How to Shoot in Low Light (Without Flash)',
+        'content': '''Day 20: How to Shoot in Low Light (Without Flash)
 
-Flash can create harsh, unnatural light that:
-• Flattens facial features
-• Creates red-eye effect
-• Eliminates natural atmosphere
-• Disturbs people and events
+🌟 What You Will Learn Today:
+	•	Handle dark scenes without flash
+	•	Use creative lighting and slow shutter
 
-Learning to use available light creates more **natural and beautiful** photos.
+🔦 Light Sources to Try
+	•	Window light
+	•	Candle or diya
+	•	Phone screen or torch
+	•	LED strip or fairy light
+📌 Stay steady: Use wall or object to rest your hands
 
-**🔦 Finding Light in Dark Places**
+🧠 Tips to Remember
+	•	Keep ISO under 1600 (less noise)
+	•	Ask subject to stay still
+	•	Use black background for moody feel
 
-**Natural light sources to look for:**
-• Window light (even at night)
-• Street lights and shop signs
-• Candles, diyas, or oil lamps
-• TV or phone screen glow
-• Car headlights
-• Fire or bonfire light
+📷 Practice Ideas
+	•	Portrait lit by diya (festival style)
+	•	Object near phone torch
+	•	Silhouette with window backlight
+	•	Reflection from screen glow
 
-**Artificial light sources:**
-• LED panels or ring lights
-• Table lamps with lampshades
-• Fairy lights or string lights
-• Torch/flashlight (diffused with tissue)
+💬 Quote
+“Darkness isn’t empty—it’s a canvas of light.”
 
-**📱 Camera Settings for Low Light**
-
-**Mobile phones:**
-• Use Night mode if available
-• Increase ISO (1600-6400)
-• Use manual focus
-• Hold very steady or use tripod
-• Take multiple shots
-
-**Manual settings:**
-• Higher ISO (accept some grain for the shot)
-• Wider aperture (lower f-number)
-• Slower shutter speed (but watch for blur)
-• Focus manually on subject
-
-**🧘‍♂️ Staying Steady in Low Light**
-
-• **Brace yourself:** Use wall, table, or your body
-• **Breathing technique:** Take breath, hold, shoot, exhale
-• **Timer function:** Use 2-3 second timer to avoid shake
-• **Makeshift tripod:** Stack books, use phone stand
-• **Both hands:** Hold phone with both hands firmly
-
-**🎨 Creative Low Light Techniques**
-
-**Silhouettes:**
-• Place subject between you and light source
-• Expose for the bright background
-• Keep subject as dark shape
-
-**Rim lighting:**
-• Light comes from behind subject
-• Creates beautiful outline glow
-• Great for portraits and objects
-
-**Mood lighting:**
-• Single candle or diya
-• Soft, warm, intimate feel
-• Perfect for festivals or spiritual moments
-
-**🇮🇳 Indian Low Light Opportunities**
-
-• **Diwali celebrations:** Candles and diyas
-• **Evening aarti:** Temple or home prayers
-• **Street food stalls:** Warm artificial lighting
-• **Wedding ceremonies:** Avoid flash, use ambient light
-• **Monsoon evenings:** Soft window light
-• **Festival lights:** Colorful decorations
-
-**⚠️ Common Low Light Mistakes**
-
-• Using digital zoom (makes grain worse)
-• Moving too much (causes blur)
-• Expecting perfection (some grain is okay)
-• Not getting close enough to light source
-• Forgetting to clean lens (reduces available light)''',
-        'estimatedDuration': 35,
-        'type': 'practice',
+✅ Summary
+	•	Use soft, local lights
+	•	Keep hand steady
+	•	Look for light even in dark''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Low Light', 'Available Light', 'Night Photography'],
-        'objectives': [
-          'Shoot in low light without using flash',
-          'Find and use available light sources creatively',
-          'Master camera stability techniques',
-          'Create mood and atmosphere in dark environments',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_020_01',
-            'title': 'Low Light Photography Challenge',
-            'description':
-                'Practice shooting in various low light conditions using only available light',
-            'steps': [
-              'Take a portrait lit by window light in evening',
-              'Photograph an object using candle or diya light',
-              'Create a silhouette against bright background',
-              'Capture the glow from a phone or TV screen',
-              'Take a street scene using only street lighting',
-              'Practice holding steady - compare with/without support',
-            ],
-            'requirements': {
-              'lighting': 'Various low light sources (no flash)',
-              'stability': 'Practice with and without camera support',
-              'subjects': 'Portrait, object, silhouette, screen glow, street',
-              'time': '45 minutes',
-            },
-            'estimatedTime': 45,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand How to Shoot in Low Light (Without Flash)'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Available Light': 'Existing light in the scene',
-            'Grain/Noise': 'Dots that appear in low light photos',
-            'Rim Light': 'Light that outlines the subject from behind',
-            'Ambient Light': 'General light in the environment',
-            'Camera Shake': 'Blur from moving camera during exposure',
-          },
-          'quote': 'Darkness isn\'t empty---it\'s a canvas of light.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 21: One Light Portrait Challenge
       {
         'id': 'lesson_021',
         'day': 21,
-        'title': 'Practice Day',
-        'subtitle': 'One Light Portrait Challenge',
-        'description':
-            'Master portrait lighting by using only one light source to create dramatic and beautiful portraits.',
-        'content': '''**💡 Why One Light Portrait Challenge?**
+        'title': 'Practice Day – One Light Portrait Challenge',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Practice Day – One Light Portrait Challenge',
+        'content': '''📷 Day 21: Practice Day – One Light Portrait Challenge
 
-Using only one light source teaches you to:
-• **Control light direction** and intensity
-• **Understand shadows** and highlights
-• **Create mood and drama**
-• **Work with limited resources**
-• **Focus on the subject's expression**
+🌟 What You Will Learn Today:
+	•	Create amazing portraits with just one light
+	•	Understand shadow, mood, and highlights
+	•	Use torch, lamp, or sunlight as your only light
 
-Great photographers often start with just one light because it's **simple yet powerful**.
+💡 Why One Light?
+Using one light helps you learn to control:
+	•	Direction
+	•	Intensity
+	•	Shadows
+	•	Mood and emotion
+Great photographers start with one light because it’s simple and powerful.
 
-**🔦 Light Sources You Can Use**
+🔦 Light Sources You Can Use:
+	•	Window light (morning/evening)
+	•	Table lamp or study light
+	•	Mobile flashlight (diffused with tissue)
+	•	Diya or LED candle for creative mood
 
-**Natural sources:**
-• Window light (soft, even)
-• Doorway light (directional)
-• Balcony or terrace light
-• Golden hour sunlight
+🧍 Posing with One Light
+	•	Subject should face or turn slightly towards the light
+	•	Use 45° angle for dramatic shadow
+	•	Backlight for silhouette
+	•	Cover half face with light for mystery effect
+📸 Tip: Keep background simple or dark
 
-**Artificial sources:**
-• Table lamp with lampshade
-• Mobile flashlight (diffused with tissue paper)
-• LED panel or ring light
-• Single candle or diya (for mood)
-• Computer or TV screen (for creative effects)
+📱 Camera Settings for Mobile
+	•	Use manual mode if available
+	•	Keep ISO as low as possible
+	•	Focus on the eye nearest to light
+Use support to keep your mobile steady.
 
-**📐 Light Positioning Techniques**
+🏠 Practice Task:
+Take 5 one-light portraits:
+	•	Soft window light (natural)
+	•	Harsh single light (lamp/torch)
+	•	Silhouette or backlit
+	•	Low light mood with diya or LED
+	•	Experimental light angle (under face or top down)
 
-**Front lighting:** Light faces the subject
-• Effect: Even, soft lighting
-• Good for: Beauty portraits, clear features
-• Setup: Light directly in front, slightly above eye level
+🇮🇳 Indian Inspiration
+	•	Use saree or dupatta to create colored light effect
+	•	Light diya near face for spiritual or festive vibe
+	•	Portrait with oil lamp (kerosene/bottle lamp)
 
-**45-degree lighting:** Light at angle to subject
-• Effect: Dramatic shadows, dimension
-• Good for: Character portraits, artistic shots
-• Setup: Light 45 degrees to side and slightly above
+✍️ Vocabulary
+Word
+Simple Meaning
+One Light
+Using only one light source
+Shadow
+Dark area where light is blocked
+Silhouette
+Shape seen against bright light
 
-**Side lighting:** Light from the side
-• Effect: Half face lit, half in shadow
-• Good for: Dramatic mood, mystery
-• Setup: Light directly to one side of subject
+💬 Quote
+“With one light and a vision, you can tell a thousand stories.”
 
-**Back lighting:** Light behind subject
-• Effect: Rim light, silhouette
-• Good for: Creative portraits, spiritual mood
-• Setup: Subject between you and light source
-
-**🧍‍♀️ Posing Tips for One Light**
-
-• **Face the light** for even illumination
-• **Turn slightly away** for more dramatic shadows
-• **Use hands naturally** - don't pose stiffly
-• **Focus on eyes** - they should catch the light
-• **Relax and talk** to get natural expressions
-
-**🎨 Creative One Light Ideas**
-
-• **Candle portraits:** Warm, intimate lighting
-• **Window silhouettes:** Subject against bright window
-• **Phone screen glow:** Modern, tech-inspired look
-• **Golden hour magic:** Soft, warm outdoor light
-• **Lamp shade softness:** Diffused indoor lighting
-
-**🇮🇳 Indian Cultural One Light Portraits**
-
-• **Diya or oil lamp lighting:** Traditional and spiritual
-• **Saree or dupatta as diffuser:** Soften harsh light
-• **Jharokha (window) portraits:** Traditional framing
-• **Morning pooja light:** Spiritual and peaceful
-• **Festival lighting:** Colorful and celebratory
-
-**📱 Technical Settings**
-
-• **Focus on the eyes** closest to camera
-• **Expose for the face**, not the background
-• **Use Portrait mode** if available for blur
-• **Keep ISO low** to reduce grain
-• **Use timer** to avoid camera shake''',
-        'estimatedDuration': 50,
-        'type': 'project',
+✅ Summary
+	•	Start small: one light = more learning
+	•	Focus on how light falls on the face
+	•	Try mood, mystery, and shape
+	•	Use everyday light sources creatively''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': [
-          'Portrait Photography',
-          'Lighting',
-          'Creative Challenge',
-        ],
-        'objectives': [
-          'Master single light source portrait techniques',
-          'Understand light direction and shadow control',
-          'Create dramatic and beautiful portraits',
-          'Develop lighting creativity with limited resources',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_021_01',
-            'title': 'One Light Portrait Project',
-            'description':
-                'Create a series of portraits using only one light source in different ways',
-            'steps': [
-              'Set up near a window for natural one-light portraits',
-              'Take a front-lit portrait (soft, even lighting)',
-              'Create a 45-degree angle dramatic portrait',
-              'Try side lighting for half-shadow effect',
-              'Experiment with backlighting for rim light or silhouette',
-              'Use artificial light (lamp, candle, phone) for creative mood',
-              'Compare all shots and select your best one-light portrait',
-            ],
-            'requirements': {
-              'light_source': 'Single light only (natural or artificial)',
-              'positions': 'Try at least 4 different light positions',
-              'subject': 'Willing portrait subject',
-              'time': '60 minutes',
-            },
-            'estimatedTime': 60,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Practice Day – One Light Portrait Challenge'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'One Light': 'Using only one light source',
-            'Light Direction': 'Where the light comes from relative to subject',
-            'Rim Light': 'Light that outlines the subject from behind',
-            'Front Light': 'Light coming from camera direction',
-            'Side Light': 'Light coming from the side of subject',
-          },
-          'quote':
-              'With one light and a vision, you can tell a thousand stories.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 22: Basic Photo Editing
       {
         'id': 'lesson_022',
         'day': 22,
-        'title': 'Basics of Photo Editing',
-        'subtitle': 'Using Snapseed or Lightroom Mobile',
-        'description':
-            'Learn essential photo editing skills using free mobile apps to enhance your photos professionally.',
-        'content': '''**🛠️ Why Edit Your Photos?**
+        'title': 'Basics of Photo Editing (Using Snapseed or Lightroom Mobile)',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Basics of Photo Editing (Using Snapseed or Lightroom Mobile)',
+        'content': '''📷 Day 22: Basics of Photo Editing (Using Snapseed or Lightroom Mobile)
 
-Photo editing helps you:
-• **Correct exposure** problems (too dark/bright)
-• **Enhance colors** and mood
-• **Remove distractions** or unwanted elements
-• **Improve composition** through cropping
-• **Express your creative vision**
+🌟 What You Will Learn Today:
+	•	Basic editing tools: brightness, contrast, highlights, shadows
+	•	Using Snapseed or Lightroom Mobile
+	•	How to improve photos without overdoing
+	•	Why editing is important for storytelling
 
-Think of editing as **finishing your photo**, not fixing bad photography.
+🛠️ Editing Tools Simplified
+	•	Brightness: Makes the whole photo lighter or darker
+	•	Contrast: Difference between light and dark
+	•	Highlights: Bright parts of the photo
+	•	Shadows: Dark parts of the photo
+	•	Saturation: Intensity of colors
+	•	Clarity: Adds sharpness and detail to edges
+	•	Temperature: Makes image warmer (yellow) or cooler (blue)
 
-**📲 Best Free Editing Apps**
+📲 Apps You Can Use:
+	•	Snapseed (Free, Android + iOS): Powerful and easy to use
+	•	Lightroom Mobile (Free with premium options): Great for more control and professional feel
 
-**Snapseed (Google):**
-• Completely free
-• Professional tools
-• Easy to learn
-• Works on Android and iOS
+🏠 Practice Task:
+Edit 3 photos:
+	•	Portrait (adjust light + sharpness)
+	•	Object (increase color + contrast)
+	•	Black & white version of one photo
+Bonus: Try using both Snapseed and Lightroom to see which you prefer.
 
-**Lightroom Mobile (Adobe):**
-• Free version available
-• Professional-grade editing
-• Cloud sync
-• Preset filters
+✍️ Vocabulary Table
+Term
+Meaning
+Filter
+A preset look for editing photos
+Clarity
+Adds detail and sharpness
+Export
+Saving your final edited photo
 
-**🔧 Essential Editing Tools Explained**
+💬 Quote
+"Editing is how you finish the story your photo began."
 
-**Brightness:** Makes the whole photo lighter or darker
-• Use when photo is too dark or too bright overall
-
-**Contrast:** Difference between light and dark areas
-• Increase for more dramatic look
-• Decrease for softer, gentler feel
-
-**Highlights:** Brightest parts of your photo
-• Lower to recover blown-out bright areas
-• Useful for sky or bright windows
-
-**Shadows:** Darkest parts of your photo
-• Raise to brighten dark areas
-• Helpful for faces in shadow
-
-**Saturation:** Intensity of colors
-• Increase for more vibrant colors
-• Decrease for muted, natural look
-
-**Clarity/Structure:** Adds sharpness to edges
-• Increase for crisp, detailed look
-• Use sparingly to avoid over-sharpening
-
-**Temperature:** Warmth or coolness of colors
-• Move toward yellow for warmer feel
-• Move toward blue for cooler mood
-
-**📱 Snapseed Basic Workflow**
-
-1. **Open photo** in Snapseed
-2. **Tools > Tune Image** for basic adjustments
-3. **Adjust brightness, contrast, saturation**
-4. **Tools > Crop** to improve composition
-5. **Tools > Healing** to remove small distractions
-6. **Export** your edited photo
-
-**🎨 Editing Guidelines for Beginners**
-
-• **Start with small adjustments** (don't overdo it)
-• **Edit with the end goal in mind** (what story are you telling?)
-• **Keep it natural** - avoid heavy filters
-• **Compare with original** regularly
-• **Save original and edited versions**
-
-**🇮🇳 Editing Indian Photography**
-
-• **Wedding photos:** Warm up skin tones, brighten faces
-• **Festival shots:** Enhance colors but keep them realistic
-• **Street photography:** Increase contrast for dramatic look
-• **Food photography:** Warm colors, bright highlights
-• **Portrait photography:** Soften skin, brighten eyes
-
-**⚠️ Common Editing Mistakes**
-
-• **Over-saturation:** Colors look fake and cartoonish
-• **Too much clarity:** Creates harsh, unnatural look
-• **Extreme contrast:** Loses detail in highlights/shadows
-• **Heavy filters:** Distracts from the subject
-• **Not cropping:** Missing chance to improve composition''',
+🇮🇳 Did You Know?
+Many Indian mobile photographers use only Snapseed or Lightroom to edit their award-winning shots. Mastering these simple apps can take your photography to the next level.''',
         'estimatedDuration': 30,
-        'type': 'practice',
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Photo Editing', 'Post-Processing', 'Digital Skills'],
-        'objectives': [
-          'Learn basic photo editing tools and techniques',
-          'Use Snapseed or Lightroom Mobile effectively',
-          'Enhance photos while maintaining natural look',
-          'Develop personal editing style',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_022_01',
-            'title': 'Basic Photo Editing Practice',
-            'description':
-                'Edit different types of photos using essential tools',
-            'steps': [
-              'Download Snapseed or Lightroom Mobile (free)',
-              'Edit a portrait: adjust brightness, contrast, and skin tones',
-              'Edit a landscape: enhance sky and colors',
-              'Edit an indoor photo: brighten shadows, reduce highlights',
-              'Practice cropping to improve composition',
-              'Compare all edited versions with originals',
-            ],
-            'requirements': {
-              'app': 'Snapseed or Lightroom Mobile',
-              'photos': 'Portrait, landscape, indoor photo',
-              'edits': 'Basic adjustments + cropping',
-              'time': '40 minutes',
-            },
-            'estimatedTime': 40,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Basics of Photo Editing (Using Snapseed or Lightroom Mobile)'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Editing': 'Adjusting photos after taking them',
-            'Exposure': 'How bright or dark the photo is',
-            'Highlights': 'Brightest areas in the photo',
-            'Shadows': 'Darkest areas in the photo',
-            'Saturation': 'How intense the colors are',
-            'Crop': 'Cut parts of photo to improve framing',
-          },
-          'quote': 'Editing is how you finish the story your photo began.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 23: Portrait Editing
       {
         'id': 'lesson_023',
         'day': 23,
         'title': 'How to Edit Skin & Light in Portraits',
-        'subtitle': 'Natural Beauty Enhancement',
-        'description':
-            'Learn to enhance portraits while maintaining natural beauty and realistic skin tones.',
-        'content': '''**🧴 Philosophy of Portrait Editing**
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about How to Edit Skin & Light in Portraits',
+        'content': '''📷 Day 23: How to Edit Skin & Light in Portraits
 
-Good portrait editing should:
-• **Enhance natural beauty**, not create artificial perfection
-• **Maintain realistic skin texture**
-• **Improve lighting and exposure**
-• **Keep the person recognizable**
-• **Support the mood and story**
+🌟 What You Will Learn Today:
+	•	How to make skin look natural and smooth
+	•	Balance light on face
+	•	Maintain realism while improving beauty
 
-Remember: The goal is to make people look like the **best version of themselves**.
+🧴 Skin Editing Tips:
+	•	Use Snapseed's Healing Tool to remove small marks
+	•	Use Portrait Tool to smooth skin slightly
+	•	Don’t over-soften: keep real texture
+	•	Lightly sharpen eyes for a natural pop
 
-**👁️ Eye Enhancement Techniques**
+💡 Light Correction:
+	•	Brighten shadows under eyes with the Selective tool
+	•	Use the Brush tool to lower highlights or lighten shadows
+	•	Adjust warmth to correct overly yellow or blue skin tone
+	•	Enhance catchlight in the eyes by subtly increasing exposure on eyes
 
-**Brightening eyes:**
-• Use Snapseed's **Selective tool**
-• Tap on the eyes
-• Increase **brightness** slightly (+10 to +20)
-• Add subtle **structure/clarity** for sparkle
+🏠 Practice Task:
+Edit 2 portraits:
+	•	Basic smoothing + brighten eyes
+	•	Fix overexposed (too bright) face
+Bonus: Compare your edit with the original side-by-side.
 
-**Sharpening eyes:**
-• Use **Details tool** in Snapseed
-• Focus on just the iris and eyelashes
-• Don't over-sharpen
+💬 Quote
+“Real beauty lives in soft light and honest skin.”
 
-**🌟 Skin Smoothing (Natural Approach)**
-
-**Basic skin enhancement:**
-• Use **Healing tool** for spots and blemishes
-• **Portrait tool** for overall skin softening
-• Keep **texture visible** - don't make skin plastic
-• Work on small areas at a time
-
-**Advanced skin editing:**
-• Use **Brush tool** to selectively brighten/darken skin
-• **Dodge** (brighten) under-eye circles gently
-• **Burn** (darken) any harsh highlights on forehead
-
-**💡 Fixing Light on Faces**
-
-**Balancing facial lighting:**
-• **Brighten shadows** under eyes, nose, chin
-• **Reduce hot spots** on forehead, nose bridge
-• Use **Selective tool** for precise adjustments
-• Keep lighting looking natural
-
-**Color correction:**
-• Adjust **temperature** for skin tone
-• Indian skin often looks good with slightly warm temperature
-• Fix **color casts** from artificial lighting
-
-**🎨 Snapseed Portrait Workflow**
-
-1. **Basic adjustments:** Brightness, contrast, highlights, shadows
-2. **Healing tool:** Remove obvious blemishes
-3. **Portrait tool:** Gentle skin smoothing (30-50% maximum)
-4. **Selective tool:** Brighten eyes and balance face lighting
-5. **Details tool:** Sharpen eyes subtly
-6. **Final check:** Compare with original
-
-**🇮🇳 Editing Indian Portraits**
-
-**Traditional portraits:**
-• Enhance jewelry and clothing details
-• Warm up gold and red tones
-• Brighten face while keeping traditional makeup natural
-
-**Wedding photography:**
-• Balance harsh flash lighting
-• Enhance bridal attire colors
-• Soften skin while keeping cultural authenticity
-
-**Family portraits:**
-• Consistent skin tones across family members
-• Gentle enhancement for older family members
-• Keep children's natural expressions intact
-
-**⚠️ What NOT to Do**
-
-• **Over-smooth skin** - lose natural texture
-• **Whiten teeth too much** - looks unnatural
-• **Change face structure** - not realistic
-• **Remove all wrinkles** from older people - part of their character
-• **Make eyes unnaturally bright** - should still look human
-
-**📱 Mobile Portrait Editing Tips**
-
-• **Zoom in** while editing for precision
-• **Use small adjustments** (+/- 10-20 maximum)
-• **Edit on bright phone screen** for accurate colors
-• **Take breaks** to see with fresh eyes
-• **Save original and edited versions**''',
-        'estimatedDuration': 35,
-        'type': 'practice',
+✍️ Extra Tip:
+In India, wedding photographers often enhance portraits by adjusting just the face area — keeping background untouched. This helps the subject stand out.''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': [
-          'Portrait Editing',
-          'Skin Retouching',
-          'Beauty Enhancement',
-        ],
-        'objectives': [
-          'Edit portraits while maintaining natural beauty',
-          'Balance lighting on faces effectively',
-          'Enhance eyes and skin texture appropriately',
-          'Develop ethical portrait editing practices',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_023_01',
-            'title': 'Natural Portrait Enhancement',
-            'description':
-                'Practice enhancing portraits while keeping them natural and realistic',
-            'steps': [
-              'Select 2-3 portrait photos with different lighting conditions',
-              'Basic adjustments: fix overall exposure and contrast',
-              'Use Healing tool to remove only obvious blemishes',
-              'Gently brighten eyes using Selective tool',
-              'Balance face lighting - brighten shadows, reduce hot spots',
-              'Apply minimal skin smoothing (30-50% maximum)',
-              'Compare before/after - ensure person still looks like themselves',
-            ],
-            'requirements': {
-              'photos': '2-3 portrait photos',
-              'editing': 'Natural enhancement only',
-              'comparison': 'Before/after comparison',
-              'time': '45 minutes',
-            },
-            'estimatedTime': 45,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand How to Edit Skin & Light in Portraits'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Skin Smoothing': 'Reducing blemishes while keeping texture',
-            'Selective Tool': 'Edit specific areas of photo',
-            'Healing Tool': 'Remove spots and unwanted elements',
-            'Color Cast': 'Unwanted color tint in photo',
-            'Hot Spots': 'Overly bright areas on skin',
-          },
-          'quote': 'Real beauty lives in soft light and honest skin.',
-        },
+        'technicalDetails': {},
       },
       {
         'id': 'lesson_024',
         'day': 24,
         'title': 'Adding Filters Without Losing Natural Look',
-        'subtitle': 'Subtle Enhancement Techniques',
-        'description':
-            'Learn to apply filters and presets while maintaining natural, professional-looking results.',
-        'content': '''**🎨 The Art of Subtle Filtering**
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Adding Filters Without Losing Natural Look',
+        'content': '''📷 Day 24: Adding Filters Without Losing Natural Look
 
-Filters and presets can enhance your photos, but the key is **restraint**. The best edits are often invisible - they enhance the mood without making the photo look obviously processed.
+🌟 What You Will Learn Today:
+	•	Apply filters without making photos look fake
+	•	Know when to avoid using filters
+	•	Understanding color mood and tones
 
-**📱 Types of Filters and Where to Find Them**
+🎨 Filter Tips:
+	•	Use filters at 30–50% strength
+	•	Avoid filters with high saturation or heavy contrast
+	•	Try “vintage” or “film” looks for subtle mood
+📱 In Snapseed:
+	•	Go to “Looks” > Choose basic look > Adjust with tools
+📱 In Lightroom:
+	•	Use Presets > Lower intensity
+	•	You can download free presets online
 
-**Built-in phone filters:**
-• Usually too strong for professional use
-• Good for quick social media posts
-• Try at 30-50% intensity
+🧠 Why Use Filters Carefully?
+	•	Natural editing keeps your work professional
+	•	Heavy filters reduce emotion and distract from subject
 
-**Snapseed "Looks":**
-• More subtle and professional
-• Can be adjusted after applying
-• Good starting points for editing
+🏠 Practice Task:
+	•	Apply 3 filters on 1 photo
+	•	Share both: Filtered vs Original
+	•	Ask which one viewers like more
 
-**Lightroom Mobile presets:**
-• Professional-grade filters
-• Free and paid options available
-• Highly customizable
+✍️ Vocabulary Table
+Term
+Meaning
+Preset
+Pre-made editing setup
+Film Look
+Filter that mimics old film camera
+Intensity
+How strong the filter effect is
 
-**🎯 Choosing the Right Filter Style**
-
-**Portrait photography:**
-• Warm, soft filters
-• Film emulation presets
-• Avoid high contrast or saturated looks
-
-**Landscape photography:**
-• Enhance natural colors
-• Slightly increase contrast
-• Bring out sky details
-
-**Street photography:**
-• Black & white conversions
-• Vintage film looks
-• Moody, contrasty styles
-
-**🛠️ How to Apply Filters Properly**
-
-**Step 1: Basic corrections first**
-• Fix exposure, highlights, shadows
-• Correct white balance
-• Crop and straighten
-
-**Step 2: Apply filter at reduced intensity**
-• Start at 30-50% strength
-• See how it affects the overall mood
-
-**Step 3: Fine-tune individual elements**
-• Adjust specific areas if needed
-• Ensure skin tones look natural
-• Check that details aren't lost
-
-**🇮🇳 Filters for Indian Photography**
-
-• **Wedding photography:** Warm, golden presets that enhance reds and golds
-• **Festival photography:** Vibrant but natural color enhancement
-• **Portrait photography:** Film emulation for timeless look
-• **Street photography:** Vintage film looks for nostalgic feel
-
-**⚠️ Common Filter Mistakes**
-
-• Over-saturation making colors look fake
-• Too much contrast losing detail
-• Heavy vignetting that distracts
-• Unrealistic skin tones
-• Inconsistent looks across similar photos''',
-        'estimatedDuration': 25,
-        'type': 'practice',
+💬 Quote
+“A good filter should whisper, not shout.”''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Photo Editing', 'Filters', 'Style Development'],
-        'objectives': [
-          'Apply filters while maintaining natural look',
-          'Understand different filter styles and when to use them',
-          'Develop personal editing style',
-          'Avoid common filtering mistakes',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_024_01',
-            'title': 'Natural Filter Application Practice',
-            'description':
-                'Practice applying various filters while keeping photos looking natural and professional',
-            'steps': [
-              'Select 3 different types of photos (portrait, landscape, object)',
-              'Try 3 different filter styles on each photo',
-              'Apply each filter at 30-50% intensity',
-              'Compare filtered versions with originals',
-              'Choose the most natural-looking enhancement for each',
-              'Create a consistent style across all three photos',
-            ],
-            'requirements': {
-              'photos': '3 different types (portrait, landscape, object)',
-              'filters': 'Try at least 3 different filter styles',
-              'intensity': 'Test at reduced intensity (30-50%)',
-              'time': '35 minutes',
-            },
-            'estimatedTime': 35,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Adding Filters Without Losing Natural Look'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Filter': 'A preset look for editing photos',
-            'Preset': 'Pre-made editing setup',
-            'Intensity': 'How strong the filter effect is',
-            'Film Emulation': 'Filter that mimics old film camera',
-            'Vignetting': 'Darkening around edges of photo',
-          },
-          'quote': 'A good filter should whisper, not shout.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 25: Cropping, Straightening & Exporting
       {
         'id': 'lesson_025',
         'day': 25,
         'title': 'Cropping, Straightening & Exporting',
-        'subtitle': 'Final Photo Preparation',
-        'description':
-            'Master the final steps of photo editing: improving composition through cropping and preparing images for sharing.',
-        'content': '''**✂️ The Power of Cropping**
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Cropping, Straightening & Exporting',
+        'content': '''📷 Day 25: Cropping, Straightening & Exporting
 
-Cropping is often the **most important edit** you can make. It can:
-• **Improve composition** dramatically
-• **Remove distractions** from edges
-• **Change the story** of your photo
-• **Fix framing mistakes** made while shooting
+🌟 What You Will Learn Today:
+	•	How to crop for better framing
+	•	Straighten tilted shots
+	•	Export your image properly
 
-**📐 Cropping Guidelines**
+✂️ Cropping Tips:
+	•	Use Rule of Thirds grid
+	•	Remove unwanted empty spaces
+	•	Try square crop for Instagram or 4:5 for portraits
 
-**Rule of Thirds in cropping:**
-• Place important elements on grid lines
-• Eyes on upper third line for portraits
-• Horizon on upper or lower third for landscapes
+🧭 Straighten:
+	•	Use horizon or wall as a guide
+	•	Snapseed > Tools > Rotate
+	•	Lightroom > Crop > Auto or Manual Adjust
 
-**Aspect ratios for different uses:**
-• **Square (1:1):** Instagram posts, profile pictures
-• **4:5 vertical:** Instagram stories, portrait posts
-• **16:9 horizontal:** YouTube thumbnails, landscape photos
-• **Original ratio:** Often best for printing
+📤 Export Settings:
+	•	High quality for printing: 3000px width
+	•	Web or Instagram: 1080px wide
+	•	Use JPEG format for most platforms
 
-**🧭 Straightening Your Photos**
+🏠 Practice Task:
+	•	Crop and straighten 3 images
+	•	Export in two sizes: Print & Instagram
+	•	Compare the final exports on your phone and laptop
 
-**Why straighten?**
-• Tilted horizons look unprofessional
-• Crooked buildings are distracting
-• Straight lines create visual stability
+✍️ Vocabulary Table
+Term
+Meaning
+Crop
+Cut part of the photo
+Rotate
+Turn image to fix tilt
+Export
+Save final image for sharing
 
-**How to straighten:**
-• Use horizon as reference line
-• For architecture, use building edges
-• Slight adjustments (1-3 degrees) often enough
-
-**📤 Exporting Your Photos**
-
-**Export settings for different purposes:**
-
-**Instagram posting:**
-• Resolution: 1080 x 1080 (square) or 1080 x 1350 (4:5)
-• Format: JPEG, Quality: 90-95%
-
-**Printing:**
-• Resolution: 300 DPI minimum
-• Format: JPEG (high quality)
-
-**Website/blog:**
-• Width: 1200-2000 pixels maximum
-• Format: JPEG for photos
-
-**WhatsApp sharing:**
-• Smaller file size for quick sending
-• 800-1200 pixels wide usually sufficient
-
-**🔧 Export Workflow**
-
-1. **Final edit check** - Review all adjustments
-2. **Crop and straighten** - Apply rule of thirds, remove distractions
-3. **Choose export settings** - Select resolution based on use
-4. **Save with descriptive name** - Include date and subject
-
-**📱 Mobile Export Tips**
-
-**Snapseed export:**
-• Export > Save (saves to gallery)
-• Maintains high quality by default
-
-**Lightroom Mobile:**
-• Share > Export As > Choose settings
-• Can export to cloud storage''',
-        'estimatedDuration': 20,
-        'type': 'practice',
+💬 Quote
+“Framing your photo is like choosing your words in a sentence.”''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Photo Editing', 'Composition', 'File Management'],
-        'objectives': [
-          'Master cropping for better composition',
-          'Learn to straighten photos professionally',
-          'Understand export settings for different platforms',
-          'Organize and name files effectively',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_025_01',
-            'title': 'Cropping and Export Practice',
-            'description':
-                'Practice improving photos through cropping and prepare them for different platforms',
-            'steps': [
-              'Select 3 photos that need composition improvement',
-              'Crop each using Rule of Thirds for better framing',
-              'Straighten any tilted horizons or buildings',
-              'Export one photo for Instagram (square)',
-              'Export one photo for printing (high resolution)',
-              'Export one photo for WhatsApp sharing (compressed)',
-              'Compare before/after crops to see improvement',
-            ],
-            'requirements': {
-              'photos': '3 photos needing composition improvement',
-              'crops': 'Apply Rule of Thirds',
-              'exports': 'Different formats for different platforms',
-              'time': '30 minutes',
-            },
-            'estimatedTime': 30,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Cropping, Straightening & Exporting'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Crop': 'Cut parts of photo to improve framing',
-            'Aspect Ratio': 'Width to height proportion of image',
-            'Resolution': 'Image quality in pixels',
-            'DPI': 'Dots per inch - print quality measure',
-            'Export': 'Save final image for sharing',
-          },
-          'quote':
-              'Framing your photo is like choosing your words in a sentence.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 26: Organizing Your Photos
       {
         'id': 'lesson_026',
         'day': 26,
         'title': 'Organizing Your Photos',
-        'subtitle': 'Digital Photo Management',
-        'description':
-            'Learn effective strategies for organizing, storing, and managing your growing photo collection.',
-        'content': '''**📁 Why Organization Matters**
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Organizing Your Photos',
+        'content': '''📷 Day 26: Organizing Your Photos
 
-As you take more photos, organization becomes crucial for:
-• **Finding specific photos quickly**
-• **Keeping only your best work**
-• **Backing up important memories**
-• **Tracking your progress as a photographer**
-• **Preparing for sharing or printing**
+🌟 What You Will Learn Today:
+	•	How to keep your photo library neat and easy to manage
 
-**🗂️ Folder Structure Ideas**
+📁 Organizing Tips:
+	•	Create folders by date, event, or subject
+	•	e.g., “2025_June_StreetPhotography”
+	•	Use Google Photos, Lightroom, or gallery folders
+	•	Mark favorites using ⭐ in app or add ‘Fav’ in name
 
-**By Date:**
-• 2025_01_January
-• 2025_02_February
-• Easy to find recent photos
+🧹 Clean-Up Habit:
+	•	Delete duplicates or blurry shots
+	•	Keep only strong compositions
+	•	Back up your best work to Google Drive or hard drive
 
-**By Subject:**
-• Portraits
-• Landscapes
-• Street_Photography
-• Family_Events
-• Good for photographers with specific interests
+🏠 Practice Task:
+	•	Organize 50 of your photos into 5 folders
+	•	Pick your top 10 images so far
+	•	Back up those 10 to Google Drive
 
-**By Event:**
-• 2025_Wedding_Priya
-• 2025_Diwali_Celebration
-• 2025_Kashmir_Trip
-• Perfect for important occasions
+✍️ Vocabulary Table
+Term
+Meaning
+Folder
+A place to store related files
+Backup
+Save copy on another device/cloud
+Favorites
+Marked images you like most
 
-**🌟 Rating and Selection System**
-
-**Star rating system:**
-• ⭐⭐⭐⭐⭐ Portfolio worthy, best work
-• ⭐⭐⭐⭐ Very good, worth sharing
-• ⭐⭐⭐ Good, keep for memories
-• ⭐⭐ Okay, might delete later
-• ⭐ Poor, consider deleting
-
-**Color coding:**
-• **Red:** Portfolio/best work
-• **Yellow:** Good for social media
-• **Green:** Family/personal memories
-• **Blue:** Learning/practice shots
-
-**🧹 Photo Culling Process**
-
-**Step 1: First pass (Keep/Delete)**
-• Delete obviously bad photos (blurry, wrong exposure)
-• Keep everything that might be worth editing
-• Be ruthless with duplicates
-
-**Step 2: Second pass (Rating)**
-• Rate remaining photos 1-5 stars
-• Focus on technical quality and composition
-• Consider emotional value for personal photos
-
-**Step 3: Final selection**
-• Keep only 4-5 star photos for portfolio
-• Archive 3 star photos for memories
-• Delete 1-2 star photos to save space
-
-**☁️ Backup Strategies**
-
-**3-2-1 Rule:**
-• **3 copies** of important photos
-• **2 different storage types** (phone + cloud)
-• **1 offsite backup** (cloud storage)
-
-**Free backup options:**
-• Google Photos (15GB free)
-• iCloud (5GB free)
-• OneDrive (5GB free)
-• Dropbox (2GB free)
-
-**Paid options for serious photographers:**
-• Google Photos (100GB for ₹130/month)
-• Adobe Creative Cloud (with Lightroom)
-• Amazon Photos (unlimited for Prime members)
-
-**📱 Mobile Organization Tools**
-
-**Built-in gallery apps:**
-• Most phones allow album creation
-• Basic folder organization
-• Limited editing and rating features
-
-**Google Photos:**
-• Automatic backup
-• Face recognition
-• Smart search features
-• Shared albums
-
-**Adobe Lightroom Mobile:**
-• Professional organization
-• Cloud sync across devices
-• Advanced search and filtering
-• Editing history preserved
-
-**🇮🇳 Indian Photography Organization**
-
-**Festival photos:**
-• Create yearly festival albums
-• Separate by festival type (Diwali, Holi, etc.)
-• Include family and cultural celebrations
-
-**Travel photography:**
-• Organize by destination
-• Include both tourist spots and local culture
-• Add location tags for easy searching
-
-**Family events:**
-• Weddings, birthdays, graduations
-• Organize by family member or event type
-• Consider sharing albums with extended family
-
-**📝 File Naming Best Practices**
-
-**Consistent naming convention:**
-• Date_Event_Subject (2025_01_15_Portrait_Mom)
-• Location_Date (Mumbai_2025_01_15)
-• Event_Date_Number (Wedding_2025_01_15_001)
-
-**Avoid:**
-• Special characters (@, #, &)
-• Very long names
-• Inconsistent formatting
-• Generic names (IMG_001, Photo1)''',
+💬 Quote
+“The best photo is the one you can find again.”''',
         'estimatedDuration': 30,
-        'type': 'organization',
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['File Management', 'Digital Organization', 'Workflow'],
-        'objectives': [
-          'Develop effective photo organization system',
-          'Learn to cull and rate photos efficiently',
-          'Set up reliable backup strategies',
-          'Create searchable file naming conventions',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_026_01',
-            'title': 'Photo Organization Project',
-            'description':
-                'Organize your existing photo collection and set up a management system',
-            'steps': [
-              'Review your current photo collection (last 50-100 photos)',
-              'Delete obviously bad photos (blurry, duplicates)',
-              'Create 3-5 folders/albums for organization',
-              'Rate your best 20 photos using stars or favorites',
-              'Set up automatic backup to cloud storage',
-              'Rename 10 photos using consistent naming convention',
-              'Create a "Portfolio" album with your top 10 photos',
-            ],
-            'requirements': {
-              'photos': 'Review 50-100 recent photos',
-              'organization': 'Create folder/album system',
-              'backup': 'Set up cloud backup',
-              'time': '45 minutes',
-            },
-            'estimatedTime': 45,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Organizing Your Photos'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Photo Culling': 'Process of selecting best photos',
-            'Rating': 'Scoring photos by quality (1-5 stars)',
-            'Backup': 'Save copy on another device/cloud',
-            'Cloud Storage': 'Online storage service',
-            'File Naming': 'System for naming photo files',
-          },
-          'quote': 'The best photo is the one you can find again.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 27: Sharing Your Work
       {
         'id': 'lesson_027',
         'day': 27,
-        'title': 'Sharing Your Work',
-        'subtitle': 'Instagram Tips and Building Confidence',
-        'description':
-            'Learn how to share your photography confidently and build an audience on social media platforms.',
-        'content': '''**📲 Why Share Your Photography?**
+        'title': 'Sharing Your Work (Instagram Tips)',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Sharing Your Work (Instagram Tips)',
+        'content': '''📷 Day 27: Sharing Your Work (Instagram Tips)
 
-Sharing your work helps you:
-• **Get feedback** from other photographers
-• **Build confidence** in your abilities
-• **Connect with photography community**
-• **Document your learning journey**
-• **Inspire others to start photography**
+🌟 What You Will Learn Today:
+	•	How to share your photos confidently
+	•	Instagram tips for beginners
+	•	Writing captions and using hashtags
 
-**📸 Instagram Photography Tips**
+📲 Instagram Tips:
+	•	Post 2–3 times a week to stay consistent
+	•	Use 5–10 relevant hashtags (e.g., #beginnerphotographer, #mumbaiphotography)
+	•	Always write a short caption explaining the photo
+	•	Tag location and use ALT text for accessibility
 
-**Profile setup:**
-• Use a clear profile picture (preferably your photo)
-• Write a simple bio: "Learning photography | 30-day journey"
-• Include location if comfortable
-• Link to other platforms or website
+🧠 Be Proud of Your Work:
+	•	Don’t wait for perfection. Share and learn from feedback
+	•	Follow other photographers to stay inspired
 
-**Posting strategy:**
-• **Consistency:** Post 2-3 times per week
-• **Quality over quantity:** Better to post less frequently with good photos
-• **Mix content:** Portraits, landscapes, behind-the-scenes
-• **Tell stories:** Each post should have a story or lesson
+🏠 Practice Task:
+	•	Post one photo today
+	•	Write a 1-line caption about what you learned while taking it
+	•	Use 5 beginner hashtags
 
-**Caption writing:**
-• Start with the story behind the photo
-• Share what you learned while taking it
-• Ask questions to encourage engagement
-• Keep it authentic and personal
+✍️ Vocabulary Table
+Term
+Meaning
+Hashtag
+A tag to group similar content
+Caption
+Text you write with your photo
+ALT Text
+Describes photo for accessibility
 
-**Hashtag strategy for beginners:**
-• Use 5-10 relevant hashtags
-• Mix popular and niche tags
-• Include location-based tags
-• Examples: #beginnerphotographer #learnphotography #mobilephotography #mumbaistreets
-
-**📱 Technical Tips for Instagram**
-
-**Image specifications:**
-• Square posts: 1080 x 1080 pixels
-• Portrait posts: 1080 x 1350 pixels
-• Stories: 1080 x 1920 pixels
-• Reels: 1080 x 1920 pixels
-
-**Quality optimization:**
-• Upload high-resolution images
-• Avoid heavy filters that reduce quality
-• Use consistent editing style
-• Maintain good lighting in photos
-
-**🌟 Building Confidence**
-
-**Start small:**
-• Share with friends and family first
-• Post in beginner photography groups
-• Don't expect immediate likes or followers
-• Focus on documenting your journey
-
-**Dealing with criticism:**
-• Ask for constructive feedback, not just "likes"
-• Learn from negative comments (ignore mean ones)
-• Remember everyone starts somewhere
-• Focus on improvement, not perfection
-
-**🇮🇳 Indian Photography Community**
-
-**Local hashtags:**
-• #indiaclicks #photographers_of_india
-• #streetphotographyindia #incredibleindia
-• City-specific: #delhidiaries #mumbai_igers #chennaiphotography
-
-**Photography groups to join:**
-• Indian Photography Community (Facebook)
-• Local photography meetups
-• Instagram photography challenges
-• WhatsApp groups for local photographers
-
-**📝 Content Ideas for Beginners**
-
-**Behind-the-scenes:**
-• Show your setup for a photo
-• Explain your camera settings
-• Share mistakes and how you fixed them
-
-**Before and after:**
-• Original photo vs edited version
-• Show your editing process
-• Explain what you changed and why
-
-**Learning posts:**
-• Share daily photography tips
-• Document your 30-day journey
-• Show progress from day 1 to day 30
-
-**🎯 Engagement Strategies**
-
-**Be genuine:**
-• Comment meaningfully on others' photos
-• Ask questions about their techniques
-• Share others' work (with credit)
-• Participate in photography challenges
-
-**Collaborate:**
-• Take photos with other beginners
-• Create photo walks with friends
-• Tag photographers who inspire you
-• Share photography tips you've learned
-
-**🛡️ Online Safety and Ethics**
-
-**Privacy considerations:**
-• Don't share photos with location tags of your home
-• Be careful about sharing personal information
-• Ask permission before posting photos of others
-• Respect cultural and religious sensitivities
-
-**Copyright and credit:**
-• Only post photos you took yourself
-• Give credit when sharing others' work
-• Understand that your photos have copyright protection
-• Watermark important photos if concerned about theft''',
-        'estimatedDuration': 25,
-        'type': 'social',
+💬 Quote
+“You never grow if you never show.”''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': [
-          'Social Media',
-          'Community Building',
-          'Photography Sharing',
-        ],
-        'objectives': [
-          'Build confidence in sharing photography work',
-          'Learn Instagram best practices for photographers',
-          'Connect with photography community',
-          'Develop authentic personal voice and style',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_027_01',
-            'title': 'First Instagram Photography Post',
-            'description':
-                'Create and share your first photography post with confidence',
-            'steps': [
-              'Choose your best photo from the past week',
-              'Write a caption telling the story behind the photo',
-              'Add 5-8 relevant hashtags',
-              'Post and share what you learned while taking it',
-              'Engage with 3 other beginner photographers\' posts',
-              'Follow 5 photographers whose style you admire',
-              'Join one photography group or community online',
-            ],
-            'requirements': {
-              'photo': 'Your best recent photograph',
-              'caption': 'Personal story about the photo',
-              'engagement': 'Comment on others\' work meaningfully',
-              'time': '30 minutes',
-            },
-            'estimatedTime': 30,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Sharing Your Work (Instagram Tips)'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Hashtag': 'A tag to group similar content (#photography)',
-            'Engagement': 'Likes, comments, and shares on posts',
-            'Caption': 'Text you write with your photo',
-            'Community': 'Group of people with shared interests',
-            'Behind-the-scenes': 'Showing the process of creating',
-          },
-          'quote': 'You never grow if you never show.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 28: Feedback Day
       {
         'id': 'lesson_028',
         'day': 28,
-        'title': 'Feedback Day',
-        'subtitle': 'Pick 3 Best Photos You Took This Month',
-        'description':
-            'Critically evaluate your month\'s work, select your best photographs, and seek constructive feedback.',
-        'content': '''**🔍 The Importance of Self-Evaluation**
+        'title': 'Feedback Day – Pick 3 Best Photos You Took This Month',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Feedback Day – Pick 3 Best Photos You Took This Month',
+        'content': '''📷 Day 28: Feedback Day – Pick 3 Best Photos You Took This Month
 
-After 28 days of learning, it's time to look back and see your progress. This process helps you:
-• **Recognize your growth** as a photographer
-• **Identify your strengths** and preferred subjects
-• **Understand areas** that need more practice
-• **Build confidence** in your abilities
-• **Plan future learning** directions
+🌟 What You Will Learn Today:
+	•	How to review your work with a critical but kind eye
+	•	Choose your best 3 images
+	•	Ask others for helpful feedback
 
-**📊 Evaluation Criteria**
+🧪 Feedback Steps:
+	•	Select your top 3 photos from this month
+	•	Ask a friend: “Which one do you like most and why?”
+	•	Write 1 line for each photo about what you learned
 
-**Technical quality:**
-• Is the photo sharp and well-exposed?
-• Are the colors natural and pleasing?
-• Is the composition strong?
-• Does it follow photography principles you've learned?
+💡 What to Look For:
+	•	Is the lighting nice?
+	•	Is the subject clear?
+	•	Is the photo telling a story?
 
-**Emotional impact:**
-• Does the photo tell a story?
-• Does it evoke emotion in viewers?
-• Is there a clear subject and message?
-• Would you be proud to show this to others?
+🏠 Practice Task:
+	•	Print or keep 3 photos in a folder
+	•	Show to a teacher, friend, or online group
+	•	Note their feedback and your own thoughts
 
-**Personal growth:**
-• Does this photo show improvement from your early work?
-• Did you apply specific techniques you learned?
-• Does it represent your developing style?
-• What challenges did you overcome to create it?
+✍️ Vocabulary Table
+Term
+Meaning
+Feedback
+Helpful opinion to improve
+Review
+Look again with focus
+Critique
+Friendly analysis
 
-**🏆 Selection Process**
-
-**Step 1: Initial review (10 minutes)**
-• Look through all photos from the past 28 days
-• Identify 10-15 photos that stand out
-• Consider variety: portraits, landscapes, objects, etc.
-
-**Step 2: Technical assessment (10 minutes)**
-• Check each photo for technical quality
-• Eliminate any with obvious technical flaws
-• Focus on sharp, well-exposed images
-
-**Step 3: Emotional evaluation (10 minutes)**
-• Which photos make you feel something?
-• Which ones tell the clearest stories?
-• Which represent moments you want to remember?
-
-**Step 4: Final selection (5 minutes)**
-• Choose your top 3 photographs
-• Ensure they show different aspects of your learning
-• Pick photos that represent your best work
-
-**💭 Questions for Self-Reflection**
-
-**For each selected photo, ask:**
-• What was I trying to achieve with this photograph?
-• What techniques did I use (rule of thirds, lighting, etc.)?
-• What do I like most about this image?
-• What would I do differently if I took it again?
-• How does this compare to my photos from Day 1?
-
-**🗣️ Seeking Feedback**
-
-**Who to ask:**
-• Photography friends or family members
-• Online photography communities
-• Other participants in photography courses
-• Local photography groups
-
-**How to ask for feedback:**
-• Be specific: "What do you think about the composition?"
-• Ask open questions: "What feeling does this give you?"
-• Request constructive criticism: "How could I improve this?"
-• Don't ask just "Do you like it?" - that's not helpful
-
-**Good feedback questions:**
-• "What draws your eye first in this photo?"
-• "Does the story come across clearly?"
-• "How does the lighting work for you?"
-• "What would you change about this composition?"
-
-**🇮🇳 Sharing Your Journey**
-
-**Document your progress:**
-• Create a before/after comparison (Day 1 vs Day 28)
-• Write about your biggest photography lessons
-• Share your challenges and breakthroughs
-• Inspire others who are starting their journey
-
-**Cultural considerations:**
-• If photographing people, ensure you have permission to share
-• Respect privacy and cultural sensitivities
-• Celebrate the diversity of Indian photography subjects
-• Share what makes your local area special
-
-**📈 Planning Next Steps**
-
-**Based on your top 3 photos, identify:**
-• **Strengths:** What type of photography do you excel at?
-• **Interests:** What subjects do you enjoy most?
-• **Improvements needed:** What areas need more practice?
-• **Next goals:** What do you want to learn next?
-
-**Future learning directions:**
-• If you love portraits → Learn more about posing and lighting
-• If landscapes appeal to you → Study composition and timing
-• If street photography excites you → Practice storytelling
-• If macro interests you → Learn about close-up techniques''',
-        'estimatedDuration': 45,
-        'type': 'review',
+💬 Quote
+“Your best photo is the one you understand the most.”''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': [
-          'Self-Assessment',
-          'Portfolio Selection',
-          'Progress Evaluation',
-        ],
-        'objectives': [
-          'Critically evaluate a month of photography work',
-          'Select best photographs using objective criteria',
-          'Seek and receive constructive feedback',
-          'Plan future photography learning direction',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_028_01',
-            'title': 'Monthly Portfolio Selection',
-            'description':
-                'Select your best 3 photographs from the month and gather feedback',
-            'steps': [
-              'Review all photos taken during the 30-day course',
-              'Create a shortlist of 10-15 strong candidates',
-              'Apply technical and emotional criteria to narrow down',
-              'Select your final 3 best photographs',
-              'Write one paragraph about each photo (story, technique, learnings)',
-              'Share with a friend/family member and ask for honest feedback',
-              'Compare your Day 28 photos with your Day 1 photos',
-              'Document your biggest improvements and learnings',
-            ],
-            'requirements': {
-              'review': 'All photos from 30-day course',
-              'selection': 'Top 3 photographs with rationale',
-              'feedback': 'Get opinion from at least one other person',
-              'time': '60 minutes',
-            },
-            'estimatedTime': 60,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Feedback Day – Pick 3 Best Photos You Took This Month'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Portfolio': 'Collection of your best work',
-            'Critique': 'Detailed analysis of artwork',
-            'Self-Assessment': 'Evaluating your own work',
-            'Technical Quality': 'Camera settings and clarity',
-            'Emotional Impact': 'How photo makes viewers feel',
-          },
-          'quote':
-              'Every photo you take is a step forward. Look back only to see how far you\'ve come.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 29: Final Assignment
       {
         'id': 'lesson_029',
         'day': 29,
-        'title': 'Final Assignment',
-        'subtitle': 'Shoot a Mini Series (3-5 Photos)',
-        'description':
-            'Create your capstone project: a cohesive photo series that demonstrates all the skills you\'ve learned.',
-        'content': '''**🎯 What is a Photo Series?**
+        'title': 'Final Assignment – Shoot a Mini Series (3–5 Photos)',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Final Assignment – Shoot a Mini Series (3–5 Photos)',
+        'content': '''📷 Day 29: Final Assignment – Shoot a Mini Series (3–5 Photos)
 
-A photo series is a collection of 3-5 related photographs that work together to tell a complete story or explore a theme. It's different from random individual photos because:
-• **All photos connect** to a central theme or story
-• **Consistent style** and editing approach
-• **Planned composition** and flow between images
-• **Complete narrative** with beginning, middle, and end
+🌟 What You Will Learn Today:
+	•	How to tell a story using a photo series
+	•	Planning, shooting, and arranging multiple shots
 
-**📝 Planning Your Series**
+🧩 How to Create a Mini Series:
+	•	Choose a small topic: street food, your room, your pet
+	•	Plan 3–5 different angles or actions
+	•	Shoot all in one day or across 2 days
+	•	Keep editing consistent for the series
 
-**Choose a theme:**
-• **Daily life:** Your morning routine, family dinner, evening walk
-• **Local culture:** Street food vendor, local market, traditional craft
-• **Personal story:** Learning photography, a hobby, a relationship
-• **Seasonal moment:** Monsoon, festival preparation, harvest time
-• **Character study:** Portrait series of one person in different moods
+💡 Ideas for Beginners:
+	•	Morning routine in 3 shots
+	•	Life of an object (cup, book, shoe)
+	•	Neighborhood story
 
-**Series structure (3-5 photos):**
-1. **Establishing shot:** Wide view showing the setting/context
-2. **Medium shot:** Main subject in their environment
-3. **Detail shot:** Close-up of important elements
-4. **Action/emotion:** Key moment or feeling
-5. **Conclusion:** Final image that completes the story
+🏠 Practice Task:
+	•	Shoot a mini series of 3–5 photos
+	•	Title it and share as a carousel on Instagram
 
-**📸 Technical Consistency**
+✍️ Vocabulary Table
+Term
+Meaning
+Series
+A group of connected images
+Carousel
+A swipeable photo post on Instagram
+Consistency
+Same editing style/look
 
-**Maintain similar:**
-• **Lighting style:** All natural light or all artificial
-• **Color palette:** Warm tones, cool tones, or black & white
-• **Editing approach:** Same filter/preset at consistent intensity
-• **Composition style:** Similar framing and rule of thirds usage
-
-**Vary for interest:**
-• **Shot sizes:** Wide, medium, close-up
-• **Angles:** Eye level, high angle, low angle
-• **Focus points:** Different subjects within the theme
-
-**🇮🇳 Indian Series Ideas**
-
-**Cultural themes:**
-• Chai wallah preparing and serving tea
-• Grandmother cooking traditional meal
-• Local temple morning rituals
-• Street art in your neighborhood
-• Monsoon through your window
-
-**Personal themes:**
-• Your photography learning journey
-• Family gathering preparation
-• Student life during exams
-• Local festival celebration
-• Evening life in your locality
-
-**🎨 Storytelling Through Series**
-
-**Narrative flow:**
-• **Beginning:** Set the scene, introduce the subject
-• **Development:** Show process, action, or change
-• **Climax:** Key moment of emotion or action
-• **Resolution:** Conclusion, reflection, or result
-
-**Emotional arc:**
-• Consider the feeling journey through your series
-• Start calm, build tension, resolve peacefully
-• Or: Show transformation, growth, or discovery
-
-**📱 Shooting Tips for Series**
-
-**Before shooting:**
-• Scout your location if needed
-• Plan your shots but be open to spontaneous moments
-• Ensure good lighting throughout the series
-• Bring any props or equipment needed
-
-**During shooting:**
-• Take multiple versions of each planned shot
-• Capture extra moments that support the story
-• Pay attention to consistent lighting
-• Don't rush - take time for each image
-
-**After shooting:**
-• Review all images before final selection
-• Choose photos that work well together
-• Edit consistently across all images
-• Test different ordering of the series
-
-**🖥️ Editing Your Series**
-
-**Consistency checklist:**
-• Similar exposure and contrast levels
-• Consistent color temperature/white balance
-• Same editing style and intensity
-• Matching cropping approach where appropriate
-
-**Series-specific edits:**
-• Ensure all photos complement each other
-• No single photo should look drastically different
-• Adjust individual photos to support overall narrative
-• Consider black & white for timeless feel
-
-**📖 Presentation Tips**
-
-**Order matters:**
-• Arrange photos in narrative sequence
-• Consider visual flow from one image to next
-• Strong opening and closing images
-• Build tension and release appropriately
-
-**Sharing your series:**
-• Instagram carousel posts work well for series
-• Include caption explaining the story/theme
-• Number the photos (1/4, 2/4, etc.)
-• Ask viewers which image resonates most''',
-        'estimatedDuration': 90,
-        'type': 'project',
+💬 Quote
+“One photo speaks. A series tells a full story.”''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Photo Series', 'Storytelling', 'Final Project'],
-        'objectives': [
-          'Plan and execute a cohesive photo series',
-          'Apply all learned photography techniques together',
-          'Demonstrate storytelling through sequential images',
-          'Create portfolio-worthy work as course capstone',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_029_01',
-            'title': 'Mini Photo Series Project',
-            'description':
-                'Create a complete 3-5 photo series demonstrating your photography journey',
-            'steps': [
-              'Choose a theme that interests you personally',
-              'Plan your 3-5 shots: wide, medium, close-up, action, conclusion',
-              'Scout location and plan lighting (use natural light)',
-              'Shoot your series, taking multiple versions of each shot',
-              'Review and select the best image for each part of story',
-              'Edit consistently across all images',
-              'Arrange in narrative order that tells complete story',
-              'Share with title and brief explanation of your story',
-            ],
-            'requirements': {
-              'series': '3-5 related photos telling one story',
-              'planning': 'Clear theme and shot list',
-              'consistency': 'Consistent editing and style',
-              'time': '90 minutes',
-            },
-            'estimatedTime': 90,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Final Assignment – Shoot a Mini Series (3–5 Photos)'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Photo Series': 'Collection of related images telling one story',
-            'Theme': 'Central idea connecting all photos',
-            'Narrative Flow': 'How story progresses through images',
-            'Visual Consistency': 'Similar look and feel across photos',
-            'Capstone Project': 'Final project demonstrating all skills',
-          },
-          'quote': 'One photo speaks. A series tells a full story.',
-        },
+        'technicalDetails': {},
       },
-
-      // Day 30: Graduation
       {
         'id': 'lesson_030',
         'day': 30,
-        'title': 'Graduation',
-        'subtitle': 'Celebrate + Share Your Work!',
-        'description':
-            'Celebrate completing your 30-day photography journey and plan your continued learning path.',
-        'content': '''**🎓 Congratulations, You Did It!**
+        'title': 'Graduation – Celebrate + Share Your Work!',
+        'subtitle': 'Photography Lesson',
+        'description': 'Learn about Graduation – Celebrate + Share Your Work!',
+        'content': '''📷 Day 30: Graduation – Celebrate + Share Your Work!
 
-You have completed 30 days of dedicated photography learning! This is a significant achievement that many people start but few finish. You should be proud of:
-• **Consistency:** Showing up every day for learning
-• **Growth:** Developing new skills and creative vision
-• **Courage:** Sharing your work and seeking feedback
-• **Dedication:** Completing exercises and challenges
+🌟 What You Will Learn Today:
+	•	Reflect on your learning
+	•	Celebrate your progress
+	•	Share your final project proudly
 
-**📈 How Much You've Learned**
+🎓 Final Steps:
+	•	Choose your favorite photo from the course
+	•	Write 3 lines: What you learned, what changed, what’s next
+	•	Post it with the hashtag: #MyFirstPhotoCourse
 
-**Technical skills:**
-• Camera settings (ISO, Aperture, Shutter Speed)
-• Lighting techniques (natural and artificial)
-• Composition rules and when to break them
-• Mobile photography with manual controls
-• Basic photo editing and enhancement
+🎉 Celebrate Small Wins:
+	•	Finished 30 days? That’s HUGE!
+	•	Treat yourself – even a cup of tea or a self-portrait celebration
 
-**Creative skills:**
-• Seeing photographic opportunities in daily life
-• Telling stories through images
-• Developing personal style and vision
-• Understanding light and shadow
-• Creating emotional connection through photos
+🏠 Practice Task:
+	•	Post a story or reel about your photo journey
+	•	Save your top 10 images in a Graduation Album (folder)
 
-**🎯 Reflection Questions**
+✍️ Vocabulary Table
+Term
+Meaning
+Reflect
+Think back and review
+Celebrate
+Acknowledge achievement
+Graduation
+Completion of a learning journey
 
-**Look back at your journey:**
-• What type of photography do you enjoy most?
-• Which lesson or technique had the biggest impact?
-• How have your photos improved from Day 1 to Day 30?
-• What challenged you the most during this course?
-• What surprised you about photography?
-
-**🏆 Creating Your Graduation Portfolio**
-
-**Select your best work:**
-• Choose 5-10 photos that represent your best work
-• Include variety: portraits, landscapes, objects, series
-• Show progression from early to recent work
-• Pick photos that make you feel proud
-
-**Document your journey:**
-• Create a before/after comparison (Day 1 vs Day 30)
-• Write about your biggest breakthrough moment
-• Share your favorite photograph and why it's special
-• List three things you learned about yourself
-
-**📱 Graduation Celebration Ideas**
-
-**Share your achievement:**
-• Post a photo carousel showing your best work
-• Write about your 30-day photography journey
-• Use hashtag #MyFirst30DaysOfPhotography
-• Thank people who supported your learning
-
-**Print your work:**
-• Choose 1-3 photos to print and frame
-• Display them in your home or office
-• Give prints as gifts to family members
-• Create a small photo album of your journey
-
-**🚀 What's Next? Continuing Your Photography Journey**
-
-**Immediate next steps:**
-• Continue taking photos daily (even just one)
-• Join local photography groups or communities
-• Practice one technique repeatedly until mastered
-• Experiment with new subjects and styles
-
-**Advanced learning options:**
-• **Specialized courses:** Portrait, landscape, street photography
-• **Technical skills:** Advanced editing, lighting setups
-• **Equipment:** Consider upgrading camera if interested
-• **Projects:** 365-day photo challenge, photo book creation
-
-**🇮🇳 Photography Opportunities in India**
-
-**Local subjects to explore:**
-• Document changing seasons in your area
-• Capture local festivals and cultural events
-• Explore architectural heritage in your city
-• Street photography in markets and public spaces
-• Portrait series of local craftspeople or artists
-
-**Photography communities to join:**
-• Delhi Photography Club, Mumbai Photography Meetup
-• Online groups: Indian Photography Community
-• Instagram hashtags: #IndiaClicks #PhotographersOfIndia
-• Local camera stores often host photography walks
-
-**📚 Resources for Continued Learning**
-
-**Free online resources:**
-• YouTube channels: Mango Street, Sean Tucker, Jamie Windsor
-• Instagram accounts: @bradengunem @jordanhammond @bradengunem
-• Websites: PetaPixel, Digital Photography School
-
-**Books to read:**
-• "Understanding Exposure" by Bryan Peterson
-• "The Art of Photography" by Bruce Barnbaum
-• "Street Photography" by Vivian Maier
-
-**💡 Final Photography Tips**
-
-**Remember these principles:**
-• **Light is everything** - always consider your lighting
-• **Composition guides the eye** - use it intentionally
-• **Story matters more than gear** - focus on content
-• **Practice makes progress** - shoot regularly
-• **Mistakes are learning opportunities** - embrace them
-
-**Keep growing:**
-• Challenge yourself with new subjects monthly
-• Seek feedback from other photographers
-• Study work of photographers you admire
-• Never stop experimenting and learning
-
-**🎉 Final Words**
-
-Photography is a lifelong journey of discovery. You've built a strong foundation in these 30 days, but this is just the beginning. The camera is now a tool for seeing the world differently, capturing memories, and expressing your unique perspective.
-
-Keep shooting, keep learning, and most importantly, keep enjoying the process. The world needs your unique vision and voice through photography.
-
-**Welcome to the wonderful world of photography. You are now a photographer!**''',
-        'estimatedDuration': 60,
-        'type': 'celebration',
+💬 Quote
+“You’re not just taking photos now — you’re making them.” 📷''',
+        'estimatedDuration': 30,
+        'type': 'theory',
         'difficulty': 'beginner',
-        'categories': ['Graduation', 'Reflection', 'Future Planning'],
-        'objectives': [
-          'Celebrate completion of 30-day photography course',
-          'Reflect on learning journey and progress made',
-          'Create graduation portfolio of best work',
-          'Plan continued photography learning and growth',
-        ],
-        'exercises': [
-          {
-            'id': 'exercise_030_01',
-            'title': 'Photography Graduation Project',
-            'description':
-                'Celebrate your achievement and plan your continued photography journey',
-            'steps': [
-              'Select your top 5 photos from the entire 30-day course',
-              'Create a before/after comparison (Day 1 vs Day 30 photos)',
-              'Write a reflection: What did you learn? What surprised you?',
-              'Share your graduation post on social media with your journey',
-              'Choose one photo to print or frame as a celebration',
-              'Plan your next photography goal or project',
-              'Join one photography community or group for continued learning',
-              'Take a final "graduation selfie" with your camera/phone',
-            ],
-            'requirements': {
-              'portfolio': 'Top 5 photos from entire course',
-              'reflection': 'Written summary of learning journey',
-              'celebration': 'Share achievement publicly',
-              'planning': 'Set next photography goal',
-              'time': '60 minutes',
-            },
-            'estimatedTime': 60,
-          },
-        ],
+        'categories': ['Photography'],
+        'objectives': ['Understand Graduation – Celebrate + Share Your Work!'],
+        'exercises': [],
         'imageUrls': [],
-        'technicalDetails': {
-          'vocabulary': {
-            'Portfolio': 'Collection of your best photographic work',
-            'Graduation': 'Completion of learning journey',
-            'Reflection': 'Thinking about what you\'ve learned',
-            'Photography Journey': 'Ongoing process of learning and growth',
-            'Community': 'Group of photographers who support each other',
-          },
-          'quote':
-              'You\'re not just taking photos now---you\'re making them. The world needs your unique vision. Keep shooting! 📷',
-        },
+        'technicalDetails': {},
       },
     ];
   }
