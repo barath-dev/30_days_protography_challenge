@@ -1,15 +1,15 @@
-
 class AdvancedLessons {
   static List<Map<String, dynamic>> get lessons {
     return [
-
       {
         'id': 'lesson_061',
         'day': 61,
         'title': 'Creative Exposure (Expose for Shadows vs Highlights)',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Creative Exposure (Expose for Shadows vs Highlights)',
-        'content': '''DAY 1 – Creative Exposure (Expose for Shadows vs Highlights)
+        'description':
+            'Learn about Creative Exposure (Expose for Shadows vs Highlights)',
+        'content':
+            '''DAY 1 – Creative Exposure (Expose for Shadows vs Highlights)
 Pro Photography Masterclass – Week 1: Mastering the Camera & Vision 🕒 Estimated Time: 1.5 – 2 hours (Learning + Practice + Review)
 
 🎯 What You'll Learn Today:
@@ -161,9 +161,19 @@ Scene: White outfit under sun at 2 PM Goal: Protect skin and dress from overex
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Creative Exposure (Expose for Shadows vs Highlights)'],
+        'objectives': [
+          'Understand Creative Exposure (Expose for Shadows vs Highlights)',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 1 comp/file_0000000061146230972c75fdf4af7cd4.png',
+          'assets/Advanced_Asset/Day 1 comp/file_000000006bf861f6b578963ff88a61a6.png',
+          'assets/Advanced_Asset/Day 1 comp/file_000000006e3461f8a39c3c2eb25e3a63.png',
+          'assets/Advanced_Asset/Day 1 comp/file_000000006ea061f6b63e384b4cd3d432.png',
+          'assets/Advanced_Asset/Day 1 comp/file_0000000082746230a58479a688d2887a.png',
+          'assets/Advanced_Asset/Day 1 comp/file_000000008d4461f985023c31c9f51b71.png',
+          'assets/Advanced_Asset/Day 1 comp/file_00000000af8861f89f934c00ba0eb3f0.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -195,7 +205,8 @@ Would you like me to:
         'id': 'lesson_062',
         'day': 62,
         'title': 'Advanced Focus Techniques right away?',
-        'subtitle': '•	📷 Add photo examples, histogram screenshots, or lighting diagrams?',
+        'subtitle':
+            '•	📷 Add photo examples, histogram screenshots, or lighting diagrams?',
         'description': 'Learn about Advanced Focus Techniques right away?',
         'content': '''Day 2: Advanced Focus Techniques right away?
 	•	📷 Add photo examples, histogram screenshots, or lighting diagrams?
@@ -213,7 +224,18 @@ Just say the word — we’re building your professional course, step-by-step!
         'categories': ['Photography'],
         'objectives': ['Understand Advanced Focus Techniques right away?'],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 2 comp/file_0000000029d061f994f800eab161dc71.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000655461f5a1d721582270e870.png',
+          'assets/Advanced_Asset/Day 2 comp/file_000000006c1861f9b182e5258ffa92c3.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000804061f88e65464c8df424f2.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000a98461f9a89ecdb7a4a686df.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000ae5061f59293b87236944595.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000b94861f98daa0eeee6634182.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000c73461f6b06cb1c80768ca86.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000c79861f68f55a2e5dd36113d.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000ed6461f7885833ad42ba14e6.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -610,7 +632,14 @@ Task B: GN Distance Calculation
         'categories': ['Photography'],
         'objectives': ['Understand Using Manual Flash'],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 3 comp/file_0000000009a861f89ea8190317132943.png',
+          'assets/Advanced_Asset/Day 3 comp/file_0000000026e461fb87b764b56997e172.png',
+          'assets/Advanced_Asset/Day 3 comp/file_000000002ecc61f78466874bc0abd4a5.png',
+          'assets/Advanced_Asset/Day 3 comp/file_00000000354861f5b47d548e80f21076.png',
+          'assets/Advanced_Asset/Day 3 comp/file_000000003d4061f5a440b8e062e2f3e3.png',
+          'assets/Advanced_Asset/Day 3 comp/file_00000000eb60622fbe31243ecf15c1a8.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -638,10 +667,13 @@ You've now learned:
       {
         'id': 'lesson_064',
         'day': 64,
-        'title': 'High-Speed Sync (HSS) & Flash with Sunlight – Expanded Version',
+        'title':
+            'High-Speed Sync (HSS) & Flash with Sunlight – Expanded Version',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about High-Speed Sync (HSS) & Flash with Sunlight – Expanded Version',
-        'content': '''DAY 4 – High-Speed Sync (HSS) & Flash with Sunlight – Expanded Version
+        'description':
+            'Learn about High-Speed Sync (HSS) & Flash with Sunlight – Expanded Version',
+        'content':
+            '''DAY 4 – High-Speed Sync (HSS) & Flash with Sunlight – Expanded Version
 
 🧠 6. The Real Science Behind HSS
 📷 What Happens Without HSS?
@@ -769,9 +801,19 @@ Editorial Outdoor Challenge:
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand High-Speed Sync (HSS) & Flash with Sunlight – Expanded Version'],
+        'objectives': [
+          'Understand High-Speed Sync (HSS) & Flash with Sunlight – Expanded Version',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 4 comp/file_00000000070861f793978cccaf27fe14.png',
+          'assets/Advanced_Asset/Day 4 comp/file_00000000596461f5b4550b4084f7686d.png',
+          'assets/Advanced_Asset/Day 4 comp/file_000000009934622f88dc5055d4fa4d73.png',
+          'assets/Advanced_Asset/Day 4 comp/file_00000000b124622f8528c3f8b1efac52.png',
+          'assets/Advanced_Asset/Day 4 comp/file_00000000efe061f586a4e0bf5760ea0a.png',
+          'assets/Advanced_Asset/Day 4 comp/file_00000000f1b4622f9f4c922b17816d5f.png',
+          'assets/Advanced_Asset/Day 4 comp/file_00000000fa08622fa4333c7d556a7fbc.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -814,10 +856,13 @@ You’ve now mastered:
       {
         'id': 'lesson_065',
         'day': 65,
-        'title': 'Color Profiles & Bit Depth in Photography (sRGB, AdobeRGB, ProPhoto RGB + Custom Color Styles)',
+        'title':
+            'Color Profiles & Bit Depth in Photography (sRGB, AdobeRGB, ProPhoto RGB + Custom Color Styles)',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Color Profiles & Bit Depth in Photography (sRGB, AdobeRGB, ProPhoto RGB + Custom Color Styles)',
-        'content': '''Day 5 – Color Profiles & Bit Depth in Photography (sRGB, AdobeRGB, ProPhoto RGB + Custom Color Styles)
+        'description':
+            'Learn about Color Profiles & Bit Depth in Photography (sRGB, AdobeRGB, ProPhoto RGB + Custom Color Styles)',
+        'content':
+            '''Day 5 – Color Profiles & Bit Depth in Photography (sRGB, AdobeRGB, ProPhoto RGB + Custom Color Styles)
 
 📅 Learning Time: 1.5 – 2 Hours
 🧠 Focus: Color control, editing consistency, professional workflow 🎓 Skill Level: Pro / Editorial / Commercial / Portfolio Shoots
@@ -1016,9 +1061,25 @@ sRGB
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Color Profiles & Bit Depth in Photography (sRGB, AdobeRGB, ProPhoto RGB + Custom Color Styles)'],
+        'objectives': [
+          'Understand Color Profiles & Bit Depth in Photography (sRGB, AdobeRGB, ProPhoto RGB + Custom Color Styles)',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 5 comp/file_0000000006e461f58bccf2c5377621e7.png',
+          'assets/Advanced_Asset/Day 5 comp/file_00000000163c61fdaaf34948cfac4401.png',
+          'assets/Advanced_Asset/Day 5 comp/file_000000001d04622fb5a42032f2cd1f80.png',
+          'assets/Advanced_Asset/Day 5 comp/file_000000002bc461fb93fca48a5056f30c (1).png',
+          'assets/Advanced_Asset/Day 5 comp/file_0000000046b0622f9fbae84345037e03.png',
+          'assets/Advanced_Asset/Day 5 comp/file_00000000582461f58d664434f2fdf4d7.png',
+          'assets/Advanced_Asset/Day 5 comp/file_00000000592861fd9276a6d75b9e35b8.png',
+          'assets/Advanced_Asset/Day 5 comp/file_000000005b9061fd9da0bd3720f335cc.png',
+          'assets/Advanced_Asset/Day 5 comp/file_00000000818461f58813524e44169aac.png',
+          'assets/Advanced_Asset/Day 5 comp/file_0000000081d861f89f25e2443d26d332.png',
+          'assets/Advanced_Asset/Day 5 comp/file_0000000090a061f7893983318f9bf70a.png',
+          'assets/Advanced_Asset/Day 5 comp/file_00000000a58061f7b310ca3bc0b45fdd.png',
+          'assets/Advanced_Asset/Day 5 comp/file_00000000b7e861f7891e0f03441a9999.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -1056,8 +1117,10 @@ You now understand:
         'day': 66,
         'title': 'Building a Visual Style (Color + Composition + Mood)',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Building a Visual Style (Color + Composition + Mood)',
-        'content': '''Day 6 – Building a Visual Style (Color + Composition + Mood)
+        'description':
+            'Learn about Building a Visual Style (Color + Composition + Mood)',
+        'content':
+            '''Day 6 – Building a Visual Style (Color + Composition + Mood)
 
 📅 Learning Time: 2 – 2.5 Hours
 📷 Skill Focus: Vision, Mood, Aesthetic, Signature Look 👁️ Ideal For: Fashion, Editorial, Portraits, Commercial, Art Photography
@@ -1220,18 +1283,32 @@ Today you’ve learned:
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Building a Visual Style (Color + Composition + Mood)'],
+        'objectives': [
+          'Understand Building a Visual Style (Color + Composition + Mood)',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 6 comp/file_00000000567061f58ef5f60d97c981bc.png',
+          'assets/Advanced_Asset/Day 6 comp/file_0000000071306243a70811fbbaa9383f.png',
+          'assets/Advanced_Asset/Day 6 comp/file_0000000076e0622fbd69596b0056968b.png',
+          'assets/Advanced_Asset/Day 6 comp/file_000000009f6c61f68458a60567dc1cf7.png',
+          'assets/Advanced_Asset/Day 6 comp/file_00000000c20061f9af27c4b1442e6315 (1).png',
+          'assets/Advanced_Asset/Day 6 comp/file_00000000cd7c61f5a6c8877863e60f74.png',
+          'assets/Advanced_Asset/Day 6 comp/file_00000000dc2c61f88f7df3dfe4d17338.png',
+        ],
         'technicalDetails': {},
       },
       {
         'id': 'lesson_067',
         'day': 67,
-        'title': 'Mastering Outdoor Flash: Shoot in Harsh Light + HSS (High-Speed Sync)',
-        'subtitle': 'A complete guide to balancing sunlight and flash like a pro — with low and high budget options!',
-        'description': 'Learn about Mastering Outdoor Flash: Shoot in Harsh Light + HSS (High-Speed Sync)',
-        'content': '''Day 7 – Mastering Outdoor Flash: Shoot in Harsh Light + HSS (High-Speed Sync)
+        'title':
+            'Mastering Outdoor Flash: Shoot in Harsh Light + HSS (High-Speed Sync)',
+        'subtitle':
+            'A complete guide to balancing sunlight and flash like a pro — with low and high budget options!',
+        'description':
+            'Learn about Mastering Outdoor Flash: Shoot in Harsh Light + HSS (High-Speed Sync)',
+        'content':
+            '''Day 7 – Mastering Outdoor Flash: Shoot in Harsh Light + HSS (High-Speed Sync)
 A complete guide to balancing sunlight and flash like a pro — with low and high budget options!
 
 📅 Duration: 2 to 3 hours
@@ -1446,18 +1523,32 @@ Position flash with intent
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Mastering Outdoor Flash: Shoot in Harsh Light + HSS (High-Speed Sync)'],
+        'objectives': [
+          'Understand Mastering Outdoor Flash: Shoot in Harsh Light + HSS (High-Speed Sync)',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 7 comp /file_000000003954622fa730a29cc8fcf6c0-min.png',
+          'assets/Advanced_Asset/Day 7 comp /file_000000005494622f8e7f5bc8a3cd3c5c-min.png',
+          'assets/Advanced_Asset/Day 7 comp /file_000000005c28622fba76b5fec01790ba-min.png',
+          'assets/Advanced_Asset/Day 7 comp /file_000000006a5c622faeecc2c15d873684-min.png',
+          'assets/Advanced_Asset/Day 7 comp /file_0000000072cc622fbafb5fde08716bcd-min.png',
+          'assets/Advanced_Asset/Day 7 comp /file_00000000ac84622fa6b6cccbabd75d36-min.png',
+          'assets/Advanced_Asset/Day 7 comp /file_00000000c528622fa626b004aae9842a-min.png',
+          'assets/Advanced_Asset/Day 7 comp /file_00000000d0b0622fb6a61ea8a8ba5b26-min.png',
+        ],
         'technicalDetails': {},
       },
       {
         'id': 'lesson_068',
         'day': 68,
         'title': 'The Complete Guide to 3-Point Lighting (Key, Fill, Hair)',
-        'subtitle': 'Master the foundational lighting setup used in fashion, beauty, commercial, and editorial work.',
-        'description': 'Learn about The Complete Guide to 3-Point Lighting (Key, Fill, Hair)',
-        'content': '''Day 8: The Complete Guide to 3-Point Lighting (Key, Fill, Hair)
+        'subtitle':
+            'Master the foundational lighting setup used in fashion, beauty, commercial, and editorial work.',
+        'description':
+            'Learn about The Complete Guide to 3-Point Lighting (Key, Fill, Hair)',
+        'content':
+            '''Day 8: The Complete Guide to 3-Point Lighting (Key, Fill, Hair)
 Master the foundational lighting setup used in fashion, beauty, commercial, and editorial work.
 
 🧠 What is 3-Point Lighting?
@@ -1611,18 +1702,34 @@ Analyze results and adjust modifiers/angles based on mood.
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand The Complete Guide to 3-Point Lighting (Key, Fill, Hair)'],
+        'objectives': [
+          'Understand The Complete Guide to 3-Point Lighting (Key, Fill, Hair)',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 8 comp/file_000000001e6861f78e476ec95859b8cd.png',
+          'assets/Advanced_Asset/Day 8 comp/file_000000002ba061f79d7f6feb356d1c9c.png',
+          'assets/Advanced_Asset/Day 8 comp/file_00000000861861f78dd84dbc4aceff39.png',
+          'assets/Advanced_Asset/Day 8 comp/file_00000000aa8c61f7bbc4c274513e97bf.png',
+          'assets/Advanced_Asset/Day 8 comp/file_00000000d39861fd8110a611113128a8.png',
+          'assets/Advanced_Asset/Day 8 comp/file_00000000e04861fdb7dbd6ca544c38a1.png',
+          'assets/Advanced_Asset/Day 8 comp/file_00000000e6b061f89e9f8e474f451046.png',
+          'assets/Advanced_Asset/Day 8 comp/file_00000000ec0461fdb6380d8d16b16d0b.png',
+          'assets/Advanced_Asset/Day 8 comp/file_00000000ee1c61f8a8cb66834ce2261c.png',
+          'assets/Advanced_Asset/Day 8 comp/file_00000000f06861f89c5cc791e9a6378f (1).png',
+        ],
         'technicalDetails': {},
       },
       {
         'id': 'lesson_069',
         'day': 69,
-        'title': 'Working with Beauty Dish, Softbox & Reflectors (with Disadvantages)',
+        'title':
+            'Working with Beauty Dish, Softbox & Reflectors (with Disadvantages)',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Working with Beauty Dish, Softbox & Reflectors (with Disadvantages)',
-        'content': '''Day 9: Working with Beauty Dish, Softbox & Reflectors (with Disadvantages)
+        'description':
+            'Learn about Working with Beauty Dish, Softbox & Reflectors (with Disadvantages)',
+        'content':
+            '''Day 9: Working with Beauty Dish, Softbox & Reflectors (with Disadvantages)
 Master the 3 most important light modifiers in fashion, beauty, and editorial photography — and know when not to use them.
 
 🔘 1. Beauty Dish – Sculpted, Glossy Light
@@ -1775,9 +1882,24 @@ If you're aiming for natural beauty with glow, use the socked dish with a fill a
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Working with Beauty Dish, Softbox & Reflectors (with Disadvantages)'],
+        'objectives': [
+          'Understand Working with Beauty Dish, Softbox & Reflectors (with Disadvantages)',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 9 comp/file_000000000f8c61f8a2859a72576d1596.png',
+          'assets/Advanced_Asset/Day 9 comp/file_000000003520622f889cd3c6e36c890f.png',
+          'assets/Advanced_Asset/Day 9 comp/file_0000000037cc61f88d827ec092d27575.png',
+          'assets/Advanced_Asset/Day 9 comp/file_0000000045ac61faa77cf67574396ce7.png',
+          'assets/Advanced_Asset/Day 9 comp/file_00000000591461f5979c83c29c645ae7.png',
+          'assets/Advanced_Asset/Day 9 comp/file_0000000066f061f5a0f09480afd8eef8.png',
+          'assets/Advanced_Asset/Day 9 comp/file_0000000071b861f789ee6e78362a8530.png',
+          'assets/Advanced_Asset/Day 9 comp/file_00000000a5a461f599f918a4af319d17.png',
+          'assets/Advanced_Asset/Day 9 comp/file_00000000acac622fb9b892ae031b1999.png',
+          'assets/Advanced_Asset/Day 9 comp/file_00000000b21461fdbdca3ea803645dfe.png',
+          'assets/Advanced_Asset/Day 9 comp/file_00000000be28622f854877fe2e3a144d.png',
+          'assets/Advanced_Asset/Day 9 comp/file_00000000f70061f594ef8a24a69b6bf3.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -1902,15 +2024,29 @@ Shoot portrait, half-body, and editorial frame variations. Try both soft and har
         'categories': ['Photography'],
         'objectives': ['Understand Using Gels for Creative Fashion Lighting'],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 10 comp/file_0000000025d461f7a075047a17efb97b.png',
+          'assets/Advanced_Asset/Day 10 comp/file_00000000360061f7bba738d4e3691698.png',
+          'assets/Advanced_Asset/Day 10 comp/file_00000000367061f9bbe40c44367b4569.png',
+          'assets/Advanced_Asset/Day 10 comp/file_00000000503c62308d65b11818f58487.png',
+          'assets/Advanced_Asset/Day 10 comp/file_000000006fdc6243a4446b756e241349.png',
+          'assets/Advanced_Asset/Day 10 comp/file_00000000861061f5bcfeba036367d6cf.png',
+          'assets/Advanced_Asset/Day 10 comp/file_000000008c4861f98abc1c925c7a5c73.png',
+          'assets/Advanced_Asset/Day 10 comp/file_00000000a18061f6976b32eb09c373c0.png',
+          'assets/Advanced_Asset/Day 10 comp/file_00000000e82061f9bbf74ae67b50fbb0.png',
+          'assets/Advanced_Asset/Day 10 comp/file_00000000ef8461fa889956bb4287a1e8.png',
+          'assets/Advanced_Asset/Day 10 comp/file_00000000f7fc61f59cd094bccea0c9d7.png',
+        ],
         'technicalDetails': {},
       },
       {
         'id': 'lesson_070',
         'day': 70,
-        'title': '✔️ What gels are and how they’re used ✔️ Creative setups to enhance mood, energy, and color in fashion work ✔️ Gel types, gear, and real pro tips ✔️ Common mistakes to avoid ✔️ A practical fashion-style assignment to apply your gel knowledge',
+        'title':
+            '✔️ What gels are and how they’re used ✔️ Creative setups to enhance mood, energy, and color in fashion work ✔️ Gel types, gear, and real pro tips ✔️ Common mistakes to avoid ✔️ A practical fashion-style assignment to apply your gel knowledge',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about ✔️ What gels are and how they’re used ✔️ Creative setups to enhance mood, energy, and color in fashion work ✔️ Gel types, gear, and real pro tips ✔️ Common mistakes to avoid ✔️ A practical fashion-style assignment to apply your gel knowledge',
+        'description':
+            'Learn about ✔️ What gels are and how they’re used ✔️ Creative setups to enhance mood, energy, and color in fashion work ✔️ Gel types, gear, and real pro tips ✔️ Common mistakes to avoid ✔️ A practical fashion-style assignment to apply your gel knowledge',
         'content': '''Day 10:
 ✔️ What gels are and how they’re used ✔️ Creative setups to enhance mood, energy, and color in fashion work ✔️ Gel types, gear, and real pro tips ✔️ Common mistakes to avoid ✔️ A practical fashion-style assignment to apply your gel knowledge
 
@@ -1923,7 +2059,9 @@ Shoot portrait, half-body, and editorial frame variations. Try both soft and har
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand ✔️ What gels are and how they’re used ✔️ Creative setups to enhance mood, energy, and color in fashion work ✔️ Gel types, gear, and real pro tips ✔️ Common mistakes to avoid ✔️ A practical fashion-style assignment to apply your gel knowledge'],
+        'objectives': [
+          'Understand ✔️ What gels are and how they’re used ✔️ Creative setups to enhance mood, energy, and color in fashion work ✔️ Gel types, gear, and real pro tips ✔️ Common mistakes to avoid ✔️ A practical fashion-style assignment to apply your gel knowledge',
+        ],
         'exercises': [],
         'imageUrls': [],
         'technicalDetails': {},
@@ -2081,7 +2219,11 @@ Would you like:
         'categories': ['Photography'],
         'objectives': ['Understand Editorial Fashion Moodboard Planning'],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 11 comp/file_000000004b2872099f4f2ef32900cb18.png',
+          'assets/Advanced_Asset/Day 11 comp/file_0000000089507209baba5126b541d5a7.png',
+          'assets/Advanced_Asset/Day 11 comp/file_00000000cdec7209baf3160bef2eb620.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -2089,8 +2231,10 @@ Would you like:
         'day': 72,
         'title': 'Lighting for Dark vs Fair Skin in Fashion Portraits?',
         'subtitle': 'Let me know!',
-        'description': 'Learn about Lighting for Dark vs Fair Skin in Fashion Portraits?',
-        'content': '''Day 12: Lighting for Dark vs Fair Skin in Fashion Portraits?
+        'description':
+            'Learn about Lighting for Dark vs Fair Skin in Fashion Portraits?',
+        'content':
+            '''Day 12: Lighting for Dark vs Fair Skin in Fashion Portraits?
 Let me know!
 You said:
 explain Editorial Fashion
@@ -2196,9 +2340,16 @@ Would you like me to help you:
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Lighting for Dark vs Fair Skin in Fashion Portraits?'],
+        'objectives': [
+          'Understand Lighting for Dark vs Fair Skin in Fashion Portraits?',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 12 comp/file_00000000514472099162eb80aa0d477d.png',
+          'assets/Advanced_Asset/Day 12 comp/file_000000005e64720680deddd0fcc2639e.png',
+          'assets/Advanced_Asset/Day 12 comp/file_00000000a7c872099b71a88fa04b0792.png',
+          'assets/Advanced_Asset/Day 12 comp/file_00000000f75c7209b2223767fe779dff.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -2206,7 +2357,8 @@ Would you like me to help you:
         'day': 72,
         'title': 'Lighting Dark vs Fair Skin in Fashion Portraits?',
         'subtitle': 'Just say the word!',
-        'description': 'Learn about Lighting Dark vs Fair Skin in Fashion Portraits?',
+        'description':
+            'Learn about Lighting Dark vs Fair Skin in Fashion Portraits?',
         'content': '''Day 12: Lighting Dark vs Fair Skin in Fashion Portraits?
 Just say the word!
 You said:
@@ -2284,7 +2436,9 @@ Or should we proceed to''',
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Lighting Dark vs Fair Skin in Fashion Portraits?'],
+        'objectives': [
+          'Understand Lighting Dark vs Fair Skin in Fashion Portraits?',
+        ],
         'exercises': [],
         'imageUrls': [],
         'technicalDetails': {},
@@ -2294,8 +2448,10 @@ Or should we proceed to''',
         'day': 72,
         'title': 'Lighting for Dark vs Fair Skin in Fashion Portraits?',
         'subtitle': 'You said:',
-        'description': 'Learn about Lighting for Dark vs Fair Skin in Fashion Portraits?',
-        'content': '''Day 12: Lighting for Dark vs Fair Skin in Fashion Portraits?
+        'description':
+            'Learn about Lighting for Dark vs Fair Skin in Fashion Portraits?',
+        'content':
+            '''Day 12: Lighting for Dark vs Fair Skin in Fashion Portraits?
 You said:
 ok mix all and write at once 
 ChatGPT said:
@@ -2307,7 +2463,9 @@ Certainly, Rinku! Here's the complete Day 11 lesson — fully integrated with ev
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Lighting for Dark vs Fair Skin in Fashion Portraits?'],
+        'objectives': [
+          'Understand Lighting for Dark vs Fair Skin in Fashion Portraits?',
+        ],
         'exercises': [],
         'imageUrls': [],
         'technicalDetails': {},
@@ -2315,10 +2473,13 @@ Certainly, Rinku! Here's the complete Day 11 lesson — fully integrated with ev
       {
         'id': 'lesson_071',
         'day': 71,
-        'title': 'Editorial Fashion Moodboard Planning + Understanding Editorial Fashion',
+        'title':
+            'Editorial Fashion Moodboard Planning + Understanding Editorial Fashion',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Editorial Fashion Moodboard Planning + Understanding Editorial Fashion',
-        'content': '''Day 11: Editorial Fashion Moodboard Planning + Understanding Editorial Fashion
+        'description':
+            'Learn about Editorial Fashion Moodboard Planning + Understanding Editorial Fashion',
+        'content':
+            '''Day 11: Editorial Fashion Moodboard Planning + Understanding Editorial Fashion
 
 👗 What is Editorial Fashion Photography?
 Editorial fashion photography is about using fashion to tell a visual story — often dramatic, emotional, or abstract. It’s the kind of work you see in magazines like Vogue, Elle, Harper’s Bazaar, and high-end fashion blogs.
@@ -2463,7 +2624,9 @@ Tools: Use Canva, Pinterest, or Milanote.
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Editorial Fashion Moodboard Planning + Understanding Editorial Fashion'],
+        'objectives': [
+          'Understand Editorial Fashion Moodboard Planning + Understanding Editorial Fashion',
+        ],
         'exercises': [],
         'imageUrls': [],
         'technicalDetails': {},
@@ -2471,10 +2634,13 @@ Tools: Use Canva, Pinterest, or Milanote.
       {
         'id': 'lesson_072',
         'day': 72,
-        'title': 'Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits',
+        'title':
+            'Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits',
-        'content': '''Day 12: Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits
+        'description':
+            'Learn about Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits',
+        'content':
+            '''Day 12: Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits
  
 
 📸 Master the communication, etiquette, and leadership skills required to handle creative teams — especially models and stylists — like a true professional.
@@ -2775,7 +2941,9 @@ Maintain consistency in fashion sets
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits'],
+        'objectives': [
+          'Understand Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits',
+        ],
         'exercises': [],
         'imageUrls': [],
         'technicalDetails': {},
@@ -2785,7 +2953,8 @@ Maintain consistency in fashion sets
         'day': 73,
         'title': 'Location Scouting + Permits + Light Planning',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Location Scouting + Permits + Light Planning',
+        'description':
+            'Learn about Location Scouting + Permits + Light Planning',
         'content': '''Day 13: Location Scouting + Permits + Light Planning
 🎯 Goal: Learn how to professionally scout, secure, and light locations for fashion shoots — whether it's on a beach, street, rooftop, studio, or urban environment.
 
@@ -2948,9 +3117,16 @@ Optional: Make a mock moodboard matching outfits to the background!
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Location Scouting + Permits + Light Planning'],
+        'objectives': [
+          'Understand Location Scouting + Permits + Light Planning',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 13 comp/file_0000000019f87209839c9ed6bafdf189.png',
+          'assets/Advanced_Asset/Day 13 comp/file_0000000026487206a4abd176971bfe31.png',
+          'assets/Advanced_Asset/Day 13 comp/file_00000000381472069c681ba7f63d61a8.png',
+          'assets/Advanced_Asset/Day 13 comp/file_0000000043407206829b18e849f9dde4.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -2958,7 +3134,8 @@ Optional: Make a mock moodboard matching outfits to the background!
         'day': 74,
         'title': 'Project – Fashion Editorial Shoot (Plan + Execute)',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Project – Fashion Editorial Shoot (Plan + Execute)',
+        'description':
+            'Learn about Project – Fashion Editorial Shoot (Plan + Execute)',
         'content': '''Day 14: Project – Fashion Editorial Shoot (Plan + Execute)
 🎯 Goal: Execute a full fashion editorial photoshoot — from concept to delivery — using everything learned so far: lighting, styling, posing, team coordination, and pro-level vision.
 
@@ -3109,9 +3286,16 @@ Include this shoot as a mini fashion story
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Project – Fashion Editorial Shoot (Plan + Execute)'],
+        'objectives': [
+          'Understand Project – Fashion Editorial Shoot (Plan + Execute)',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 14 comp/file_000000001ca8720991a9512696dc7b29.png',
+          'assets/Advanced_Asset/Day 14 comp/file_00000000456c7209909c88f70800c6fc.png',
+          'assets/Advanced_Asset/Day 14 comp/file_000000007d30720994a4a797628d0fd4.png',
+          'assets/Advanced_Asset/Day 14 comp/file_00000000e00872099bd1dfc89c90cc7d.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -3252,7 +3436,22 @@ Add light contrast curve for punch post D&B
         'categories': ['Photography'],
         'objectives': ['Understand Dodge & Burn (for Skin, Fabric, Fashion)'],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 16 comp/file_00000000079c622f994107e9f73081aa.png',
+          'assets/Advanced_Asset/Day 16 comp/file_00000000091c61fa8372af04a0380913.png',
+          'assets/Advanced_Asset/Day 16 comp/file_000000001c6861f98e6ce80bbc85545f.png',
+          'assets/Advanced_Asset/Day 16 comp/file_00000000324861f785c4ea2ae97bf815.png',
+          'assets/Advanced_Asset/Day 16 comp/file_000000003f7861f595432de8d7fd6653.png',
+          'assets/Advanced_Asset/Day 16 comp/file_000000005b2861f58684fce51cf15024.png',
+          'assets/Advanced_Asset/Day 16 comp/file_000000006a2061fa89f7d0a9fdefcfac.png',
+          'assets/Advanced_Asset/Day 16 comp/file_00000000aa9c61f8a2ba8862d771d818.png',
+          'assets/Advanced_Asset/Day 16 comp/file_00000000b2a061f5acb9167007c49464.png',
+          'assets/Advanced_Asset/Day 16 comp/file_00000000c36061f489a000630d89a005.png',
+          'assets/Advanced_Asset/Day 16 comp/file_00000000c87c620aa281b1d15f992a88.png',
+          'assets/Advanced_Asset/Day 16 comp/file_00000000d860622fa482adf253603eba.png',
+          'assets/Advanced_Asset/Day 16 comp/file_00000000e1a8622fb5f2ee5405d9bf0f.png',
+          'assets/Advanced_Asset/Day 16 comp/file_00000000ec8c622f88fbd9cb3909b94b.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -3260,8 +3459,10 @@ Add light contrast curve for punch post D&B
         'day': 77,
         'title': 'Frequency Separation (Non-Destructive Beauty Retouch)',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Frequency Separation (Non-Destructive Beauty Retouch)',
-        'content': '''Day 17: Frequency Separation (Non-Destructive Beauty Retouch)
+        'description':
+            'Learn about Frequency Separation (Non-Destructive Beauty Retouch)',
+        'content':
+            '''Day 17: Frequency Separation (Non-Destructive Beauty Retouch)
 🎯 Objective: Learn to professionally retouch skin and fabric while keeping textures 100% realistic — without blurring or plastic effects.
 
 🔍 What is Frequency Separation?
@@ -3420,9 +3621,15 @@ Optional Challenge:
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Frequency Separation (Non-Destructive Beauty Retouch)'],
+        'objectives': [
+          'Understand Frequency Separation (Non-Destructive Beauty Retouch)',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 17 comp/file_000000001ba4720988ab65ca7b528e66.png',
+          'assets/Advanced_Asset/Day 17 comp/file_00000000611c72069e6deffcf87c83f8.png',
+          'assets/Advanced_Asset/Day 17 comp/file_00000000672c720988d7af31fb606ce7.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -3430,8 +3637,10 @@ Optional Challenge:
         'day': 78,
         'title': 'Color Grading with Curves, LUTs, and Gradient Maps',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Color Grading with Curves, LUTs, and Gradient Maps',
-        'content': '''Day 18: Color Grading with Curves, LUTs, and Gradient Maps 
+        'description':
+            'Learn about Color Grading with Curves, LUTs, and Gradient Maps',
+        'content':
+            '''Day 18: Color Grading with Curves, LUTs, and Gradient Maps 
 
 🎯 Objective: Learn how to color grade images for editorial, commercial, beauty, and fashion photography using desktop tools, Lightroom Mobile, and professional color theory. This is where your images go from great to world-class.
 
@@ -3620,9 +3829,25 @@ Deliver:
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Color Grading with Curves, LUTs, and Gradient Maps'],
+        'objectives': [
+          'Understand Color Grading with Curves, LUTs, and Gradient Maps',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 18 comp/file_000000001c00622f95a8fef9b0cb9335.png',
+          'assets/Advanced_Asset/Day 18 comp/file_000000001e7461f5b07d270190e25deb.png',
+          'assets/Advanced_Asset/Day 18 comp/file_0000000022a8622f9180db624ae9ba75.png',
+          'assets/Advanced_Asset/Day 18 comp/file_000000003174622f91e8410b33549396.png',
+          'assets/Advanced_Asset/Day 18 comp/file_0000000034c861fb90fe4f3d6f14a293.png',
+          'assets/Advanced_Asset/Day 18 comp/file_000000003d406230b901935c7fa52e84.png',
+          'assets/Advanced_Asset/Day 18 comp/file_0000000087bc61fb83d9721856bd47c0.png',
+          'assets/Advanced_Asset/Day 18 comp/file_000000009cdc61f881951ee2bfa40f3f.png',
+          'assets/Advanced_Asset/Day 18 comp/file_00000000b5f861fda9c804316dab74fb.png',
+          'assets/Advanced_Asset/Day 18 comp/file_00000000da7061f5952ecf1a56292425.png',
+          'assets/Advanced_Asset/Day 18 comp/file_00000000e4f8620a9d1c1855f481f1e7.png',
+          'assets/Advanced_Asset/Day 18 comp/file_00000000ed8062308fe0c3625532babb.png',
+          'assets/Advanced_Asset/Day 18 comp/file_00000000f4c86246a6bfcac3795e4e1b.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -3630,8 +3855,10 @@ Deliver:
         'day': 79,
         'title': 'Batch Editing for Client Delivery (Speed + Consistency)',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Batch Editing for Client Delivery (Speed + Consistency)',
-        'content': '''Day 19: Batch Editing for Client Delivery (Speed + Consistency)
+        'description':
+            'Learn about Batch Editing for Client Delivery (Speed + Consistency)',
+        'content':
+            '''Day 19: Batch Editing for Client Delivery (Speed + Consistency)
 🎯 Objective: Learn how to edit hundreds of fashion/editorial photos quickly, consistently, and professionally, so your client receives a polished set on time — whether you’re using Lightroom, Capture One, or even mobile workflows.
 
 🔄 What is Batch Editing?
@@ -3776,9 +4003,19 @@ Causes crunchy skin or fabric
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Batch Editing for Client Delivery (Speed + Consistency)'],
+        'objectives': [
+          'Understand Batch Editing for Client Delivery (Speed + Consistency)',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 19 comp/file_00000000289c61f89c5e074bcd6ed36e.png',
+          'assets/Advanced_Asset/Day 19 comp/file_0000000041f46230bcfc707190504483.png',
+          'assets/Advanced_Asset/Day 19 comp/file_00000000481461f8bd51bacc135d0b2e.png',
+          'assets/Advanced_Asset/Day 19 comp/file_000000004b0c622f82d66173bbf21541.png',
+          'assets/Advanced_Asset/Day 19 comp/file_00000000613c61f59a1902a620722fa3.png',
+          'assets/Advanced_Asset/Day 19 comp/file_000000007e1c622fbe7e7cd1cf5d9949.png',
+          'assets/Advanced_Asset/Day 19 comp/file_00000000c84461f8bcbacab297f172bb.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -3786,7 +4023,8 @@ Causes crunchy skin or fabric
         'day': 80,
         'title': 'Exporting for Print, Web, Lookbook, Magazine',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Exporting for Print, Web, Lookbook, Magazine',
+        'description':
+            'Learn about Exporting for Print, Web, Lookbook, Magazine',
         'content': '''Day 20: Exporting for Print, Web, Lookbook, Magazine
 
 🎯 Goal of the Day:
@@ -3906,9 +4144,22 @@ TIFF / JPEG
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Exporting for Print, Web, Lookbook, Magazine'],
+        'objectives': [
+          'Understand Exporting for Print, Web, Lookbook, Magazine',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 20 comp/file_00000000244861fd98ba5e6e919686ea.png',
+          'assets/Advanced_Asset/Day 20 comp/file_000000003a9461f8adec16188bb94e54.png',
+          'assets/Advanced_Asset/Day 20 comp/file_000000005d5862308108f72462ddf54c.png',
+          'assets/Advanced_Asset/Day 20 comp/file_0000000063c461f7bc68cad18b7b0d88.png',
+          'assets/Advanced_Asset/Day 20 comp/file_000000007da8623080af3b7997ad181b.png',
+          'assets/Advanced_Asset/Day 20 comp/file_0000000080286230a2de6e3dd3c2febc.png',
+          'assets/Advanced_Asset/Day 20 comp/file_0000000085a061f89e824b58cc30171e.png',
+          'assets/Advanced_Asset/Day 20 comp/file_000000009160623095baf91e28d4619c.png',
+          'assets/Advanced_Asset/Day 20 comp/file_000000009fa861f8a3cef33d691914ed.png',
+          'assets/Advanced_Asset/Day 20 comp/file_00000000e24c623093b35258528cd9de.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -3916,7 +4167,8 @@ TIFF / JPEG
         'day': 81,
         'title': 'Project — High-End Beauty Retouching Assignment',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Project — High-End Beauty Retouching Assignment',
+        'description':
+            'Learn about Project — High-End Beauty Retouching Assignment',
         'content': '''Day 21: Project — High-End Beauty Retouching Assignment
 
 🎯 Goal of the Day:
@@ -4015,18 +4267,33 @@ Task:
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Project — High-End Beauty Retouching Assignment'],
+        'objectives': [
+          'Understand Project — High-End Beauty Retouching Assignment',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 21 comp/file_0000000014707208949f3cec75f64046.png',
+          'assets/Advanced_Asset/Day 21 comp/file_0000000052ac7208bc27fec841cf7942.png',
+          'assets/Advanced_Asset/Day 21 comp/file_00000000772c72089cc58e32893d90f5.png',
+          'assets/Advanced_Asset/Day 21 comp/file_0000000079387208a3ac55f017b28dfa.png',
+          'assets/Advanced_Asset/Day 21 comp/file_00000000b9a072068a51d8e12e7c5fbb.png',
+          'assets/Advanced_Asset/Day 21 comp/file_00000000c7887208b0e0edea0b2bfe59 (1).png',
+          'assets/Advanced_Asset/Day 21 comp/file_00000000d00072089ec6601d3c077583.png',
+          'assets/Advanced_Asset/Day 21 comp/file_00000000dfcc7208a95d58261ab20760 (1).png',
+          'assets/Advanced_Asset/Day 21 comp/file_00000000dfcc7208a95d58261ab20760.png',
+        ],
         'technicalDetails': {},
       },
       {
         'id': 'lesson_082',
         'day': 82,
-        'title': 'Pricing for Commercial & Fashion Work (Day Rates, Licensing, Usage Rights) – Real Ground-Level Guide',
+        'title':
+            'Pricing for Commercial & Fashion Work (Day Rates, Licensing, Usage Rights) – Real Ground-Level Guide',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Pricing for Commercial & Fashion Work (Day Rates, Licensing, Usage Rights) – Real Ground-Level Guide',
-        'content': '''Day 22: Pricing for Commercial & Fashion Work (Day Rates, Licensing, Usage Rights) – Real Ground-Level Guide
+        'description':
+            'Learn about Pricing for Commercial & Fashion Work (Day Rates, Licensing, Usage Rights) – Real Ground-Level Guide',
+        'content':
+            '''Day 22: Pricing for Commercial & Fashion Work (Day Rates, Licensing, Usage Rights) – Real Ground-Level Guide
 
 🎯 Goal of the Day (Updated):
 To confidently create quotes for real clients, with practical on-ground pricing, clear breakdowns for shoot fees, post-production, licensing, usage, and local expectations — so you never undercharge or get exploited.
@@ -4136,9 +4403,20 @@ Create a 3-tier rate card:
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Pricing for Commercial & Fashion Work (Day Rates, Licensing, Usage Rights) – Real Ground-Level Guide'],
+        'objectives': [
+          'Understand Pricing for Commercial & Fashion Work (Day Rates, Licensing, Usage Rights) – Real Ground-Level Guide',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 22 comp/file_00000000258461f5838f8ce28929bddf.png',
+          'assets/Advanced_Asset/Day 22 comp/file_000000002b9861f78f8fe4e4e253e52a (1).png',
+          'assets/Advanced_Asset/Day 22 comp/file_000000004390622f9ca3e88f524b9ffc.png',
+          'assets/Advanced_Asset/Day 22 comp/file_00000000657861f5a55244fef0fddbf0.png',
+          'assets/Advanced_Asset/Day 22 comp/file_000000006bd061f99e2fa75fd261a805.png',
+          'assets/Advanced_Asset/Day 22 comp/file_000000007d8861f58ac03ed82b46f93a.png',
+          'assets/Advanced_Asset/Day 22 comp/file_00000000d67461f9933981fad61182ff.png',
+          'assets/Advanced_Asset/Day 22 comp/file_00000000d6b861f98ff897cdd02e885a.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -4146,8 +4424,10 @@ Create a 3-tier rate card:
         'day': 83,
         'title': 'Contracts, Model Release Forms & Indian Photography Law',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Contracts, Model Release Forms & Indian Photography Law',
-        'content': '''Day 23: Contracts, Model Release Forms & Indian Photography Law
+        'description':
+            'Learn about Contracts, Model Release Forms & Indian Photography Law',
+        'content':
+            '''Day 23: Contracts, Model Release Forms & Indian Photography Law
 
 🎯 Goal of the Day:
 Become a legally protected professional photographer. Learn to use contracts, model release forms, and understand Indian laws so you can confidently shoot, publish, and license your work — without fear of legal issues.
@@ -4288,17 +4568,37 @@ Tools to use: Canva, Jotform, Notion, Google Docs
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Contracts, Model Release Forms & Indian Photography Law'],
+        'objectives': [
+          'Understand Contracts, Model Release Forms & Indian Photography Law',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 23 comp/file_0000000041b0622fb57cdd6e462d7e26.png',
+          'assets/Advanced_Asset/Day 23 comp/file_000000005664622f83a12aaed1b79272.png',
+          'assets/Advanced_Asset/Day 23 comp/file_000000005c8061f89c757bfb7140effb.png',
+          'assets/Advanced_Asset/Day 23 comp/file_00000000754861f8bb854769a83d3aad.png',
+          'assets/Advanced_Asset/Day 23 comp/file_00000000795c61fd96e1b498f3a9c9df.png',
+          'assets/Advanced_Asset/Day 23 comp/file_000000008c5061f5a53b7e00281ea355.png',
+          'assets/Advanced_Asset/Day 23 comp/file_00000000a9f8622fa99a119817b530ff.png',
+          'assets/Advanced_Asset/Day 23 comp/file_00000000bcf861f9bbb0f4b37c3f8eaf.png',
+          'assets/Advanced_Asset/Day 23 comp/file_00000000bf3461f884c429167904c878.png',
+          'assets/Advanced_Asset/Day 23 comp/file_00000000ca5c61f990f1eb45ed587607.png',
+          'assets/Advanced_Asset/Day 23 comp/file_00000000dbf861f8830e15dfba35a77a.png',
+          'assets/Advanced_Asset/Day 23 comp/file_00000000dc2861f6a6b47343ce282d01.png',
+          'assets/Advanced_Asset/Day 23 comp/file_00000000e91461f8b731ee9a8a8193ca.png',
+          'assets/Advanced_Asset/Day 23 comp/file_00000000f210622f8792bfc659609eb0.png',
+          'assets/Advanced_Asset/Day 23 comp/file_00000000f2c461f88af75c34dac94f2c.png',
+        ],
         'technicalDetails': {},
       },
       {
         'id': 'lesson_084',
         'day': 84,
         'title': 'Creating a Strong Fashion/Portrait Portfolio',
-        'subtitle': '(Includes Budget Tips, Indian Workflow, and Sample Layout)',
-        'description': 'Learn about Creating a Strong Fashion/Portrait Portfolio',
+        'subtitle':
+            '(Includes Budget Tips, Indian Workflow, and Sample Layout)',
+        'description':
+            'Learn about Creating a Strong Fashion/Portrait Portfolio',
         'content': '''Day 24: Creating a Strong Fashion/Portrait Portfolio
 (Includes Budget Tips, Indian Workflow, and Sample Layout)
 
@@ -4469,9 +4769,22 @@ Model releases
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Creating a Strong Fashion/Portrait Portfolio'],
+        'objectives': [
+          'Understand Creating a Strong Fashion/Portrait Portfolio',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 24 comp/file_00000000254061f9a466b02eec02416e.png',
+          'assets/Advanced_Asset/Day 24 comp/file_00000000306861f9805e1cdeb5f21e6f.png',
+          'assets/Advanced_Asset/Day 24 comp/file_00000000399861f8b78ba647e11706a1.png',
+          'assets/Advanced_Asset/Day 24 comp/file_000000004fa0624698aa0f774df11bea.png',
+          'assets/Advanced_Asset/Day 24 comp/file_00000000654061f99520d1cc7c08015c.png',
+          'assets/Advanced_Asset/Day 24 comp/file_0000000080f861f9abff999b66e98ec9.png',
+          'assets/Advanced_Asset/Day 24 comp/file_00000000a38c61f9aca6a6598d5dcbb0.png',
+          'assets/Advanced_Asset/Day 24 comp/file_00000000c93061f6a6fa69a94b9c58ce.png',
+          'assets/Advanced_Asset/Day 24 comp/file_00000000de5461f9957c3892610b83f3.png',
+          'assets/Advanced_Asset/Day 24 comp/file_00000000f21c61f9889a0eefa70eea09.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -4631,7 +4944,18 @@ Add Indo-Western series
         'categories': ['Photography'],
         'objectives': ['Understand Submitting to Magazines & Getting Featured'],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 25 comp/file_00000000330461f99b51bcd7c44b041f.png',
+          'assets/Advanced_Asset/Day 25 comp/file_000000005644622f8ebae8e51e43b13e.png',
+          'assets/Advanced_Asset/Day 25 comp/file_000000006fb0623092669648f6c03eab.png',
+          'assets/Advanced_Asset/Day 25 comp/file_0000000079506230a41695ce1877d9be.png',
+          'assets/Advanced_Asset/Day 25 comp/file_0000000097246230bb11194c4eb7fc41.png',
+          'assets/Advanced_Asset/Day 25 comp/file_000000009f9c6230b94992bd76e178f5.png',
+          'assets/Advanced_Asset/Day 25 comp/file_00000000b75061f9bd86d2d9cb602c47.png',
+          'assets/Advanced_Asset/Day 25 comp/file_00000000c67461f9be046058d8360281.png',
+          'assets/Advanced_Asset/Day 25 comp/file_00000000eb846230bd15f7e62e0bc490.png',
+          'assets/Advanced_Asset/Day 25 comp/file_00000000ecd461f8a1d5c89323487cc7.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -4774,14 +5098,20 @@ They want changes after delivery
         'categories': ['Photography'],
         'objectives': ['Understand Client Communication & Handling Shoot Days'],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 26 comp/file_000000003d78720688c9e4af86ed882b.png',
+          'assets/Advanced_Asset/Day 26 comp/file_0000000060787209bd33437f0d36429a.png',
+          'assets/Advanced_Asset/Day 26 comp/file_000000006a00720984160ffdc4e1bfbe.png',
+          'assets/Advanced_Asset/Day 26 comp/file_00000000905c7206a5070873fc0654eb.png',
+        ],
         'technicalDetails': {},
       },
       {
         'id': 'lesson_087',
         'day': 87,
         'title': 'Working with Agencies, Stylists & Teams',
-        'subtitle': 'Professional Collaboration, Communication & Workflow in the Fashion Industry',
+        'subtitle':
+            'Professional Collaboration, Communication & Workflow in the Fashion Industry',
         'description': 'Learn about Working with Agencies, Stylists & Teams',
         'content': '''Day 27: Working with Agencies, Stylists & Teams
 Professional Collaboration, Communication & Workflow in the Fashion Industry
@@ -4932,16 +5262,24 @@ Want these files? I can generate links or PDFs.
         'categories': ['Photography'],
         'objectives': ['Understand Working with Agencies, Stylists & Teams'],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 27 comp/file_0000000024007207966544d10b21b125.png',
+          'assets/Advanced_Asset/Day 27 comp/file_0000000037f87207bf49564b6b1efb1c.png',
+          'assets/Advanced_Asset/Day 27 comp/file_00000000aed072078505f2b87e77c246.png',
+          'assets/Advanced_Asset/Day 27 comp/file_00000000d19c72068b8b21f9754fd08d.png',
+        ],
         'technicalDetails': {},
       },
       {
         'id': 'lesson_088',
         'day': 88,
-        'title': 'Client Delivery (Google Drive, WeTransfer, File Sizes + Pro Tools & Business Systems)',
+        'title':
+            'Client Delivery (Google Drive, WeTransfer, File Sizes + Pro Tools & Business Systems)',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn about Client Delivery (Google Drive, WeTransfer, File Sizes + Pro Tools & Business Systems)',
-        'content': '''Day 28: Client Delivery (Google Drive, WeTransfer, File Sizes + Pro Tools & Business Systems)
+        'description':
+            'Learn about Client Delivery (Google Drive, WeTransfer, File Sizes + Pro Tools & Business Systems)',
+        'content':
+            '''Day 28: Client Delivery (Google Drive, WeTransfer, File Sizes + Pro Tools & Business Systems)
 The complete system to deliver photos/videos professionally, impress clients, and build a trustworthy photography business in India.
 
 🎯 Goal of the Day:
@@ -5144,18 +5482,28 @@ Let me know and I’ll share them all!
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Client Delivery (Google Drive, WeTransfer, File Sizes + Pro Tools & Business Systems)'],
+        'objectives': [
+          'Understand Client Delivery (Google Drive, WeTransfer, File Sizes + Pro Tools & Business Systems)',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 28 comp/file_000000007bb87206a5c7837a5dbbe826.png',
+          'assets/Advanced_Asset/Day 28 comp/file_00000000e334720982c74a06e0fe82a0.png',
+          'assets/Advanced_Asset/Day 28 comp/file_00000000fb9c72068508b22687c7d474.png',
+        ],
         'technicalDetails': {},
       },
       {
         'id': 'lesson_089',
         'day': 89,
-        'title': 'Final Assignment – Fashion Campaign with Concept, Shoot, Edit, Delivery',
-        'subtitle': 'Your complete fashion editorial assignment to build your pro-level portfolio',
-        'description': 'Learn about Final Assignment – Fashion Campaign with Concept, Shoot, Edit, Delivery',
-        'content': '''Day 29: Final Assignment – Fashion Campaign with Concept, Shoot, Edit, Delivery
+        'title':
+            'Final Assignment – Fashion Campaign with Concept, Shoot, Edit, Delivery',
+        'subtitle':
+            'Your complete fashion editorial assignment to build your pro-level portfolio',
+        'description':
+            'Learn about Final Assignment – Fashion Campaign with Concept, Shoot, Edit, Delivery',
+        'content':
+            '''Day 29: Final Assignment – Fashion Campaign with Concept, Shoot, Edit, Delivery
 Your complete fashion editorial assignment to build your pro-level portfolio
 
 🎯 Objective:
@@ -5304,16 +5652,23 @@ Create a Lookbook PDF with your campaign:
         'type': 'theory',
         'difficulty': 'advanced',
         'categories': ['Photography'],
-        'objectives': ['Understand Final Assignment – Fashion Campaign with Concept, Shoot, Edit, Delivery'],
+        'objectives': [
+          'Understand Final Assignment – Fashion Campaign with Concept, Shoot, Edit, Delivery',
+        ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 29 comp/file_00000000294072099565d4675c71ff9a.png',
+          'assets/Advanced_Asset/Day 29 comp/file_0000000042dc7206a35dfe7aacf5594d.png',
+          'assets/Advanced_Asset/Day 29 comp/file_00000000c73c7206bfec59189532adcf.png',
+        ],
         'technicalDetails': {},
       },
       {
         'id': 'lesson_090',
         'day': 90,
         'title': 'Graduation + Business Setup Guide',
-        'subtitle': 'Make it official — you\'re ready to launch your career as a professional fashion photographer.',
+        'subtitle':
+            'Make it official — you\'re ready to launch your career as a professional fashion photographer.',
         'description': 'Learn about Graduation + Business Setup Guide',
         'content': '''Day 30: Graduation + Business Setup Guide
 Make it official — you're ready to launch your career as a professional fashion photographer.
@@ -5858,7 +6213,11 @@ The future is yours. Go shoot it. 📸🌟''',
         'categories': ['Photography'],
         'objectives': ['Understand Graduation + Business Setup Guide'],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 30 comp/file_0000000006e07206a23f8a38cca285b1.png',
+          'assets/Advanced_Asset/Day 30 comp/file_0000000099c472098c9982f704d4acf3.png',
+          'assets/Advanced_Asset/Day 30 comp/file_00000000bbfc7209af0d203e27e078e1.png',
+        ],
         'technicalDetails': {},
       },
     ];

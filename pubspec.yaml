@@ -117,6 +117,37 @@ flutter:
     - assets/Intermediate_Asset/Day 28 comp /
     - assets/Intermediate_Asset/Day 29 comp/
     - assets/Intermediate_Asset/Day 30 comp/
+    # Advanced Assets
+    - assets/Advanced_Asset/Day 1 comp/
+    - assets/Advanced_Asset/Day 2 comp/
+    - assets/Advanced_Asset/Day 3 comp/
+    - assets/Advanced_Asset/Day 4 comp/
+    - assets/Advanced_Asset/Day 5 comp/
+    - assets/Advanced_Asset/Day 6 comp/
+    - assets/Advanced_Asset/Day 7 comp /
+    - assets/Advanced_Asset/Day 8 comp/
+    - assets/Advanced_Asset/Day 9 comp/
+    - assets/Advanced_Asset/Day 10 comp/
+    - assets/Advanced_Asset/Day 11 comp/
+    - assets/Advanced_Asset/Day 12 comp/
+    - assets/Advanced_Asset/Day 13 comp/
+    - assets/Advanced_Asset/Day 14 comp/
+    - assets/Advanced_Asset/Day 15 comp/
+    - assets/Advanced_Asset/Day 16 comp/
+    - assets/Advanced_Asset/Day 17 comp/
+    - assets/Advanced_Asset/Day 18 comp/
+    - assets/Advanced_Asset/Day 19 comp/
+    - assets/Advanced_Asset/Day 20 comp/
+    - assets/Advanced_Asset/Day 21 comp/
+    - assets/Advanced_Asset/Day 22 comp/
+    - assets/Advanced_Asset/Day 23 comp/
+    - assets/Advanced_Asset/Day 24 comp/
+    - assets/Advanced_Asset/Day 25 comp/
+    - assets/Advanced_Asset/Day 26 comp/
+    - assets/Advanced_Asset/Day 27 comp/
+    - assets/Advanced_Asset/Day 28 comp/
+    - assets/Advanced_Asset/Day 29 comp/
+    - assets/Advanced_Asset/Day 30 comp/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see

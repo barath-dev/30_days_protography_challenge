@@ -13,7 +13,7 @@ class AppConstants {
   static const double minReadingProgressForCompletion = 0.8; // 80%
   // Flag to toggle unrestricted access to all lessons (bypass daily unlock)
   static const bool isUnrestrictedMode = true;
-  static const bool allowAdvanceAccess = false; // Can't skip ahead
+  static const bool allowAdvanceAccess = true; // Can't skip ahead
   static const int maxLessonsPerDay =
       1; // Maximum lessons that can be accessed per day
 
