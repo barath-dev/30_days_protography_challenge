@@ -124,6 +124,8 @@ class LessonManager {
     final targetDifficulty = difficulty ?? UserPreferences.activeDifficulty;
     if (targetDifficulty == null) return false;
 
+    if (AppConstants.isUnrestrictedMode) return true;
+
     final progress = UserPreferences.getProgressForDifficulty(targetDifficulty);
     if (progress == null) return false;
 

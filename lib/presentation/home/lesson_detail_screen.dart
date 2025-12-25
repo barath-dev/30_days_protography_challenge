@@ -6,6 +6,7 @@ import '../../models/user_progress.dart';
 import '../../models/saved_item.dart';
 import '../../services/user_preferences.dart';
 import '../../services/lesson_manager.dart';
+import '../widgets/full_screen_image_viewer.dart';
 
 class LessonDetailScreen extends StatefulWidget {
   final Lesson? lesson;
@@ -613,6 +614,8 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                               _buildObjectivesSection(),
                               const SizedBox(height: 32),
                               _buildContentSection(),
+                              const SizedBox(height: 32),
+                              _buildImageGallery(),
                               const SizedBox(height: 32),
                               if (_lesson!.exercises.isNotEmpty) ...[
                                 _buildExercisesSection(),
@@ -1303,6 +1306,88 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                   ),
                 )
                 .toList(),
+      ),
+    );
+  }
+
+  Widget _buildImageGallery() {
+    if (_lesson!.imageUrls.isEmpty) return const SizedBox.shrink();
+
+    final theme = Theme.of(context);
+
+    return _buildSection(
+      title: 'Visual Guide',
+      icon: Icons.image_rounded,
+      child: SizedBox(
+        height: 220,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: _lesson!.imageUrls.length,
+          physics: const BouncingScrollPhysics(),
+          itemBuilder: (context, index) {
+            final url = _lesson!.imageUrls[index];
+            return Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => FullScreenImageViewer(
+                            imageUrls: _lesson!.imageUrls,
+                            initialIndex: index,
+                          ),
+                    ),
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Image.asset(
+                        url,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            width: 200,
+                            color: theme.cardColor,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.broken_image_rounded,
+                                  color: theme.disabledColor,
+                                  size: 32,
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  'Image not found',
+                                  style: theme.textTheme.bodySmall,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:photography_guide/models/lesson.dart';
+import '../utils/constants.dart';
 
 class UserProgress {
   static bool debugUnlockAllLessons = false; // Set to true for testing
@@ -166,6 +167,7 @@ class UserProgress {
   // Daily unlock system methods (works with progress days 1-30)
   bool isDayUnlocked(int progressDay) {
     if (debugUnlockAllLessons) return true;
+    if (AppConstants.isUnrestrictedMode) return true;
     if (progressDay == 1) return true;
 
     // Check if this day has been explicitly unlocked
@@ -240,10 +242,11 @@ class UserProgress {
 
   // Updated to work with progress days instead of actual lesson days
   LessonStatus getLessonStatus(String lessonId, int progressDay) {
-    // Check daily unlock first (using progress day)
-    if (!isDayUnlocked(progressDay)) return LessonStatus.locked;
-
+    // Check for completion FIRST to ensure completed lessons stay visible even if mode changes
     if (isLessonCompleted(lessonId)) return LessonStatus.completed;
+
+    // Check daily unlock (using progress day)
+    if (!isDayUnlocked(progressDay)) return LessonStatus.locked;
 
     // Current day logic - only one lesson can be current at a time
     final maxAvailableDay = getMaxAvailableDay();
