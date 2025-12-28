@@ -60,7 +60,7 @@ class PhotographyGuideApp extends StatelessWidget {
       valueListenable: UserPreferences.settingsNotifier,
       builder: (context, settings, child) {
         return MaterialApp(
-          title: 'Photography Guide',
+          title: 'Learn photography in 30days',
           debugShowCheckedModeBanner: false,
           navigatorKey: NavigationService.navigatorKey,
           navigatorObservers: [AppNavigationObserver()],
@@ -178,7 +178,7 @@ class _AppInitializerState extends State<AppInitializer> {
 
             // App title
             const Text(
-              'Photography Guide',
+              'Learn photography in 30days',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 28,
@@ -367,7 +367,7 @@ class AppLifecycleManager extends WidgetsBindingObserver {
 
 // App configuration and constants
 class AppConfig {
-  static const String appName = 'Photography Guide';
+  static const String appName = 'Learn photography in 30days';
   static const String appVersion = '1.0.0';
   static const int totalCourseDays = 30;
 

@@ -152,7 +152,7 @@ class HelpSupportScreen extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Photography Guide',
+                  'Learn photography in 30days',
                   style: textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),

@@ -13,7 +13,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     NotificationItem(
       id: '1',
       type: NotificationType.achievement,
-      title: 'Welcome to Photography Guide!',
+      title: 'Welcome to Learn photography in 30days!',
       message: 'Start your journey to becoming a better photographer today.',
       timestamp: DateTime.now().subtract(const Duration(hours: 2)),
       isRead: false,

@@ -210,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
               const SizedBox(height: 32),
               Text(
-                'Welcome to\nPhotography Guide',
+                'Welcome to\nLearn photography in 30days',
                 textAlign: TextAlign.center,
                 style: textTheme.displaySmall?.copyWith(
                   fontWeight: FontWeight.bold,
