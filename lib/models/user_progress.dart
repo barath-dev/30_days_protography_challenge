@@ -260,6 +260,9 @@ class UserProgress {
 
     if (progressDay < maxAvailableDay) return LessonStatus.available;
 
+    // In unrestricted mode, all future lessons are available
+    if (AppConstants.isUnrestrictedMode) return LessonStatus.available;
+
     return LessonStatus.locked;
   }
 
@@ -342,9 +345,14 @@ class UserProgress {
   }
 
   UserProgress updateStreak() {
-    final today = DateTime.now();
-    final lastDate = lastActivityDate;
-    final daysDifference = today.difference(lastDate).inDays;
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final lastActivity = DateTime(
+      lastActivityDate.year,
+      lastActivityDate.month,
+      lastActivityDate.day,
+    );
+    final daysDifference = today.difference(lastActivity).inDays;
 
     int newStreak;
     if (daysDifference == 0) {

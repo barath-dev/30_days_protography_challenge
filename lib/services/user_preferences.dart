@@ -9,7 +9,9 @@ class UserPreferences {
   static SharedPreferences? _prefs;
   static Map<DifficultyLevel, UserProgress> _allProgress = {};
   static DifficultyLevel? _activeDifficulty;
-  static final ValueNotifier<AppSettings> settingsNotifier = ValueNotifier(AppSettings.defaultSettings());
+  static final ValueNotifier<AppSettings> settingsNotifier = ValueNotifier(
+    AppSettings.defaultSettings(),
+  );
 
   // Keys for SharedPreferences
   static const String _keyFirstLaunch = 'first_launch';
@@ -358,9 +360,7 @@ class UserPreferences {
   }
 
   static bool hasValidProgress() {
-    return currentProgress != null &&
-        currentProgress!.selectedDifficulty != null &&
-        currentProgress!.userId.isNotEmpty;
+    return currentProgress != null && currentProgress!.userId.isNotEmpty;
   }
 
   static bool hasProgressForDifficulty(DifficultyLevel difficulty) {

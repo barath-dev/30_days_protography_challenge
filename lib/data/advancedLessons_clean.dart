@@ -175,7 +175,7 @@ Scene: White outfit under sun at 2 PM Goal: Protect skin and dress from overex
           'assets/Advanced_Asset/Day 1 comp/file_00000000af8861f89f934c00ba0eb3f0.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_062',
         'day': 62,
@@ -350,7 +350,7 @@ Task B: Focus Stacking Portrait
         'exercises': [],
         'imageUrls': [],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_063',
         'day': 63,
@@ -541,7 +541,7 @@ Task B: GN Distance Calculation
           'assets/Advanced_Asset/Day 3 comp/file_00000000eb60622fbe31243ecf15c1a8.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_064',
         'day': 64,
@@ -693,7 +693,7 @@ Editorial Outdoor Challenge:
           'assets/Advanced_Asset/Day 4 comp/file_00000000fa08622fa4333c7d556a7fbc.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_065',
         'day': 65,
@@ -922,7 +922,7 @@ sRGB
           'assets/Advanced_Asset/Day 5 comp/file_00000000b7e861f7891e0f03441a9999.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_066',
         'day': 66,
@@ -1108,7 +1108,7 @@ Today you’ve learned:
           'assets/Advanced_Asset/Day 6 comp/file_00000000dc2c61f88f7df3dfe4d17338.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_067',
         'day': 67,
@@ -1349,7 +1349,7 @@ Position flash with intent
           'assets/Advanced_Asset/Day 7 comp /file_00000000d0b0622fb6a61ea8a8ba5b26-min.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_068',
         'day': 68,
@@ -1530,7 +1530,7 @@ Analyze results and adjust modifiers/angles based on mood.
           'assets/Advanced_Asset/Day 8 comp/file_00000000f06861f89c5cc791e9a6378f (1).png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_069',
         'day': 69,
@@ -1712,7 +1712,7 @@ If you're aiming for natural beauty with glow, use the socked dish with a fill a
           'assets/Advanced_Asset/Day 9 comp/file_00000000f70061f594ef8a24a69b6bf3.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_070',
         'day': 70,
@@ -1849,7 +1849,7 @@ Shoot portrait, half-body, and editorial frame variations. Try both soft and har
           'assets/Advanced_Asset/Day 10 comp/file_00000000f7fc61f59cd094bccea0c9d7.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_071',
         'day': 71,
@@ -2010,7 +2010,7 @@ Tools: Use Canva, Pinterest, or Milanote.
         'exercises': [],
         'imageUrls': [],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_072',
         'day': 72,
@@ -2327,7 +2327,7 @@ Maintain consistency in fashion sets
         'exercises': [],
         'imageUrls': [],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_073',
         'day': 73,
@@ -2508,7 +2508,7 @@ Optional: Make a mock moodboard matching outfits to the background!
           'assets/Advanced_Asset/Day 13 comp/file_0000000043407206829b18e849f9dde4.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_074',
         'day': 74,
@@ -2677,7 +2677,7 @@ Include this shoot as a mini fashion story
           'assets/Advanced_Asset/Day 14 comp/file_00000000e00872099bd1dfc89c90cc7d.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_075',
         'day': 75,
@@ -2856,7 +2856,7 @@ Add light contrast curve for punch post D&B
           'assets/Advanced_Asset/Day 16 comp/file_00000000ec8c622f88fbd9cb3909b94b.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_077',
         'day': 77,
@@ -3034,7 +3034,7 @@ Optional Challenge:
           'assets/Advanced_Asset/Day 17 comp/file_00000000672c720988d7af31fb606ce7.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_078',
         'day': 78,
@@ -3252,7 +3252,7 @@ Deliver:
           'assets/Advanced_Asset/Day 18 comp/file_00000000f4c86246a6bfcac3795e4e1b.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_079',
         'day': 79,
@@ -3420,7 +3420,7 @@ Causes crunchy skin or fabric
           'assets/Advanced_Asset/Day 19 comp/file_00000000c84461f8bcbacab297f172bb.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_080',
         'day': 80,
@@ -3564,7 +3564,7 @@ TIFF / JPEG
           'assets/Advanced_Asset/Day 20 comp/file_00000000e24c623093b35258528cd9de.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_081',
         'day': 81,
@@ -3686,7 +3686,7 @@ Task:
           'assets/Advanced_Asset/Day 21 comp/file_00000000dfcc7208a95d58261ab20760.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_082',
         'day': 82,
@@ -3821,7 +3821,7 @@ Create a 3-tier rate card:
           'assets/Advanced_Asset/Day 22 comp/file_00000000d6b861f98ff897cdd02e885a.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_083',
         'day': 83,
@@ -3993,7 +3993,7 @@ Tools to use: Canva, Jotform, Notion, Google Docs
           'assets/Advanced_Asset/Day 23 comp/file_00000000f2c461f88af75c34dac94f2c.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_084',
         'day': 84,
@@ -4189,7 +4189,7 @@ Model releases
           'assets/Advanced_Asset/Day 24 comp/file_00000000f21c61f9889a0eefa70eea09.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_085',
         'day': 85,
@@ -4360,7 +4360,7 @@ Add Indo-Western series
           'assets/Advanced_Asset/Day 25 comp/file_00000000ecd461f8a1d5c89323487cc7.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_086',
         'day': 86,
@@ -4508,7 +4508,7 @@ They want changes after delivery
           'assets/Advanced_Asset/Day 26 comp/file_00000000905c7206a5070873fc0654eb.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_087',
         'day': 87,
@@ -4672,7 +4672,7 @@ Want these files? I can generate links or PDFs.
           'assets/Advanced_Asset/Day 27 comp/file_00000000d19c72068b8b21f9754fd08d.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_088',
         'day': 88,
@@ -4895,7 +4895,7 @@ Let me know and I’ll share them all!
           'assets/Advanced_Asset/Day 28 comp/file_00000000fb9c72068508b22687c7d474.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_089',
         'day': 89,
@@ -5065,7 +5065,7 @@ Create a Lookbook PDF with your campaign:
           'assets/Advanced_Asset/Day 29 comp/file_00000000c73c7206bfec59189532adcf.png',
         ],
         'technicalDetails': {},
-      },
+      },,
       {
         'id': 'lesson_090',
         'day': 90,
