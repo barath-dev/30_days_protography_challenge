@@ -350,7 +350,7 @@ Task B: Focus Stacking Portrait
         'exercises': [],
         'imageUrls': [],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_063',
         'day': 63,

@@ -348,7 +348,18 @@ Task B: Focus Stacking Portrait
         'categories': ['Photography'],
         'objectives': ['Understand Advanced Focus Techniques'],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 2 comp/file_0000000029d061f994f800eab161dc71.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000655461f5a1d721582270e870.png',
+          'assets/Advanced_Asset/Day 2 comp/file_000000006c1861f9b182e5258ffa92c3.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000804061f88e65464c8df424f2.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000a98461f9a89ecdb7a4a686df.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000ae5061f59293b87236944595.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000b94861f98daa0eeee6634182.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000c73461f6b06cb1c80768ca86.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000c79861f68f55a2e5dd36113d.png',
+          'assets/Advanced_Asset/Day 2 comp/file_00000000ed6461f7885833ad42ba14e6.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -2008,7 +2019,11 @@ Tools: Use Canva, Pinterest, or Milanote.
           'Understand Editorial Fashion Moodboard Planning + Understanding Editorial Fashion',
         ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 11 comp/file_000000004b2872099f4f2ef32900cb18.png',
+          'assets/Advanced_Asset/Day 11 comp/file_0000000089507209baba5126b541d5a7.png',
+          'assets/Advanced_Asset/Day 11 comp/file_00000000cdec7209baf3160bef2eb620.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -2325,7 +2340,12 @@ Maintain consistency in fashion sets
           'Understand Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits',
         ],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 12 comp/file_00000000514472099162eb80aa0d477d.png',
+          'assets/Advanced_Asset/Day 12 comp/file_000000005e64720680deddd0fcc2639e.png',
+          'assets/Advanced_Asset/Day 12 comp/file_00000000a7c872099b71a88fa04b0792.png',
+          'assets/Advanced_Asset/Day 12 comp/file_00000000f75c7209b2223767fe779dff.png',
+        ],
         'technicalDetails': {},
       },
       {
@@ -2683,7 +2703,8 @@ Include this shoot as a mini fashion story
         'day': 75,
         'title': 'Post-Production Workflow & Selection (Culling to Editing)',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn how to select your best shots and prepare them for high-end retouching.',
+        'description':
+            'Learn how to select your best shots and prepare them for high-end retouching.',
         'content': '''Day 15: Post-Production Workflow & Selection
         
 🎯 Objective: Learn the professional workflow for culling, rating, and selecting images before you start editing.
@@ -2698,7 +2719,12 @@ Include this shoot as a mini fashion story
         'categories': ['Photography'],
         'objectives': ['Understand Post-Production Workflow'],
         'exercises': [],
-        'imageUrls': [],
+        'imageUrls': [
+          'assets/Advanced_Asset/Day 15 comp/file_00000000111c7206adc144e7acec24f7.png',
+          'assets/Advanced_Asset/Day 15 comp/file_0000000014647209b7cc48cbe05ea24f.png',
+          'assets/Advanced_Asset/Day 15 comp/file_00000000da60720996df7ba68dda88cb.png',
+          'assets/Advanced_Asset/Day 15 comp/file_00000000f0ec7206b49f792f95c07a67.png',
+        ],
         'technicalDetails': {},
       },
       {
