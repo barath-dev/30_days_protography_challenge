@@ -158,19 +158,21 @@ class _AppInitializerState extends State<AppInitializer> {
           children: [
             // App logo/icon
             Container(
-              padding: const EdgeInsets.all(32),
+              width: 120,
+              height: 120,
               decoration: BoxDecoration(
-                color: const Color(0xFFFF6B35).withOpacity(0.1),
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: const Color(0xFFFF6B35).withOpacity(0.3),
-                  width: 2,
-                ),
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFFF6B35).withOpacity(0.2),
+                    blurRadius: 20,
+                    spreadRadius: 5,
+                  ),
+                ],
               ),
-              child: const Icon(
-                Icons.camera_alt,
-                color: Color(0xFFFF6B35),
-                size: 64,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: Image.asset('assets/icon.png', fit: BoxFit.cover),
               ),
             ),
 
