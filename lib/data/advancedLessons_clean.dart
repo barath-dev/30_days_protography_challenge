@@ -10,7 +10,7 @@ class AdvancedLessons {
             'Learn about Creative Exposure (Expose for Shadows vs Highlights)',
         'content':
             '''DAY 1 – Creative Exposure (Expose for Shadows vs Highlights)
-Pro Photography Masterclass – Week 1: Mastering the Camera & Vision 🕒 Estimated Time: 1.5 – 2 hours (Learning + Practice + Review)
+Pro Photography Masterclass – Week 1: Mastering the Camera & Vision🕒 Estimated Time: 1.5 – 2 hours (Learning + Practice + Review)
 
 🎯 What You'll Learn Today:
 	•	How to expose creatively, not just correctly
@@ -119,16 +119,16 @@ Push histogram slightly to the right to:
 	•	Especially useful in RAW fashion/editorial shoots
 
 🔹 Flash Ambient Ratio Technique
-Lower ambient exposure by 1 stop → Use flash to fill subject → Gives you control + natural look Used in:
+Lower ambient exposure by 1 stop→ Use flash to fill subject→ Gives you control + natural lookUsed in:
 	•	Outdoor fashion
 	•	Wedding portraits
 	•	Harsh sun + moody tone combo
 
 🔹 RGB Histogram Check
-Enable RGB histogram for colored fabrics and makeup → Prevent color channel clipping (especially red or blue)
+Enable RGB histogram for colored fabrics and makeup→ Prevent color channel clipping (especially red or blue)
 
 🔹 Tethered Exposure Checking
-Use Capture One or Lightroom + Tether Tools cable to shoot directly to laptop → View exposure, histogram, focus, and highlight alert on big screen → Industry standard in studios
+Use Capture One or Lightroom + Tether Tools cable to shoot directly to laptop→ View exposure, histogram, focus, and highlight alert on big screen→ Industry standard in studios
 
 🧪 6. Practice Assignment
 📸 Shoot the Same Subject in 3 Ways:
@@ -146,7 +146,7 @@ Use Capture One or Lightroom + Tether Tools cable to shoot directly to laptop 
 	•	Edit all 3 in Lightroom/Capture One
 
 🧵 Real-World Fashion Scenario
-Scene: White outfit under sun at 2 PM Goal: Protect skin and dress from overexposure Setup:
+Scene: White outfit under sun at 2 PMGoal: Protect skin and dress from overexposureSetup:
 	•	ISO 100, f/2.8, 1/2000s
 	•	ND filter (6-stop) on 50mm f/1.2
 	•	Godox AD200 flash with softbox
@@ -154,7 +154,7 @@ Scene: White outfit under sun at 2 PM Goal: Protect skin and dress from overex
 📌 Meter on skin → Flash for balance → Let sky blow out
 
 🧠 Final Quote:
-“Exposure isn’t about perfection — it’s about intention.” – Fashion DPs and Editorial Directors everywhere
+“Exposure isn’t about perfection — it’s about intention.”– Fashion DPs and Editorial Directors everywhere
 
 ✅''',
         'estimatedDuration': 30,
@@ -175,7 +175,7 @@ Scene: White outfit under sun at 2 PM Goal: Protect skin and dress from overex
           'assets/Advanced_Asset/Day 1 comp/file_00000000af8861f89f934c00ba0eb3f0.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_062',
         'day': 62,
@@ -224,7 +224,7 @@ Nikon Z8 / Z9
 Dynamic area AF + BBF option
 Fujifilm X-T5 / GFX
 Best for studio fashion & product
-🧠 Pro Tip: Set AF-ON for focus, and leave shutter button for exposure only 💡 Combine BBF with continuous AF (AF-C) for moving subjects
+🧠 Pro Tip: Set AF-ON for focus, and leave shutter button for exposure only💡 Combine BBF with continuous AF (AF-C) for moving subjects
 
 🪄 2. What Is Focus Stacking?
 Focus stacking is the process of taking multiple photos at different focus points and combining them to get one image that’s sharp across the frame.
@@ -339,7 +339,7 @@ Task B: Focus Stacking Portrait
 🎯 Goal: Create one image where entire face is tack sharp
 
 📌 Pro Quote:
-"Focus is not just technical — it's where your story begins. Control it, and you control the viewer’s eye." – Editorial Fashion Director, Vogue Italia
+"Focus is not just technical — it's where your story begins. Control it, and you control the viewer’s eye."– Editorial Fashion Director, Vogue Italia
 
 ✅''',
         'estimatedDuration': 30,
@@ -385,7 +385,7 @@ Flash auto-meters scene (not for consistent work)
 The Guide Number (GN) is the measurement of how powerful a flash is.
 📏 Formula:
 GN = Distance (meters or feet) × f-number (aperture)
-✅ Example: If your flash GN = 60 (meters) You want f/4 → subject should be 15 meters away (60 ÷ 4)
+✅ Example:If your flash GN = 60 (meters)You want f/4 → subject should be 15 meters away (60 ÷ 4)
 💡 This helps you:
 	•	Pre-light scenes without test shots
 	•	Match multiple flashes
@@ -486,14 +486,14 @@ For stability
 
 🧠 Pro Techniques for Manual Flash
 🔹 “Inverse Square Law”:
-Closer the flash → sharper falloff Farther flash → smoother gradient
+Closer the flash → sharper falloffFarther flash → smoother gradient
 ✅ Use it to control how fast the shadows fade
 
 🔹 “Feathering” the Light:
-Point the edge of the softbox at the subject, not the center → Creates more natural soft light with smoother transitions
+Point the edge of the softbox at the subject, not the center→ Creates more natural soft light with smoother transitions
 
 🔹 Use Flash Meter:
-Use Sekonic L-858D to read exact exposure from flash. → Set it to f/5.6 at subject distance → dial flash power to match
+Use Sekonic L-858D to read exact exposure from flash.→ Set it to f/5.6 at subject distance → dial flash power to match
 
 🔹 Manual Flash + ND Filter:
 For shallow depth in bright light:
@@ -523,7 +523,7 @@ Task B: GN Distance Calculation
 	•	Place subject there and test accuracy
 
 💬 Final Quote:
-“Manual flash gives you total creative control — it’s not just about light, it’s about shaping the mood of the entire photo.” – Beauty Lighting Director, Global Fashion Week
+“Manual flash gives you total creative control — it’s not just about light, it’s about shaping the mood of the entire photo.”– Beauty Lighting Director, Global Fashion Week
 
 ✅''',
         'estimatedDuration': 30,
@@ -541,7 +541,7 @@ Task B: GN Distance Calculation
           'assets/Advanced_Asset/Day 3 comp/file_00000000eb60622fbe31243ecf15c1a8.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_064',
         'day': 64,
@@ -559,7 +559,7 @@ A camera shutter has two curtains:
 	•	First curtain opens
 	•	Second curtain closes
 At high shutter speeds (above 1/200s), both curtains move together, only exposing a small slit at a time.
-⚠️ Standard flash can’t light the full frame in this mode. 👉 That’s why non-HSS flash creates black bars or partial exposure above 1/200s.
+⚠️ Standard flash can’t light the full frame in this mode.👉 That’s why non-HSS flash creates black bars or partial exposure above 1/200s.
 
 🔥 How HSS Fixes That:
 HSS sends a rapid burst (pulses of flash) that lights the entire sensor while the slit moves. It acts like constant light for a millisecond.
@@ -640,7 +640,7 @@ Use HSL sliders in Lightroom to match:
 
 🎯 Lightroom Mask Trick:
 	•	Select Subject > reduce highlights -20
-	•	Increase exposure +10 on shadows → Feels more natural + editorial
+	•	Increase exposure +10 on shadows→ Feels more natural + editorial
 
 🔁 11. Common Mistakes to Avoid in HSS Shoots
 Mistake
@@ -672,7 +672,7 @@ Editorial Outdoor Challenge:
 🎯 Goal: Create an editorial image worthy of a magazine cover or lookbook
 
 🔊 Pro Photographer Quote:
-“HSS flash is like having a sun in your hand — you control time, light, and even emotion when you master it.” – Lighting Director, Elle India
+“HSS flash is like having a sun in your hand — you control time, light, and even emotion when you master it.”– Lighting Director, Elle India
 
 ✅''',
         'estimatedDuration': 30,
@@ -693,7 +693,7 @@ Editorial Outdoor Challenge:
           'assets/Advanced_Asset/Day 4 comp/file_00000000fa08622fa4333c7d556a7fbc.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_065',
         'day': 65,
@@ -706,7 +706,7 @@ Editorial Outdoor Challenge:
             '''Day 5 – Color Profiles & Bit Depth in Photography (sRGB, AdobeRGB, ProPhoto RGB + Custom Color Styles)
 
 📅 Learning Time: 1.5 – 2 Hours
-🧠 Focus: Color control, editing consistency, professional workflow 🎓 Skill Level: Pro / Editorial / Commercial / Portfolio Shoots
+🧠 Focus: Color control, editing consistency, professional workflow🎓 Skill Level: Pro / Editorial / Commercial / Portfolio Shoots
 
 🔍 What You’ll Learn Today
 	•	What are color profiles and bit depth, and why they matter
@@ -895,7 +895,7 @@ sRGB
 8-bit
 
 🗣️ Pro Quote:
-“Your colors define your signature. Color space and bit depth are not tech talk — they are tools of visual identity.” — Senior Print Colorist, Vogue India
+“Your colors define your signature. Color space and bit depth are not tech talk — they are tools of visual identity.”— Senior Print Colorist, Vogue India
 
 ✅''',
         'estimatedDuration': 30,
@@ -922,7 +922,7 @@ sRGB
           'assets/Advanced_Asset/Day 5 comp/file_00000000b7e861f7891e0f03441a9999.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_066',
         'day': 66,
@@ -934,7 +934,7 @@ sRGB
             '''Day 6 – Building a Visual Style (Color + Composition + Mood)
 
 📅 Learning Time: 2 – 2.5 Hours
-📷 Skill Focus: Vision, Mood, Aesthetic, Signature Look 👁️ Ideal For: Fashion, Editorial, Portraits, Commercial, Art Photography
+📷 Skill Focus: Vision, Mood, Aesthetic, Signature Look👁️ Ideal For: Fashion, Editorial, Portraits, Commercial, Art Photography
 
 🔍 What Is a Visual Style?
 A visual style is the consistent artistic look and feel that makes your photos instantly recognizable. It includes:
@@ -1044,7 +1044,7 @@ Minimalism, emotion, strong BW tones
 	•	Add a calibrated monitor and reference color tools (from Day 5)
 
 🧪 5. Practical Assignment – Day 6
-Create Your Own Signature Series 📍 Task:
+Create Your Own Signature Series📍 Task:
 	•	Pick one moodboard style (e.g., "Golden cinematic outdoor")
 	•	Use:
 	•	Backlight
@@ -1058,8 +1058,8 @@ Create Your Own Signature Series 📍 Task:
 🎯 Goal: Your images should look like they belong to one world.
 
 💬 Bonus Quotes:
-“Style is knowing who you are and telling that story with consistency.” – Richard Avedon
-“Your photos should look like YOU took them — not like you copied someone else’s filter.” – Vikram Bawa
+“Style is knowing who you are and telling that story with consistency.”– Richard Avedon
+“Your photos should look like YOU took them — not like you copied someone else’s filter.”– Vikram Bawa
 
 ❌ Mistakes to Avoid
 Mistake
@@ -1088,7 +1088,7 @@ Today you’ve learned:
 	•	Tools and exercises to build your visual identity
 	•	How pros shape their recognizable styles
 	•	Assignments to practice and create a signature body of work
-  
+
 ⚡📸''',
         'estimatedDuration': 30,
         'type': 'theory',
@@ -1108,7 +1108,7 @@ Today you’ve learned:
           'assets/Advanced_Asset/Day 6 comp/file_00000000dc2c61f88f7df3dfe4d17338.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_067',
         'day': 67,
@@ -1123,7 +1123,7 @@ Today you’ve learned:
 A complete guide to balancing sunlight and flash like a pro — with low and high budget options!
 
 📅 Duration: 2 to 3 hours
-🎯 Goal: Learn how to use flash with sunlight using High-Speed Sync 🧠 Focus: Lighting, exposure control, gear handling, and style consistency
+🎯 Goal: Learn how to use flash with sunlight using High-Speed Sync🧠 Focus: Lighting, exposure control, gear handling, and style consistency
 
 🔆 What Is High-Speed Sync (HSS)? – Simple Explanation
 When you use flash, most cameras have a shutter speed limit around 1/200 sec. If you go faster, the photo looks wrong or blacked out — because the flash and shutter are out of sync.
@@ -1152,7 +1152,7 @@ HSS is perfect for:
 
 ✅ Nikon (DSLR or Z Series)
 	•	Use flash with HSS (e.g., SB-700, Godox V1N, AD300 Pro)
-	•	On camera: Go to Menu → Custom Settings → E1 → Flash sync speed → Set to “Auto FP 1/250”
+	•	On camera:Go to Menu → Custom Settings → E1 → Flash sync speed → Set to “Auto FP 1/250”
 	•	Activate HSS on flash
 	•	You can now shoot above 1/250s with flash ON
 
@@ -1296,7 +1296,7 @@ Messy light/shadow patterns
 Position flash with intent
 
 🎯 Pro Quote:
-“Sunlight gives shape. Flash gives control. Combine both, and you own the scene — not the other way around.” — Lara Jade (International Fashion Photographer)
+“Sunlight gives shape. Flash gives control. Combine both, and you own the scene — not the other way around.”— Lara Jade (International Fashion Photographer)
 
 ✅ DAY 7 COMPLETED – You Now Know:
 
@@ -1349,7 +1349,7 @@ Position flash with intent
           'assets/Advanced_Asset/Day 7 comp /file_00000000d0b0622fb6a61ea8a8ba5b26-min.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_068',
         'day': 68,
@@ -1392,7 +1392,7 @@ Separation, cinematic feel
 	•	Modifiers:
 	•	Soft look: 90cm Octabox, Beauty Dish with Diffuser
 	•	Dramatic look: Standard reflector, grid
-Advanced Tip: Try clamshell lighting — place a reflector or second light directly below face for beauty close-ups. It fills neck/eye shadows beautifully.
+Advanced Tip:Try clamshell lighting — place a reflector or second light directly below face for beauty close-ups. It fills neck/eye shadows beautifully.
 
 2️⃣ Fill Light – The Mood Balancer
 	•	Where to place: Opposite of key light or just beside camera
@@ -1456,10 +1456,10 @@ Key side only (no fill)
 Moody, fashion portraits
 
 🧪 Layering Lights – Step-by-Step
-1. Start with Key Light Only Take a test shot. Study shadows and facial sculpting.
-2. Add Fill Light or Reflector Watch how shadows lighten. Adjust power or distance.
-3. Add Hair Light Create a subtle glow or rim. Avoid overblown highlights.
-4. Review Exposure Balance Use histogram and test shots. Adjust one light at a time.
+1. Start with Key Light OnlyTake a test shot. Study shadows and facial sculpting.
+2. Add Fill Light or ReflectorWatch how shadows lighten. Adjust power or distance.
+3. Add Hair LightCreate a subtle glow or rim. Avoid overblown highlights.
+4. Review Exposure BalanceUse histogram and test shots. Adjust one light at a time.
 
 🧱 Studio Setup Blueprint (Top View)
 mathematica
@@ -1503,10 +1503,10 @@ Create a 3-light fashion portrait series with the following:
 Analyze results and adjust modifiers/angles based on mood.
 
 💬 Expert Quote:
-“Lighting is not about showing everything—it’s about deciding what to reveal.” — Erik Almas (Commercial Photographer)
+“Lighting is not about showing everything—it’s about deciding what to reveal.”— Erik Almas (Commercial Photographer)
 
 ✅ What You’ve Learned Today:
-✔️ The full function of key, fill, and hair lights ✔️ Pro-level lighting ratios and setups ✔️ Lighting patterns (Rembrandt, Loop, Butterfly) ✔️ Modifier selection based on style ✔️ Budget and pro gear setups ✔️ Step-by-step layering approach for 3-point light
+✔️ The full function of key, fill, and hair lights✔️ Pro-level lighting ratios and setups✔️ Lighting patterns (Rembrandt, Loop, Butterfly)✔️ Modifier selection based on style✔️ Budget and pro gear setups✔️ Step-by-step layering approach for 3-point light
 
 📸''',
         'estimatedDuration': 30,
@@ -1530,7 +1530,7 @@ Analyze results and adjust modifiers/angles based on mood.
           'assets/Advanced_Asset/Day 8 comp/file_00000000f06861f89c5cc791e9a6378f (1).png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_069',
         'day': 69,
@@ -1638,7 +1638,7 @@ Compare the light spread, skin texture, mood, and note:
 	•	Which modifier works best for different skin tones
 
 💬 Expert Quote:
-“The light shaper you choose is not just a tool — it’s a style decision.” — Melissa Rodwell (Fashion Photographer)
+“The light shaper you choose is not just a tool — it’s a style decision.”— Melissa Rodwell (Fashion Photographer)
 
 ❓ Does a Beauty Dish Make a 30+ Year Old Model Look Older?
 ✅ Short Answer: It can, if not used correctly.
@@ -1712,7 +1712,7 @@ If you're aiming for natural beauty with glow, use the socked dish with a fill a
           'assets/Advanced_Asset/Day 9 comp/file_00000000f70061f594ef8a24a69b6bf3.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_070',
         'day': 70,
@@ -1826,7 +1826,7 @@ Create 3 different gel lighting looks:
 Shoot portrait, half-body, and editorial frame variations. Try both soft and hard lighting, and vary exposure for contrast.
 
 💬 Expert Quote
-“Color is emotion. Gels let you speak in emotion, not just light.” — Jake Hicks (Fashion Photographer known for gel lighting)
+“Color is emotion. Gels let you speak in emotion, not just light.”— Jake Hicks (Fashion Photographer known for gel lighting)
 
 ✅ What You’ve Learned in''',
         'estimatedDuration': 30,
@@ -1849,7 +1849,7 @@ Shoot portrait, half-body, and editorial frame variations. Try both soft and har
           'assets/Advanced_Asset/Day 10 comp/file_00000000f7fc61f59cd094bccea0c9d7.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_071',
         'day': 71,
@@ -1893,7 +1893,7 @@ Brands, fashion labels, e-commerce companies
 💬 Final Message
 “Here’s a feeling, a vibe”
 “Buy this product now”
-Pro Quote: “Commercial pays the bills. Editorial builds the brand.” — Lindsay Adler
+Pro Quote:“Commercial pays the bills. Editorial builds the brand.”— Lindsay Adler
 
 🎯 Why Editorial Moodboards Matter
 In professional fashion work, the moodboard is the blueprint of your shoot. It communicates the creative vision to your entire team — photographer, stylist, makeup artist, model, assistant, client.
@@ -1999,7 +1999,7 @@ Build a 1-page moodboard with:
 Tools: Use Canva, Pinterest, or Milanote.
 
 ✅ What You’ve Mastered Today
-✔️ The real meaning and purpose of editorial fashion photography ✔️ Clear difference between editorial and commercial work ✔️ How to plan and structure a professional moodboard ✔️ Tools, references, and workflow used by industry pros ✔️ An assignment to apply this knowledge right away''',
+✔️ The real meaning and purpose of editorial fashion photography✔️ Clear difference between editorial and commercial work✔️ How to plan and structure a professional moodboard✔️ Tools, references, and workflow used by industry pros✔️ An assignment to apply this knowledge right away''',
         'estimatedDuration': 30,
         'type': 'theory',
         'difficulty': 'advanced',
@@ -2010,18 +2010,18 @@ Tools: Use Canva, Pinterest, or Milanote.
         'exercises': [],
         'imageUrls': [],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_072',
         'day': 72,
         'title':
-            'Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits',
+            'Working with Models & Stylists (Professional Communication)                   and Lighting & Capturing Skin Tones for Fashion Portraits',
         'subtitle': 'Photography Lesson',
         'description':
-            'Learn about Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits',
+            'Learn about Working with Models & Stylists (Professional Communication)                   and Lighting & Capturing Skin Tones for Fashion Portraits',
         'content':
-            '''Day 12: Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits
- 
+            '''Day 12: Working with Models & Stylists (Professional Communication)                   and Lighting & Capturing Skin Tones for Fashion Portraits
+
 
 📸 Master the communication, etiquette, and leadership skills required to handle creative teams — especially models and stylists — like a true professional.
 
@@ -2154,10 +2154,10 @@ Value each role; this isn't a solo shoot — it's a collaboration
 Shoot Brief: “Powerful Woman in Structured Fashion”
 	•	Model arrives nervous; you greet warmly.
 	•	Stylist says jacket sleeves must not be rolled — you note that for shots.
-	•	You say to model: “Imagine you’re a CEO walking into a room full of men. You own it.”
+	•	You say to model:“Imagine you’re a CEO walking into a room full of men. You own it.”
 	•	Result: Model nails expression.
 	•	MUA asks for 2-minute break for lip gloss. You say “Of course.”
-	•	Everyone gets tagged on IG with BTS reel the next day. ✨ ✅ Result: Pro shoot, happy team, strong portfolio piece.
+	•	Everyone gets tagged on IG with BTS reel the next day. ✨✅ Result: Pro shoot, happy team, strong portfolio piece.
 
 🎯 Assignment: Build a Real Team Shoot Brief
 	•	Choose a mini editorial concept (e.g. “Vintage Denim”)
@@ -2171,7 +2171,7 @@ Shoot Brief: “Powerful Woman in Structured Fashion”
 	•	Share one image with full credits on social
 
 ✅ What You Mastered Today
-✔️ How to work professionally with models, stylists, MUAs, and your crew ✔️ Communication skills that improve trust, mood, and creativity on set ✔️ Pre-shoot, shoot-day, and post-shoot etiquette ✔️ Call sheet format + real-world pro workflow ✔️ Assignment to practice leading a creative team
+✔️ How to work professionally with models, stylists, MUAs, and your crew✔️ Communication skills that improve trust, mood, and creativity on set✔️ Pre-shoot, shoot-day, and post-shoot etiquette✔️ Call sheet format + real-world pro workflow✔️ Assignment to practice leading a creative team
 
 
 >>>>>>Lighting & Capturing Skin Tones for Fashion Portraits <<<<<<<
@@ -2305,7 +2305,7 @@ Maintain consistency in fashion sets
 	•	Result: Creamy skin, strong dimension, natural finish
 
 ✅ What You Now Know (Complete Day 12 Summary):
-✔️ Scientific & artistic understanding of skin tone + undertones ✔️ Lighting setups tailored for deep, medium, and fair skin ✔️ Camera settings optimized for Canon, Sony, and Nikon ✔️ How to meter, light, and post-process for beautiful, rich skin results ✔️ Assignments to test on different models and lighting setups
+✔️ Scientific & artistic understanding of skin tone + undertones✔️ Lighting setups tailored for deep, medium, and fair skin✔️ Camera settings optimized for Canon, Sony, and Nikon✔️ How to meter, light, and post-process for beautiful, rich skin results✔️ Assignments to test on different models and lighting setups
 
 
 
@@ -2322,12 +2322,12 @@ Maintain consistency in fashion sets
         'difficulty': 'advanced',
         'categories': ['Photography'],
         'objectives': [
-          'Understand Working with Models & Stylists (Professional Communication)                    and Lighting & Capturing Skin Tones for Fashion Portraits',
+          'Understand Working with Models & Stylists (Professional Communication)                   and Lighting & Capturing Skin Tones for Fashion Portraits',
         ],
         'exercises': [],
         'imageUrls': [],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_073',
         'day': 73,
@@ -2474,7 +2474,7 @@ Moodboard should guide if modern, rustic, nature, etc.
 Optional: Make a mock moodboard matching outfits to the background!
 
 ✅ What You Mastered Today
-✔️ How to find and evaluate great fashion locations ✔️ How to get permission and plan logistics legally and safely ✔️ How to build a light plan for that location — daylight or flash ✔️ What to carry, when to shoot, and how to avoid location mistakes ✔️ Assignment to practice scouting like a fashion industry pro
+✔️ How to find and evaluate great fashion locations✔️ How to get permission and plan logistics legally and safely✔️ How to build a light plan for that location — daylight or flash✔️ What to carry, when to shoot, and how to avoid location mistakes✔️ Assignment to practice scouting like a fashion industry pro
 
 
 
@@ -2508,7 +2508,7 @@ Optional: Make a mock moodboard matching outfits to the background!
           'assets/Advanced_Asset/Day 13 comp/file_0000000043407206829b18e849f9dde4.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_074',
         'day': 74,
@@ -2632,11 +2632,11 @@ Build a PDF Portfolio Page
 Include this shoot as a mini fashion story
 
 ✅ What You Mastered Today
-✔️ Planned and executed a full editorial fashion shoot ✔️ Created a team workflow: concept > scout > shoot > deliver ✔️ Handled light, pose, wardrobe, and mood under real conditions ✔️ Prepared visuals that can go to magazines, blogs, or clients ✔️ Took a major step toward professional fashion photographer work
+✔️ Planned and executed a full editorial fashion shoot✔️ Created a team workflow: concept > scout > shoot > deliver✔️ Handled light, pose, wardrobe, and mood under real conditions✔️ Prepared visuals that can go to magazines, blogs, or clients✔️ Took a major step toward professional fashion photographer work
 
 🎓 Assignment: Share Your Editorial
 	•	Post 4–6 final images on Instagram or Behance
-	•	Use a caption like: “A fashion editorial shot with natural + flash light in Mumbai. Styling by @, model: @, shot by me. #fashioneditorial #indianfashionphotographer”
+	•	Use a caption like:“A fashion editorial shot with natural + flash light in Mumbai. Styling by @, model: @, shot by me. #fashioneditorial #indianfashionphotographer”
 	•	Tag everyone and save the images for your fashion portfolio PDF
 
 
@@ -2677,13 +2677,14 @@ Include this shoot as a mini fashion story
           'assets/Advanced_Asset/Day 14 comp/file_00000000e00872099bd1dfc89c90cc7d.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_075',
         'day': 75,
         'title': 'Post-Production Workflow & Selection (Culling to Editing)',
         'subtitle': 'Photography Lesson',
-        'description': 'Learn how to select your best shots and prepare them for high-end retouching.',
+        'description':
+            'Learn how to select your best shots and prepare them for high-end retouching.',
         'content': '''Day 15: Post-Production Workflow & Selection
         
 🎯 Objective: Learn the professional workflow for culling, rating, and selecting images before you start editing.
@@ -2811,16 +2812,16 @@ Add light contrast curve for punch post D&B
 	•	Global D&B for contour: Sculpt lighting and depth
 	•	Fabric & detail enhancement
 	•	Final color grading (next day!)
-⏱ Average D&B Time: 20–30 mins for beauty portrait, 10–15 mins for fashion image
+⏱ Average D&B Time:20–30 mins for beauty portrait,10–15 mins for fashion image
 
 🧪 Assignment: Your First Dodge & Burn Pass
 	•	Pick a portrait and a full-body fashion image
 	•	Do only Dodge & Burn retouching
 	•	Keep before-after versions
-	•	Optional: Share for critique or post with caption: “Only light and shadow. No blur. Pure fashion.”
+	•	Optional: Share for critique or post with caption:“Only light and shadow. No blur. Pure fashion.”
 
 ✅ What You’ve Mastered Today
-✔️ Non-destructive Dodge & Burn setup ✔️ Micro and global techniques for beauty and fashion ✔️ Pro-level gear + affordable alternatives ✔️ Mistake-proof method for perfect light sculpting
+✔️ Non-destructive Dodge & Burn setup✔️ Micro and global techniques for beauty and fashion✔️ Pro-level gear + affordable alternatives✔️ Mistake-proof method for perfect light sculpting
 
 
 
@@ -2856,7 +2857,7 @@ Add light contrast curve for punch post D&B
           'assets/Advanced_Asset/Day 16 comp/file_00000000ec8c622f88fbd9cb3909b94b.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_077',
         'day': 77,
@@ -2996,13 +2997,13 @@ Spot missed retouch zones
 Choose 2 Images:
 	•	🧑‍🎤 A close-up beauty shot
 	•	👗 A fabric-rich fashion image
-🎯 Retouch using FS only 🎯 Show Before & After 🎯 Try at least one clone and one lasso edit per image
+🎯 Retouch using FS only🎯 Show Before & After🎯 Try at least one clone and one lasso edit per image
 Optional Challenge:
 	•	Do it with a mouse only
 	•	Compare it to Wacom or plugin workflow
 
 ✅ Summary – What You’ve Learned
-✔️ Frequency Separation explained in pro terms and simple language ✔️ Full non-destructive workflow ✔️ Manual + Plugin setup ✔️ Combined with D&B + smart layer checks ✔️ Real mistakes & how to avoid them ✔️ Industry workflow from top retouchers
+✔️ Frequency Separation explained in pro terms and simple language✔️ Full non-destructive workflow✔️ Manual + Plugin setup✔️ Combined with D&B + smart layer checks✔️ Real mistakes & how to avoid them✔️ Industry workflow from top retouchers
 
 
 
@@ -3034,7 +3035,7 @@ Optional Challenge:
           'assets/Advanced_Asset/Day 17 comp/file_00000000672c720988d7af31fb606ce7.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_078',
         'day': 78,
@@ -3175,7 +3176,7 @@ Adjust each color separately:
 	•	Red = Lips, blush
 	•	Blue = Backgrounds, denim
 	•	Green = Grass, walls
-Pro Trick: Orange Sat ↓ + Lum ↑ = Glowy skin
+Pro Trick:Orange Sat ↓ + Lum ↑ = Glowy skin
 
 3️⃣ Tone Curve (Light Panel)
 	•	“S” curve = contrast
@@ -3187,7 +3188,7 @@ Pro Trick: Orange Sat ↓ + Lum ↑ = Glowy skin
 	•	Shadows = Blue, Teal
 	•	Midtones = Natural (skin tone)
 	•	Highlights = Warm Gold
-Editorial Formula: Cool shadows + neutral mids + warm highlights
+Editorial Formula:Cool shadows + neutral mids + warm highlights
 
 5️⃣ Split Toning (Free Users)
 	•	Shadows → Teal
@@ -3196,7 +3197,7 @@ Editorial Formula: Cool shadows + neutral mids + warm highlights
 
 6️⃣ Presets + Manual Refining
 	•	Apply LUTs or free presets
-	•	Then fine-tune: → Desaturate Green → Add skin glow via Luminance
+	•	Then fine-tune:→ Desaturate Green→ Add skin glow via Luminance
 
 📐 Section 4: Fashion Application Examples
 Style
@@ -3220,7 +3221,7 @@ Deliver:
 	•	Optional: Share a before/after
 
 ✅ What You’ve Learned Today (Full Day 18 Summary)
-✔️ What color grading is and why it’s essential in fashion ✔️ RGB theory and opposites for perfect balance ✔️ Color harmony to make your work visually powerful ✔️ Curves, LUTs, Gradient Maps, and how to use them professionally ✔️ Lightroom Mobile manual grading — all major tools ✔️ Color correction tips for skin and backgrounds ✔️ Creative vision-building via color ✔️ Editorial-ready workflow from mobile to desktop
+✔️ What color grading is and why it’s essential in fashion✔️ RGB theory and opposites for perfect balance✔️ Color harmony to make your work visually powerful✔️ Curves, LUTs, Gradient Maps, and how to use them professionally✔️ Lightroom Mobile manual grading — all major tools✔️ Color correction tips for skin and backgrounds✔️ Creative vision-building via color✔️ Editorial-ready workflow from mobile to desktop
 
 
 
@@ -3252,7 +3253,7 @@ Deliver:
           'assets/Advanced_Asset/Day 18 comp/file_00000000f4c86246a6bfcac3795e4e1b.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_079',
         'day': 79,
@@ -3287,7 +3288,7 @@ Use: ModelName_Look01_001.CR3
 Use Photo Mechanic, Lightroom, or Capture One:
 	•	⭐ Flag or rate the top images (only 2–3 per look)
 	•	💥 Look for: sharpness, emotion, fashion pose, light, detail
-Pro Workflow Tip: Quickly compare 4–6 similar shots and pick 1 winner.
+Pro Workflow Tip:Quickly compare 4–6 similar shots and pick 1 winner.
 
 🎨 Step 2: Edit a Master Image (Anchor Edit)
 	•	Choose the best photo of the set
@@ -3397,7 +3398,7 @@ Causes crunchy skin or fabric
 	•	Deliver via Google Drive or WeTransfer
 
 ✅ What You’ve Learned Today
-✔️ Organizing images before editing ✔️ Efficient culling methods ✔️ Master image workflow & syncing ✔️ Local adjustments only when needed ✔️ Exporting for different platforms ✔️ Fast + polished delivery system ✔️ Avoiding mistakes that ruin client trust
+✔️ Organizing images before editing✔️ Efficient culling methods✔️ Master image workflow & syncing✔️ Local adjustments only when needed✔️ Exporting for different platforms✔️ Fast + polished delivery system✔️ Avoiding mistakes that ruin client trust
 
 
 
@@ -3420,7 +3421,7 @@ Causes crunchy skin or fabric
           'assets/Advanced_Asset/Day 19 comp/file_00000000c84461f8bcbacab297f172bb.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_080',
         'day': 80,
@@ -3564,7 +3565,7 @@ TIFF / JPEG
           'assets/Advanced_Asset/Day 20 comp/file_00000000e24c623093b35258528cd9de.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_081',
         'day': 81,
@@ -3583,7 +3584,7 @@ Choose a high-resolution beauty image that includes:
 	•	Clean lighting (preferably from your Day 14 shoot)
 	•	Sharp focus on the eyes, lips, and skin texture
 	•	Balanced exposure with no overblown highlights
-✅ RAW preferred ⛔ Avoid JPEGs with crushed shadows or extreme filters
+✅ RAW preferred⛔ Avoid JPEGs with crushed shadows or extreme filters
 
 🧰 2. Tools Needed:
 	•	Adobe Photoshop (recommended)
@@ -3655,7 +3656,7 @@ Task:
 	•	Save your before/after layer groups for future teaching/demo use.
 
 📝 Bonus: Retouching Checklist (For Review)
-✔ Natural skin texture intact ✔ No visible brush strokes or blur ✔ Clean, crisp edges around lips, brows ✔ No color banding ✔ Eyes detailed, not over-whitened ✔ Grading matches editorial vibe
+✔ Natural skin texture intact✔ No visible brush strokes or blur✔ Clean, crisp edges around lips, brows✔ No color banding✔ Eyes detailed, not over-whitened✔ Grading matches editorial vibe
 
 ✍️ Quote of the Day:
 “A great retoucher is invisible — only beauty remains.” — Solve Sundsbo
@@ -3686,7 +3687,7 @@ Task:
           'assets/Advanced_Asset/Day 21 comp/file_00000000dfcc7208a95d58261ab20760.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_082',
         'day': 82,
@@ -3821,7 +3822,7 @@ Create a 3-tier rate card:
           'assets/Advanced_Asset/Day 22 comp/file_00000000d6b861f98ff897cdd02e885a.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_083',
         'day': 83,
@@ -3993,7 +3994,7 @@ Tools to use: Canva, Jotform, Notion, Google Docs
           'assets/Advanced_Asset/Day 23 comp/file_00000000f2c461f88af75c34dac94f2c.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_084',
         'day': 84,
@@ -4009,7 +4010,7 @@ Tools to use: Canva, Jotform, Notion, Google Docs
 Build a professional, stylish, and impactful portfolio that reflects your photography identity, attracts high-end fashion clients, stylists, agencies, and magazines — even if you're on a tight budget.
 
 🧠 1. What Makes a Great Portfolio?
-✅ Consistency of Style — Color tones, editing, lighting, and posing should feel part of one artistic vision ✅ Quality over Quantity — Better to show 12 killer shots than 40 average ones ✅ Storytelling over Randomness — Show stories or styled sets, not just pretty images ✅ Audience-Focused — Fashion brands want fashion work, not baby shoots or landscapes ✅ Personal Touch — It should feel like you, not a Pinterest copy
+✅ Consistency of Style — Color tones, editing, lighting, and posing should feel part of one artistic vision✅ Quality over Quantity — Better to show 12 killer shots than 40 average ones✅ Storytelling over Randomness — Show stories or styled sets, not just pretty images✅ Audience-Focused — Fashion brands want fashion work, not baby shoots or landscapes✅ Personal Touch — It should feel like you, not a Pinterest copy
 
 🧰 2. Types of Portfolios to Create
 Format
@@ -4115,7 +4116,7 @@ Fashion & Beauty Photographer
 	•	Logo (if any)
 
 🧪 5. Practice Task
-✅ Create your first 10-page PDF Portfolio Use:
+✅ Create your first 10-page PDF PortfolioUse:
 	•	Canva (drag and drop editor)
 	•	Adobe InDesign (advanced)
 	•	Google Slides / Docs (convert to PDF)
@@ -4146,7 +4147,7 @@ Jotform/Google Form
 Model releases
 
 ✍️ Quote of the Day:
-“Your portfolio should whisper your identity — not shout everything you’ve ever done, but showcase exactly who you are as an artist.” — Fashion Art Director, Vogue India
+“Your portfolio should whisper your identity — not shout everything you’ve ever done, but showcase exactly who you are as an artist.”— Fashion Art Director, Vogue India
 
 
 
@@ -4189,7 +4190,7 @@ Model releases
           'assets/Advanced_Asset/Day 24 comp/file_00000000f21c61f9889a0eefa70eea09.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_085',
         'day': 85,
@@ -4241,7 +4242,7 @@ Being published is like getting an award in the creative world.
 📸 3. Build a Submission-Worthy Editorial
 You need more than random good images. You need a story.
 Submission Checklist:
-✅ Minimum 6–12 high-resolution, retouched images ✅ Same model and story throughout ✅ Cohesive color scheme and styling ✅ Team credits typed and ready ✅ No logos, no watermarks ✅ Not previously published or posted
+✅ Minimum 6–12 high-resolution, retouched images✅ Same model and story throughout✅ Cohesive color scheme and styling✅ Team credits typed and ready✅ No logos, no watermarks✅ Not previously published or posted
 💡 Keep it exclusive until accepted by a magazine.
 
 📨 4. What to Include in Your Submission Email
@@ -4327,7 +4328,7 @@ To Send
 Add Indo-Western series
 
 ✍️ Quote of the Day:
-“If you want your work in magazines, shoot like your story deserves to be there.” — International Fashion Editor
+“If you want your work in magazines, shoot like your story deserves to be there.”— International Fashion Editor
 
 
 
@@ -4360,7 +4361,7 @@ Add Indo-Western series
           'assets/Advanced_Asset/Day 25 comp/file_00000000ecd461f8a1d5c89323487cc7.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_086',
         'day': 86,
@@ -4388,7 +4389,7 @@ File delivery, feedback, invoicing
 	•	Brief or Call with Client
 	•	Understand purpose: campaign, catalog, social media, lookbook
 	•	Ask for moodboard, references, color palette, shoot tone
-	•	Send a Clear Estimate or Package Include:
+	•	Send a Clear Estimate or PackageInclude:
 	•	Deliverables (no. of final images, video clips, formats)
 	•	Editing style
 	•	Shoot duration
@@ -4438,7 +4439,7 @@ Unreasonable Requests
 “This would require additional editing time — happy to offer as an add-on.”
 
 📋 5. Things to Carry on Set (Checklist)
-✅ Camera, cards, batteries ✅ Lens wipes + blower ✅ Extension board ✅ Gaffer tape + clips ✅ White cloth / reflector ✅ Light modifier (if needed) ✅ Tether cable + laptop ✅ Phone tripod (for BTS/Instagram reel)
+✅ Camera, cards, batteries✅ Lens wipes + blower✅ Extension board✅ Gaffer tape + clips✅ White cloth / reflector✅ Light modifier (if needed)✅ Tether cable + laptop✅ Phone tripod (for BTS/Instagram reel)
 
 📨 6. Post-Shoot Professionalism
 What to Send After the Shoot:
@@ -4467,10 +4468,10 @@ They want changes after delivery
 “I’d be happy to revise with an add-on edit package — let me know how many images.”
 
 🧪 Practice Task for Today
-✅ Draft your own Shoot Day Checklist (PDF) ✅ Write a Pre-Shoot Client Confirmation Template ✅ Create a Shoot Day Script for how you'll manage time, talk to clients/models ✅ Prepare a Client-Friendly Moodboard Format (Canva)
+✅ Draft your own Shoot Day Checklist (PDF)✅ Write a Pre-Shoot Client Confirmation Template✅ Create a Shoot Day Script for how you'll manage time, talk to clients/models✅ Prepare a Client-Friendly Moodboard Format (Canva)
 
 ✍️ Quote of the Day:
-“Clients don’t just hire your camera — they hire your attitude, planning, and how you make them feel on set.” — Industry Producer, India
+“Clients don’t just hire your camera — they hire your attitude, planning, and how you make them feel on set.”— Industry Producer, India
 
 
 
@@ -4508,7 +4509,7 @@ They want changes after delivery
           'assets/Advanced_Asset/Day 26 comp/file_00000000905c7206a5070873fc0654eb.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_087',
         'day': 87,
@@ -4644,7 +4645,7 @@ Share final images
 Don’t leave team hanging
 
 📃 9. Free Tools & Templates You Can Use:
-✅ Editable Canva Release Form ✅ Styling Checklist Template ✅ Team Credits Template ✅ Editorial Moodboard Layout
+✅ Editable Canva Release Form✅ Styling Checklist Template✅ Team Credits Template✅ Editorial Moodboard Layout
 Want these files? I can generate links or PDFs.
 
 🧪 Assignment:
@@ -4655,7 +4656,7 @@ Want these files? I can generate links or PDFs.
 	•	Create a Google Doc with credit info + concept
 
 ✍️ Quote of the Day:
-“A powerful photo needs more than a lens — it needs a team with one vision.” — Fashion Industry Producer
+“A powerful photo needs more than a lens — it needs a team with one vision.”— Fashion Industry Producer
 
 
 📦''',
@@ -4672,7 +4673,7 @@ Want these files? I can generate links or PDFs.
           'assets/Advanced_Asset/Day 27 comp/file_00000000d19c72068b8b21f9754fd08d.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_088',
         'day': 88,
@@ -4849,7 +4850,7 @@ Warm regards,
 	•	Web-Res
 	•	Video reel
 	•	Contact sheet
-✅ Create folder structure ✅ Add branded PDF: delivery note + invoice ✅ Deliver via Google Drive or WeTransfer ✅ Write and send a test delivery email
+✅ Create folder structure✅ Add branded PDF: delivery note + invoice✅ Deliver via Google Drive or WeTransfer✅ Write and send a test delivery email
 
 🧰 Resources Available (Free on Request)
 	•	✅ Delivery Notes PDF Template (editable)
@@ -4895,7 +4896,7 @@ Let me know and I’ll share them all!
           'assets/Advanced_Asset/Day 28 comp/file_00000000fb9c72068508b22687c7d474.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_089',
         'day': 89,
@@ -5065,7 +5066,7 @@ Create a Lookbook PDF with your campaign:
           'assets/Advanced_Asset/Day 29 comp/file_00000000c73c7206bfec59189532adcf.png',
         ],
         'technicalDetails': {},
-      },,
+      },
       {
         'id': 'lesson_090',
         'day': 90,
@@ -5196,14 +5197,14 @@ Affiliate Content
 Gear recommendations + reviews
 
 🧪 8. Graduation Project (Final Checklist)
-✅ Create & share your Fashion Campaign (Day 29) ✅ Finalize your business name/logo ✅ Register for MSME or open a business bank account ✅ Launch your website or lookbook PDF ✅ Send a “graduation email” or post to your network ✅ Create a pricing sheet or proposal PDF ✅ Save all templates and start pitching
+✅ Create & share your Fashion Campaign (Day 29)✅ Finalize your business name/logo✅ Register for MSME or open a business bank account✅ Launch your website or lookbook PDF✅ Send a “graduation email” or post to your network✅ Create a pricing sheet or proposal PDF✅ Save all templates and start pitching
 
 🧠 Bonus:
 If you'd like a free Graduation Certificate (editable Canva) or a Launch Toolkit Folder including:
 	•	Invoice + contract templates
 	•	Model release form
 	•	Website page samples
-	•	Portfolio checklist Let me know and I’ll create it for you.
+	•	Portfolio checklistLet me know and I’ll create it for you.
 
 ✍️ Final Quote of the Course:
 “Learning never stops — but now, you have the tools to start earning from what you’ve mastered.”
@@ -5218,7 +5219,7 @@ Marketing, Website, Selling Your Work & Building Long-Term Career Growth
 
 
                                                   🎉 Bonus TIPS 
-                                   : Launch Yourself as a Professional Photographer
+                                  : Launch Yourself as a Professional Photographer
 🎯 Goal of the Day:
 Turn your skills, projects, and portfolio into a real, market-ready photography career. Learn how to build visibility, attract paying clients, sell photos online, and position yourself as a serious professional — especially in the Indian market.
 
@@ -5346,7 +5347,7 @@ Backup all shoots (Drive/SSD)
 Never lose client trust
 
 📈 6. Your Business Checklist
-✅ GST (if needed) ✅ MSME Udyam Certificate ✅ Professional invoice template ✅ Contract / Release Form (PDF) ✅ Bank account / UPI QR / Payment link ✅ Canva branded kit (logo, palette, font)
+✅ GST (if needed)✅ MSME Udyam Certificate✅ Professional invoice template✅ Contract / Release Form (PDF)✅ Bank account / UPI QR / Payment link✅ Canva branded kit (logo, palette, font)
 
 🔖 Final Portfolio Submission (If You Want to Pitch)
 	•	Campaign name
@@ -5371,7 +5372,7 @@ Never lose client trust
 	•	Write your “launch” post and share your journey
 
 🎓 Congratulations!
-You’ve completed your 30-Day Pro Photography Course. You now have the creative, technical, business, and marketing skills to launch as a professional fashion/editorial photographer.
+You’ve completed your 30-Day Pro Photography Course.You now have the creative, technical, business, and marketing skills to launch as a professional fashion/editorial photographer.
 
 
 
@@ -5379,7 +5380,7 @@ You’ve completed your 30-Day Pro Photography Course. You now have the creati
 
 
 
-                                       💸 BONUS CHAPTER  : Licensing Your Work & Earning Passive Income from Photography
+                                       💸 BONUS CHAPTER : Licensing Your Work & Earning Passive Income from Photography
 Your Complete Guide to Selling, Licensing, and Monetizing Your Photography Online (India + Global)
 
 🎯 Goal of the Day:
@@ -5593,10 +5594,10 @@ Branded Storefront
 ✅ One photo can sell 50+ times if properly listed.
 
 🧪 Practice Assignment:
-✅ Upload 5 images to Shutterstock or Wirestock ✅ Create a Gumroad or Sellfy product with your fashion work ✅ Share 1 reel promoting the pack ✅ Draft 1-page license info + pricing PDF ✅ Try 1 Indian-specific platform (like Picxy)
+✅ Upload 5 images to Shutterstock or Wirestock✅ Create a Gumroad or Sellfy product with your fashion work✅ Share 1 reel promoting the pack✅ Draft 1-page license info + pricing PDF✅ Try 1 Indian-specific platform (like Picxy)
 
 ✍️ Quote of the Day:
-“Don’t just work for the next client — build products that keep working for you.” — Visual Business Coach
+“Don’t just work for the next client — build products that keep working for you.”— Visual Business Coach
 
 
 
