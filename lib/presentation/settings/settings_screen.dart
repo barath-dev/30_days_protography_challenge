@@ -53,10 +53,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         title: Text(
           'Settings',
-          style: textTheme.titleLarge?.copyWith(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
       ),
       body:
@@ -167,7 +164,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Text(
             title.toUpperCase(),
             style: theme.textTheme.labelSmall?.copyWith(
-              fontSize: 12,
               fontWeight: FontWeight.w600,
               letterSpacing: 1.2,
             ),
@@ -220,10 +216,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title,
         style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
-      subtitle: Text(
-        subtitle,
-        style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
-      ),
+      subtitle: Text(subtitle, style: theme.textTheme.bodyMedium),
       trailing: Switch(
         value: value,
         onChanged: (val) {
@@ -262,10 +255,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         'Difficulty Level',
         style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
-      subtitle: Text(
-        difficultyName,
-        style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
-      ),
+      subtitle: Text(difficultyName, style: theme.textTheme.bodyMedium),
       trailing: Icon(Icons.chevron_right, color: colorScheme.onSurface),
       onTap: () async {
         HapticFeedback.lightImpact();
@@ -302,10 +292,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         'Reminder Time',
         style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
-      subtitle: Text(
-        timeString,
-        style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
-      ),
+      subtitle: Text(timeString, style: theme.textTheme.bodyMedium),
       trailing: Icon(Icons.chevron_right, color: colorScheme.onSurface),
       onTap: () async {
         HapticFeedback.lightImpact();
@@ -343,7 +330,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           Text(
             '${(_settings.textScale * 100).toInt()}%',
-            style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
+            style: theme.textTheme.bodyMedium,
           ),
           Slider(
             value: _settings.textScale,
@@ -385,7 +372,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       subtitle: Text(
         'Clear all learning progress',
-        style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
+        style: theme.textTheme.bodyMedium,
       ),
       trailing: Icon(Icons.chevron_right, color: colorScheme.error),
       onTap: () {
@@ -413,10 +400,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title,
         style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
-      subtitle: Text(
-        value,
-        style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
-      ),
+      subtitle: Text(value, style: theme.textTheme.bodyMedium),
     );
   }
 
@@ -443,10 +427,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title,
         style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
-      subtitle: Text(
-        subtitle,
-        style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
-      ),
+      subtitle: Text(subtitle, style: theme.textTheme.bodyMedium),
       trailing: Icon(Icons.chevron_right, color: colorScheme.onSurface),
       onTap: () {
         HapticFeedback.lightImpact();

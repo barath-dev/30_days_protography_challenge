@@ -24,12 +24,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   String? _filterCategory;
 
   // Simple color scheme
-  static const Color _primary = Color(0xFFFF6B35);
-  static const Color _background = Color(0xFF0D0D0D);
-  static const Color _card = Color(0xFF1A1A1A);
-  static const Color _text = Color(0xFF888888);
-  static const Color _border = Color(0xFF333333);
-  static const Color _success = Color(0xFF4CAF50);
+  // Removed static colors in favor of Theme.of(context)
 
   @override
   void initState() {
@@ -134,7 +129,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: _buildAppBar(),
       body: _isLoading ? _buildLoadingState() : _buildTimelineContent(),
     );
@@ -146,28 +141,29 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
             ? _getDifficultyDisplayName(_userProgress!.selectedDifficulty)
             : 'Unknown';
 
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return AppBar(
-      backgroundColor: _background,
+      backgroundColor: theme.scaffoldBackgroundColor,
       elevation: 0,
       leading: IconButton(
         onPressed: () => Navigator.pop(context),
-        icon: const Icon(Icons.arrow_back, color: Colors.white),
+        icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
       ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             '30-Day Journey',
-            style: TextStyle(
-              color: Colors.white,
+            style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
-              fontSize: 18,
             ),
           ),
           Text(
             '$difficultyName Track',
             style: TextStyle(
-              color: _primary,
+              color: colorScheme.primary,
               fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
@@ -177,7 +173,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
       actions: [
         IconButton(
           onPressed: _showStatistics,
-          icon: const Icon(Icons.insights, color: Colors.white),
+          icon: Icon(Icons.insights, color: colorScheme.onSurface),
         ),
         IconButton(
           onPressed: _showFilterOptions,
@@ -185,8 +181,8 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
             Icons.filter_list,
             color:
                 (_filterType != null || _filterCategory != null)
-                    ? _primary
-                    : Colors.white,
+                    ? colorScheme.primary
+                    : colorScheme.onSurface,
           ),
         ),
         IconButton(
@@ -196,16 +192,18 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
               MaterialPageRoute(builder: (_) => const SettingsScreen()),
             ).then((_) => _loadData());
           },
-          icon: const Icon(Icons.settings, color: Colors.white),
+          icon: Icon(Icons.settings, color: colorScheme.onSurface),
         ),
       ],
     );
   }
 
   Widget _buildLoadingState() {
-    return const Center(
+    return Center(
       child: CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(_primary),
+        valueColor: AlwaysStoppedAnimation<Color>(
+          Theme.of(context).colorScheme.primary,
+        ),
       ),
     );
   }
@@ -216,11 +214,15 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, color: _text, size: 64),
+            Icon(
+              Icons.error_outline,
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+              size: 64,
+            ),
             const SizedBox(height: 16),
             Text(
               'No progress data found',
-              style: TextStyle(color: _text, fontSize: 16),
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ],
         ),
@@ -242,17 +244,16 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
             .where((p) => p.status == LessonStatus.completed)
             .length;
 
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Container(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF2D2D2D), Color(0xFF1A1A1A)],
-        ),
+        color: theme.cardColor,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _border, width: 1),
+        border: Border.all(color: theme.dividerColor, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -267,7 +268,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
               Text(
                 '${(progress * 100).round()}%',
                 style: TextStyle(
-                  color: _primary,
+                  color: colorScheme.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -277,8 +278,8 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
           const SizedBox(height: 12),
           LinearProgressIndicator(
             value: progress,
-            backgroundColor: _border,
-            valueColor: AlwaysStoppedAnimation(_primary),
+            backgroundColor: theme.dividerColor,
+            valueColor: AlwaysStoppedAnimation(colorScheme.primary),
             minHeight: 6,
             borderRadius: BorderRadius.circular(3),
           ),
@@ -310,20 +311,23 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   }
 
   Widget _buildStatItem(IconData icon, String value, String label) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Row(
       children: [
-        Icon(icon, color: _primary, size: 16),
+        Icon(icon, color: colorScheme.primary, size: 16),
         const SizedBox(width: 4),
         Text(
           value,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: colorScheme.onSurface,
             fontWeight: FontWeight.bold,
             fontSize: 14,
           ),
         ),
         const SizedBox(width: 4),
-        Text(label, style: TextStyle(color: _text, fontSize: 12)),
+        Text(label, style: theme.textTheme.bodyMedium),
       ],
     );
   }
@@ -343,11 +347,15 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.search_off, color: _text, size: 64),
+            Icon(
+              Icons.search_off,
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+              size: 64,
+            ),
             const SizedBox(height: 16),
             Text(
               'No lessons found',
-              style: TextStyle(color: _text, fontSize: 16),
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
             if (_filterType != null || _filterCategory != null) ...[
               const SizedBox(height: 8),
@@ -359,7 +367,12 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                   });
                   _applyFilters();
                 },
-                child: Text('Clear Filters', style: TextStyle(color: _primary)),
+                child: Text(
+                  'Clear Filters',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
               ),
             ],
           ],
@@ -369,8 +382,8 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
 
     return RefreshIndicator(
       onRefresh: _loadData,
-      color: _primary,
-      backgroundColor: _card,
+      color: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).cardColor,
       child: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         itemCount: _lessons.length,
@@ -429,7 +442,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                       width: 2,
                       margin: const EdgeInsets.symmetric(vertical: 8),
                       decoration: BoxDecoration(
-                        color: _getLineColor(status),
+                        color: _getLineColor(status, context),
                         borderRadius: BorderRadius.circular(1),
                       ),
                     ),
@@ -450,33 +463,41 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
     );
   }
 
-  Color _getLineColor(LessonStatus status) {
+  Color _getLineColor(LessonStatus status, BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final dividerColor = Theme.of(context).dividerColor;
+
     switch (status) {
       case LessonStatus.completed:
-        return _success;
+        return const Color(0xFF4CAF50);
       case LessonStatus.current:
       case LessonStatus.inProgress:
-        return _primary;
+        return colorScheme.primary;
       case LessonStatus.available:
-        return _text;
+        return Theme.of(context).textTheme.bodyMedium?.color ?? Colors.grey;
       case LessonStatus.locked:
       case LessonStatus.lockedToday:
-        return _border;
+        return dividerColor;
     }
   }
 
   Widget _buildIndicator(Lesson lesson, LessonStatus status) {
     Color color;
     Widget child;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final dividerColor = theme.dividerColor;
+    final textMediumColor = theme.textTheme.bodyMedium?.color ?? Colors.grey;
+    final successColor = const Color(0xFF4CAF50);
 
     switch (status) {
       case LessonStatus.completed:
-        color = _success;
+        color = successColor;
         child = const Icon(Icons.check, color: Colors.white, size: 16);
         break;
       case LessonStatus.current:
       case LessonStatus.inProgress:
-        color = _primary;
+        color = colorScheme.primary;
         child = Text(
           '${lesson.day}',
           style: const TextStyle(
@@ -487,7 +508,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
         );
         break;
       case LessonStatus.available:
-        color = _text;
+        color = textMediumColor;
         child = Text(
           '${lesson.day}',
           style: const TextStyle(
@@ -499,8 +520,8 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
         break;
       case LessonStatus.locked:
       case LessonStatus.lockedToday:
-        color = _border;
-        child = Icon(Icons.lock, color: _text, size: 14);
+        color = dividerColor;
+        child = Icon(Icons.lock, color: textMediumColor, size: 14);
         break;
     }
 
@@ -520,7 +541,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                     status == LessonStatus.inProgress)
                 ? [
                   BoxShadow(
-                    color: _primary.withOpacity(0.3),
+                    color: colorScheme.primary.withOpacity(0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -543,20 +564,25 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
     final isInProgress = status == LessonStatus.inProgress;
     final canAccess = !isLocked;
 
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final dividerColor = theme.dividerColor;
+    final textMediumColor = theme.textTheme.bodyMedium?.color ?? Colors.grey;
+
     return GestureDetector(
       onTap: () => _onLessonTap(lesson, status),
       child: Container(
         margin: const EdgeInsets.only(bottom: 16, left: 8),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: _card,
+          color: theme.cardColor,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color:
                 (status == LessonStatus.current ||
                         status == LessonStatus.inProgress)
-                    ? _primary
-                    : _border,
+                    ? colorScheme.primary
+                    : dividerColor,
             width:
                 (status == LessonStatus.current ||
                         status == LessonStatus.inProgress)
@@ -568,7 +594,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                       status == LessonStatus.inProgress)
                   ? [
                     BoxShadow(
-                      color: _primary.withOpacity(0.1),
+                      color: colorScheme.primary.withOpacity(0.1),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -606,7 +632,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
             Text(
               'Day ${lesson.day}: ${lesson.title}',
               style: TextStyle(
-                color: canAccess ? Colors.white : _text,
+                color: canAccess ? colorScheme.onSurface : textMediumColor,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
@@ -615,7 +641,10 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
             Text(
               lesson.description,
               style: TextStyle(
-                color: canAccess ? _text : _text.withOpacity(0.6),
+                color:
+                    canAccess
+                        ? textMediumColor
+                        : textMediumColor.withOpacity(0.6),
                 fontSize: 14,
               ),
               maxLines: 2,
@@ -629,17 +658,17 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: _border.withOpacity(0.3),
+                  color: dividerColor.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.schedule, color: _text, size: 12),
+                    Icon(Icons.schedule, color: textMediumColor, size: 12),
                     const SizedBox(width: 4),
                     Text(
                       'Available: $unlockTime',
-                      style: TextStyle(color: _text, fontSize: 11),
+                      style: TextStyle(color: textMediumColor, fontSize: 11),
                     ),
                   ],
                 ),
@@ -654,13 +683,13 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                 children: [
                   Text(
                     'Progress',
-                    style: TextStyle(color: _text, fontSize: 12),
+                    style: TextStyle(color: textMediumColor, fontSize: 12),
                   ),
                   const Spacer(),
                   Text(
                     '${(progress * 100).round()}%',
                     style: TextStyle(
-                      color: _primary,
+                      color: colorScheme.primary,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
@@ -670,8 +699,8 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
               const SizedBox(height: 4),
               LinearProgressIndicator(
                 value: progress,
-                backgroundColor: _border,
-                valueColor: AlwaysStoppedAnimation(_primary),
+                backgroundColor: dividerColor,
+                valueColor: AlwaysStoppedAnimation(colorScheme.primary),
                 minHeight: 3,
                 borderRadius: BorderRadius.circular(1.5),
               ),
@@ -680,20 +709,20 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
 
             Row(
               children: [
-                Icon(Icons.schedule, color: _text, size: 14),
+                Icon(Icons.schedule, color: textMediumColor, size: 14),
                 const SizedBox(width: 4),
                 Text(
                   '${lesson.estimatedDuration} min',
-                  style: TextStyle(color: _text, fontSize: 12),
+                  style: TextStyle(color: textMediumColor, fontSize: 12),
                 ),
                 const SizedBox(width: 16),
-                Icon(Icons.category, color: _text, size: 14),
+                Icon(Icons.category, color: textMediumColor, size: 14),
                 const SizedBox(width: 4),
                 Text(
                   lesson.categories.isNotEmpty
                       ? lesson.categories.first
                       : 'General',
-                  style: TextStyle(color: _text, fontSize: 12),
+                  style: TextStyle(color: textMediumColor, fontSize: 12),
                 ),
               ],
             ),
@@ -707,27 +736,33 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
     String text;
     Color color;
 
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final dividerColor = theme.dividerColor;
+    final textMediumColor = theme.textTheme.bodyMedium?.color ?? Colors.grey;
+    final successColor = const Color(0xFF4CAF50);
+
     switch (status) {
       case LessonStatus.completed:
         text = 'Completed';
-        color = _success;
+        color = successColor;
         break;
       case LessonStatus.current:
         text = 'Current';
-        color = _primary;
+        color = colorScheme.primary;
         break;
       case LessonStatus.inProgress:
         text = 'In Progress';
-        color = _primary;
+        color = colorScheme.primary;
         break;
       case LessonStatus.available:
         text = 'Available';
-        color = _text;
+        color = textMediumColor;
         break;
       case LessonStatus.locked:
       case LessonStatus.lockedToday:
         text = 'Locked';
-        color = _border;
+        color = dividerColor;
         break;
     }
 
@@ -754,11 +789,11 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
       case LessonType.theory:
         return const Color(0xFF2196F3);
       case LessonType.practice:
-        return _primary;
+        return Theme.of(context).colorScheme.primary;
       case LessonType.review:
         return const Color(0xFF9C27B0);
       case LessonType.planning:
-        return _success;
+        return const Color(0xFF4CAF50);
       case LessonType.project:
         return const Color(0xFFFFEB3B);
       case LessonType.celebration:
@@ -807,21 +842,25 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
     final nextProgressDay = userProgress.getMaxAvailableDay() + 1;
     final unlockTime = userProgress.getTimeUntilUnlock(nextProgressDay);
 
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textMediumColor = theme.textTheme.bodyMedium?.color ?? Colors.grey;
+
     showDialog(
       context: context,
       builder:
           (context) => AlertDialog(
-            backgroundColor: _card,
+            backgroundColor: theme.cardColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
             title: Row(
               children: [
-                Icon(Icons.schedule, color: _primary, size: 24),
+                Icon(Icons.schedule, color: colorScheme.primary, size: 24),
                 const SizedBox(width: 12),
-                const Text(
+                Text(
                   'Lesson Locked',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: colorScheme.onSurface),
                 ),
               ],
             ),
@@ -829,17 +868,19 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'This lesson follows our daily learning schedule.',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(color: colorScheme.onSurface, fontSize: 16),
                 ),
                 const SizedBox(height: 12),
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: _primary.withOpacity(0.1),
+                    color: colorScheme.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: _primary.withOpacity(0.3)),
+                    border: Border.all(
+                      color: colorScheme.primary.withOpacity(0.3),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -847,7 +888,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                       Text(
                         'Next lesson available: $unlockTime',
                         style: TextStyle(
-                          color: _primary,
+                          color: colorScheme.primary,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -855,7 +896,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                       const SizedBox(height: 4),
                       Text(
                         'Complete one lesson per day to build a strong learning habit.',
-                        style: TextStyle(color: _text, fontSize: 12),
+                        style: TextStyle(color: textMediumColor, fontSize: 12),
                       ),
                     ],
                   ),
@@ -865,7 +906,10 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('Got it', style: TextStyle(color: _primary)),
+                child: Text(
+                  'Got it',
+                  style: TextStyle(color: colorScheme.primary),
+                ),
               ),
             ],
           ),
@@ -874,10 +918,12 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
 
   void _showStatistics() {
     final stats = LessonManager.getLessonStatistics();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: _card,
+      backgroundColor: theme.cardColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -891,7 +937,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                 Text(
                   'Your Progress Statistics',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: colorScheme.onSurface,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
@@ -899,7 +945,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                 const SizedBox(height: 8),
                 Text(
                   '${_getDifficultyDisplayName(_userProgress!.selectedDifficulty)} Track',
-                  style: TextStyle(color: _primary, fontSize: 14),
+                  style: TextStyle(color: colorScheme.primary, fontSize: 14),
                 ),
                 const SizedBox(height: 20),
                 _buildStatRow('Total Lessons', '${stats['totalLessons']}'),
@@ -924,16 +970,20 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   }
 
   Widget _buildStatRow(String label, String value) {
+    final textMediumColor =
+        Theme.of(context).textTheme.bodyMedium?.color ?? Colors.grey;
+    final onSurfaceColor = Theme.of(context).colorScheme.onSurface;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: _text, fontSize: 14)),
+          Text(label, style: TextStyle(color: textMediumColor, fontSize: 14)),
           Text(
             value,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: onSurfaceColor,
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
@@ -944,9 +994,12 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   }
 
   void _showFilterOptions() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     showModalBottomSheet(
       context: context,
-      backgroundColor: _card,
+      backgroundColor: theme.cardColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -960,10 +1013,10 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       'Filter Lessons',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: colorScheme.onSurface,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -980,16 +1033,16 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                         },
                         child: Text(
                           'Clear All',
-                          style: TextStyle(color: _primary),
+                          style: TextStyle(color: colorScheme.primary),
                         ),
                       ),
                   ],
                 ),
                 const SizedBox(height: 16),
-                const Text(
+                Text(
                   'By Status',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: colorScheme.onSurface,
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
@@ -1012,10 +1065,10 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                   Navigator.pop(context);
                 }),
                 const SizedBox(height: 16),
-                const Text(
+                Text(
                   'By Type',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: colorScheme.onSurface,
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
@@ -1052,9 +1105,13 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   }
 
   Widget _buildFilterOption(String title, IconData icon, VoidCallback onTap) {
+    final theme = Theme.of(context);
+    final textMediumColor = theme.textTheme.bodyMedium?.color ?? Colors.grey;
+    final onSurfaceColor = theme.colorScheme.onSurface;
+
     return ListTile(
-      leading: Icon(icon, color: _text),
-      title: Text(title, style: const TextStyle(color: Colors.white)),
+      leading: Icon(icon, color: textMediumColor),
+      title: Text(title, style: TextStyle(color: onSurfaceColor)),
       onTap: onTap,
     );
   }

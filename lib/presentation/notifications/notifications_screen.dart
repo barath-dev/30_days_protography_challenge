@@ -54,7 +54,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         title: Text(
           'Notifications',
           style: theme.textTheme.titleLarge?.copyWith(
-            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -67,7 +66,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               },
               child: Text(
                 'Mark all read',
-                style: TextStyle(color: colorScheme.primary, fontSize: 14),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: colorScheme.primary,
+                ),
               ),
             ),
         ],
@@ -235,7 +236,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         color: theme.textTheme.bodySmall?.color?.withOpacity(
                           0.7,
                         ),
-                        fontSize: 11,
                       ),
                     ),
                   ],

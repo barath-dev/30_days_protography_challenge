@@ -945,9 +945,8 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
               ),
               child: Text(
                 'Day $progressDay • ${_getDifficultyName(_lesson!.difficulty)}',
-                style: const TextStyle(
+                style: theme.textTheme.labelLarge?.copyWith(
                   color: Colors.white,
-                  fontSize: 13,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.5,
                 ),
@@ -973,7 +972,6 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                   Text(
                     '${_lesson!.estimatedDuration} min',
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      fontSize: 13,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -986,7 +984,6 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         Text(
           _lesson!.title,
           style: theme.textTheme.displaySmall?.copyWith(
-            fontSize: 32,
             fontWeight: FontWeight.w800,
             height: 1.1,
             letterSpacing: -0.5,
@@ -996,9 +993,8 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         if (_lesson!.subtitle.isNotEmpty) ...[
           Text(
             _lesson!.subtitle,
-            style: TextStyle(
+            style: theme.textTheme.titleLarge?.copyWith(
               color: colorScheme.primary,
-              fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -1007,7 +1003,6 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         Text(
           _lesson!.description,
           style: theme.textTheme.bodyLarge?.copyWith(
-            fontSize: 17,
             height: 1.5,
             fontWeight: FontWeight.w400,
             color: theme.textTheme.bodyMedium?.color,
@@ -1088,8 +1083,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             child: Text(
               value,
               maxLines: 1,
-              style: theme.textTheme.bodyLarge?.copyWith(
-                fontSize: 16,
+              style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -1098,7 +1092,6 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
           Text(
             label,
             style: theme.textTheme.bodySmall?.copyWith(
-              fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -1158,9 +1151,8 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                           child: Center(
                             child: Text(
                               '${entry.key + 1}',
-                              style: const TextStyle(
+                              style: theme.textTheme.labelLarge?.copyWith(
                                 color: Colors.white,
-                                fontSize: 12,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -1171,7 +1163,6 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                           child: Text(
                             entry.value,
                             style: theme.textTheme.bodyMedium?.copyWith(
-                              fontSize: 15,
                               height: 1.4,
                               fontWeight: FontWeight.w400,
                             ),
@@ -1247,7 +1238,6 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                         Text(
                           exercise.description,
                           style: theme.textTheme.bodyMedium?.copyWith(
-                            fontSize: 15,
                             height: 1.5,
                           ),
                         ),
@@ -1283,11 +1273,11 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                                   child: Center(
                                     child: Text(
                                       '${entry.key + 1}',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                                      style: theme.textTheme.labelLarge
+                                          ?.copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700,
+                                          ),
                                     ),
                                   ),
                                 ),
@@ -1296,7 +1286,6 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                                   child: Text(
                                     entry.value,
                                     style: theme.textTheme.bodyMedium?.copyWith(
-                                      fontSize: 14,
                                       height: 1.4,
                                     ),
                                   ),
@@ -1424,9 +1413,8 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                             width: 120,
                             child: Text(
                               entry.key.replaceAll('_', ' ').toUpperCase(),
-                              style: TextStyle(
+                              style: theme.textTheme.labelSmall?.copyWith(
                                 color: colorScheme.primary,
-                                fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 letterSpacing: 0.5,
                               ),
@@ -1436,7 +1424,6 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                             child: Text(
                               entry.value.toString(),
                               style: theme.textTheme.bodyMedium?.copyWith(
-                                fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -1600,8 +1587,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                   const SizedBox(width: 12),
                   Text(
                     'Continue Reading (${(_readingProgress * 100).round()}%)',
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontSize: 16,
+                    style: theme.textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -1694,12 +1680,11 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             ],
             Text(
               label,
-              style: TextStyle(
+              style: theme.textTheme.titleMedium?.copyWith(
                 color:
                     isPrimary
                         ? colorScheme.primary
                         : theme.textTheme.bodyMedium?.color,
-                fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
             ),

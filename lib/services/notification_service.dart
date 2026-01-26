@@ -17,37 +17,82 @@ class NotificationService {
   Future<void> init() async {
     if (_isInitialized) return;
 
-    // Initialize timezone
-    tz.initializeTimeZones();
-    final timeZoneName = await FlutterTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(timeZoneName.toString()));
+    try {
+      // Initialize timezone
+      tz.initializeTimeZones();
 
-    // Android initialization
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+      String timeZoneName = 'UTC';
+      try {
+        final dynamic localTimezone = await FlutterTimezone.getLocalTimezone();
+        final String rawTimezone = localTimezone.toString();
 
-    // iOS initialization
-    const DarwinInitializationSettings initializationSettingsDarwin =
-        DarwinInitializationSettings(
-          requestAlertPermission: true,
-          requestBadgePermission: true,
-          requestSoundPermission: true,
+        print(
+          "Timezone type: ${localTimezone.runtimeType}, value: $rawTimezone",
         );
 
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
-          android: initializationSettingsAndroid,
-          iOS: initializationSettingsDarwin,
+        if (localTimezone is String) {
+          timeZoneName = localTimezone;
+        } else {
+          // Handle TimezoneInfo object (TimezoneInfo(id=Asia/Kolkata, ...))
+          final idMatch = RegExp(r'id=([^,)]+)').firstMatch(rawTimezone);
+          if (idMatch != null) {
+            timeZoneName = idMatch.group(1) ?? 'UTC';
+          } else {
+            print("⚠️ Could not parse timezone ID from: $rawTimezone");
+            timeZoneName = 'UTC';
+          }
+        }
+      } catch (e) {
+        print("⚠️ Error getting local timezone: $e");
+        timeZoneName = 'UTC';
+      }
+
+      try {
+        tz.setLocalLocation(tz.getLocation(timeZoneName));
+      } catch (e) {
+        print(
+          "⚠️ Error setting location 'timeZoneName', falling back to UTC: $e",
         );
+        try {
+          tz.setLocalLocation(tz.getLocation('UTC'));
+        } catch (e) {
+          print("⚠️ CRITICAL: Could not even set UTC: $e");
+          // Depending on timezone package version, 'UTC' should exist in default data
+        }
+      }
 
-    await flutterLocalNotificationsPlugin.initialize(
-      settings: initializationSettings,
-      onDidReceiveNotificationResponse: (NotificationResponse response) async {
-        // Handle notification tap
-      },
-    );
+      // Android initialization
+      const AndroidInitializationSettings initializationSettingsAndroid =
+          AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    _isInitialized = true;
+      // iOS initialization
+      const DarwinInitializationSettings initializationSettingsDarwin =
+          DarwinInitializationSettings(
+            requestAlertPermission: true,
+            requestBadgePermission: true,
+            requestSoundPermission: true,
+          );
+
+      const InitializationSettings initializationSettings =
+          InitializationSettings(
+            android: initializationSettingsAndroid,
+            iOS: initializationSettingsDarwin,
+          );
+
+      await flutterLocalNotificationsPlugin.initialize(
+        settings: initializationSettings,
+        onDidReceiveNotificationResponse: (
+          NotificationResponse response,
+        ) async {
+          // Handle notification tap
+        },
+      );
+
+      _isInitialized = true;
+    } catch (e) {
+      print("❌ CRITICAL ERROR in NotificationService.init: $e");
+      // We do NOT set _isInitialized to true here, so we might retry or just fail gracefully
+    }
   }
 
   Future<void> requestPermissions() async {
@@ -70,24 +115,52 @@ class NotificationService {
     required String body,
     required TimeOfDay time,
   }) async {
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      id: id,
-      title: title,
-      body: body,
-      scheduledDate: _nextInstanceOfTime(time),
-      notificationDetails: const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'daily_reminders',
-          'Daily Study Reminders',
-          channelDescription: 'Reminders to continue your photography course',
-          importance: Importance.high,
-          priority: Priority.high,
+    try {
+      await flutterLocalNotificationsPlugin.zonedSchedule(
+        id: id,
+        title: title,
+        body: body,
+        scheduledDate: _nextInstanceOfTime(time),
+        notificationDetails: const NotificationDetails(
+          android: AndroidNotificationDetails(
+            'daily_reminders',
+            'Daily Study Reminders',
+            channelDescription: 'Reminders to continue your photography course',
+            importance: Importance.high,
+            priority: Priority.high,
+          ),
+          iOS: DarwinNotificationDetails(),
         ),
-        iOS: DarwinNotificationDetails(),
-      ),
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      matchDateTimeComponents: DateTimeComponents.time,
-    );
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        matchDateTimeComponents: DateTimeComponents.time,
+      );
+    } catch (e) {
+      print("⚠️ Error scheduling exact reminder: $e");
+      print("🔄 Falling back to inexact scheduling...");
+      try {
+        await flutterLocalNotificationsPlugin.zonedSchedule(
+          id: id,
+          title: title,
+          body: body,
+          scheduledDate: _nextInstanceOfTime(time),
+          notificationDetails: const NotificationDetails(
+            android: AndroidNotificationDetails(
+              'daily_reminders',
+              'Daily Study Reminders',
+              channelDescription:
+                  'Reminders to continue your photography course',
+              importance: Importance.high,
+              priority: Priority.high,
+            ),
+            iOS: DarwinNotificationDetails(),
+          ),
+          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+          matchDateTimeComponents: DateTimeComponents.time,
+        );
+      } catch (e2) {
+        print("❌ Error scheduling inexact reminder: $e2");
+      }
+    }
   }
 
   Future<void> cancelReminder(int id) async {

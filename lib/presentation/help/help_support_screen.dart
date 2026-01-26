@@ -21,10 +21,7 @@ class HelpSupportScreen extends StatelessWidget {
         ),
         title: Text(
           'Help & Support',
-          style: textTheme.titleLarge?.copyWith(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
       ),
       body: ListView(
@@ -164,7 +161,6 @@ class HelpSupportScreen extends StatelessWidget {
                   'Educational Project',
                   style: textTheme.bodySmall?.copyWith(
                     color: textTheme.bodySmall?.color?.withOpacity(0.7),
-                    fontSize: 11,
                   ),
                 ),
               ],
@@ -190,7 +186,6 @@ class HelpSupportScreen extends StatelessWidget {
           child: Text(
             title.toUpperCase(),
             style: theme.textTheme.labelSmall?.copyWith(
-              fontSize: 12,
               fontWeight: FontWeight.w600,
               letterSpacing: 1.2,
             ),
@@ -275,10 +270,7 @@ class HelpSupportScreen extends StatelessWidget {
         title,
         style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
-      subtitle: Text(
-        description,
-        style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
-      ),
+      subtitle: Text(description, style: theme.textTheme.bodyMedium),
     );
   }
 
@@ -306,10 +298,7 @@ class HelpSupportScreen extends StatelessWidget {
         title,
         style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
-      subtitle: Text(
-        subtitle,
-        style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
-      ),
+      subtitle: Text(subtitle, style: theme.textTheme.bodyMedium),
       trailing: Icon(
         Icons.chevron_right,
         color: colorScheme.onSurface,
@@ -346,10 +335,7 @@ class HelpSupportScreen extends StatelessWidget {
         title,
         style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
-      subtitle: Text(
-        subtitle,
-        style: theme.textTheme.bodyMedium?.copyWith(fontSize: 12),
-      ),
+      subtitle: Text(subtitle, style: theme.textTheme.bodyMedium),
       trailing: Icon(
         Icons.chevron_right,
         color: colorScheme.onSurface,

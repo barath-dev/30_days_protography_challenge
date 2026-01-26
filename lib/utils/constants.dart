@@ -33,6 +33,11 @@ class AppConstants {
   static const Color lightBorderColor = Color(0xFFE5E5EA);
   static const Color lightTextSecondary = Color(0xFF8E8E93);
 
+  // Difficulty Colors
+  static const Color beginnerColor = successColor;
+  static const Color intermediateColor = primaryColor;
+  static const Color advancedColor = Color(0xFF9C27B0);
+
   // Gradient Colors
   static const List<Color> primaryGradient = [
     Color(0xFFFF6B35),

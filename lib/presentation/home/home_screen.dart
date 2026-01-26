@@ -250,9 +250,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                     elevation: 8,
                   ),
-                  child: const Text(
+                  child: Text(
                     'Start Your Journey',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    style: textTheme.titleMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
@@ -500,10 +503,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final theme = Theme.of(context);
     return ListTile(
       leading: Icon(icon, color: theme.textTheme.bodyMedium?.color, size: 22),
-      title: Text(
-        title,
-        style: theme.textTheme.bodyLarge?.copyWith(fontSize: 16),
-      ),
+      title: Text(title, style: theme.textTheme.bodyLarge),
       onTap: onTap,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -550,9 +550,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               const SizedBox(width: 8),
               Text(
                 _getDifficultyDisplayName(_activeDifficulty!),
-                style: TextStyle(
+                style: theme.textTheme.labelLarge?.copyWith(
                   color: colorScheme.primary,
-                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -783,9 +782,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
                 Text(
                   '${(progress * 100).round()}% complete',
-                  style: TextStyle(
+                  style: theme.textTheme.titleSmall?.copyWith(
                     color: colorScheme.primary,
-                    fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -901,8 +899,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             ? 'Continue Learning'
                             : 'Start Lesson'
                         : 'Lesson Locked',
-                    style: const TextStyle(
-                      fontSize: 16,
+                    style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -1284,58 +1281,35 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ],
           ),
           const SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${(progress * 100).round()}%',
-                      style: TextStyle(
-                        color: colorScheme.primary,
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Text(
-                      'Complete',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _buildStatChip(
+                  context,
+                  Icons.check_circle_rounded,
+                  '${(progress * 100).round()}%',
+                  'Completed',
+                  colorScheme.primary,
                 ),
-              ),
-              const SizedBox(width: 24),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.local_fire_department,
-                          color: colorScheme.primary,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          '$streak',
-                          style: TextStyle(
-                            color: colorScheme.primary,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Text(
-                      'Day Streak',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ],
+                const SizedBox(width: 12),
+                _buildStatChip(
+                  context,
+                  Icons.local_fire_department_rounded,
+                  '$streak',
+                  'Day Streak',
+                  const Color(0xFFFF6B00), // Orange for streak
                 ),
-              ),
-            ],
+                const SizedBox(width: 12),
+                _buildStatChip(
+                  context,
+                  Icons.timer_rounded,
+                  '${(progress * 30 * 0.5).toStringAsFixed(1)}', // Estimated hours
+                  'Hours',
+                  const Color(0xFF4CAF50), // Green for time
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 20),
           LinearProgressIndicator(
@@ -1344,6 +1318,47 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             valueColor: AlwaysStoppedAnimation(colorScheme.primary),
             minHeight: 8,
             borderRadius: BorderRadius.circular(4),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatChip(
+    BuildContext context,
+    IconData icon,
+    String value,
+    String label,
+    Color color,
+  ) {
+    final theme = Theme.of(context);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withOpacity(0.3), width: 1),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: color, size: 18),
+          const SizedBox(width: 8),
+          Text(
+            value,
+            style: theme.textTheme.bodyLarge?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: Colors.white.withOpacity(0.7),
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ],
       ),

@@ -32,7 +32,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
       description:
           'Perfect for those just starting their photography journey. Learn camera basics, composition, and fundamental techniques.',
       icon: Icons.camera_alt,
-      color: AppConstants.successColor,
+      color: AppConstants.beginnerColor,
       features: [
         'Camera basics and controls',
         'Simple composition rules',
@@ -50,7 +50,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
       description:
           'For photographers who know the basics and want to improve their skills with advanced techniques and creative approaches.',
       icon: Icons.tune,
-      color: AppConstants.primaryColor,
+      color: AppConstants.intermediateColor,
       features: [
         'Advanced composition techniques',
         'Manual camera controls',
@@ -68,7 +68,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
       description:
           'Master professional techniques, develop your unique style, and learn business aspects of photography.',
       icon: Icons.auto_awesome,
-      color: Color(0xFF9C27B0),
+      color: AppConstants.advancedColor,
       features: [
         'Professional shooting techniques',
         'Advanced post-processing',
@@ -571,12 +571,18 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
   }
 
   Widget _buildCardFooter(DifficultyInfo difficulty) {
-    return Row(
-      children: [
-        _buildInfoChip(Icons.schedule, difficulty.duration),
-        const SizedBox(width: 12),
-        _buildInfoChip(Icons.assignment, '${difficulty.totalLessons} lessons'),
-      ],
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          _buildInfoChip(Icons.schedule, difficulty.duration),
+          const SizedBox(width: 12),
+          _buildInfoChip(
+            Icons.assignment,
+            '${difficulty.totalLessons} lessons',
+          ),
+        ],
+      ),
     );
   }
 

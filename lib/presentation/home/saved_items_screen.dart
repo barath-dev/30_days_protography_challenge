@@ -167,15 +167,16 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
               children: [
                 Text(
                   'Saved Items',
-                  style: TextStyle(
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: _textPrimary,
-                    fontSize: 24,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
                 Text(
                   '${_savedItems.length} items saved',
-                  style: TextStyle(color: _textSecondary, fontSize: 14),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: _textSecondary),
                 ),
               ],
             ),
@@ -218,7 +219,9 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
                     searchQuery = value;
                   });
                 },
-                style: TextStyle(color: _textPrimary, fontSize: 16),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(color: _textPrimary),
                 decoration: InputDecoration(
                   hintText: 'Search saved items...',
                   hintStyle: TextStyle(color: _textSecondary),
@@ -308,9 +311,10 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
                       children: [
                         Text(
                           tab,
-                          style: TextStyle(
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium?.copyWith(
                             color: isSelected ? Colors.white : _textSecondary,
-                            fontSize: 14,
                             fontWeight:
                                 isSelected ? FontWeight.w600 : FontWeight.w500,
                           ),
@@ -487,9 +491,10 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
                         ),
                         child: Text(
                           _getTypeName(item.type).toUpperCase(),
-                          style: TextStyle(
+                          style: Theme.of(
+                            context,
+                          ).textTheme.labelSmall?.copyWith(
                             color: _getTypeColor(item.type),
-                            fontSize: 11,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 0.5,
                           ),
@@ -498,9 +503,10 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
                       const SizedBox(height: 8),
                       Text(
                         item.title,
-                        style: TextStyle(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
                           color: _textPrimary,
-                          fontSize: 18,
                           fontWeight: FontWeight.w700,
                         ),
                         maxLines: 2,
@@ -529,9 +535,8 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
             const SizedBox(height: 16),
             Text(
               item.description,
-              style: TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: _textSecondary,
-                fontSize: 15,
                 height: 1.4,
               ),
               maxLines: 2,
@@ -672,7 +677,9 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
             searchQuery.isNotEmpty
                 ? 'Try adjusting your search or filters'
                 : 'Start bookmarking lessons and tips\nto see them here',
-            style: TextStyle(color: _textSecondary, fontSize: 16, height: 1.5),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(color: _textSecondary, height: 1.5),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
