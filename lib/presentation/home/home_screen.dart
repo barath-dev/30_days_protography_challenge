@@ -152,26 +152,41 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           onRefresh: _loadUserData,
           color: colorScheme.primary,
           backgroundColor: theme.cardColor,
-          child: FadeTransition(
-            opacity: _fadeAnimation,
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildHeader(),
-                  const SizedBox(height: 32),
-                  _buildWelcomeSection(),
-                  const SizedBox(height: 32),
-                  _buildContinueLearningWidget(),
-                  const SizedBox(height: 32),
-                  _buildProgressOverview(),
-                  const SizedBox(height: 32),
-                  _buildQuickActions(),
-                  const SizedBox(height: 32),
-                  _buildRecentActivity(),
-                ],
-              ),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _FadeInSlide(
+                  delay: const Duration(milliseconds: 0),
+                  child: _buildHeader(),
+                ),
+                const SizedBox(height: 32),
+                _FadeInSlide(
+                  delay: const Duration(milliseconds: 100),
+                  child: _buildWelcomeSection(),
+                ),
+                const SizedBox(height: 32),
+                _FadeInSlide(
+                  delay: const Duration(milliseconds: 200),
+                  child: _buildContinueLearningWidget(),
+                ),
+                const SizedBox(height: 32),
+                _FadeInSlide(
+                  delay: const Duration(milliseconds: 300),
+                  child: _buildProgressOverview(),
+                ),
+                const SizedBox(height: 32),
+                _FadeInSlide(
+                  delay: const Duration(milliseconds: 400),
+                  child: _buildQuickActions(),
+                ),
+                const SizedBox(height: 32),
+                _FadeInSlide(
+                  delay: const Duration(milliseconds: 500),
+                  child: _buildRecentActivity(),
+                ),
+              ],
             ),
           ),
         ),
@@ -646,307 +661,266 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       progressDay,
     );
 
-    final isCompleted = status == LessonStatus.completed;
     final isInProgress = progress > 0 && progress < 1.0;
 
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+
+    // Status color logic
+    final statusColor = _getStatusColor(status);
+    final glowColor = statusColor.withOpacity(0.4);
 
     return Container(
-      padding: const EdgeInsets.all(24),
+      width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            colorScheme.primary.withOpacity(0.1),
-            colorScheme.primary.withOpacity(0.05),
-          ],
+          colors: [const Color(0xFF1E1E1E), const Color(0xFF0D0D0D)],
         ),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: colorScheme.primary.withOpacity(0.3),
-          width: 1.5,
-        ),
+        borderRadius: BorderRadius.circular(32),
+        border: Border.all(color: Colors.white.withOpacity(0.1), width: 1),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.primary.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
+            color: glowColor.withOpacity(0.15),
+            blurRadius: 30,
+            offset: const Offset(0, 10),
+            spreadRadius: -5,
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
-          // Header with status
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: _getStatusColor(status).withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Icon(
-                  _getStatusIcon(status),
-                  color: _getStatusColor(status),
-                  size: 24,
-                ),
+          // Background Glow Effect
+          Positioned(
+            right: -50,
+            top: -50,
+            child: Container(
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: statusColor.withOpacity(0.15),
+                boxShadow: [
+                  BoxShadow(
+                    color: statusColor.withOpacity(0.2),
+                    blurRadius: 50,
+                    spreadRadius: 20,
+                  ),
+                ],
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Top Row: Status Pill
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      _getStatusText(status, isInProgress),
-                      style: TextStyle(
-                        color: _getStatusColor(status),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        color: statusColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: statusColor.withOpacity(0.2)),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            _getStatusIcon(status),
+                            color: statusColor,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            _getStatusText(status, isInProgress),
+                            style: TextStyle(
+                              color: statusColor,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Text(
-                      'Day ${_getProgressDay(_currentLesson!.day, _currentLesson!.difficulty)} of 30',
-                      style: theme.textTheme.bodySmall,
+                      'Day ${_getProgressDay(_currentLesson!.day, _currentLesson!.difficulty)}',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ],
                 ),
-              ),
-              if (isCompleted)
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
+
+                const SizedBox(height: 20),
+
+                // Lesson Title and Description
+                // Main Content
+                Text(
+                  _currentLesson!.title,
+                  style: theme.textTheme.headlineLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    height: 1.1,
+                    color: Colors.white,
+                    fontSize: 28,
                   ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  _currentLesson!.description,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.7),
+                    height: 1.5,
+                    fontSize: 16,
+                  ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+
+                const SizedBox(height: 24),
+
+                // Metadata Chips
+                Row(
+                  children: [
+                    _buildGlassChip(
+                      Icons.access_time_rounded,
+                      '${_currentLesson!.estimatedDuration} min',
+                    ),
+                    const SizedBox(width: 12),
+                    _buildGlassChip(
+                      _getLessonTypeIcon(_currentLesson!.type),
+                      _getLessonTypeName(_currentLesson!.type),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 32),
+
+                // Action Button
+                Container(
+                  width: double.infinity,
+                  height: 56,
                   decoration: BoxDecoration(
-                    color: colorScheme.tertiary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: colorScheme.tertiary.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(16),
+                    gradient: LinearGradient(
+                      colors:
+                          canAccess
+                              ? [statusColor, statusColor.withOpacity(0.8)]
+                              : [Colors.grey[800]!, Colors.grey[900]!],
+                    ),
+                    boxShadow:
+                        canAccess
+                            ? [
+                              BoxShadow(
+                                color: statusColor.withOpacity(0.4),
+                                blurRadius: 20,
+                                offset: const Offset(0, 8),
+                                spreadRadius: -2,
+                              ),
+                            ]
+                            : [],
+                  ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap:
+                          canAccess
+                              ? () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (_) => LessonDetailScreen(
+                                          lesson: _currentLesson!,
+                                        ),
+                                  ),
+                                );
+                                await _loadUserData();
+                              }
+                              : () => _showLessonLockedDialog(),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            !canAccess
+                                ? Icons.lock_outline
+                                : isInProgress
+                                ? Icons.play_arrow_rounded
+                                : Icons.arrow_forward_rounded,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            !canAccess
+                                ? 'Lesson Locked'
+                                : isInProgress
+                                ? 'Continue Lesson'
+                                : 'Start Lesson',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.check, color: colorScheme.tertiary, size: 14),
-                      const SizedBox(width: 4),
-                      Text(
-                        'Completed',
-                        style: TextStyle(
-                          color: colorScheme.tertiary,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
+                ),
+
+                // Show availability time if locked
+                if (!canAccess) ...[
+                  const SizedBox(height: 16),
+                  Center(
+                    child: Text(
+                      'Available ${LessonManager.getTimeUntilNextLesson(_activeDifficulty)}',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontSize: 12,
                       ),
-                    ],
+                    ),
                   ),
-                ),
-            ],
-          ),
-
-          const SizedBox(height: 20),
-
-          // Lesson Title and Description
-          Text(
-            _currentLesson!.title,
-            style: theme.textTheme.headlineLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              height: 1.2,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            _currentLesson!.description,
-            style: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.textTheme.bodyMedium?.color,
-              height: 1.5,
-            ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-
-          const SizedBox(height: 20),
-
-          // Progress bar for in-progress lessons
-          if (isInProgress) ...[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Progress',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  '${(progress * 100).round()}% complete',
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    color: colorScheme.primary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                ],
               ],
             ),
-            const SizedBox(height: 12),
-            Container(
-              height: 6,
-              decoration: BoxDecoration(
-                color: theme.dividerColor,
-                borderRadius: BorderRadius.circular(3),
-              ),
-              child: FractionallySizedBox(
-                alignment: Alignment.centerLeft,
-                widthFactor: progress,
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        colorScheme.primary,
-                        colorScheme.primary.withOpacity(0.8),
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(3),
-                    boxShadow: [
-                      BoxShadow(
-                        color: colorScheme.primary.withOpacity(0.3),
-                        blurRadius: 4,
-                        offset: const Offset(0, 1),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-          ],
-
-          // Lesson metadata
-          Row(
-            children: [
-              _buildMetaChip(
-                Icons.access_time,
-                '${_currentLesson!.estimatedDuration} min',
-              ),
-              const SizedBox(width: 12),
-              _buildMetaChip(
-                _getLessonTypeIcon(_currentLesson!.type),
-                _getLessonTypeName(_currentLesson!.type),
-              ),
-              const SizedBox(width: 12),
-              if (_currentLesson!.exercises.isNotEmpty)
-                _buildMetaChip(
-                  Icons.assignment_outlined,
-                  '${_currentLesson!.exercises.length} exercises',
-                ),
-            ],
           ),
+        ],
+      ),
+    );
+  }
 
-          const SizedBox(height: 24),
-
-          // Action button
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed:
-                  canAccess
-                      ? () async {
-                        HapticFeedback.mediumImpact();
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder:
-                                (_) =>
-                                    LessonDetailScreen(lesson: _currentLesson),
-                          ),
-                        );
-                        await _loadUserData();
-                      }
-                      : () {
-                        HapticFeedback.lightImpact();
-                        _showLessonLockedDialog();
-                      },
-              style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    canAccess ? colorScheme.primary : theme.disabledColor,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: canAccess ? 4 : 0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    canAccess
-                        ? isCompleted
-                            ? Icons.replay
-                            : isInProgress
-                            ? Icons.play_arrow
-                            : Icons.play_circle_filled
-                        : Icons.lock,
-                    size: 20,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    canAccess
-                        ? isCompleted
-                            ? 'Review Lesson'
-                            : isInProgress
-                            ? 'Continue Learning'
-                            : 'Start Lesson'
-                        : 'Lesson Locked',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
+  Widget _buildGlassChip(IconData icon, String label) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white.withOpacity(0.1)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: Colors.white.withOpacity(0.7), size: 14),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.7),
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
             ),
           ),
-
-          // Lock indicator for locked lessons
-          if (!canAccess) ...[
-            const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: theme.dividerColor.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: theme.dividerColor),
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.schedule,
-                    color: theme.textTheme.bodyMedium?.color,
-                    size: 18,
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Available ${LessonManager.getTimeUntilNextLesson(_activeDifficulty)}',
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          'Complete lessons daily to maintain your learning streak',
-                          style: theme.textTheme.bodySmall,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
         ],
       ),
     );
@@ -1241,21 +1215,55 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
+    // Status colors
+    final statusColor = colorScheme.primary;
+
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.all(24),
-      decoration: _cardDecoration(),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [const Color(0xFF1E1E1E), const Color(0xFF121212)],
+        ),
+        borderRadius: BorderRadius.circular(32),
+        border: Border.all(color: Colors.white.withOpacity(0.08), width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                '${_getDifficultyDisplayName(_activeDifficulty!)} Track',
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white, // Keep white for contrast on dark card
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${_getDifficultyDisplayName(_activeDifficulty!)} Track',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Keep up the momentum!',
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.5),
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
               ),
               Container(
                 padding: const EdgeInsets.symmetric(
@@ -1263,101 +1271,157 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  color: colorScheme.tertiary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: colorScheme.tertiary.withOpacity(0.3),
-                  ),
+                  color: statusColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: statusColor.withOpacity(0.2)),
                 ),
                 child: Text(
                   'Day $currentDay',
                   style: TextStyle(
-                    color: colorScheme.tertiary,
+                    color: statusColor,
                     fontSize: 12,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 20),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                _buildStatChip(
-                  context,
-                  Icons.check_circle_rounded,
+
+          const SizedBox(height: 24),
+
+          // Stats Row
+          Row(
+            children: [
+              Expanded(
+                child: _buildGlassStatItem(
+                  Icons.check_circle_outline_rounded,
                   '${(progress * 100).round()}%',
-                  'Completed',
+                  'Done',
                   colorScheme.primary,
                 ),
-                const SizedBox(width: 12),
-                _buildStatChip(
-                  context,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildGlassStatItem(
                   Icons.local_fire_department_rounded,
                   '$streak',
-                  'Day Streak',
-                  const Color(0xFFFF6B00), // Orange for streak
+                  'Streak',
+                  const Color(0xFFFF6B00),
                 ),
-                const SizedBox(width: 12),
-                _buildStatChip(
-                  context,
-                  Icons.timer_rounded,
-                  '${(progress * 30 * 0.5).toStringAsFixed(1)}', // Estimated hours
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildGlassStatItem(
+                  Icons.timer_outlined,
+                  '${(progress * 30 * 0.5).toStringAsFixed(1)}',
                   'Hours',
-                  const Color(0xFF4CAF50), // Green for time
+                  const Color(0xFF4CAF50),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const SizedBox(height: 20),
-          LinearProgressIndicator(
-            value: progress,
-            backgroundColor: theme.dividerColor.withOpacity(0.2),
-            valueColor: AlwaysStoppedAnimation(colorScheme.primary),
-            minHeight: 8,
-            borderRadius: BorderRadius.circular(4),
+
+          const SizedBox(height: 24),
+
+          // Progress Bar
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Overall Progress',
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.7),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    '${(progress * 100).round()}%',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Container(
+                height: 8,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.05),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: FractionallySizedBox(
+                  widthFactor: progress.clamp(0.0, 1.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          colorScheme.primary,
+                          colorScheme.primary.withOpacity(0.6),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(4),
+                      boxShadow: [
+                        BoxShadow(
+                          color: colorScheme.primary.withOpacity(0.3),
+                          blurRadius: 6,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  Widget _buildStatChip(
-    BuildContext context,
+  Widget _buildGlassStatItem(
     IconData icon,
     String value,
     String label,
     Color color,
   ) {
-    final theme = Theme.of(context);
-
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.3),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.3), width: 1),
+        color: Colors.white.withOpacity(0.03),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.white.withOpacity(0.05)),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
+      child: Column(
         children: [
-          Icon(icon, color: color, size: 18),
-          const SizedBox(width: 8),
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: color, size: 20),
+          ),
+          const SizedBox(height: 12),
           Text(
             value,
-            style: theme.textTheme.bodyLarge?.copyWith(
+            style: const TextStyle(
               color: Colors.white,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(width: 6),
+          const SizedBox(height: 4),
           Text(
             label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: Colors.white.withOpacity(0.7),
-              fontWeight: FontWeight.w500,
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.5),
+              fontSize: 11,
             ),
           ),
         ],
@@ -1537,37 +1601,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
         ),
       ],
-    );
-  }
-
-  BoxDecoration _cardDecoration() {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-
-    return BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors:
-            isDark
-                ? [const Color(0xFF2D2D2D), const Color(0xFF1A1A1A)]
-                : [
-                  theme.cardColor,
-                  theme.cardColor,
-                ], // Use solid color for light mode or adjust as needed
-      ),
-      borderRadius: BorderRadius.circular(16),
-      border: Border.all(color: theme.dividerColor),
-      boxShadow:
-          isDark
-              ? null
-              : [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
     );
   }
 
@@ -1866,6 +1899,64 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
             ],
           ),
+    );
+  }
+}
+
+class _FadeInSlide extends StatefulWidget {
+  final Widget child;
+  final Duration delay;
+  final Duration duration;
+  final Offset offset;
+
+  const _FadeInSlide({
+    required this.child,
+    this.delay = Duration.zero,
+    this.duration = const Duration(milliseconds: 800),
+    this.offset = const Offset(0, 0.2), // 20% slide up
+  });
+
+  @override
+  State<_FadeInSlide> createState() => _FadeInSlideState();
+}
+
+class _FadeInSlideState extends State<_FadeInSlide>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _opacity;
+  late Animation<Offset> _slide;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: widget.duration);
+
+    _opacity = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+
+    _slide = Tween<Offset>(
+      begin: widget.offset,
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
+
+    Future.delayed(widget.delay, () {
+      if (mounted) _controller.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeTransition(
+      opacity: _opacity,
+      child: SlideTransition(position: _slide, child: widget.child),
     );
   }
 }

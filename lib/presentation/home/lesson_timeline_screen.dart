@@ -23,9 +23,6 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
   LessonType? _filterType;
   String? _filterCategory;
 
-  // Simple color scheme
-  // Removed static colors in favor of Theme.of(context)
-
   @override
   void initState() {
     super.initState();
@@ -46,16 +43,12 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
     setState(() => _isLoading = true);
 
     try {
-      // Load user progress first
       _userProgress = UserPreferences.currentProgress;
 
       if (_userProgress != null) {
-        // Load lessons for the current user's difficulty level only
         _lessons = LessonManager.getLessonsByDifficulty(
           _userProgress!.selectedDifficulty,
         );
-
-        // Apply any active filters
         _applyFilters();
       }
 
@@ -95,21 +88,17 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
 
   LessonStatus _getLessonStatus(Lesson lesson) {
     if (_userProgress == null) {
-      // If no progress exists, only Day 1 lessons are available
       return lesson.day == 1 ? LessonStatus.available : LessonStatus.locked;
     }
-
-    // Convert actual lesson day to progress day for status checking
     final progressDay = _getProgressDay(lesson.day, lesson.difficulty);
     return _userProgress!.getLessonStatus(lesson.id, progressDay);
   }
 
-  // Helper method to convert actual lesson day to progress day
   int _getProgressDay(int actualDay, DifficultyLevel difficulty) {
     const Map<DifficultyLevel, int> dayOffsets = {
-      DifficultyLevel.beginner: 0, // Days 1-30
-      DifficultyLevel.intermediate: 30, // Days 31-60
-      DifficultyLevel.advanced: 60, // Days 61-90
+      DifficultyLevel.beginner: 0,
+      DifficultyLevel.intermediate: 30,
+      DifficultyLevel.advanced: 60,
     };
     final offset = dayOffsets[difficulty] ?? 0;
     return actualDay - offset;
@@ -128,8 +117,10 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFF121212), // Deep dark background
       appBar: _buildAppBar(),
       body: _isLoading ? _buildLoadingState() : _buildTimelineContent(),
     );
@@ -140,25 +131,21 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
         _userProgress != null
             ? _getDifficultyDisplayName(_userProgress!.selectedDifficulty)
             : 'Unknown';
-
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return AppBar(
-      backgroundColor: theme.scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFF121212),
       elevation: 0,
       leading: IconButton(
         onPressed: () => Navigator.pop(context),
-        icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
+        icon: const Icon(Icons.arrow_back, color: Colors.white),
       ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             '30-Day Journey',
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
           Text(
             '$difficultyName Track',
@@ -173,7 +160,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
       actions: [
         IconButton(
           onPressed: _showStatistics,
-          icon: Icon(Icons.insights, color: colorScheme.onSurface),
+          icon: const Icon(Icons.insights, color: Colors.white),
         ),
         IconButton(
           onPressed: _showFilterOptions,
@@ -182,7 +169,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
             color:
                 (_filterType != null || _filterCategory != null)
                     ? colorScheme.primary
-                    : colorScheme.onSurface,
+                    : Colors.white,
           ),
         ),
         IconButton(
@@ -192,7 +179,7 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
               MaterialPageRoute(builder: (_) => const SettingsScreen()),
             ).then((_) => _loadData());
           },
-          icon: Icon(Icons.settings, color: colorScheme.onSurface),
+          icon: const Icon(Icons.settings, color: Colors.white),
         ),
       ],
     );
@@ -216,13 +203,13 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
           children: [
             Icon(
               Icons.error_outline,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+              color: Colors.white.withOpacity(0.5),
               size: 64,
             ),
             const SizedBox(height: 16),
-            Text(
+            const Text(
               'No progress data found',
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: TextStyle(color: Colors.white, fontSize: 16),
             ),
           ],
         ),
@@ -230,13 +217,11 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
     }
 
     return Column(
-      children: [_buildProgress(), Expanded(child: _buildTimeline())],
+      children: [_buildTimelineHeader(), Expanded(child: _buildTimelineList())],
     );
   }
 
-  Widget _buildProgress() {
-    if (_userProgress == null) return const SizedBox.shrink();
-
+  Widget _buildTimelineHeader() {
     final currentDay = _userProgress!.currentDay;
     final progress = _userProgress!.overallProgress;
     final completedLessons =
@@ -244,16 +229,26 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
             .where((p) => p.status == LessonStatus.completed)
             .length;
 
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
-      margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: theme.cardColor,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: theme.dividerColor, width: 1),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF1E1E1E), Color(0xFF0D0D0D)],
+        ),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: Colors.white.withOpacity(0.08)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -261,74 +256,452 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Day $currentDay of 30',
-                style: const TextStyle(color: Colors.white, fontSize: 18),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Day $currentDay',
+                    style: TextStyle(
+                      color: colorScheme.primary,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.0,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        '${(progress * 100).round()}%',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          height: 1.0,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Complete',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.5),
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              Text(
-                '${(progress * 100).round()}%',
-                style: TextStyle(
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: colorScheme.primary.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: colorScheme.primary.withOpacity(0.2),
+                  ),
+                ),
+                child: Icon(
+                  Icons.auto_graph_rounded,
                   color: colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  size: 24,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
-          LinearProgressIndicator(
-            value: progress,
-            backgroundColor: theme.dividerColor,
-            valueColor: AlwaysStoppedAnimation(colorScheme.primary),
-            minHeight: 6,
-            borderRadius: BorderRadius.circular(3),
+          const SizedBox(height: 20),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(
+              value: progress,
+              backgroundColor: Colors.white.withOpacity(0.05),
+              valueColor: AlwaysStoppedAnimation(colorScheme.primary),
+              minHeight: 6,
+            ),
           ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              _buildStatItem(
-                Icons.check_circle,
-                '$completedLessons',
-                'Completed',
-              ),
-              const SizedBox(width: 20),
-              _buildStatItem(
-                Icons.access_time,
-                '${_userProgress!.dailyStreak}',
-                'Day Streak',
-              ),
-              const SizedBox(width: 20),
-              _buildStatItem(
-                Icons.schedule,
-                '${_getTotalTimeSpent()}',
-                'Hours',
-              ),
-            ],
+          const SizedBox(height: 20),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _buildGlassStat(
+                  Icons.check_circle_outline_rounded,
+                  '$completedLessons Lessons',
+                  colorScheme.tertiary,
+                ),
+                const SizedBox(width: 12),
+                _buildGlassStat(
+                  Icons.local_fire_department_rounded,
+                  '${_userProgress!.dailyStreak} Day Streak',
+                  const Color(0xFFFF6B00),
+                ),
+                const SizedBox(width: 12),
+                _buildGlassStat(
+                  Icons.timer_outlined,
+                  '${_getTotalTimeSpent()} Hours',
+                  const Color(0xFF4CAF50),
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildStatItem(IconData icon, String value, String label) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return Row(
-      children: [
-        Icon(icon, color: colorScheme.primary, size: 16),
-        const SizedBox(width: 4),
-        Text(
-          value,
-          style: TextStyle(
-            color: colorScheme.onSurface,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
+  Widget _buildGlassStat(IconData icon, String label, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.03),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white.withOpacity(0.05)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: color, size: 16),
+          const SizedBox(width: 8),
+          Text(
+            label,
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.9),
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTimelineList() {
+    if (_lessons.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.search_off,
+              color: Colors.white.withOpacity(0.5),
+              size: 48,
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'No lessons found',
+              style: TextStyle(color: Colors.white70),
+            ),
+            if (_filterType != null || _filterCategory != null)
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _filterType = null;
+                    _filterCategory = null;
+                  });
+                  _applyFilters();
+                },
+                child: const Text('Clear Filters'),
+              ),
+          ],
         ),
-        const SizedBox(width: 4),
-        Text(label, style: theme.textTheme.bodyMedium),
-      ],
+      );
+    }
+
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      itemCount: _lessons.length,
+      itemBuilder: (context, index) {
+        final lesson = _lessons[index];
+        final status = _getLessonStatus(lesson);
+        final isLast = index == _lessons.length - 1;
+
+        return _buildTimelineItem(lesson, status, isLast);
+      },
+    );
+  }
+
+  Widget _buildTimelineItem(Lesson lesson, LessonStatus status, bool isLast) {
+    final progress = _userProgress?.getLessonProgress(lesson.id) ?? 0.0;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    // Status Logic
+    final isLocked =
+        status == LessonStatus.locked || status == LessonStatus.lockedToday;
+    final isActive =
+        status == LessonStatus.current || status == LessonStatus.inProgress;
+    final isCompleted = status == LessonStatus.completed;
+
+    Color statusColor;
+    if (isCompleted)
+      statusColor = const Color(0xFF4CAF50);
+    else if (isActive)
+      statusColor = colorScheme.primary;
+    else if (isLocked)
+      statusColor = Colors.white.withOpacity(0.1);
+    else
+      statusColor = Colors.white.withOpacity(0.3);
+
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Timeline Indicator Column
+          SizedBox(
+            width: 40,
+            child: Column(
+              children: [
+                // Node
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: isActive ? statusColor : const Color(0xFF121212),
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: isActive ? Colors.white : statusColor,
+                      width: 2,
+                    ),
+                    boxShadow:
+                        isActive
+                            ? [
+                              BoxShadow(
+                                color: statusColor.withOpacity(0.5),
+                                blurRadius: 12,
+                                spreadRadius: 2,
+                              ),
+                            ]
+                            : null,
+                  ),
+                  child: Center(
+                    child:
+                        isCompleted
+                            ? const Icon(
+                              Icons.check,
+                              size: 16,
+                              color: Colors.white,
+                            )
+                            : isLocked
+                            ? Icon(
+                              Icons.lock,
+                              size: 14,
+                              color: Colors.white.withOpacity(0.3),
+                            )
+                            : Text(
+                              '${lesson.day}',
+                              style: TextStyle(
+                                color: isActive ? Colors.white : statusColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                  ),
+                ),
+                // Connector Line
+                if (!isLast)
+                  Expanded(
+                    child: Container(
+                      width: 2,
+                      margin: const EdgeInsets.symmetric(vertical: 4),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            statusColor.withOpacity(isActive ? 1.0 : 0.5),
+                            isCompleted
+                                ? statusColor
+                                : statusColor.withOpacity(0.1),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 16),
+
+          // Lesson Card
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 24),
+              child: GestureDetector(
+                onTap: () => _onLessonTap(lesson, status),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors:
+                          isActive
+                              ? [
+                                colorScheme.primary.withOpacity(0.2),
+                                colorScheme.primary.withOpacity(0.05),
+                              ]
+                              : [
+                                const Color(0xFF2D2D2D),
+                                const Color(0xFF1A1A1A),
+                              ],
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color:
+                          isActive
+                              ? colorScheme.primary.withOpacity(0.5)
+                              : Colors.white.withOpacity(0.1),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Header: Chips
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildGlassChip(
+                              _getLessonTypeIcon(lesson.type),
+                              _getLessonTypeName(lesson.type),
+                            ),
+                            if (isActive)
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: colorScheme.primary,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Text(
+                                  'Current',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+
+                      // Title
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          lesson.title,
+                          style: TextStyle(
+                            color:
+                                isLocked
+                                    ? Colors.white.withOpacity(0.5)
+                                    : Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 8),
+
+                      // Description
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          lesson.description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.6),
+                            fontSize: 14,
+                            height: 1.5,
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      // Footer: Metadata & Progress
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.2),
+                          borderRadius: const BorderRadius.vertical(
+                            bottom: Radius.circular(16),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.schedule,
+                              size: 14,
+                              color: Colors.white.withOpacity(0.5),
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              '${lesson.estimatedDuration} min',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.5),
+                                fontSize: 12,
+                              ),
+                            ),
+                            const Spacer(),
+                            if (isActive && progress > 0)
+                              Text(
+                                '${(progress * 100).round()}% Done',
+                                style: TextStyle(
+                                  color: colorScheme.primary,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGlassChip(IconData icon, String label) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.white.withOpacity(0.1)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: Colors.white.withOpacity(0.7), size: 12),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.7),
+              fontSize: 11,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -341,778 +714,51 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
     return (totalMinutes / 60).round();
   }
 
-  Widget _buildTimeline() {
-    if (_lessons.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.search_off,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
-              size: 64,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'No lessons found',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            if (_filterType != null || _filterCategory != null) ...[
-              const SizedBox(height: 8),
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    _filterType = null;
-                    _filterCategory = null;
-                  });
-                  _applyFilters();
-                },
-                child: Text(
-                  'Clear Filters',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              ),
-            ],
-          ],
-        ),
-      );
-    }
-
-    return RefreshIndicator(
-      onRefresh: _loadData,
-      color: Theme.of(context).colorScheme.primary,
-      backgroundColor: Theme.of(context).cardColor,
-      child: ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: _lessons.length,
-        itemBuilder: (context, index) {
-          final lesson = _lessons[index];
-          final status = _getLessonStatus(lesson);
-          final isLast = index == _lessons.length - 1;
-          final delay = index * 0.05;
-
-          return AnimatedBuilder(
-            animation: _controller,
-            builder: (context, child) {
-              final animation = Tween<double>(begin: 0, end: 1).animate(
-                CurvedAnimation(
-                  parent: _controller,
-                  curve: Interval(delay, (delay + 0.3).clamp(0, 1)),
-                ),
-              );
-
-              return FadeTransition(
-                opacity: animation,
-                child: SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(0, 0.2),
-                    end: Offset.zero,
-                  ).animate(animation),
-                  child: _buildTimelineItem(lesson, status, isLast),
-                ),
-              );
-            },
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildTimelineItem(Lesson lesson, LessonStatus status, bool isLast) {
-    final progress = _userProgress?.getLessonProgress(lesson.id) ?? 0.0;
-    final progressDay = _getProgressDay(lesson.day, lesson.difficulty);
-    final unlockTime =
-        _userProgress?.getTimeUntilUnlock(progressDay) ?? 'Unknown';
-
-    return IntrinsicHeight(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Timeline column with indicator and line
-          SizedBox(
-            width: 32,
-            child: Column(
-              children: [
-                _buildIndicator(lesson, status),
-                if (!isLast)
-                  Expanded(
-                    child: Container(
-                      width: 2,
-                      margin: const EdgeInsets.symmetric(vertical: 8),
-                      decoration: BoxDecoration(
-                        color: _getLineColor(status, context),
-                        borderRadius: BorderRadius.circular(1),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 16),
-          // Content
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              child: _buildLessonCard(lesson, status, progress, unlockTime),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Color _getLineColor(LessonStatus status, BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final dividerColor = Theme.of(context).dividerColor;
-
-    switch (status) {
-      case LessonStatus.completed:
-        return const Color(0xFF4CAF50);
-      case LessonStatus.current:
-      case LessonStatus.inProgress:
-        return colorScheme.primary;
-      case LessonStatus.available:
-        return Theme.of(context).textTheme.bodyMedium?.color ?? Colors.grey;
-      case LessonStatus.locked:
-      case LessonStatus.lockedToday:
-        return dividerColor;
-    }
-  }
-
-  Widget _buildIndicator(Lesson lesson, LessonStatus status) {
-    Color color;
-    Widget child;
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final dividerColor = theme.dividerColor;
-    final textMediumColor = theme.textTheme.bodyMedium?.color ?? Colors.grey;
-    final successColor = const Color(0xFF4CAF50);
-
-    switch (status) {
-      case LessonStatus.completed:
-        color = successColor;
-        child = const Icon(Icons.check, color: Colors.white, size: 16);
-        break;
-      case LessonStatus.current:
-      case LessonStatus.inProgress:
-        color = colorScheme.primary;
-        child = Text(
-          '${lesson.day}',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-          ),
-        );
-        break;
-      case LessonStatus.available:
-        color = textMediumColor;
-        child = Text(
-          '${lesson.day}',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-          ),
-        );
-        break;
-      case LessonStatus.locked:
-      case LessonStatus.lockedToday:
-        color = dividerColor;
-        child = Icon(Icons.lock, color: textMediumColor, size: 14);
-        break;
-    }
-
-    return Container(
-      width: 32,
-      height: 32,
-      decoration: BoxDecoration(
-        color: color,
-        shape: BoxShape.circle,
-        border:
-            (status == LessonStatus.current ||
-                    status == LessonStatus.inProgress)
-                ? Border.all(color: Colors.white, width: 2)
-                : null,
-        boxShadow:
-            (status == LessonStatus.current ||
-                    status == LessonStatus.inProgress)
-                ? [
-                  BoxShadow(
-                    color: colorScheme.primary.withOpacity(0.3),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-                : null,
-      ),
-      child: Center(child: child),
-    );
-  }
-
-  Widget _buildLessonCard(
-    Lesson lesson,
-    LessonStatus status,
-    double progress,
-    String unlockTime,
-  ) {
-    final isLocked =
-        status == LessonStatus.locked || status == LessonStatus.lockedToday;
-    final isCompleted = status == LessonStatus.completed;
-    final isInProgress = status == LessonStatus.inProgress;
-    final canAccess = !isLocked;
-
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final dividerColor = theme.dividerColor;
-    final textMediumColor = theme.textTheme.bodyMedium?.color ?? Colors.grey;
-
-    return GestureDetector(
-      onTap: () => _onLessonTap(lesson, status),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 16, left: 8),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: theme.cardColor,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color:
-                (status == LessonStatus.current ||
-                        status == LessonStatus.inProgress)
-                    ? colorScheme.primary
-                    : dividerColor,
-            width:
-                (status == LessonStatus.current ||
-                        status == LessonStatus.inProgress)
-                    ? 2
-                    : 1,
-          ),
-          boxShadow:
-              (status == LessonStatus.current ||
-                      status == LessonStatus.inProgress)
-                  ? [
-                    BoxShadow(
-                      color: colorScheme.primary.withOpacity(0.1),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ]
-                  : null,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: _getTypeColor(lesson.type).withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    _getTypeName(lesson.type),
-                    style: TextStyle(
-                      color: _getTypeColor(lesson.type),
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                const Spacer(),
-                _buildStatusBadge(status),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Day ${lesson.day}: ${lesson.title}',
-              style: TextStyle(
-                color: canAccess ? colorScheme.onSurface : textMediumColor,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              lesson.description,
-              style: TextStyle(
-                color:
-                    canAccess
-                        ? textMediumColor
-                        : textMediumColor.withOpacity(0.6),
-                fontSize: 14,
-              ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 8),
-
-            // Show unlock time for locked lessons
-            if (isLocked) ...[
-              const SizedBox(height: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: dividerColor.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.schedule, color: textMediumColor, size: 12),
-                    const SizedBox(width: 4),
-                    Text(
-                      'Available: $unlockTime',
-                      style: TextStyle(color: textMediumColor, fontSize: 11),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 8),
-            ],
-
-            // Progress bar for in-progress lessons
-            if (isInProgress && progress > 0) ...[
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Text(
-                    'Progress',
-                    style: TextStyle(color: textMediumColor, fontSize: 12),
-                  ),
-                  const Spacer(),
-                  Text(
-                    '${(progress * 100).round()}%',
-                    style: TextStyle(
-                      color: colorScheme.primary,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-              LinearProgressIndicator(
-                value: progress,
-                backgroundColor: dividerColor,
-                valueColor: AlwaysStoppedAnimation(colorScheme.primary),
-                minHeight: 3,
-                borderRadius: BorderRadius.circular(1.5),
-              ),
-              const SizedBox(height: 8),
-            ],
-
-            Row(
-              children: [
-                Icon(Icons.schedule, color: textMediumColor, size: 14),
-                const SizedBox(width: 4),
-                Text(
-                  '${lesson.estimatedDuration} min',
-                  style: TextStyle(color: textMediumColor, fontSize: 12),
-                ),
-                const SizedBox(width: 16),
-                Icon(Icons.category, color: textMediumColor, size: 14),
-                const SizedBox(width: 4),
-                Text(
-                  lesson.categories.isNotEmpty
-                      ? lesson.categories.first
-                      : 'General',
-                  style: TextStyle(color: textMediumColor, fontSize: 12),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStatusBadge(LessonStatus status) {
-    String text;
-    Color color;
-
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final dividerColor = theme.dividerColor;
-    final textMediumColor = theme.textTheme.bodyMedium?.color ?? Colors.grey;
-    final successColor = const Color(0xFF4CAF50);
-
-    switch (status) {
-      case LessonStatus.completed:
-        text = 'Completed';
-        color = successColor;
-        break;
-      case LessonStatus.current:
-        text = 'Current';
-        color = colorScheme.primary;
-        break;
-      case LessonStatus.inProgress:
-        text = 'In Progress';
-        color = colorScheme.primary;
-        break;
-      case LessonStatus.available:
-        text = 'Available';
-        color = textMediumColor;
-        break;
-      case LessonStatus.locked:
-      case LessonStatus.lockedToday:
-        text = 'Locked';
-        color = dividerColor;
-        break;
-    }
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withOpacity(0.3)),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: color,
-          fontSize: 10,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
-
-  Color _getTypeColor(LessonType type) {
+  // Helper methods for icons and names
+  IconData _getLessonTypeIcon(LessonType type) {
     switch (type) {
       case LessonType.theory:
-        return const Color(0xFF2196F3);
+        return Icons.auto_stories;
       case LessonType.practice:
-        return Theme.of(context).colorScheme.primary;
+        return Icons.camera_alt;
       case LessonType.review:
-        return const Color(0xFF9C27B0);
+        return Icons.refresh;
       case LessonType.planning:
-        return const Color(0xFF4CAF50);
+        return Icons.map;
       case LessonType.project:
-        return const Color(0xFFFFEB3B);
+        return Icons.image;
       case LessonType.celebration:
-        return const Color(0xFFE91E63);
+        return Icons.emoji_events;
     }
   }
 
-  String _getTypeName(LessonType type) {
-    switch (type) {
-      case LessonType.theory:
-        return 'Theory';
-      case LessonType.practice:
-        return 'Practice';
-      case LessonType.review:
-        return 'Review';
-      case LessonType.planning:
-        return 'Planning';
-      case LessonType.project:
-        return 'Project';
-      case LessonType.celebration:
-        return 'Celebration';
-    }
+  String _getLessonTypeName(LessonType type) {
+    return type.toString().split('.').last[0].toUpperCase() +
+        type.toString().split('.').last.substring(1);
   }
 
   void _onLessonTap(Lesson lesson, LessonStatus status) {
     if (status == LessonStatus.locked || status == LessonStatus.lockedToday) {
-      HapticFeedback.lightImpact();
-      _showLockedDialog();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('This lesson is currently locked.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
       return;
     }
 
-    HapticFeedback.mediumImpact();
     Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => LessonDetailScreen(lesson: lesson)),
-    ).then((_) {
-      // Reload data when returning from lesson detail
-      _loadData();
-    });
-  }
-
-  void _showLockedDialog() {
-    final userProgress = _userProgress;
-    if (userProgress == null) return;
-
-    final nextProgressDay = userProgress.getMaxAvailableDay() + 1;
-    final unlockTime = userProgress.getTimeUntilUnlock(nextProgressDay);
-
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textMediumColor = theme.textTheme.bodyMedium?.color ?? Colors.grey;
-
-    showDialog(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-            backgroundColor: theme.cardColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            title: Row(
-              children: [
-                Icon(Icons.schedule, color: colorScheme.primary, size: 24),
-                const SizedBox(width: 12),
-                Text(
-                  'Lesson Locked',
-                  style: TextStyle(color: colorScheme.onSurface),
-                ),
-              ],
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'This lesson follows our daily learning schedule.',
-                  style: TextStyle(color: colorScheme.onSurface, fontSize: 16),
-                ),
-                const SizedBox(height: 12),
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: colorScheme.primary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: colorScheme.primary.withOpacity(0.3),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Next lesson available: $unlockTime',
-                        style: TextStyle(
-                          color: colorScheme.primary,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Complete one lesson per day to build a strong learning habit.',
-                        style: TextStyle(color: textMediumColor, fontSize: 12),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'Got it',
-                  style: TextStyle(color: colorScheme.primary),
-                ),
-              ),
-            ],
-          ),
-    );
+    ).then((_) => _loadData());
   }
 
   void _showStatistics() {
-    final stats = LessonManager.getLessonStatistics();
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: theme.cardColor,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder:
-          (context) => Container(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Your Progress Statistics',
-                  style: TextStyle(
-                    color: colorScheme.onSurface,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '${_getDifficultyDisplayName(_userProgress!.selectedDifficulty)} Track',
-                  style: TextStyle(color: colorScheme.primary, fontSize: 14),
-                ),
-                const SizedBox(height: 20),
-                _buildStatRow('Total Lessons', '${stats['totalLessons']}'),
-                _buildStatRow('Completed', '${stats['completedLessons']}'),
-                _buildStatRow('In Progress', '${stats['inProgressLessons']}'),
-                _buildStatRow(
-                  'Completion Rate',
-                  '${(stats['completionRate'] * 100).round()}%',
-                ),
-                _buildStatRow(
-                  'Total Time Spent',
-                  '${stats['totalTimeSpent']} minutes',
-                ),
-                _buildStatRow(
-                  'Current Streak',
-                  '${stats['currentStreak']} days',
-                ),
-              ],
-            ),
-          ),
-    );
-  }
-
-  Widget _buildStatRow(String label, String value) {
-    final textMediumColor =
-        Theme.of(context).textTheme.bodyMedium?.color ?? Colors.grey;
-    final onSurfaceColor = Theme.of(context).colorScheme.onSurface;
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label, style: TextStyle(color: textMediumColor, fontSize: 14)),
-          Text(
-            value,
-            style: TextStyle(
-              color: onSurfaceColor,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
+    // Implement statistics dialog or navigation
   }
 
   void _showFilterOptions() {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: theme.cardColor,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder:
-          (context) => Container(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Filter Lessons',
-                      style: TextStyle(
-                        color: colorScheme.onSurface,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    if (_filterType != null || _filterCategory != null)
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _filterType = null;
-                            _filterCategory = null;
-                          });
-                          _applyFilters();
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          'Clear All',
-                          style: TextStyle(color: colorScheme.primary),
-                        ),
-                      ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'By Status',
-                  style: TextStyle(
-                    color: colorScheme.onSurface,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                _buildFilterOption('All Lessons', Icons.list, () {
-                  setState(() {
-                    _filterType = null;
-                    _filterCategory = null;
-                  });
-                  _applyFilters();
-                  Navigator.pop(context);
-                }),
-                _buildFilterOption('Completed Only', Icons.check_circle, () {
-                  // Filter by completed status would need custom logic
-                  Navigator.pop(context);
-                }),
-                _buildFilterOption('Available Lessons', Icons.play_circle, () {
-                  // Filter by available status would need custom logic
-                  Navigator.pop(context);
-                }),
-                const SizedBox(height: 16),
-                Text(
-                  'By Type',
-                  style: TextStyle(
-                    color: colorScheme.onSurface,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                _buildFilterOption('Theory Lessons', Icons.school, () {
-                  setState(() {
-                    _filterType = LessonType.theory;
-                    _filterCategory = null;
-                  });
-                  _applyFilters();
-                  Navigator.pop(context);
-                }),
-                _buildFilterOption('Practice Sessions', Icons.camera_alt, () {
-                  setState(() {
-                    _filterType = LessonType.practice;
-                    _filterCategory = null;
-                  });
-                  _applyFilters();
-                  Navigator.pop(context);
-                }),
-                _buildFilterOption('Projects', Icons.assignment, () {
-                  setState(() {
-                    _filterType = LessonType.project;
-                    _filterCategory = null;
-                  });
-                  _applyFilters();
-                  Navigator.pop(context);
-                }),
-              ],
-            ),
-          ),
-    );
-  }
-
-  Widget _buildFilterOption(String title, IconData icon, VoidCallback onTap) {
-    final theme = Theme.of(context);
-    final textMediumColor = theme.textTheme.bodyMedium?.color ?? Colors.grey;
-    final onSurfaceColor = theme.colorScheme.onSurface;
-
-    return ListTile(
-      leading: Icon(icon, color: textMediumColor),
-      title: Text(title, style: TextStyle(color: onSurfaceColor)),
-      onTap: onTap,
-    );
+    // Implement filter bottom sheet
   }
 }

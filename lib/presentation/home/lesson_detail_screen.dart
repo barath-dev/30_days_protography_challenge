@@ -493,18 +493,7 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
     HapticFeedback.lightImpact();
 
     if (_isBookmarked) {
-      final savedItem = SavedItem(
-        id: _lesson!.id,
-        title: _lesson!.title,
-        description: _lesson!.description,
-        type: SavedItemType.tip,
-        category:
-            _lesson!.categories.isNotEmpty
-                ? _lesson!.categories.first
-                : 'lesson',
-        duration: _lesson!.estimatedDuration,
-        savedDate: DateTime.now(),
-      );
+      final savedItem = SavedItem.fromLesson(_lesson!, DateTime.now());
       await UserPreferences.addSavedItem(savedItem);
     } else {
       await UserPreferences.removeSavedItem(_lesson!.id);

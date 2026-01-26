@@ -13,7 +13,7 @@ class SavedItemsScreen extends StatefulWidget {
 }
 
 class _SavedItemsScreenState extends State<SavedItemsScreen>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
   String searchQuery = '';
@@ -21,18 +21,6 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
   List<SavedItem> _savedItems = [];
   bool _isLoading = true;
   SortOption _currentSort = SortOption.recentlySaved;
-
-  // Enhanced design constants matching the lesson detail screen
-  static const Color _primaryColor = Color(0xFFFF6B35);
-  static const Color _secondaryColor = Color(0xFFFFB800);
-  static const Color _backgroundColor = Color(0xFF0B0B0B);
-  static const Color _surfaceColor = Color(0xFF1C1C1E);
-  static const Color _cardColor = Color(0xFF2C2C2E);
-  static const Color _textPrimary = Color(0xFFFFFFFF);
-  static const Color _textSecondary = Color(0xFFAAAAAA);
-  static const Color _textTertiary = Color(0xFF666666);
-  static const Color _borderColor = Color(0xFF3C3C3E);
-  static const Color _successColor = Color(0xFF30D158);
 
   final List<String> _tabs = [
     'All',
@@ -77,7 +65,6 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
   List<SavedItem> get filteredItems {
     List<SavedItem> items = List.from(_savedItems);
 
-    // Filter by search query
     if (searchQuery.isNotEmpty) {
       items =
           items
@@ -96,13 +83,11 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
               .toList();
     }
 
-    // Filter by tab
     if (selectedTab > 0) {
       final type = SavedItemType.values[selectedTab - 1];
       items = items.where((item) => item.type == type).toList();
     }
 
-    // Sort items
     _sortItems(items);
     return items;
   }
@@ -126,14 +111,19 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: _backgroundColor,
+      backgroundColor: const Color(0xFF121212),
       body: SafeArea(
         child: Column(
           children: [
             _buildHeader(),
-            _buildSearchBar(),
-            _buildTabBar(),
+            const SizedBox(height: 20),
+            _buildSearchField(),
+            const SizedBox(height: 20),
+            _buildFilterTabs(),
+            const SizedBox(height: 20),
             Expanded(child: _buildContent()),
           ],
         ),
@@ -143,54 +133,59 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
 
   Widget _buildHeader() {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: _surfaceColor,
+                color: Colors.white.withOpacity(0.05),
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: _borderColor),
+                border: Border.all(color: Colors.white.withOpacity(0.1)),
               ),
-              child: Icon(
-                Icons.arrow_back_rounded,
-                color: _textPrimary,
+              child: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
                 size: 20,
               ),
             ),
           ),
-          Expanded(
-            child: Column(
-              children: [
-                Text(
-                  'Saved Items',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: _textPrimary,
-                    fontWeight: FontWeight.w800,
-                  ),
+          Column(
+            children: [
+              const Text(
+                'Saved Items',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
-                Text(
-                  '${_savedItems.length} items saved',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(color: _textSecondary),
+              ),
+              Text(
+                '${filteredItems.length} items',
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.5),
+                  fontSize: 12,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           GestureDetector(
             onTap: _showSortOptions,
             child: Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: _surfaceColor,
+                color: Colors.white.withOpacity(0.05),
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: _borderColor),
+                border: Border.all(color: Colors.white.withOpacity(0.1)),
               ),
-              child: Icon(Icons.sort_rounded, color: _textPrimary, size: 20),
+              child: const Icon(
+                Icons.sort_rounded,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
           ),
         ],
@@ -198,191 +193,113 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
     );
   }
 
-  Widget _buildSearchBar() {
+  Widget _buildSearchField() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
-          color: _surfaceColor,
+          color: Colors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: _borderColor),
+          border: Border.all(color: Colors.white.withOpacity(0.1)),
         ),
-        child: Row(
-          children: [
-            Icon(Icons.search_rounded, color: _textSecondary, size: 20),
-            const SizedBox(width: 12),
-            Expanded(
-              child: TextField(
-                onChanged: (value) {
-                  setState(() {
-                    searchQuery = value;
-                  });
-                },
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge?.copyWith(color: _textPrimary),
-                decoration: InputDecoration(
-                  hintText: 'Search saved items...',
-                  hintStyle: TextStyle(color: _textSecondary),
-                  border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
+        child: TextField(
+          onChanged: (value) => setState(() => searchQuery = value),
+          style: const TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            icon: Icon(Icons.search, color: Colors.white.withOpacity(0.5)),
+            hintText: 'Search saved items...',
+            hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
+            border: InputBorder.none,
+            suffixIcon:
+                searchQuery.isNotEmpty
+                    ? IconButton(
+                      icon: Icon(
+                        Icons.clear,
+                        color: Colors.white.withOpacity(0.5),
+                      ),
+                      onPressed: () => setState(() => searchQuery = ''),
+                    )
+                    : null,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFilterTabs() {
+    return SizedBox(
+      height: 40,
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        scrollDirection: Axis.horizontal,
+        itemCount: _tabs.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 12),
+        itemBuilder: (context, index) {
+          final isSelected = selectedTab == index;
+          return GestureDetector(
+            onTap: () {
+              setState(() => selectedTab = index);
+              HapticFeedback.lightImpact();
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              decoration: BoxDecoration(
+                gradient:
+                    isSelected
+                        ? LinearGradient(
+                          colors: [
+                            Theme.of(context).colorScheme.primary,
+                            Theme.of(
+                              context,
+                            ).colorScheme.primary.withOpacity(0.8),
+                          ],
+                        )
+                        : null,
+                color: isSelected ? null : Colors.white.withOpacity(0.05),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color:
+                      isSelected
+                          ? Colors.transparent
+                          : Colors.white.withOpacity(0.1),
+                ),
+                boxShadow:
+                    isSelected
+                        ? [
+                          BoxShadow(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primary.withOpacity(0.3),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ]
+                        : null,
+              ),
+              child: Text(
+                _tabs[index],
+                style: TextStyle(
+                  color:
+                      isSelected ? Colors.white : Colors.white.withOpacity(0.6),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
                 ),
               ),
             ),
-            if (searchQuery.isNotEmpty)
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    searchQuery = '';
-                  });
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: _textSecondary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(
-                    Icons.close_rounded,
-                    color: _textSecondary,
-                    size: 16,
-                  ),
-                ),
-              ),
-          ],
-        ),
+          );
+        },
       ),
     );
-  }
-
-  Widget _buildTabBar() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children:
-              _tabs.asMap().entries.map((entry) {
-                final index = entry.key;
-                final tab = entry.value;
-                final isSelected = selectedTab == index;
-                final count = _getTabCount(index);
-
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedTab = index;
-                    });
-                    HapticFeedback.lightImpact();
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    margin: const EdgeInsets.only(right: 12),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 18,
-                      vertical: 12,
-                    ),
-                    decoration: BoxDecoration(
-                      gradient:
-                          isSelected
-                              ? LinearGradient(
-                                colors: [_primaryColor, _secondaryColor],
-                              )
-                              : null,
-                      color: isSelected ? null : _surfaceColor,
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-                        color: isSelected ? Colors.transparent : _borderColor,
-                      ),
-                      boxShadow:
-                          isSelected
-                              ? [
-                                BoxShadow(
-                                  color: _primaryColor.withOpacity(0.3),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ]
-                              : null,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          tab,
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodyMedium?.copyWith(
-                            color: isSelected ? Colors.white : _textSecondary,
-                            fontWeight:
-                                isSelected ? FontWeight.w600 : FontWeight.w500,
-                          ),
-                        ),
-                        if (count > 0) ...[
-                          const SizedBox(width: 8),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 2,
-                            ),
-                            decoration: BoxDecoration(
-                              color:
-                                  isSelected
-                                      ? Colors.white.withOpacity(0.2)
-                                      : _primaryColor.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Text(
-                              count.toString(),
-                              style: TextStyle(
-                                color:
-                                    isSelected ? Colors.white : _primaryColor,
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                );
-              }).toList(),
-        ),
-      ),
-    );
-  }
-
-  int _getTabCount(int tabIndex) {
-    if (tabIndex == 0) return _savedItems.length;
-    final type = SavedItemType.values[tabIndex - 1];
-    return _savedItems.where((item) => item.type == type).length;
   }
 
   Widget _buildContent() {
     if (_isLoading) {
       return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: _surfaceColor,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(_primaryColor),
-                strokeWidth: 3,
-              ),
-            ),
-            const SizedBox(height: 24),
-            Text(
-              'Loading saved items...',
-              style: TextStyle(color: _textSecondary, fontSize: 16),
-            ),
-          ],
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation(
+            Theme.of(context).colorScheme.primary,
+          ),
         ),
       );
     }
@@ -393,337 +310,227 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
       return _buildEmptyState();
     }
 
-    return RefreshIndicator(
-      onRefresh: _loadSavedItems,
-      color: _primaryColor,
-      backgroundColor: _surfaceColor,
-      child: ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          final item = items[index];
-          final delay = index * 0.1;
+    return ListView.separated(
+      padding: const EdgeInsets.all(24),
+      itemCount: items.length,
+      separatorBuilder: (_, __) => const SizedBox(height: 16),
+      itemBuilder: (context, index) {
+        final item = items[index];
+        final delay = index * 0.05; // Stagger duration
 
-          return AnimatedBuilder(
-            animation: _animationController,
-            builder: (context, child) {
-              final animation = Tween<double>(begin: 0, end: 1).animate(
-                CurvedAnimation(
-                  parent: _animationController,
-                  curve: Interval(delay, (delay + 0.3).clamp(0, 1)),
+        return AnimatedBuilder(
+          animation: _animationController,
+          builder: (context, child) {
+            final animation = Tween<double>(begin: 0, end: 1).animate(
+              CurvedAnimation(
+                parent: _animationController,
+                curve: Interval(
+                  delay.clamp(0.0, 0.8),
+                  (delay + 0.4).clamp(0.0, 1.0),
+                  curve: Curves.easeOutCubic,
                 ),
-              );
+              ),
+            );
 
-              return FadeTransition(
-                opacity: animation,
-                child: SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(0, 0.2),
-                    end: Offset.zero,
-                  ).animate(animation),
-                  child: _buildSavedItemCard(item),
-                ),
-              );
-            },
-          );
-        },
-      ),
+            return FadeTransition(
+              opacity: animation,
+              child: SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(0, 0.2),
+                  end: Offset.zero,
+                ).animate(animation),
+                child: _buildSavedItemCard(item),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
   Widget _buildSavedItemCard(SavedItem item) {
-    return GestureDetector(
-      onTap: () => _openItem(item),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: _surfaceColor,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: _borderColor),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        _getTypeColor(item.type),
-                        _getTypeColor(item.type).withOpacity(0.7),
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Icon(
-                    _getTypeIcon(item.type),
-                    color: Colors.white,
-                    size: 24,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: _getTypeColor(item.type).withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: _getTypeColor(item.type).withOpacity(0.3),
-                          ),
-                        ),
-                        child: Text(
-                          _getTypeName(item.type).toUpperCase(),
-                          style: Theme.of(
-                            context,
-                          ).textTheme.labelSmall?.copyWith(
-                            color: _getTypeColor(item.type),
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        item.title,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          color: _textPrimary,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => _removeSavedItem(item),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: _primaryColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Icon(
-                      Icons.bookmark_rounded,
-                      color: _primaryColor,
-                      size: 20,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Text(
-              item.description,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: _textSecondary,
-                height: 1.4,
-              ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 16),
+    // final colorScheme = Theme.of(context).colorScheme; // Unused
 
-            // Progress bar for lessons
-            if (item.progress != null) ...[
+    return Dismissible(
+      key: Key(item.id),
+      direction: DismissDirection.endToStart,
+      background: Container(
+        alignment: Alignment.centerRight,
+        padding: const EdgeInsets.only(right: 24),
+        decoration: BoxDecoration(
+          color: const Color(0xFFCF6679).withOpacity(0.15),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: const Color(0xFFCF6679).withOpacity(0.3)),
+        ),
+        child: const Icon(
+          Icons.delete_outline_rounded,
+          color: Color(0xFFCF6679),
+          size: 28,
+        ),
+      ),
+      onDismissed: (_) => _removeSavedItem(item),
+      child: GestureDetector(
+        onTap: () => _openItem(item),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF2D2D2D), Color(0xFF1A1A1A)],
+            ),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.white.withOpacity(0.05)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                width: 48,
+                height: 48,
                 decoration: BoxDecoration(
-                  color: _primaryColor.withOpacity(0.05),
+                  color: _getTypeColor(item.type).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: _primaryColor.withOpacity(0.1)),
+                  border: Border.all(
+                    color: _getTypeColor(item.type).withOpacity(0.3),
+                  ),
                 ),
+                child: Icon(
+                  _getTypeIcon(item.type),
+                  color: _getTypeColor(item.type),
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Icon(
-                          Icons.trending_up_rounded,
-                          color: _primaryColor,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          'Progress',
-                          style: TextStyle(
-                            color: _primaryColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.05),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            _getTypeName(item.type).toUpperCase(),
+                            style: TextStyle(
+                              color: _getTypeColor(item.type),
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.5,
+                            ),
                           ),
                         ),
                         const Spacer(),
-                        Text(
-                          '${(item.progress! * 100).round()}%',
-                          style: TextStyle(
-                            color: _primaryColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700,
+                        if (item.category.isNotEmpty)
+                          Text(
+                            item.category,
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.5),
+                              fontSize: 10,
+                            ),
                           ),
-                        ),
                       ],
                     ),
                     const SizedBox(height: 8),
-                    LinearProgressIndicator(
-                      value: item.progress,
-                      backgroundColor: _borderColor,
-                      valueColor: AlwaysStoppedAnimation(_primaryColor),
-                      minHeight: 6,
-                      borderRadius: BorderRadius.circular(3),
+                    Text(
+                      item.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Saved ${_formatTime(item.savedDate)}',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.4),
+                        fontSize: 12,
+                      ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
             ],
-
-            // Footer info
-            Row(
-              children: [
-                Icon(Icons.folder_rounded, color: _textTertiary, size: 16),
-                const SizedBox(width: 6),
-                Text(
-                  item.category,
-                  style: TextStyle(
-                    color: _textTertiary,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                if (item.duration != null) ...[
-                  const SizedBox(width: 16),
-                  Icon(Icons.schedule_rounded, color: _textTertiary, size: 16),
-                  const SizedBox(width: 6),
-                  Text(
-                    '${item.duration} min',
-                    style: TextStyle(
-                      color: _textTertiary,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-                const Spacer(),
-                Text(
-                  _formatDate(item.savedDate),
-                  style: TextStyle(
-                    color: _textTertiary,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildEmptyState() {
+    final isSearch = searchQuery.isNotEmpty;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 100,
-            height: 100,
+            padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  _primaryColor.withOpacity(0.1),
-                  _secondaryColor.withOpacity(0.05),
-                ],
-              ),
+              color: (isSearch
+                      ? Colors.red
+                      : Theme.of(context).colorScheme.primary)
+                  .withOpacity(0.1),
               shape: BoxShape.circle,
-              border: Border.all(color: _primaryColor.withOpacity(0.2)),
             ),
             child: Icon(
-              Icons.bookmark_outline_rounded,
-              color: _primaryColor,
+              isSearch
+                  ? Icons.search_off_rounded
+                  : Icons.bookmark_border_rounded,
               size: 48,
+              color:
+                  isSearch
+                      ? Colors.red.withOpacity(0.8)
+                      : Theme.of(context).colorScheme.primary,
             ),
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
           Text(
-            searchQuery.isNotEmpty ? 'No Results Found' : 'No Saved Items',
+            isSearch ? 'No Results Found' : 'No Saved Items',
             style: TextStyle(
-              color: _textPrimary,
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
+              color: Colors.white.withOpacity(0.9),
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           Text(
-            searchQuery.isNotEmpty
-                ? 'Try adjusting your search or filters'
-                : 'Start bookmarking lessons and tips\nto see them here',
-            style: Theme.of(
-              context,
-            ).textTheme.bodyLarge?.copyWith(color: _textSecondary, height: 1.5),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 32),
-          if (searchQuery.isNotEmpty)
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  searchQuery = '';
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: _primaryColor,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 16,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.clear_rounded, size: 20),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Clear Search',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                ],
-              ),
+            isSearch
+                ? 'Try searching for something else'
+                : 'Items you bookmark will appear here',
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.5),
+              fontSize: 14,
             ),
+          ),
         ],
       ),
     );
   }
 
+  // Helpers
   Color _getTypeColor(SavedItemType type) {
     switch (type) {
       case SavedItemType.lesson:
-        return _primaryColor;
+        return const Color(0xFFFF6B35);
       case SavedItemType.tip:
-        return _successColor;
+        return const Color(0xFF30D158);
       case SavedItemType.article:
         return const Color(0xFF007AFF);
       case SavedItemType.reference:
@@ -734,319 +541,229 @@ class _SavedItemsScreenState extends State<SavedItemsScreen>
   IconData _getTypeIcon(SavedItemType type) {
     switch (type) {
       case SavedItemType.lesson:
-        return Icons.play_circle_filled_rounded;
+        return Icons.play_lesson_rounded;
       case SavedItemType.tip:
         return Icons.lightbulb_rounded;
       case SavedItemType.article:
         return Icons.article_rounded;
       case SavedItemType.reference:
-        return Icons.description_rounded;
+        return Icons.book_rounded;
     }
   }
 
-  String _getTypeName(SavedItemType type) {
-    switch (type) {
-      case SavedItemType.lesson:
-        return 'Lesson';
-      case SavedItemType.tip:
-        return 'Tip';
-      case SavedItemType.article:
-        return 'Article';
-      case SavedItemType.reference:
-        return 'Reference';
-    }
-  }
+  String _getTypeName(SavedItemType type) => type.toString().split('.').last;
 
-  String _formatDate(DateTime date) {
-    final now = DateTime.now();
-    final difference = now.difference(date);
-
-    if (difference.inDays > 7) {
-      return '${date.day}/${date.month}/${date.year}';
-    } else if (difference.inDays > 0) {
-      return '${difference.inDays}d ago';
-    } else if (difference.inHours > 0) {
-      return '${difference.inHours}h ago';
-    } else {
-      return '${difference.inMinutes}m ago';
-    }
-  }
-
-  Future<void> _openItem(SavedItem item) async {
-    if (item.type == SavedItemType.lesson) {
-      final lesson = LessonManager.getLessonById(item.id);
-      if (lesson != null && mounted) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => LessonDetailScreen(lesson: lesson)),
-        );
-      }
-    } else {
-      _showItemDetail(item);
-    }
-  }
-
-  void _showItemDetail(SavedItem item) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: _surfaceColor,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder:
-          (context) => DraggableScrollableSheet(
-            initialChildSize: 0.7,
-            maxChildSize: 0.9,
-            minChildSize: 0.5,
-            builder:
-                (context, scrollController) => Container(
-                  padding: const EdgeInsets.all(24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Container(
-                          width: 40,
-                          height: 4,
-                          decoration: BoxDecoration(
-                            color: _borderColor,
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  _getTypeColor(item.type),
-                                  _getTypeColor(item.type).withOpacity(0.7),
-                                ],
-                              ),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Icon(
-                              _getTypeIcon(item.type),
-                              color: Colors.white,
-                              size: 24,
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item.title,
-                                  style: TextStyle(
-                                    color: _textPrimary,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                Text(
-                                  item.category,
-                                  style: TextStyle(
-                                    color: _textSecondary,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 24),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          controller: scrollController,
-                          child: Text(
-                            item.description,
-                            style: TextStyle(
-                              color: _textSecondary,
-                              fontSize: 16,
-                              height: 1.6,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-          ),
-    );
-  }
-
-  Future<void> _removeSavedItem(SavedItem item) async {
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-            backgroundColor: _surfaceColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            title: Text(
-              'Remove Bookmark',
-              style: TextStyle(
-                color: _textPrimary,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            content: Text(
-              'Remove "${item.title}" from your saved items?',
-              style: TextStyle(color: _textSecondary),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: Text('Cancel', style: TextStyle(color: _textSecondary)),
-              ),
-              ElevatedButton(
-                onPressed: () => Navigator.pop(context, true),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: _primaryColor,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text('Remove'),
-              ),
-            ],
-          ),
-    );
-
-    if (confirmed == true) {
-      await UserPreferences.removeSavedItem(item.id);
-      setState(() {
-        _savedItems.removeWhere((i) => i.id == item.id);
-      });
-      HapticFeedback.lightImpact();
-
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('${item.title} removed from saved items'),
-            backgroundColor: _surfaceColor,
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-        );
-      }
-    }
+  String _formatTime(DateTime date) {
+    final diff = DateTime.now().difference(date);
+    if (diff.inDays > 0) return '${diff.inDays}d ago';
+    if (diff.inHours > 0) return '${diff.inHours}h ago';
+    return '${diff.inMinutes}m ago';
   }
 
   void _showSortOptions() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: _surfaceColor,
+      backgroundColor: const Color(0xFF1E1E1E),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder:
-          (context) => Container(
-            padding: const EdgeInsets.all(24),
+          (context) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Sort by',
-                  style: TextStyle(
-                    color: _textPrimary,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                ...SortOption.values.map((option) => _buildSortOption(option)),
-                const SizedBox(height: 10),
-              ],
+              children:
+                  SortOption.values.map((option) {
+                    final isSelected = _currentSort == option;
+                    return ListTile(
+                      title: Text(
+                        option.toString().split('.').last,
+                        style: TextStyle(
+                          color:
+                              isSelected
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Colors.white,
+                        ),
+                      ),
+                      trailing:
+                          isSelected
+                              ? Icon(
+                                Icons.check,
+                                color: Theme.of(context).colorScheme.primary,
+                              )
+                              : null,
+                      onTap: () {
+                        setState(() => _currentSort = option);
+                        Navigator.pop(context);
+                      },
+                    );
+                  }).toList(),
             ),
           ),
     );
   }
 
-  Widget _buildSortOption(SortOption option) {
-    final isSelected = _currentSort == option;
+  Future<void> _openItem(SavedItem item) async {
+    print(
+      '🔍 Opening item: ${item.title} (ID: ${item.id}, Type: ${item.type})',
+    );
 
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _currentSort = option;
-        });
-        Navigator.pop(context);
-        HapticFeedback.lightImpact();
-      },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color:
-              isSelected ? _primaryColor.withOpacity(0.1) : Colors.transparent,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color:
-                isSelected
-                    ? _primaryColor.withOpacity(0.3)
-                    : Colors.transparent,
-          ),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              _getSortIcon(option),
-              color: isSelected ? _primaryColor : _textSecondary,
-              size: 22,
-            ),
-            const SizedBox(width: 16),
-            Text(
-              _getSortName(option),
-              style: TextStyle(
-                color: isSelected ? _primaryColor : _textPrimary,
-                fontSize: 16,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+    if (item.type == SavedItemType.lesson) {
+      final lesson = LessonManager.getLessonById(item.id);
+      print('📖 Lesson found: ${lesson?.title ?? "NULL"}');
+
+      if (lesson != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => LessonDetailScreen(lesson: lesson)),
+        );
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Content not found for "${item.title}"'),
+              backgroundColor: Colors.red.withOpacity(0.8),
+              behavior: SnackBarBehavior.floating,
+              action: SnackBarAction(
+                label: 'REMOVE',
+                textColor: Colors.white,
+                onPressed: () => _removeSavedItem(item),
               ),
             ),
-            const Spacer(),
-            if (isSelected)
-              Icon(Icons.check_rounded, color: _primaryColor, size: 20),
-          ],
+          );
+        }
+      }
+    } else {
+      // Show detail bottom sheet for other types
+      showModalBottomSheet(
+        context: context,
+        backgroundColor: const Color(0xFF1E1E1E),
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
-      ),
-    );
-  }
-
-  IconData _getSortIcon(SortOption option) {
-    switch (option) {
-      case SortOption.recentlySaved:
-        return Icons.access_time_rounded;
-      case SortOption.alphabetical:
-        return Icons.sort_by_alpha_rounded;
-      case SortOption.type:
-        return Icons.category_rounded;
-      case SortOption.category:
-        return Icons.folder_rounded;
+        builder:
+            (context) => DraggableScrollableSheet(
+              initialChildSize: 0.7,
+              minChildSize: 0.5,
+              maxChildSize: 0.9,
+              builder: (_, controller) => _buildDetailSheet(item, controller),
+            ),
+      );
     }
   }
 
-  String _getSortName(SortOption option) {
-    switch (option) {
-      case SortOption.recentlySaved:
-        return 'Recently Saved';
-      case SortOption.alphabetical:
-        return 'Alphabetical';
-      case SortOption.type:
-        return 'Type';
-      case SortOption.category:
-        return 'Category';
+  Widget _buildDetailSheet(SavedItem item, ScrollController controller) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      child: ListView(
+        controller: controller,
+        children: [
+          Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: _getTypeColor(item.type).withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(
+                    color: _getTypeColor(item.type).withOpacity(0.3),
+                  ),
+                ),
+                child: Text(
+                  _getTypeName(item.type).toUpperCase(),
+                  style: TextStyle(
+                    color: _getTypeColor(item.type),
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const Spacer(),
+              IconButton(
+                icon: const Icon(Icons.bookmark, color: Colors.white),
+                onPressed: () {
+                  _removeSavedItem(item);
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Text(
+            item.title,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            item.description,
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.7),
+              fontSize: 16,
+              height: 1.5,
+            ),
+          ),
+          // Add more content here based on item type if needed
+        ],
+      ),
+    );
+  }
+
+  Future<void> _removeSavedItem(SavedItem item) async {
+    // Optimistic update
+    final index = _savedItems.indexOf(item);
+    setState(() {
+      _savedItems.remove(item);
+    });
+
+    try {
+      await UserPreferences.removeSavedItem(item.id);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('${item.title} removed from saved items'),
+            backgroundColor: const Color(0xFF323232),
+            behavior: SnackBarBehavior.floating,
+            action: SnackBarAction(
+              label: 'UNDO',
+              textColor: Theme.of(context).colorScheme.primary,
+              onPressed: () async {
+                // Restore item
+                setState(() {
+                  _savedItems.insert(index, item);
+                });
+                await UserPreferences.addSavedItem(item);
+              },
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      // Revert if failed
+      if (mounted) {
+        setState(() {
+          _savedItems.insert(index, item);
+        });
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Failed to remove item')));
+      }
     }
   }
 }
