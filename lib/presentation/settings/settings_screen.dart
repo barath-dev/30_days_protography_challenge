@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:ui' as ui;
 import 'package:photography_guide/models/lesson.dart';
 import '../../services/user_preferences.dart';
+import '../../utils/constants.dart';
 import '../onboarding/difficulty_selection_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -11,14 +13,31 @@ class SettingsScreen extends StatefulWidget {
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends State<SettingsScreen>
+    with SingleTickerProviderStateMixin {
   late AppSettings _settings;
   bool _isLoading = true;
+  late AnimationController _animationController;
+  late Animation<double> _fadeAnimation;
 
   @override
   void initState() {
     super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+    _fadeAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOut,
+    );
     _loadSettings();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadSettings() async {
@@ -29,6 +48,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _settings = AppSettings.defaultSettings();
     }
     setState(() => _isLoading = false);
+    _animationController.forward();
   }
 
   Future<void> _saveSettings(AppSettings newSettings) async {
@@ -38,157 +58,215 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final textTheme = theme.textTheme;
-
     return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: theme.scaffoldBackgroundColor,
+        backgroundColor: Colors.transparent,
         elevation: 0,
+        flexibleSpace: ClipRRect(
+          child: BackdropFilter(
+            filter: ui.ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(color: Colors.black.withOpacity(0.2)),
+          ),
+        ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
+          icon: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(Icons.arrow_back, color: Colors.white, size: 20),
+          ),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
+        title: const Text(
           'Settings',
-          style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 0.5,
+          ),
         ),
+        centerTitle: true,
       ),
-      body:
-          _isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : ListView(
-                padding: const EdgeInsets.all(20),
-                children: [
-                  _buildSection('Learning', [
-                    _buildDifficultyTile(),
-                    _buildResetProgressTile(),
-                  ]),
-                  const SizedBox(height: 24),
-                  _buildSection('Notifications', [
-                    _buildSwitchTile(
-                      'Enable Notifications',
-                      'Receive daily reminders and updates',
-                      Icons.notifications_outlined,
-                      _settings.notificationsEnabled,
-                      (value) {
-                        _saveSettings(
-                          _settings.copyWith(notificationsEnabled: value),
-                        );
-                      },
-                    ),
-                    if (_settings.notificationsEnabled) ...[
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFF1E1E1E), Color(0xFF121212)],
+            stops: [0.0, 1.0],
+          ),
+        ),
+        child:
+            _isLoading
+                ? const Center(
+                  child: CircularProgressIndicator(
+                    color: AppConstants.primaryColor,
+                  ),
+                )
+                : ListView(
+                  padding: const EdgeInsets.fromLTRB(20, 100, 20, 40),
+                  children: [
+                    _buildAnimatedSection(0, 'Learning', [
+                      _buildDifficultyTile(),
+                      const SizedBox(height: 12),
+                      _buildResetProgressTile(),
+                    ]),
+                    const SizedBox(height: 32),
+                    _buildAnimatedSection(1, 'Notifications', [
                       _buildSwitchTile(
-                        'Daily Reminders',
-                        'Get reminded to complete daily lessons',
-                        Icons.alarm,
-                        _settings.dailyReminders,
+                        'Enable Notifications',
+                        'Receive daily reminders and updates',
+                        Icons.notifications_outlined,
+                        _settings.notificationsEnabled,
                         (value) {
                           _saveSettings(
-                            _settings.copyWith(dailyReminders: value),
+                            _settings.copyWith(notificationsEnabled: value),
                           );
                         },
                       ),
-                      if (_settings.dailyReminders) _buildReminderTimeTile(),
-                    ],
-                  ]),
-                  const SizedBox(height: 24),
-                  _buildSection('Appearance', [
-                    _buildSwitchTile(
-                      'Dark Mode',
-                      'Use dark theme throughout the app',
-                      Icons.dark_mode_outlined,
-                      _settings.darkModeEnabled,
-                      (value) {
-                        _saveSettings(
-                          _settings.copyWith(darkModeEnabled: value),
-                        );
-                      },
-                    ),
-                    _buildTextScaleTile(),
-                  ]),
-                  const SizedBox(height: 24),
-                  _buildSection('Content', [
-                    _buildSwitchTile(
-                      'Auto-play Videos',
-                      'Automatically play videos in lessons',
-                      Icons.play_circle_outline,
-                      _settings.autoPlayVideos,
-                      (value) {
-                        _saveSettings(
-                          _settings.copyWith(autoPlayVideos: value),
-                        );
-                      },
-                    ),
-                  ]),
-                  const SizedBox(height: 24),
-                  _buildSection('Privacy', [
-                    _buildSwitchTile(
-                      'Analytics',
-                      'Help improve the app by sharing usage data',
-                      Icons.analytics_outlined,
-                      _settings.analyticsEnabled,
-                      (value) {
-                        _saveSettings(
-                          _settings.copyWith(analyticsEnabled: value),
-                        );
-                      },
-                    ),
-                  ]),
-                  const SizedBox(height: 24),
-                  _buildSection('About', [
-                    _buildInfoTile('Version', '1.0.0', Icons.info_outline),
-                    _buildActionTile(
-                      'Licenses',
-                      'View open source licenses',
-                      Icons.description_outlined,
-                      () => showLicensePage(context: context),
-                    ),
-                  ]),
-                ],
-              ),
+                      if (_settings.notificationsEnabled) ...[
+                        const SizedBox(height: 12),
+                        _buildSwitchTile(
+                          'Daily Reminders',
+                          'Get reminded to complete daily lessons',
+                          Icons.alarm,
+                          _settings.dailyReminders,
+                          (value) {
+                            _saveSettings(
+                              _settings.copyWith(dailyReminders: value),
+                            );
+                          },
+                        ),
+                        if (_settings.dailyReminders) ...[
+                          const SizedBox(height: 12),
+                          _buildReminderTimeTile(),
+                        ],
+                      ],
+                    ]),
+                    const SizedBox(height: 32),
+                    _buildAnimatedSection(2, 'Appearance', [
+                      _buildSwitchTile(
+                        'Dark Mode',
+                        'Use dark theme throughout the app',
+                        Icons.dark_mode_outlined,
+                        _settings.darkModeEnabled,
+                        (value) {
+                          _saveSettings(
+                            _settings.copyWith(darkModeEnabled: value),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      _buildTextScaleTile(),
+                    ]),
+                    const SizedBox(height: 32),
+                    _buildAnimatedSection(3, 'Content', [
+                      _buildSwitchTile(
+                        'Auto-play Videos',
+                        'Automatically play videos in lessons',
+                        Icons.play_circle_outline,
+                        _settings.autoPlayVideos,
+                        (value) {
+                          _saveSettings(
+                            _settings.copyWith(autoPlayVideos: value),
+                          );
+                        },
+                      ),
+                    ]),
+                    const SizedBox(height: 32),
+                    _buildAnimatedSection(4, 'Privacy & About', [
+                      _buildSwitchTile(
+                        'Analytics',
+                        'Help improve the app by sharing usage data',
+                        Icons.analytics_outlined,
+                        _settings.analyticsEnabled,
+                        (value) {
+                          _saveSettings(
+                            _settings.copyWith(analyticsEnabled: value),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      _buildInfoTile('Version', '1.0.0', Icons.info_outline),
+                      const SizedBox(height: 12),
+                      _buildActionTile(
+                        'Licenses',
+                        'View open source licenses',
+                        Icons.description_outlined,
+                        () => showLicensePage(context: context),
+                      ),
+                    ]),
+                  ],
+                ),
+      ),
     );
   }
 
-  Widget _buildSection(String title, List<Widget> children) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 4, bottom: 12),
-          child: Text(
-            title.toUpperCase(),
-            style: theme.textTheme.labelSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-              letterSpacing: 1.2,
+  Widget _buildAnimatedSection(int index, String title, List<Widget> children) {
+    return FadeTransition(
+      opacity: _fadeAnimation,
+      child: SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, 0.2),
+          end: Offset.zero,
+        ).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Interval(
+              index * 0.1,
+              0.6 + (index * 0.1),
+              curve: Curves.easeOut,
             ),
           ),
         ),
-        Container(
-          decoration: BoxDecoration(
-            color: theme.cardColor,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: theme.dividerColor),
-          ),
-          child: Column(
-            children: List.generate(
-              children.length,
-              (index) => Column(
-                children: [
-                  children[index],
-                  if (index < children.length - 1)
-                    Divider(color: theme.dividerColor, height: 1),
-                ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 4, bottom: 12),
+              child: Text(
+                title.toUpperCase(),
+                style: TextStyle(
+                  color: AppConstants.primaryColor,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                ),
               ),
             ),
+            ...children,
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGlassContainer({
+    required Widget child,
+    VoidCallback? onTap,
+    Color? borderColor,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.05),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: borderColor ?? Colors.white.withOpacity(0.08),
           ),
         ),
-      ],
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: BackdropFilter(
+            filter: ui.ImageFilter.blur(sigmaX: 0, sigmaY: 0),
+            child: Padding(padding: const EdgeInsets.all(16), child: child),
+          ),
+        ),
+      ),
     );
   }
 
@@ -199,31 +277,53 @@ class _SettingsScreenState extends State<SettingsScreen> {
     bool value,
     Function(bool) onChanged,
   ) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      leading: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: colorScheme.primary.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Icon(icon, color: colorScheme.primary, size: 20),
-      ),
-      title: Text(
-        title,
-        style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
-      ),
-      subtitle: Text(subtitle, style: theme.textTheme.bodyMedium),
-      trailing: Switch(
-        value: value,
-        onChanged: (val) {
-          HapticFeedback.lightImpact();
-          onChanged(val);
-        },
-        activeColor: colorScheme.primary,
+    return _buildGlassContainer(
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: AppConstants.primaryColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: AppConstants.primaryColor, size: 22),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.5),
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Switch(
+            value: value,
+            onChanged: (val) {
+              HapticFeedback.lightImpact();
+              onChanged(val);
+            },
+            activeColor: AppConstants.primaryColor,
+            activeTrackColor: AppConstants.primaryColor.withOpacity(0.3),
+            inactiveThumbColor: Colors.white.withOpacity(0.6),
+            inactiveTrackColor: Colors.white.withOpacity(0.1),
+          ),
+        ],
       ),
     );
   }
@@ -234,29 +334,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
         currentDifficulty != null
             ? _getDifficultyName(currentDifficulty)
             : 'Not Set';
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      leading: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: colorScheme.primary.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Icon(
-          Icons.school_outlined,
-          color: colorScheme.primary,
-          size: 20,
-        ),
-      ),
-      title: Text(
-        'Difficulty Level',
-        style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
-      ),
-      subtitle: Text(difficultyName, style: theme.textTheme.bodyMedium),
-      trailing: Icon(Icons.chevron_right, color: colorScheme.onSurface),
+    // Choose color based on difficulty
+    Color diffColor = AppConstants.primaryColor;
+    if (currentDifficulty == DifficultyLevel.beginner)
+      diffColor = AppConstants.beginnerColor;
+    if (currentDifficulty == DifficultyLevel.intermediate)
+      diffColor = AppConstants.intermediateColor;
+    if (currentDifficulty == DifficultyLevel.advanced)
+      diffColor = AppConstants.advancedColor;
+
+    return _buildGlassContainer(
       onTap: () async {
         HapticFeedback.lightImpact();
         final result = await Navigator.push(
@@ -264,10 +352,60 @@ class _SettingsScreenState extends State<SettingsScreen> {
           MaterialPageRoute(builder: (_) => const DifficultySelectionScreen()),
         );
         if (result == true && mounted) {
-          // Refresh settings if difficulty changed
           setState(() {});
         }
       },
+      borderColor: diffColor.withOpacity(0.3),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: diffColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: diffColor.withOpacity(0.3)),
+            ),
+            child: Icon(Icons.school_outlined, color: diffColor, size: 22),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Difficulty Level',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  difficultyName,
+                  style: TextStyle(
+                    color: diffColor,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.05),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.chevron_right,
+              color: Colors.white.withOpacity(0.5),
+              size: 16,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -275,74 +413,160 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final time = _settings.reminderTime;
     final timeString =
         '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      leading: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: colorScheme.primary.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Icon(Icons.schedule, color: colorScheme.primary, size: 20),
-      ),
-      title: Text(
-        'Reminder Time',
-        style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
-      ),
-      subtitle: Text(timeString, style: theme.textTheme.bodyMedium),
-      trailing: Icon(Icons.chevron_right, color: colorScheme.onSurface),
+    return _buildGlassContainer(
       onTap: () async {
         HapticFeedback.lightImpact();
         final newTime = await showTimePicker(
           context: context,
           initialTime: _settings.reminderTime,
+          builder: (context, child) {
+            return Theme(
+              data: ThemeData.dark().copyWith(
+                colorScheme: const ColorScheme.dark(
+                  primary: AppConstants.primaryColor,
+                  onPrimary: Colors.white,
+                  surface: Color(0xFF1E1E1E),
+                  onSurface: Colors.white,
+                ),
+              ),
+              child: child!,
+            );
+          },
         );
         if (newTime != null) {
           _saveSettings(_settings.copyWith(reminderTime: newTime));
         }
       },
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: AppConstants.primaryColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Icon(
+              Icons.schedule,
+              color: AppConstants.primaryColor,
+              size: 22,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Reminder Time',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  timeString,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.5),
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.05),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.white.withOpacity(0.1)),
+            ),
+            child: Text(
+              timeString,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildTextScaleTile() {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      leading: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: colorScheme.primary.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Icon(Icons.text_fields, color: colorScheme.primary, size: 20),
-      ),
-      title: Text(
-        'Text Size',
-        style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
-      ),
-      subtitle: Column(
+    return _buildGlassContainer(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '${(_settings.textScale * 100).toInt()}%',
-            style: theme.textTheme.bodyMedium,
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppConstants.primaryColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.text_fields,
+                  color: AppConstants.primaryColor,
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Text Size',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Adjust content reading size',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                '${(_settings.textScale * 100).toInt()}%',
+                style: TextStyle(
+                  color: AppConstants.primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
-          Slider(
-            value: _settings.textScale,
-            min: 0.8,
-            max: 1.5,
-            divisions: 7,
-            activeColor: colorScheme.primary,
-            inactiveColor: theme.dividerColor,
-            onChanged: (value) {
-              HapticFeedback.selectionClick();
-              _saveSettings(_settings.copyWith(textScale: value));
-            },
+          const SizedBox(height: 16),
+          SliderTheme(
+            data: SliderThemeData(
+              activeTrackColor: AppConstants.primaryColor,
+              inactiveTrackColor: Colors.white.withOpacity(0.1),
+              thumbColor: Colors.white,
+              overlayColor: AppConstants.primaryColor.withOpacity(0.2),
+              trackHeight: 4,
+            ),
+            child: Slider(
+              value: _settings.textScale,
+              min: 0.8,
+              max: 1.5,
+              divisions: 7,
+              onChanged: (value) {
+                HapticFeedback.selectionClick();
+                _saveSettings(_settings.copyWith(textScale: value));
+              },
+            ),
           ),
         ],
       ),
@@ -350,57 +574,87 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget _buildResetProgressTile() {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      leading: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: colorScheme.error.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Icon(Icons.refresh, color: colorScheme.error, size: 20),
-      ),
-      title: Text(
-        'Reset Progress',
-        style: theme.textTheme.bodyLarge?.copyWith(
-          color: colorScheme.error,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      subtitle: Text(
-        'Clear all learning progress',
-        style: theme.textTheme.bodyMedium,
-      ),
-      trailing: Icon(Icons.chevron_right, color: colorScheme.error),
+    return _buildGlassContainer(
       onTap: () {
         HapticFeedback.lightImpact();
         _showResetConfirmDialog();
       },
+      borderColor: AppConstants.errorColor.withOpacity(0.3),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: AppConstants.errorColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Icon(
+              Icons.refresh,
+              color: AppConstants.errorColor,
+              size: 22,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Reset Progress',
+                  style: TextStyle(
+                    color: AppConstants.errorColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Clear all learning progress',
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.5),
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildInfoTile(String title, String value, IconData icon) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      leading: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: colorScheme.primary.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Icon(icon, color: colorScheme.primary, size: 20),
+    return _buildGlassContainer(
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: AppConstants.primaryColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: AppConstants.primaryColor, size: 22),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          Text(
+            value,
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.5),
+              fontSize: 14,
+            ),
+          ),
+        ],
       ),
-      title: Text(
-        title,
-        style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
-      ),
-      subtitle: Text(value, style: theme.textTheme.bodyMedium),
     );
   }
 
@@ -410,55 +664,82 @@ class _SettingsScreenState extends State<SettingsScreen> {
     IconData icon,
     VoidCallback onTap,
   ) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      leading: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: colorScheme.primary.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Icon(icon, color: colorScheme.primary, size: 20),
-      ),
-      title: Text(
-        title,
-        style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
-      ),
-      subtitle: Text(subtitle, style: theme.textTheme.bodyMedium),
-      trailing: Icon(Icons.chevron_right, color: colorScheme.onSurface),
+    return _buildGlassContainer(
       onTap: () {
         HapticFeedback.lightImpact();
         onTap();
       },
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: AppConstants.primaryColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: AppConstants.primaryColor, size: 22),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.5),
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Icon(
+            Icons.chevron_right,
+            color: Colors.white.withOpacity(0.5),
+            size: 20,
+          ),
+        ],
+      ),
     );
   }
 
   void _showResetConfirmDialog() {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     showDialog(
       context: context,
       builder:
           (context) => AlertDialog(
-            backgroundColor: theme.cardColor,
+            backgroundColor: const Color(0xFF1E1E1E),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
+              side: BorderSide(color: Colors.white.withOpacity(0.1)),
             ),
-            title: Text('Reset Progress?', style: theme.textTheme.titleLarge),
+            title: const Text(
+              'Reset Progress?',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             content: Text(
               'This will delete all your progress for the current difficulty level. This action cannot be undone.',
-              style: theme.textTheme.bodyMedium,
+              style: TextStyle(color: Colors.white.withOpacity(0.7)),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text(
                   'Cancel',
-                  style: TextStyle(color: theme.textTheme.bodyMedium?.color),
+                  style: TextStyle(color: Colors.white.withOpacity(0.5)),
                 ),
               ),
               TextButton(
@@ -472,16 +753,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     if (mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: const Text('Progress reset successfully'),
-                          backgroundColor: colorScheme.primary,
+                          content: const Text(
+                            'Progress reset successfully',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: AppConstants.successColor,
+                          behavior: SnackBarBehavior.floating,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
                       );
                     }
                   }
                 },
-                child: Text(
+                child: const Text(
                   'Reset',
-                  style: TextStyle(color: colorScheme.error),
+                  style: TextStyle(color: AppConstants.errorColor),
                 ),
               ),
             ],

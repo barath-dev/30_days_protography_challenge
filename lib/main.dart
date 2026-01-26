@@ -7,6 +7,7 @@ import 'package:photography_guide/utils/app_theme.dart';
 import 'package:photography_guide/utils/constants.dart';
 import 'package:photography_guide/presentation/home/home_screen.dart';
 import 'package:photography_guide/presentation/onboarding/difficulty_selection_screen.dart';
+import 'package:photography_guide/presentation/common/loading_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -151,70 +152,7 @@ class _AppInitializerState extends State<AppInitializer> {
   }
 
   Widget _buildLoadingScreen() {
-    return Scaffold(
-      backgroundColor: AppConstants.backgroundColor,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // App logo/icon
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppConstants.primaryColor.withOpacity(0.2),
-                    blurRadius: 20,
-                    spreadRadius: 5,
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(24),
-                child: Image.asset('assets/icon.png', fit: BoxFit.cover),
-              ),
-            ),
-
-            const SizedBox(height: 32),
-
-            // App title
-            const Text(
-              'Learn photography in 30days',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // Subtitle
-            const Text(
-              'Master photography in 30 days',
-              style: TextStyle(color: AppConstants.textSecondary, fontSize: 16),
-            ),
-
-            const SizedBox(height: 48),
-
-            // Loading indicator
-            const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(AppConstants.primaryColor),
-            ),
-
-            const SizedBox(height: 24),
-
-            // Loading text
-            const Text(
-              'Preparing your learning journey...',
-              style: TextStyle(color: AppConstants.textSecondary, fontSize: 14),
-            ),
-          ],
-        ),
-      ),
-    );
+    return const LoadingScreen();
   }
 
   Widget _buildErrorScreen() {

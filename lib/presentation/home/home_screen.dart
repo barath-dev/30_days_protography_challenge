@@ -11,6 +11,7 @@ import '../onboarding/difficulty_selection_screen.dart';
 import '../settings/settings_screen.dart';
 import '../help/help_support_screen.dart';
 import '../notifications/notifications_screen.dart';
+import '../common/coming_soon_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -1475,7 +1476,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 Icons.camera,
                 colorScheme.primary,
                 () {
-                  // Navigate to daily challenge
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (_) => const ComingSoonScreen(
+                            featureName: 'Daily Challenges',
+                            icon: Icons.emoji_events_outlined,
+                            description:
+                                'Test your skills with new photography challenges every day and earn badges.',
+                          ),
+                    ),
+                  );
                 },
               ),
             ),
@@ -1486,7 +1498,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 Icons.people_outline,
                 colorScheme.tertiary,
                 () {
-                  // Navigate to community
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (_) => const ComingSoonScreen(
+                            featureName: 'Community',
+                            icon: Icons.people_outline,
+                            description:
+                                'Connect with other photographers, share your work, and get feedback from the community.',
+                          ),
+                    ),
+                  );
                 },
               ),
             ),
