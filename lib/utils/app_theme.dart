@@ -445,12 +445,12 @@ class AppTheme {
         onSurface: Colors.black,
         onError: Colors.white,
         tertiary: AppConstants.successColor,
-        outline: const Color(0xFFE5E5EA),
+        outline: AppConstants.lightBorderColor,
       ),
 
       // AppBar Theme
       appBarTheme: const AppBarTheme(
-        backgroundColor: Color(0xFFF2F2F7),
+        backgroundColor: AppConstants.lightBackgroundColor,
         foregroundColor: Colors.black,
         elevation: 0,
         scrolledUnderElevation: 0,
@@ -464,7 +464,7 @@ class AppTheme {
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark,
-          systemNavigationBarColor: Color(0xFFF2F2F7),
+          systemNavigationBarColor: AppConstants.lightBackgroundColor,
           systemNavigationBarIconBrightness: Brightness.dark,
         ),
       ),
@@ -475,7 +475,10 @@ class AppTheme {
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppConstants.cardBorderRadius),
-          side: const BorderSide(color: Color(0xFFE5E5EA), width: 1),
+          side: const BorderSide(
+            color: AppConstants.lightBorderColor,
+            width: 1,
+          ),
         ),
         margin: const EdgeInsets.all(0),
       ),
@@ -485,8 +488,8 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppConstants.primaryColor,
           foregroundColor: Colors.white,
-          disabledBackgroundColor: const Color(0xFFE5E5EA),
-          disabledForegroundColor: const Color(0xFF8E8E93),
+          disabledBackgroundColor: AppConstants.lightBorderColor,
+          disabledForegroundColor: AppConstants.lightTextSecondary,
           elevation: 0,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(
@@ -506,8 +509,11 @@ class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: Colors.black,
-          disabledForegroundColor: const Color(0xFF8E8E93),
-          side: const BorderSide(color: Color(0xFFE5E5EA), width: 1),
+          disabledForegroundColor: AppConstants.lightTextSecondary,
+          side: const BorderSide(
+            color: AppConstants.lightBorderColor,
+            width: 1,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               AppConstants.defaultBorderRadius,
@@ -525,7 +531,7 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppConstants.primaryColor,
-          disabledForegroundColor: const Color(0xFF8E8E93),
+          disabledForegroundColor: AppConstants.lightTextSecondary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               AppConstants.defaultBorderRadius,
@@ -546,11 +552,11 @@ class AppTheme {
         fillColor: Colors.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
-          borderSide: const BorderSide(color: Color(0xFFE5E5EA)),
+          borderSide: const BorderSide(color: AppConstants.lightBorderColor),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
-          borderSide: const BorderSide(color: Color(0xFFE5E5EA)),
+          borderSide: const BorderSide(color: AppConstants.lightBorderColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
@@ -574,8 +580,14 @@ class AppTheme {
           horizontal: 16,
           vertical: 16,
         ),
-        hintStyle: const TextStyle(color: Color(0xFF8E8E93), fontSize: 16),
-        labelStyle: const TextStyle(color: Color(0xFF8E8E93), fontSize: 16),
+        hintStyle: const TextStyle(
+          color: AppConstants.lightTextSecondary,
+          fontSize: 16,
+        ),
+        labelStyle: const TextStyle(
+          color: AppConstants.lightTextSecondary,
+          fontSize: 16,
+        ),
       ),
 
       // Bottom Sheet Theme
@@ -602,14 +614,14 @@ class AppTheme {
         ),
         contentTextStyle: const TextStyle(
           fontSize: 14,
-          color: Color(0xFF8E8E93),
+          color: AppConstants.lightTextSecondary,
           fontFamily: 'SF Pro Display',
         ),
       ),
 
       // Snackbar Theme
       snackBarTheme: SnackBarThemeData(
-        backgroundColor: const Color(0xFF333333),
+        backgroundColor: AppConstants.borderColor,
         contentTextStyle: const TextStyle(
           color: Colors.white,
           fontSize: 14,
@@ -625,8 +637,8 @@ class AppTheme {
       // Progress Indicator Theme
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: AppConstants.primaryColor,
-        linearTrackColor: Color(0xFFE5E5EA),
-        circularTrackColor: Color(0xFFE5E5EA),
+        linearTrackColor: AppConstants.lightBorderColor,
+        circularTrackColor: AppConstants.lightBorderColor,
       ),
 
       // Switch Theme
@@ -635,13 +647,13 @@ class AppTheme {
           if (states.contains(WidgetState.selected)) {
             return Colors.white;
           }
-          return const Color(0xFF8E8E93);
+          return AppConstants.lightTextSecondary;
         }),
         trackColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
             return AppConstants.primaryColor;
           }
-          return const Color(0xFFE5E5EA);
+          return AppConstants.lightBorderColor;
         }),
       ),
 
@@ -654,7 +666,7 @@ class AppTheme {
           return Colors.transparent;
         }),
         checkColor: WidgetStateProperty.all(Colors.white),
-        side: const BorderSide(color: Color(0xFFE5E5EA), width: 2),
+        side: const BorderSide(color: AppConstants.lightBorderColor, width: 2),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
 
@@ -664,7 +676,7 @@ class AppTheme {
           if (states.contains(WidgetState.selected)) {
             return AppConstants.primaryColor;
           }
-          return const Color(0xFFE5E5EA);
+          return AppConstants.lightBorderColor;
         }),
       ),
 
@@ -673,7 +685,7 @@ class AppTheme {
         tileColor: Colors.transparent,
         selectedTileColor: AppConstants.primaryColor,
         textColor: Colors.black,
-        iconColor: Color(0xFF8E8E93),
+        iconColor: AppConstants.lightTextSecondary,
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -682,7 +694,7 @@ class AppTheme {
 
       // Divider Theme
       dividerTheme: const DividerThemeData(
-        color: Color(0xFFE5E5EA),
+        color: AppConstants.lightBorderColor,
         thickness: 1,
         space: 1,
       ),
@@ -704,7 +716,7 @@ class AppTheme {
         textColor: Colors.black,
         collapsedTextColor: Colors.black,
         iconColor: AppConstants.primaryColor,
-        collapsedIconColor: Color(0xFF8E8E93),
+        collapsedIconColor: AppConstants.lightTextSecondary,
       ),
 
       // Navigation Bar Theme
@@ -722,14 +734,14 @@ class AppTheme {
           if (states.contains(WidgetState.selected)) {
             return const IconThemeData(color: AppConstants.primaryColor);
           }
-          return const IconThemeData(color: Color(0xFF8E8E93));
+          return const IconThemeData(color: AppConstants.lightTextSecondary);
         }),
       ),
 
       // Tab Bar Theme
       tabBarTheme: const TabBarThemeData(
         labelColor: AppConstants.primaryColor,
-        unselectedLabelColor: Color(0xFF8E8E93),
+        unselectedLabelColor: AppConstants.lightTextSecondary,
         indicatorColor: AppConstants.primaryColor,
         indicatorSize: TabBarIndicatorSize.label,
         labelStyle: TextStyle(
@@ -809,13 +821,13 @@ class AppTheme {
         bodyMedium: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
-          color: Color(0xFF8E8E93),
+          color: AppConstants.lightTextSecondary,
           fontFamily: 'SF Pro Display',
         ),
         bodySmall: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.normal,
-          color: Color(0xFF8E8E93),
+          color: AppConstants.lightTextSecondary,
           fontFamily: 'SF Pro Display',
         ),
         labelLarge: TextStyle(
@@ -827,13 +839,13 @@ class AppTheme {
         labelMedium: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w500,
-          color: Color(0xFF8E8E93),
+          color: AppConstants.lightTextSecondary,
           fontFamily: 'SF Pro Display',
         ),
         labelSmall: TextStyle(
           fontSize: 10,
           fontWeight: FontWeight.w500,
-          color: Color(0xFF8E8E93),
+          color: AppConstants.lightTextSecondary,
           fontFamily: 'SF Pro Display',
         ),
       ),

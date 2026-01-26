@@ -4,6 +4,7 @@ import 'package:photography_guide/models/lesson.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_progress.dart';
 import '../models/saved_item.dart';
+import 'notification_service.dart';
 
 class UserPreferences {
   static SharedPreferences? _prefs;
@@ -31,6 +32,22 @@ class UserPreferences {
     await _loadActiveDifficulty();
     // Initialize settings notifier
     settingsNotifier.value = await getAppSettings();
+
+    // Initialize Notifications
+    final notificationService = NotificationService();
+    await notificationService.init();
+    await notificationService.requestPermissions();
+
+    // Ensure notification is scheduled according to settings
+    if (settingsNotifier.value.notificationsEnabled &&
+        settingsNotifier.value.dailyReminders) {
+      await notificationService.scheduleDailyReminder(
+        id: 1,
+        title: "Time to Learn!",
+        body: "Keep up your photography streak!",
+        time: settingsNotifier.value.reminderTime,
+      );
+    }
   }
 
   // Force reload - useful when data changes
@@ -306,6 +323,18 @@ class UserPreferences {
       final settingsJson = jsonEncode(settings.toJson());
       await _prefs?.setString(_keySettings, settingsJson);
       settingsNotifier.value = settings;
+
+      // Update notifications
+      if (settings.notificationsEnabled && settings.dailyReminders) {
+        await NotificationService().scheduleDailyReminder(
+          id: 1,
+          title: "Time to Learn!",
+          body: "Keep up your photography streak!",
+          time: settings.reminderTime,
+        );
+      } else {
+        await NotificationService().cancelReminder(1);
+      }
     } catch (e) {
       print('Error saving app settings: $e');
     }

@@ -16,6 +16,9 @@ class AppConstants {
   static const bool allowAdvanceAccess = true; // Can't skip ahead
   static const int maxLessonsPerDay =
       1; // Maximum lessons that can be accessed per day
+  static const Duration dailyLessonUnlockTime = Duration(hours: 0); // Midnight
+  static const int maxSavedItems = 100;
+  static const int maxRecentActivity = 10;
 
   // Design Constants
   static const Color primaryColor = Color(0xFFFF6B35);
@@ -26,6 +29,9 @@ class AppConstants {
   static const Color successColor = Color(0xFF4CAF50);
   static const Color warningColor = Color(0xFFFFC107);
   static const Color errorColor = Color(0xFFF44336);
+  static const Color lightBackgroundColor = Color(0xFFF2F2F7);
+  static const Color lightBorderColor = Color(0xFFE5E5EA);
+  static const Color lightTextSecondary = Color(0xFF8E8E93);
 
   // Gradient Colors
   static const List<Color> primaryGradient = [
@@ -51,11 +57,18 @@ class AppConstants {
 
   // Layout Constants
   static const double defaultPadding = 20.0;
+  static const double mediumPadding = 16.0;
+  static const double contentPadding = 12.0;
   static const double smallPadding = 8.0;
   static const double largePadding = 32.0;
   static const double defaultBorderRadius = 12.0;
   static const double largeBorderRadius = 16.0;
+  static const double extraLargeBorderRadius = 24.0;
   static const double cardBorderRadius = 16.0;
+
+  static const double iconSizeSmall = 16.0;
+  static const double iconSizeDefault = 24.0;
+  static const double iconSizeLarge = 28.0;
 
   // Text Styles
   static const TextStyle headingLarge = TextStyle(
@@ -320,4 +333,6 @@ class AppConfig {
   // Feature Toggles
   static const bool enableNewFeatures = isDevelopment || isStaging;
   static const bool enableBetaFeatures = isDevelopment;
+  static const bool enableNotifications = true;
+  static const bool enableAnalytics = true;
 }

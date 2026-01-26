@@ -4,6 +4,7 @@ import 'package:photography_guide/services/user_preferences.dart';
 import 'package:photography_guide/services/lesson_manager.dart';
 import 'package:photography_guide/services/navigation_service.dart';
 import 'package:photography_guide/utils/app_theme.dart';
+import 'package:photography_guide/utils/constants.dart';
 import 'package:photography_guide/presentation/home/home_screen.dart';
 import 'package:photography_guide/presentation/onboarding/difficulty_selection_screen.dart';
 
@@ -23,7 +24,7 @@ Future<void> _initializeApp() async {
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: Color(0xFF0D0D0D),
+        systemNavigationBarColor: AppConstants.backgroundColor,
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     );
@@ -151,7 +152,7 @@ class _AppInitializerState extends State<AppInitializer> {
 
   Widget _buildLoadingScreen() {
     return Scaffold(
-      backgroundColor: const Color(0xFF0D0D0D),
+      backgroundColor: AppConstants.backgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -164,7 +165,7 @@ class _AppInitializerState extends State<AppInitializer> {
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFFFF6B35).withOpacity(0.2),
+                    color: AppConstants.primaryColor.withOpacity(0.2),
                     blurRadius: 20,
                     spreadRadius: 5,
                   ),
@@ -193,14 +194,14 @@ class _AppInitializerState extends State<AppInitializer> {
             // Subtitle
             const Text(
               'Master photography in 30 days',
-              style: TextStyle(color: Color(0xFF888888), fontSize: 16),
+              style: TextStyle(color: AppConstants.textSecondary, fontSize: 16),
             ),
 
             const SizedBox(height: 48),
 
             // Loading indicator
             const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(Color(0xFFFF6B35)),
+              valueColor: AlwaysStoppedAnimation(AppConstants.primaryColor),
             ),
 
             const SizedBox(height: 24),
@@ -208,7 +209,7 @@ class _AppInitializerState extends State<AppInitializer> {
             // Loading text
             const Text(
               'Preparing your learning journey...',
-              style: TextStyle(color: Color(0xFF888888), fontSize: 14),
+              style: TextStyle(color: AppConstants.textSecondary, fontSize: 14),
             ),
           ],
         ),
@@ -218,7 +219,7 @@ class _AppInitializerState extends State<AppInitializer> {
 
   Widget _buildErrorScreen() {
     return Scaffold(
-      backgroundColor: const Color(0xFF0D0D0D),
+      backgroundColor: AppConstants.backgroundColor,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -242,7 +243,10 @@ class _AppInitializerState extends State<AppInitializer> {
 
               Text(
                 'We encountered an error while starting the app. Please try again.',
-                style: const TextStyle(color: Color(0xFF888888), fontSize: 16),
+                style: const TextStyle(
+                  color: AppConstants.textSecondary,
+                  fontSize: 16,
+                ),
                 textAlign: TextAlign.center,
               ),
 
@@ -251,14 +255,14 @@ class _AppInitializerState extends State<AppInitializer> {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1A1A1A),
+                    color: AppConstants.cardColor,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: const Color(0xFF333333)),
+                    border: Border.all(color: AppConstants.borderColor),
                   ),
                   child: Text(
                     _errorMessage!,
                     style: const TextStyle(
-                      color: Color(0xFF888888),
+                      color: AppConstants.textSecondary,
                       fontSize: 12,
                       fontFamily: 'monospace',
                     ),
@@ -277,7 +281,7 @@ class _AppInitializerState extends State<AppInitializer> {
                   _determineInitialRoute();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFF6B35),
+                  backgroundColor: AppConstants.primaryColor,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 32,
@@ -365,31 +369,6 @@ class AppLifecycleManager extends WidgetsBindingObserver {
       print('Error unlocking today\'s lesson: $e');
     }
   }
-}
-
-// App configuration and constants
-class AppConfig {
-  static const String appName = 'Learn photography in 30days';
-  static const String appVersion = '1.0.0';
-  static const int totalCourseDays = 30;
-
-  // Color scheme
-  static const Color primaryColor = Color(0xFFFF6B35);
-  static const Color backgroundColor = Color(0xFF0D0D0D);
-  static const Color cardColor = Color(0xFF1A1A1A);
-  static const Color textColor = Color(0xFF888888);
-  static const Color borderColor = Color(0xFF333333);
-  static const Color successColor = Color(0xFF4CAF50);
-
-  // Feature flags
-  static const bool enableDebugMode = true;
-  static const bool enableAnalytics = false;
-  static const bool enableNotifications = true;
-
-  // App settings
-  static const Duration dailyLessonUnlockTime = Duration(hours: 0); // Midnight
-  static const int maxSavedItems = 100;
-  static const int maxRecentActivity = 10;
 }
 
 // Global error handler

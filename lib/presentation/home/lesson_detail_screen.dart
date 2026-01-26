@@ -1083,11 +1083,15 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
         children: [
           Icon(icon, color: color, size: 24),
           const SizedBox(height: 8),
-          Text(
-            value,
-            style: theme.textTheme.bodyLarge?.copyWith(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              value,
+              maxLines: 1,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
           const SizedBox(height: 4),

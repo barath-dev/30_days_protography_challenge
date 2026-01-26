@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:photography_guide/models/lesson.dart';
 import 'package:photography_guide/models/user_progress.dart';
 import '../../services/user_preferences.dart';
+import '../../utils/constants.dart';
 import '../home/home_screen.dart';
 
 class DifficultySelectionScreen extends StatefulWidget {
@@ -23,14 +24,6 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
   bool _isLoading = false;
   Map<DifficultyLevel, bool> _hasProgress = {};
 
-  // Design constants
-  static const Color _primary = Color(0xFFFF6B35);
-  static const Color _background = Color(0xFF0D0D0D);
-  static const Color _card = Color(0xFF1A1A1A);
-  static const Color _text = Color(0xFF888888);
-  static const Color _border = Color(0xFF333333);
-  static const Color _success = Color(0xFF4CAF50);
-
   final List<DifficultyInfo> difficulties = [
     DifficultyInfo(
       level: DifficultyLevel.beginner,
@@ -39,7 +32,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
       description:
           'Perfect for those just starting their photography journey. Learn camera basics, composition, and fundamental techniques.',
       icon: Icons.camera_alt,
-      color: Color(0xFF4CAF50),
+      color: AppConstants.successColor,
       features: [
         'Camera basics and controls',
         'Simple composition rules',
@@ -57,7 +50,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
       description:
           'For photographers who know the basics and want to improve their skills with advanced techniques and creative approaches.',
       icon: Icons.tune,
-      color: Color(0xFFFF6B35),
+      color: AppConstants.primaryColor,
       features: [
         'Advanced composition techniques',
         'Manual camera controls',
@@ -143,8 +136,9 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: _background,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -169,7 +163,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
     final isEditing = UserPreferences.activeDifficulty != null;
 
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(AppConstants.defaultPadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -179,29 +173,39 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Container(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(AppConstants.contentPadding),
                   decoration: BoxDecoration(
-                    color: _card,
-                    borderRadius: BorderRadius.circular(12),
+                    color: Theme.of(context).cardColor,
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.defaultBorderRadius,
+                    ),
                   ),
-                  child: const Icon(Icons.arrow_back, color: Colors.white),
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
                 ),
               ),
               if (isEditing)
                 Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
+                    horizontal: AppConstants.contentPadding,
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: _primary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: _primary, width: 1),
+                    color: AppConstants.primaryColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.defaultBorderRadius,
+                    ),
+                    border: Border.all(
+                      color: AppConstants.primaryColor,
+                      width: 1,
+                    ),
                   ),
                   child: Text(
                     'Switch Track',
                     style: TextStyle(
-                      color: _primary,
+                      color: AppConstants.primaryColor,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
@@ -209,16 +213,21 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                 )
               else
                 Container(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(AppConstants.contentPadding),
                   decoration: BoxDecoration(
-                    color: _card,
-                    borderRadius: BorderRadius.circular(12),
+                    color: Theme.of(context).cardColor,
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.defaultBorderRadius,
+                    ),
                   ),
-                  child: const Icon(Icons.help_outline, color: Colors.white),
+                  child: Icon(
+                    Icons.help_outline,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
                 ),
             ],
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: AppConstants.largePadding),
           FadeTransition(
             opacity: _fadeAnimation,
             child: Column(
@@ -228,19 +237,19 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                   isEditing
                       ? 'Switch Learning\nTrack'
                       : 'Choose Your\nSkill Level',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    height: 1.2,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.displayLarge?.copyWith(height: 1.2),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: AppConstants.contentPadding),
                 Text(
                   isEditing
                       ? 'Switch between different learning tracks. Your progress is saved for each difficulty level.'
                       : 'Select the level that best matches your current photography experience. You can always switch between tracks later.',
-                  style: TextStyle(color: _text, fontSize: 16, height: 1.5),
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
+                    height: 1.5,
+                  ),
                 ),
               ],
             ),
@@ -252,7 +261,9 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
 
   Widget _buildContent() {
     return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppConstants.defaultPadding,
+      ),
       itemCount: difficulties.length,
       itemBuilder: (context, index) {
         final difficulty = difficulties[index];
@@ -304,13 +315,16 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        margin: const EdgeInsets.only(bottom: 20),
-        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.only(bottom: AppConstants.defaultPadding),
+        padding: const EdgeInsets.all(AppConstants.defaultPadding),
         decoration: BoxDecoration(
-          color: _card,
-          borderRadius: BorderRadius.circular(20),
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.circular(
+            AppConstants.extraLargeBorderRadius,
+          ),
           border: Border.all(
-            color: isSelected ? difficulty.color : _border,
+            color:
+                isSelected ? difficulty.color : Theme.of(context).dividerColor,
             width: isSelected ? 2 : 1,
           ),
           boxShadow:
@@ -328,21 +342,23 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildCardHeader(difficulty, isSelected, hasProgress),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppConstants.mediumPadding),
             Text(
               difficulty.description,
-              style: TextStyle(color: _text, fontSize: 14, height: 1.5),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(height: 1.5),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppConstants.mediumPadding),
             _buildFeaturesList(difficulty),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppConstants.mediumPadding),
             _buildCardFooter(difficulty),
             if (hasProgress) ...[
-              const SizedBox(height: 16),
+              const SizedBox(height: AppConstants.mediumPadding),
               _buildProgressIndicator(difficulty),
             ],
             if (isSelected) ...[
-              const SizedBox(height: 16),
+              const SizedBox(height: AppConstants.mediumPadding),
               _buildSelectedIndicator(),
             ],
           ],
@@ -360,18 +376,20 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
       children: [
         AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(AppConstants.contentPadding),
           decoration: BoxDecoration(
             color: difficulty.color.withOpacity(isSelected ? 1.0 : 0.1),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(
+              AppConstants.defaultBorderRadius,
+            ),
           ),
           child: Icon(
             difficulty.icon,
             color: isSelected ? Colors.white : difficulty.color,
-            size: 24,
+            size: AppConstants.iconSizeDefault,
           ),
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: AppConstants.mediumPadding),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -381,7 +399,10 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                   Text(
                     difficulty.title,
                     style: TextStyle(
-                      color: isSelected ? difficulty.color : Colors.white,
+                      color:
+                          isSelected
+                              ? difficulty.color
+                              : Theme.of(context).textTheme.titleLarge?.color,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -394,14 +415,18 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: _success.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: _success.withOpacity(0.3)),
+                        color: AppConstants.successColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(
+                          AppConstants.smallPadding,
+                        ),
+                        border: Border.all(
+                          color: AppConstants.successColor.withOpacity(0.3),
+                        ),
                       ),
                       child: Text(
                         'In Progress',
                         style: TextStyle(
-                          color: _success,
+                          color: AppConstants.successColor,
                           fontSize: 10,
                           fontWeight: FontWeight.w600,
                         ),
@@ -412,7 +437,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
               ),
               Text(
                 difficulty.subtitle,
-                style: TextStyle(color: _text, fontSize: 14),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
           ),
@@ -425,7 +450,11 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
               color: difficulty.color,
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.check, color: Colors.white, size: 16),
+            child: const Icon(
+              Icons.check,
+              color: Colors.white,
+              size: AppConstants.iconSizeSmall,
+            ),
           ),
       ],
     );
@@ -444,9 +473,11 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: _background.withOpacity(0.5),
+        color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.5),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: _border.withOpacity(0.5)),
+        border: Border.all(
+          color: Theme.of(context).dividerColor.withOpacity(0.5),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -456,11 +487,9 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
             children: [
               Text(
                 'Progress',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
               ),
               Text(
                 '$completedLessons/30 lessons',
@@ -475,7 +504,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
           const SizedBox(height: 8),
           LinearProgressIndicator(
             value: progressPercentage,
-            backgroundColor: _border.withOpacity(0.3),
+            backgroundColor: Theme.of(context).dividerColor.withOpacity(0.3),
             valueColor: AlwaysStoppedAnimation(difficulty.color),
             minHeight: 4,
             borderRadius: BorderRadius.circular(2),
@@ -486,11 +515,11 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
             children: [
               Text(
                 'Day ${progress.currentDay}',
-                style: TextStyle(color: _text, fontSize: 11),
+                style: Theme.of(context).textTheme.bodySmall,
               ),
               Text(
                 '${progress.dailyStreak} day streak',
-                style: TextStyle(color: _text, fontSize: 11),
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
           ),
@@ -505,11 +534,9 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
       children: [
         Text(
           'What you\'ll learn:',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 8),
         ...difficulty.features.map(
@@ -530,7 +557,9 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                 Expanded(
                   child: Text(
                     feature,
-                    style: TextStyle(color: _text, fontSize: 13, height: 1.4),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(height: 1.4),
                   ),
                 ),
               ],
@@ -555,15 +584,19 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: _border.withOpacity(0.3),
+        color: Theme.of(context).dividerColor.withOpacity(0.3),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: _text, size: 12),
+          Icon(
+            icon,
+            color: Theme.of(context).textTheme.bodyMedium?.color,
+            size: 12,
+          ),
           const SizedBox(width: 4),
-          Text(text, style: TextStyle(color: _text, fontSize: 11)),
+          Text(text, style: Theme.of(context).textTheme.bodySmall),
         ],
       ),
     );
@@ -573,19 +606,26 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: _primary.withOpacity(0.1),
+        color: AppConstants.primaryColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: _primary.withOpacity(0.3), width: 1),
+        border: Border.all(
+          color: AppConstants.primaryColor.withOpacity(0.3),
+          width: 1,
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.check_circle, color: _primary, size: 16),
-          const SizedBox(width: 8),
+          Icon(
+            Icons.check_circle,
+            color: AppConstants.primaryColor,
+            size: AppConstants.iconSizeSmall,
+          ),
+          const SizedBox(width: AppConstants.smallPadding),
           Text(
             'Selected',
             style: TextStyle(
-              color: _primary,
+              color: AppConstants.primaryColor,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
@@ -606,7 +646,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
             : false;
 
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(AppConstants.defaultPadding),
       child: Column(
         children: [
           if (selectedDifficulty != null) ...[
@@ -620,7 +660,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                   : hasProgress
                   ? 'Continue your existing progress'
                   : 'Ready to start your photography journey?',
-              style: TextStyle(color: _text, fontSize: 14),
+              style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
@@ -636,10 +676,10 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                       }
                       : null,
               style: ElevatedButton.styleFrom(
-                backgroundColor: _primary,
+                backgroundColor: AppConstants.primaryColor,
                 foregroundColor: Colors.white,
-                disabledBackgroundColor: _border,
-                disabledForegroundColor: _text,
+                disabledBackgroundColor: Theme.of(context).disabledColor,
+                disabledForegroundColor: Theme.of(context).disabledColor,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -727,7 +767,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
       barrierDismissible: false,
       builder:
           (context) => AlertDialog(
-            backgroundColor: _card,
+            backgroundColor: Theme.of(context).cardColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
@@ -735,12 +775,17 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
               children: [
                 Icon(difficulty.icon, color: difficulty.color, size: 28),
                 const SizedBox(width: 12),
-                Text('Great Choice!', style: TextStyle(color: Colors.white)),
+                Text(
+                  'Great Choice!',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.titleLarge?.color,
+                  ),
+                ),
               ],
             ),
             content: Text(
               'You\'ve selected ${difficulty.title} level. Your 30-day photography journey will be customized for your skill level.',
-              style: TextStyle(color: _text),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             actions: [
               ElevatedButton(
@@ -754,7 +799,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: _primary,
+                  backgroundColor: AppConstants.primaryColor,
                   foregroundColor: Colors.white,
                 ),
                 child: const Text('Let\'s Go!'),
@@ -774,17 +819,19 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
       barrierDismissible: false,
       builder:
           (context) => AlertDialog(
-            backgroundColor: _card,
+            backgroundColor: Theme.of(context).cardColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
             title: Text(
               'Track Switched!',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                color: Theme.of(context).textTheme.titleLarge?.color,
+              ),
             ),
             content: Text(
               'You\'ve switched to the ${difficulty.title} track. Your progress has been preserved and you can continue where you left off.',
-              style: TextStyle(color: _text),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             actions: [
               ElevatedButton(
@@ -796,7 +843,7 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
                   ); // Return to home with refresh flag
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: _primary,
+                  backgroundColor: AppConstants.primaryColor,
                   foregroundColor: Colors.white,
                 ),
                 child: const Text('Continue'),
@@ -811,19 +858,27 @@ class _DifficultySelectionScreenState extends State<DifficultySelectionScreen>
       context: context,
       builder:
           (context) => AlertDialog(
-            backgroundColor: _card,
+            backgroundColor: Theme.of(context).cardColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            title: Text('Error', style: TextStyle(color: Colors.white)),
+            title: Text(
+              'Error',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.titleLarge?.color,
+              ),
+            ),
             content: Text(
               'Something went wrong. Please try again.',
-              style: TextStyle(color: _text),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('OK', style: TextStyle(color: _primary)),
+                child: Text(
+                  'OK',
+                  style: TextStyle(color: AppConstants.primaryColor),
+                ),
               ),
             ],
           ),

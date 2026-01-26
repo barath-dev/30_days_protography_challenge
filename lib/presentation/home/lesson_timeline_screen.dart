@@ -5,6 +5,7 @@ import '../../models/user_progress.dart';
 import '../../services/user_preferences.dart';
 import '../../services/lesson_manager.dart';
 import 'lesson_detail_screen.dart';
+import '../settings/settings_screen.dart';
 
 class LessonTimelineScreen extends StatefulWidget {
   const LessonTimelineScreen({super.key});
@@ -187,6 +188,15 @@ class _LessonTimelineScreenState extends State<LessonTimelineScreen>
                     ? _primary
                     : Colors.white,
           ),
+        ),
+        IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const SettingsScreen()),
+            ).then((_) => _loadData());
+          },
+          icon: const Icon(Icons.settings, color: Colors.white),
         ),
       ],
     );
